@@ -1,19 +1,19 @@
 <?php 
 
-function checking_existing_username_email($db_table_name, $db_username, $input_value) {
+function checking_existing_username_email($db_table_name, $db_username_or_email, $input_value) {
 
-  $database_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+  $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
   try {
-    $database_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
-    $database_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+    $db_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo 'CONNECTION 4 SUCCESS!';
   } catch (PDOException $th) {
     echo 'FAILED!: ' . $th->getMessage();
   }
 
-  $sql  = "SELECT $db_username FROM $db_table_name WHERE {$db_username}=:{$db_username}";
-  $stmt = $database_connection->prepare($sql);
-  $stmt->bindValue(":{$db_username}", $input_value);
+  $sql  = "SELECT $db_username_or_email FROM $db_table_name WHERE {$db_username_or_email}=:{$db_username_or_email}";
+  $stmt = $db_connection->prepare($sql);
+  $stmt->bindValue(":{$db_username_or_email}", $input_value);
   $stmt->execute();
   
   $result = $stmt->rowCount();
@@ -26,6 +26,34 @@ function checking_existing_username_email($db_table_name, $db_username, $input_v
 
   $database_connection = null;
 }
+
+
+function login_attempt($db_table_name, $db_username, $db_password, $username_input_value, $password_input_value) {
+  $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+  try {
+    $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+    $db_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo 'CONNECTION 5 SUCCESS!';
+  } catch (PDOException $th) {
+    echo 'Failed!:' . $th->getMessage();
+  } 
+
+  $sql  = "SELECT {$db_username}, {$db_password} FROM {$db_table_name} WHERE {$db_username}=:{$db_username} AND {$db_password}=:{$db_password}";
+  $stmt = $db_connection->prepare($sql);
+  $stmt->bindValue(":{$db_username}", $username_input_value);
+  $stmt->bindValue(":{$db_password}", $password_input_value);
+  $stmt->execute();
+
+  $result = $stmt->rowCount();
+
+  if ($result == 1) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
 
 // Display selected IT Branches
 function checkbox_array_display() {
