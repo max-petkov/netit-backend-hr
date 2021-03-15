@@ -1,15 +1,16 @@
 <?php
+include_once 'src/functions.php';
 
 session_start();
 
 $host     = 'localhost';
 $user     = 'root';
-$database = 'registered_users';
+$db = 'registered_users';
 $password = '';
 
-$database_connection = mysqli_connect($host, $user, $password, $database);
+$db_connection = mysqli_connect($host, $user, $password, $db);
 
-if (!$database_connection) {
+if (!$db_connection) {
   die("Connection failed!:" . mysqli_connect_error());
 
 } else {
@@ -22,15 +23,15 @@ if (!$database_connection) {
 if (isset($_POST['submit_registration'])) {
 
   if (!empty($_POST['employee_username'])                                                                     && 
-      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['employee_username']) &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['employee_username'])                              &&
       !empty($_POST['first_name'])                                                                            && 
-      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['first_name'])                                                   && 
+      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['first_name'])                                          && 
       !empty($_POST['last_name'])                                                                             && 
-      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['last_name'])                                                    &&
+      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['last_name'])                                           &&
       !empty($_POST['email'])                                                                                 && 
       filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)                                                      &&
       !empty($_POST['password'])                                                                              && 
-      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['password'])          && 
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['password'])                                       && 
       !empty($_POST['confirm_password'])                                                                      && 
       $_POST['password'] == $_POST['confirm_password']                                                        &&
       mb_strlen($_POST['employee_username']) >= 4                                                             && 
@@ -47,7 +48,7 @@ if (isset($_POST['submit_registration'])) {
       !checking_existing_username_email('employees', 'email', $_POST['email'])                                && 
       !checking_existing_username_email('companies', 'email', $_POST['email'])) {
       
-      $stmt = $database_connection->prepare('INSERT INTO employees(username, first_name, last_name, email, password) VALUES(?, ?, ?, ?, ?)');
+      $stmt = $db_connection->prepare('INSERT INTO employees(username, first_name, last_name, email, password) VALUES(?, ?, ?, ?, ?)');
       $stmt->bind_param('sssss', $username, $first_name, $last_name, $email, $password);
 
       $username   = $_POST['employee_username'];
@@ -64,9 +65,6 @@ if (isset($_POST['submit_registration'])) {
       exit;
       
   }
-
-  
-
 }
 
 
@@ -79,7 +77,7 @@ if (isset($_POST['submit_registration_company'])) {
       !empty($_POST['email'])                                                                        && 
       filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)                                             &&
       !empty($_POST['company_description'])                                                          && 
-      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.,; ]+$/u', $_POST['company_description'])             &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.,; ]+$/u', $_POST['company_description'])            &&
       !empty($_POST['it_branch'])                                                                    && 
       !empty($_POST['password'])                                                                     && 
       preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['password'])                              &&
@@ -107,7 +105,7 @@ if (isset($_POST['submit_registration_company'])) {
         $company_password    = $_POST['password'];
 
         $sql  = ('INSERT INTO companies(username, company_name, company_it_branches, company_description, email, password) VALUES(?, ?, ?, ?, ?, ?)');
-        $stmt = $database_connection->prepare($sql);
+        $stmt = $db_connection->prepare($sql);
         $stmt->bind_param('ssssss', $company_username, $company_name, $company_it_branches, $company_description, $company_email, $company_password);
 
         $stmt->execute();
@@ -116,13 +114,32 @@ if (isset($_POST['submit_registration_company'])) {
         $_SESSION['success_message'] = 'Your account has been created successfully!';
         header('location: registration-form-company.php');
         exit;
-
-
   }
 }
 
+if(isset($_POST['submit_login'])) {
 
-mysqli_close($database_connection);
+  if(empty($_POST['username']) && empty($_POST['password'])) {
+  $_SESSION['error_message'] = 'All fields must be filled out!';
+  header('location: login.php');
+  exit;
+  
+  } elseif (login_attempt('companies', 'username', 'password', $_POST['username'], $_POST['password']) ||
+            login_attempt('employees', 'username', 'password', $_POST['username'], $_POST['password'])) {
+  $_SESSION['success_message'] = "Welcome, {$_POST['username']}!";
+  header('location: login.php');
+  exit;
+
+  } else {
+  $_SESSION['error_message'] = 'Incorrect username or password... Try again!';
+  header('location: login.php');
+  exit;
+  }
+    
+}
+
+
+mysqli_close($db_connection);
 
 
 ?>
