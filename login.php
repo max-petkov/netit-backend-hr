@@ -1,3 +1,7 @@
+<?php include 'src/database.php' ?>
+<?php include_once 'src/sessions.php' ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +31,10 @@
       <div class="col-lg-4 col-md-6 mx-auto">
         <h3 class="text-center mb-3">Monster HR</h3>
         <form action="login.php" class="" method="POST">
+        <?php echo success_message(); ?>
+        <?php echo error_message(); ?>
           <div class="form-group mb-3">
-            <input type="text" class="form-control" name="employee_username" placeholder="Username" value="">
+            <input type="text" class="form-control" name="username" placeholder="Username" value="">
           </div>
           <div class="form-group mb-3">
             <input type="password" class="form-control" name="password" placeholder="Password" value="">
