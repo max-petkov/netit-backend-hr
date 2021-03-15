@@ -24,9 +24,9 @@ if (isset($_POST['submit_registration'])) {
   if (!empty($_POST['employee_username'])                                                                     && 
       preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['employee_username']) &&
       !empty($_POST['first_name'])                                                                            && 
-      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['first_name'])                                                   && 
+      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['first_name'])                                                   && 
       !empty($_POST['last_name'])                                                                             && 
-      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['last_name'])                                                    &&
+      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['last_name'])                                                    &&
       !empty($_POST['email'])                                                                                 && 
       filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)                                                      &&
       !empty($_POST['password'])                                                                              && 

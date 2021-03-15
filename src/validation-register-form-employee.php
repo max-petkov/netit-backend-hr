@@ -89,7 +89,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_first_name    = 'is-invalid';
     $input_value_employee_first_name = $_POST['first_name'];
 
-  } elseif (!preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['first_name'])) {
+  } elseif (!preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['first_name'])) {
     $error_message_first_name        = "<div class=\"invalid-feedback\"><i>Use only letters...</i></div>";
     $error_input_class_first_name    = 'is-invalid';
     $input_value_employee_first_name = $_POST['first_name'];
@@ -117,7 +117,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_last_name    = 'is-invalid';
     $input_value_employee_last_name = $_POST['last_name'];
 
-  } elseif (!preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['last_name'])) {
+  } elseif (!preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['last_name'])) {
     $input_value_employee_last_name = $_POST['last_name'];
     $error_input_class_last_name    = 'is-invalid';
     $error_message_last_name        = "<div class=\"invalid-feedback\"><i>Use only letters...</i></div>";
