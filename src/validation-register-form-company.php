@@ -73,7 +73,7 @@ $success_check_ux_ui     = '';
     $error_input_class_company_username = 'is-invalid';
     $input_value_company_username       = $_POST['company_username'];
 
-  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['company_username'])) {
+  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['company_username'])) {
     $error_message_company_username     = "<div class=\"invalid-feedback\"><i>Use only letters and numbers...</i></div>";
     $error_input_class_company_username = 'is-invalid';
     $input_value_company_username       = $_POST['company_username'];
@@ -106,7 +106,7 @@ $success_check_ux_ui     = '';
     $error_input_class_company_name = 'is-invalid';
     $input_value_company_name       = $_POST['company_name'];
 
-  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}- ]+$/u', $_POST['company_name'])) {
+  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\- ]+$/u', $_POST['company_name'])) {
     $error_message_company_name     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and white space...</i></div>";
     $error_input_class_company_name = 'is-invalid';
     $input_value_company_name       = $_POST['company_name'];
@@ -229,7 +229,7 @@ $success_check_ux_ui     = '';
     $error_input_class_password = 'is-invalid';
     $input_value_password       = $_POST['password'];
 
-  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['password'])) {
+  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['password'])) {
     $input_value_password       = $_POST['password'];
     $error_input_class_password = 'is-invalid';
     $error_message_password     = "<div class=\"invalid-feedback\"><i>Use only upper or lower case letters and numbers!</i></div>";
