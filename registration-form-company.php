@@ -35,7 +35,7 @@
           <i class="fs-5 fw-bold ms-4"><a href="registration-form-company.php">Company</a></i>
         </div>
         <form action="registration-form-company.php" method="POST">
-        <?php echo success_message_registration(); ?>
+        <?php echo success_message(); ?>
           <h4 class="text-center">For Companies</h4>
           <p class="text-muted text-center mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, mollitia!</p>
           <div class="form-group mb-3">
