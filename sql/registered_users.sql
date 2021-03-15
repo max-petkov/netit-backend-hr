@@ -22,5 +22,7 @@ CREATE TABLE companies(
 
 SELECT * FROM employees;
 
+SELECT username, password FROM  companies;
+
 SELECT * FROM companies;
 
