@@ -162,7 +162,7 @@ $success_check_ux_ui     = '';
     $error_input_class_company_description = 'is-invalid';
     $input_value_company_description       = $_POST['company_description'];
 
-  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.; ]+$/u', $_POST['company_description'])) {
+  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.,; ]+$/u', $_POST['company_description'])) {
     $error_message_company_description     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and white space...</i></div>";
     $error_input_class_company_description = 'is-invalid';
     $input_value_company_description       = $_POST['company_description'];

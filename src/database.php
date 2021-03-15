@@ -79,7 +79,7 @@ if (isset($_POST['submit_registration_company'])) {
       !empty($_POST['email'])                                                                        && 
       filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)                                             &&
       !empty($_POST['company_description'])                                                          && 
-      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.; ]+$/u', $_POST['company_description'])             &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.,; ]+$/u', $_POST['company_description'])             &&
       !empty($_POST['it_branch'])                                                                    && 
       !empty($_POST['password'])                                                                     && 
       preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['password'])                              &&
