@@ -22,15 +22,15 @@ if (!$database_connection) {
 if (isset($_POST['submit_registration'])) {
 
   if (!empty($_POST['employee_username'])                                                                     && 
-      preg_match('/^[a-zA-z0-9]*$/', $_POST['employee_username']) &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['employee_username']) &&
       !empty($_POST['first_name'])                                                                            && 
-      preg_match('/^[a-zA-z.\' ]*$/', $_POST['first_name'])                                                   && 
+      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['first_name'])                                                   && 
       !empty($_POST['last_name'])                                                                             && 
-      preg_match('/^[a-zA-z.\' ]*$/', $_POST['last_name'])                                                    &&
+      preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['last_name'])                                                    &&
       !empty($_POST['email'])                                                                                 && 
       filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)                                                      &&
       !empty($_POST['password'])                                                                              && 
-      preg_match('/^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]*$/', $_POST['password'])          && 
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['password'])          && 
       !empty($_POST['confirm_password'])                                                                      && 
       $_POST['password'] == $_POST['confirm_password']                                                        &&
       mb_strlen($_POST['employee_username']) >= 4                                                             && 
@@ -69,19 +69,20 @@ if (isset($_POST['submit_registration'])) {
 
 }
 
+
 if (isset($_POST['submit_registration_company'])) {
 
   if (!empty($_POST['company_username'])                                                             && 
-      preg_match('/^[a-zA-z0-9]*$/', $_POST['company_username'])                                     &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['company_username'])                      &&
       !empty($_POST['company_name'])                                                                 && 
-      preg_match('/^[a-zA-z.\' ]*$/', $_POST['company_name'])                                        &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}- ]+$/u', $_POST['company_name'])                         &&
       !empty($_POST['email'])                                                                        && 
       filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)                                             &&
       !empty($_POST['company_description'])                                                          && 
-      preg_match('/^[a-zA-z0-9.!?\' ]*$/', $_POST['company_description'])                            &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.; ]+$/u', $_POST['company_description'])             &&
       !empty($_POST['it_branch'])                                                                    && 
       !empty($_POST['password'])                                                                     && 
-      preg_match('/^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]*$/', $_POST['password']) &&
+      preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['password'])                              &&
       !empty($_POST['confirm_password'])                                                             && 
       $_POST['password'] == $_POST['confirm_password']                                               && 
       mb_strlen($_POST['company_username'])    >= 4                                                  && 

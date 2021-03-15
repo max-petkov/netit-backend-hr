@@ -56,7 +56,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_username    = 'is-invalid';
     $input_value_employee_username = $_POST['employee_username'];
 
-  } elseif (!preg_match('/^[a-zA-z0-9]*$/', $_POST['employee_username'])) {
+  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['employee_username'])) {
     $error_message_username        = "<div class=\"invalid-feedback\"><i>Use only letters and numbers...</i></div>";
     $error_input_class_username    = 'is-invalid';
     $input_value_employee_username = $_POST['employee_username'];
@@ -89,7 +89,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_first_name    = 'is-invalid';
     $input_value_employee_first_name = $_POST['first_name'];
 
-  } elseif (!preg_match('/^[a-zA-z.\' ]*$/', $_POST['first_name'])) {
+  } elseif (!preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['first_name'])) {
     $error_message_first_name        = "<div class=\"invalid-feedback\"><i>Use only letters...</i></div>";
     $error_input_class_first_name    = 'is-invalid';
     $input_value_employee_first_name = $_POST['first_name'];
@@ -117,7 +117,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_last_name    = 'is-invalid';
     $input_value_employee_last_name = $_POST['last_name'];
 
-  } elseif (!preg_match('/^[a-zA-z.\' ]*$/', $_POST['last_name'])) {
+  } elseif (!preg_match('/^[a-zA-Z\p{Cyrillic}]+$/', $_POST['last_name'])) {
     $input_value_employee_last_name = $_POST['last_name'];
     $error_input_class_last_name    = 'is-invalid';
     $error_message_last_name        = "<div class=\"invalid-feedback\"><i>Use only letters...</i></div>";
@@ -173,7 +173,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_password    = 'is-invalid';
     $input_value_employee_password = $_POST['password'];
 
-  } elseif (!preg_match('/^[a-zA-Z0-9]+([a-zA-Z0-9](_|-| )[a-zA-Z0-9])*[a-zA-Z0-9]*$/', $_POST['password'])) {
+  } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}-]+$/u', $_POST['password'])) {
     $input_value_employee_password = $_POST['password'];
     $error_input_class_password    = 'is-invalid';
     $error_message_password        = "<div class=\"invalid-feedback\"><i>Use only upper or lower case letters and numbers!</i></div>";
