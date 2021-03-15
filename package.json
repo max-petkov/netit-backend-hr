@@ -1,0 +1,16 @@
+{
+  "name": "my_package",
+  "version": "1.0.0",
+  "description": "Front-end & Back-end Final Project - NETIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile_scss": "node-sass --watch scss -o css"
+  },
+  "author": "Maximilian Petkov",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.0.0-beta2",
+    "node-sass": "^5.0.0"
+  }
+}
