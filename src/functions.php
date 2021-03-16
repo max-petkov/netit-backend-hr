@@ -38,7 +38,7 @@ function login_attempt($db_table_name, $db_username, $db_password, $username_inp
     echo 'Failed!:' . $th->getMessage();
   } 
 
-  $sql  = "SELECT {$db_username}, {$db_password} FROM {$db_table_name} WHERE {$db_username}=:{$db_username} AND {$db_password}=:{$db_password}";
+  $sql  = "SELECT {$db_username}, {$db_password} FROM {$db_table_name} WHERE BINARY {$db_username}=:{$db_username} AND BINARY {$db_password}=:{$db_password}";
   $stmt = $db_connection->prepare($sql);
   $stmt->bindValue(":{$db_username}", $username_input_value);
   $stmt->bindValue(":{$db_password}", $password_input_value);
