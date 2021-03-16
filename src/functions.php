@@ -54,6 +54,11 @@ function login_attempt($db_table_name, $db_username, $db_password, $username_inp
 
 }
 
+// Redirection url function 
+function redirect_to($url){
+header("location: {$url}");
+exit;
+}
 
 // Display selected IT Branches
 function checkbox_array_display() {
