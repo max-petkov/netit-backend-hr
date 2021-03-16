@@ -61,8 +61,7 @@ if (isset($_POST['submit_registration'])) {
       $stmt->close();
 
       $_SESSION['success_message'] = 'Your account has been created successfully!';
-      header('location: registration-form-employee.php');
-      exit;
+      redirect_to('registration-form-employee.php');
       
   }
 }
@@ -112,8 +111,7 @@ if (isset($_POST['submit_registration_company'])) {
         $stmt->close();
 
         $_SESSION['success_message'] = 'Your account has been created successfully!';
-        header('location: registration-form-company.php');
-        exit;
+        redirect_to('registration-form-company.php');
   }
 }
 
@@ -132,8 +130,8 @@ if(isset($_POST['submit_login'])) {
 
   } else {
   $_SESSION['error_message'] = 'Incorrect username or password... Try again!';
-  header('location: login.php');
-  exit;
+  redirect_to('login.php');
+
   }
     
 }
