@@ -74,7 +74,7 @@ $success_check_ux_ui     = '';
     $input_value_company_username       = $_POST['company_username'];
 
   } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['company_username'])) {
-    $error_message_company_username     = "<div class=\"invalid-feedback\"><i>Use only letters and numbers...</i></div>";
+    $error_message_company_username     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and dashes - ....</i></div>";
     $error_input_class_company_username = 'is-invalid';
     $input_value_company_username       = $_POST['company_username'];
 
@@ -222,7 +222,6 @@ $success_check_ux_ui     = '';
     
   }
 
-
   // Password validation
   if (empty($_POST['password'])) {
     $error_message_password     = "<div class=\"invalid-feedback\"><i>You must fill the required field...</i></div>";
@@ -232,7 +231,7 @@ $success_check_ux_ui     = '';
   } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['password'])) {
     $input_value_password       = $_POST['password'];
     $error_input_class_password = 'is-invalid';
-    $error_message_password     = "<div class=\"invalid-feedback\"><i>Use only upper or lower case letters and numbers!</i></div>";
+    $error_message_password     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and dashes - ...</i></div>";
 
   } elseif (mb_strlen($_POST['password']) < 4) {
     $error_message_password     = "<div class=\"invalid-feedback\"><i>Must be more than 3 characters</i></div>";
