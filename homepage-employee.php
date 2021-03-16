@@ -8,15 +8,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/custom.css">
   <link rel="stylesheet" href="css/bootstrap.css">
-  <title>Monster HR</title>
+  <title>👾Monster HR</title>
 </head>
 
 <body>
   <header>
-    <nav class="navbar shadow-custom-navbar navbar-expand-sm py-3 mb-5">
+    <nav class="navbar flex-wrap shadow-custom-navbar navbar-expand py-3 mb-5">
       <div class="container">
         <a href="homepage-employee.php" class="navbar-brand text-dark fw-bold">Monster HR</a>
-        <ul class="navbar-nav align-items-center">
+        <ul class="navbar-nav align-items-center mt-sm-0">
           <li class="me-3">
             <a href="login.php" class="text-dark text-decoration-none fw-bold">Login</a>
           </li>
@@ -234,7 +234,7 @@
   </section>
   <footer class="bg-dark text-white py-5">
     <div class="container">
-      <p class="text-center text-white m-0">Made by: Maximilian Petkov</p>
+      <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
       <hr class="mx-auto my-1" width="256px">
       <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg" class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
     </div>
