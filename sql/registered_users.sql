@@ -2,7 +2,7 @@ CREATE DATABASE registered_users;
 USE registered_users;
 
 CREATE TABLE employees(
-	employee_id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50),
     first_name VARCHAR(50),
     last_name VARCHAR(50),
@@ -11,7 +11,7 @@ CREATE TABLE employees(
 );
 
 CREATE TABLE companies(
-	company_id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50),
     company_name VARCHAR(255),
     company_it_branches VARCHAR(255),
@@ -21,8 +21,6 @@ CREATE TABLE companies(
 );
 
 SELECT * FROM employees;
-
-SELECT username, password FROM  companies;
 
 SELECT * FROM companies;
 
