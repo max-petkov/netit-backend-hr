@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/custom.css">
   <title>Monster HR</title>
 </head>
 
 <body>
-  <header class="mb-5">
+  <header>
     <nav class="navbar shadow-custom-navbar navbar-expand-sm py-3 mb-5">
       <div class="container">
         <a href="homepage-company.php" class="navbar-brand text-dark fw-bold">Monster HR</a>
@@ -48,7 +49,6 @@
       </div>
       <hr class="my-5">
     </div>
-    
   </header>
   <section class="mb-5">
     <div class="container">
@@ -129,9 +129,112 @@
       </div>
     </div>
   </section>
-  <footer class="bg-dark text-white p-4">
+  <section class="bg-dark py-5">
     <div class="container">
-      <p class="text-center text-white m-0">PLATFORM MADE BY ...  WITH ... :</p>
+      <h3 class="fs-3 text-white text-underline text-center"><i>Platform made with:</i></h3>
+      <div class="d-flex flex-wrap justify-content-center align-items-center">
+        <div class="m-3">
+          <img src="img/icons/html5-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
+        </div>
+        <div class="m-3">
+          <img src="img/icons/css3-alt-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
+        </div>
+        <div class="m-3">
+          <img src="img/icons/sass-brands.svg" alt="" width="64px" height="64px" class="svg-bg-color">
+        </div>
+        <div class="m-3">
+          <img src="img/icons/js-square-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
+        </div>
+        <div class="m-3">
+          <img src="img/icons/php-brands.svg" alt="" width="80px" height="64px" class="svg-bg-color">
+        </div>
+        <div class="m-3 display-6 text-center text-white">
+          <img src="img/icons/database-solid.svg" alt="" width="48px" height="48px" class="svg-bg-color">
+          <p class="fs-6 m-0">MySQL</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-5">
+    <div class="container">
+      
+        <h1 class="text-center mt-5">Meet the Creators</h1>
+        <p class="text-center lead mx-auto mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iusto dignissimos eius iste maxime ullam placeat vitae porro unde </p>
+     
+      <div class="row mb-5 justify-content-center">
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card pt-4 pb-2">
+            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <div class="card-body">
+              <h3 class="text-center">Jon Doe</h3>
+              <h5 class="text-muted text-center">Frontend Developer</h5>
+              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
+              <div class="social-links-card">
+                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 ">
+          <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-0">
+            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <div class="card-body">
+              <h3 class="text-center">Jordan King</h3>
+              <h5 class="text-muted text-center">Backend Developer</h5>
+              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
+              <div class="social-links-card">
+                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
+            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <div class="card-body">
+              <h3 class="text-center">Susam Williams</h3>
+              <h5 class="text-muted text-center">Quality Assurance</h5>
+              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
+              <div class="social-links-card">
+                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
+            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <div class="card-body">
+              <h3 class="text-center">Frank Sifuentes</h3>
+              <h5 class="text-muted text-center">UX/UI</h5>
+              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
+              <div class="social-links-card">
+                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <footer class="bg-dark text-white py-5">
+    <div class="container">
+      <p class="text-center text-white m-0">Made by: Maximilian Petkov</p>
+      <hr class="mx-auto my-1" width="256px">
+      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg" class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
     </div>
   </footer>
 </body>
