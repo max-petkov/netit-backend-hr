@@ -409,7 +409,10 @@
       <!-- Jobs lists -->
       <div id="list-jobs">
         <div class="row search-bar my-4">
-          <div class="order-1 order-sm-0 col-6 mt-3 col-sm-3 mt-sm-0 pe-sm-0 col-md-2">
+          <div class="col-sm-8 col-md-6">
+            <input type="text" class="form-control" placeholder="Search job...">
+          </div>
+          <div class="order-1 order-sm-0 col-6 mt-3 col-sm-3 mt-sm-0 ps-sm-0 col-md-2">
             <select class="form-select" name="it_branches" id="it_branches">
               <option class="text-dark" selected>Sort by...</option>
               <option class="text-dark" value="">Frontend</option>
@@ -420,16 +423,12 @@
               <option class="text-dark" value="">Mob Develmp</option>
             </select>
           </div>
-          <div class="col-sm-8 col-md-6">
-            <input type="text" class="form-control" placeholder="Search job...">
-          </div>
         </div>
         <ul class="list-group-flush ps-0">
           <li class="list-group-item px-2">
             <p class="text-muted mb-3">Published: 03.10.2021 by</p>
-            <div class="mb-3 d-flex">
-              <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" class="me-1" width="48px" alt="">
-              <div class="d-flex flex-column">
+            <div class="mb-3 d-flex align-items-center">
+              <div class="d-flex flex-column me-1">
                 <h4 class="m-0">
                   Medics Prosperity
                 </h4>
@@ -439,6 +438,7 @@
                   <span class="badge bg-secondary rounded-pill">backend</span>
                 </span>
               </div>
+              <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" width="56px" alt="">
             </div>
             <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam pariatur libero reiciendis
               doloremque in magni atque consequuntur, laudantium, maxime rerum, id ratione alias consectetur
