@@ -89,8 +89,8 @@
                       <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
                       <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
                     </svg>
-                    <b>Logout</b> 
-                    </a>
+                    <b>Logout</b>
+                  </a>
                 </li>
                 <div class="dropdown-divider"></div>
                 <li class="dropdown-item xsm-text-class d-flex align-items-center">
@@ -426,15 +426,19 @@
         </div>
         <ul class="list-group-flush ps-0">
           <li class="list-group-item px-2">
-            <p class="text-muted mb-2">Published: 03.10.2021 by</p>
-            <div class="mb-4">
-              <h4 class="m-0">
-                <span>Medics Prosperity</span>
-                <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" width="48px" alt="">
-              </h4>
-              <span class="badge bg-danger rounded-pill">ux/ui</span>
-              <span class="badge bg-primary rounded-pill">frontend</span>
-              <span class="badge bg-secondary rounded-pill">backend</span>
+            <p class="text-muted mb-3">Published: 03.10.2021 by</p>
+            <div class="mb-3 d-flex">
+              <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" class="me-1" width="48px" alt="">
+              <div class="d-flex flex-column">
+                <h4 class="m-0">
+                  <span class="">Medics Prosperity
+                </h4>
+                <span class="badges mt-1">
+                  <span class="badge bg-danger rounded-pill">ux/ui</span>
+                  <span class="badge bg-primary rounded-pill">frontend</span>
+                  <span class="badge bg-secondary rounded-pill">backend</span>
+                </span>
+              </div>
             </div>
             <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam pariatur libero reiciendis
               doloremque in magni atque consequuntur, laudantium, maxime rerum, id ratione alias consectetur
