@@ -9,14 +9,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
   <title>Register | Company</title>
 </head>
 <body>
   <nav class="navbar shadow-custom-navbar navbar-expand-sm py-3 mb-5">
     <div class="container">
-      <a href="homepage-company.php" class="navbar-brand text-dark fw-bold">Monster HR</a>
+      <a href="homepage-company.php" class="calistoga-font navbar-brand text-dark fw-bold">Monster HR</a>
       <ul class="navbar-nav align-items-center">
         <li class="me-3">
           <a href="login.php" class="text-dark text-decoration-none fw-bold">Login</a>
@@ -104,9 +104,12 @@
       </div>
     </div>
   </div>
-  <footer class="bg-dark text-white p-4 mt-5">
+  <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
-      <p class="text-center text-white m-0">PLATFORM MADE BY ...  WITH ... :</p>
+      <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
+      <hr class="mx-auto my-1" width="256px">
+      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg"
+          class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
     </div>
   </footer>
 </body>

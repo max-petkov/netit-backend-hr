@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
   <title>👾Monster HR</title>
 </head>
 
@@ -16,8 +16,8 @@
   <header>
     <nav class="navbar shadow-custom-navbar flex-wrap navbar-expand py-3 mb-5">
       <div class="container">
-        <a href="homepage-company.php" class="navbar-brand text-dark fw-bold">Monster HR</a>
-        <ul class="navbar-nav align-items-center">
+        <a href="homepage-company.php" class="calistoga-font navbar-brand text-dark fw-bold">Monster HR</a>
+        <ul class="navbar-nav align-items-center d-flex">
           <li class="me-3">
             <a href="login.php" class="text-dark text-decoration-none fw-bold">Login</a>
           </li>
@@ -45,7 +45,7 @@
           <a href="login.php" class="btn btn-primary px-4 py-2">Find a professional</a>
         </div>
         <div class="d-none d-md-block col-md-6">
-          <img src="img/img-homepage-company.jpg" alt="success-image" class="img-fluid">
+          <img src="assets/img/img-homepage-company.jpg" alt="success-image" class="img-fluid">
         </div>
       </div>
       <hr class="my-5">
@@ -135,22 +135,25 @@
       <h3 class="fs-3 text-white text-underline text-center"><i>Platform made with:</i></h3>
       <div class="d-flex flex-wrap justify-content-center align-items-center">
         <div class="m-3">
-          <img src="img/icons/html5-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
+          <img src="assets/icons/html5-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
         <div class="m-3">
-          <img src="img/icons/css3-alt-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
+          <img src="assets/icons/css3-alt-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
         <div class="m-3">
-          <img src="img/icons/sass-brands.svg" alt="" width="64px" height="64px" class="svg-bg-color">
+          <img src="assets/icons/sass-brands.svg" alt="" width="64px" height="64px" class="svg-bg-color">
         </div>
         <div class="m-3">
-          <img src="img/icons/js-square-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
+          <img src="assets/icons/js-square-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
         <div class="m-3">
-          <img src="img/icons/php-brands.svg" alt="" width="80px" height="64px" class="svg-bg-color">
+          <img src="assets/icons/jquery-brand.svg" alt="" width="64px" height="64px" class="svg-bg-color">
+        </div>
+        <div class="m-3">
+          <img src="assets/icons/php-brands.svg" alt="" width="80px" height="64px" class="svg-bg-color">
         </div>
         <div class="m-3 display-6 text-center text-white">
-          <img src="img/icons/database-solid.svg" alt="" width="48px" height="48px" class="svg-bg-color">
+          <img src="assets/icons/database-solid.svg" alt="" width="48px" height="48px" class="svg-bg-color">
           <p class="fs-6 m-0">MySQL</p>
         </div>
       </div>
@@ -167,7 +170,7 @@
 
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2">
-            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
             <div class="card-body">
               <h3 class="text-center">Jon Doe</h3>
               <h5 class="text-muted text-center">Frontend Developer</h5>
@@ -183,7 +186,7 @@
 
         <div class="col-lg-3 col-md-6 ">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-0">
-            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
             <div class="card-body">
               <h3 class="text-center">Jordan King</h3>
               <h5 class="text-muted text-center">Backend Developer</h5>
@@ -199,7 +202,7 @@
 
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
-            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
             <div class="card-body">
               <h3 class="text-center">Susam Williams</h3>
               <h5 class="text-muted text-center">Quality Assurance</h5>
@@ -215,7 +218,7 @@
 
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
-            <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
+            <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
             <div class="card-body">
               <h3 class="text-center">Frank Sifuentes</h3>
               <h5 class="text-muted text-center">UX/UI</h5>
@@ -233,11 +236,12 @@
     </div>
   </section>
   
-  <footer class="bg-dark text-white py-5">
+  <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
       <hr class="mx-auto my-1" width="256px">
-      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg" class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
+      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg"
+          class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
     </div>
   </footer>
 </body>
