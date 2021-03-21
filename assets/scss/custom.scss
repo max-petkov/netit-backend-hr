@@ -1,0 +1,82 @@
+// Adding custom font
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+
+// Custom Style CSS
+body {
+  overflow-x: hidden;
+}
+
+.shadow-custom-navbar {
+  box-shadow: 2px 0px 5px #707070;
+}
+
+
+.calistoga-font {
+  font-family: 'Calistoga', cursive;
+}
+
+
+.xsm-text-class {
+  font-size: 0.9rem;
+}
+
+
+/* Color doesn't work, use fill: */
+.back-icon:hover {
+  cursor: pointer;
+  fill: #000;
+}
+
+
+.edit-profile {
+  font-size: 0.9rem;
+}
+
+.edit-profile input {
+  font-size: 0.85rem;
+}
+
+/* CHEVRON */
+.bi-chevron-down {
+  cursor: pointer;
+
+}
+
+.chevron-animation-open {
+  transform: rotate(-540deg);
+  transition: 0.4s;
+}
+
+.chevron-animation-close {
+  transform: rotate(180deg);
+  transition: 0.4s;
+}
+
+
+/* Box */
+.message_box {
+  max-width: 500px;
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  opacity: 0;
+  right: -544px;
+}
+
+.application_box {
+  max-width: 500px;
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  opacity: 0;
+  right: -544px;
+}
+
+.profile_box {
+  max-width: 500px;
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  opacity: 0;
+  right: -544px;
+}
