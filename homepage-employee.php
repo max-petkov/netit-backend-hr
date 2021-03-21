@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<!-- Showcase -->
   <header>
     <nav class="navbar flex-wrap shadow-custom-navbar navbar-expand py-3 mb-5">
       <div class="container">
@@ -51,86 +52,85 @@
       <hr>
     </div>
   </header>
-  <section class="mb-5">
-    <div class="container">
-      <div class="d-flex justify-content-center flex-wrap">
+  <!-- Cards published jobs -->
+  <div id="cards-job-container">
+        <div class="d-flex justify-content-center flex-wrap">
 
-        <div class="card mx-2 mt-4 mt-md-3" style="width: 16rem;">
-          <div class="card-body">
-            <div class="card-title text-center">Frontend Development</div>
-            <div class="card">
-              <div class="card-body">
-                <div class="card-subttile text-center small">Published jobs:</div>
-                <div class="card-subtitle text-center fw-bold">122</div>
+          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+            <div class="card-body p-2">
+              <div class="card-title text-center">Frontend</div>
+              <div class="card">
+                <div class="card-body p-2">
+                  <div class="card-subttile text-center small">Published jobs:</div>
+                  <div class="card-subtitle text-center fw-bold">122</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+            <div class="card-body p-2">
+              <div class="card-title text-center">Backend</div>
+              <div class="card">
+                <div class="card-body p-2">
+                  <div class="card-subttile text-center small">Published jobs:</div>
+                  <div class="card-subtitle text-center fw-bold">95</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+            <div class="card-body p-2">
+              <div class="card-title text-center">Fullstack</div>
+              <div class="card">
+                <div class="card-body p-2">
+                  <div class="card-subttile text-center small">Published jobs:</div>
+                  <div class="card-subtitle text-center fw-bold">32</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+            <div class="card-body p-2">
+              <div class="card-title text-center">QA</div>
+              <div class="card">
+                <div class="card-body p-2">
+                  <div class="card-subttile text-center small">Published jobs:</div>
+                  <div class="card-subtitle text-center fw-bold">201</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+            <div class="card-body p-2">
+              <div class="card-title text-center">MobDev</div>
+              <div class="card">
+                <div class="card-body p-2">
+                  <div class="card-subttile text-center small">Published jobs:</div>
+                  <div class="card-subtitle text-center fw-bold">300</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+            <div class="card-body p-2">
+              <div class="card-title text-center">UX/UI</div>
+              <div class="card">
+                <div class="card-body p-2">
+                  <div class="card-subttile text-center small">Published jobs:</div>
+                  <div class="card-subtitle text-center fw-bold">71</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="card mx-2 mt-4 mt-md-3" style="width: 16rem;">
-          <div class="card-body">
-            <div class="card-title text-center">Backend Development</div>
-            <div class="card">
-              <div class="card-body">
-                <div class="card-subttile text-center small">Published jobs:</div>
-                <div class="card-subtitle text-center fw-bold">95</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mx-2 mt-4 mt-md-3" style="width: 16rem;">
-          <div class="card-body">
-            <div class="card-title text-center">Fullstack Development</div>
-            <div class="card">
-              <div class="card-body">
-                <div class="card-subttile text-center small">Published jobs:</div>
-                <div class="card-subtitle text-center fw-bold">32</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mx-2 mt-4 mt-md-3" style="width: 16rem;">
-          <div class="card-body">
-            <div class="card-title text-center">Quality Assurance</div>
-            <div class="card">
-              <div class="card-body">
-                <div class="card-subttile text-center small">Published jobs:</div>
-                <div class="card-subtitle text-center fw-bold">201</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mx-2 mt-4 mt-md-3" style="width: 16rem;">
-          <div class="card-body">
-            <div class="card-title text-center">Mobile Development</div>
-            <div class="card">
-              <div class="card-body">
-                <div class="card-subttile text-center small">Published jobs:</div>
-                <div class="card-subtitle text-center fw-bold">300</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mx-2 mt-4 mt-md-3" style="width: 16rem;">
-          <div class="d-flex flex-column justify-content-end card-body">
-            <div class="card-title text-center">UX/UI</div>
-            <div class="card">
-              <div class="card-body">
-                <div class="card-subttile text-center small">Published jobs:</div>
-                <div class="card-subtitle text-center fw-bold">71</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <hr class="my-4">
       </div>
-    </div>
-  </section>
-
+<!-- Used languages -->
   <section class="bg-dark py-5">
     <div class="container">
       <h3 class="fs-3 text-white text-underline text-center"><i>Platform made with:</i></h3>
@@ -157,14 +157,12 @@
       </div>
     </div>
   </section>
+  <!-- Team -->
   <section class="py-5">
     <div class="container">
-      
         <h1 class="text-center mt-5">Meet the Creators</h1>
-        <p class="text-center lead mx-auto mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iusto dignissimos eius iste maxime ullam placeat vitae porro unde </p>
-     
+        <p class="text-center lead mx-auto mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iusto dignissimos eius iste maxime ullam placeat vitae porro unde </p> 
       <div class="row mb-5 justify-content-center">
-
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2">
             <img class="img-fluid rounded-circle mx-auto" src="img/profifle-pic.jpg" alt="">
@@ -232,6 +230,7 @@
       </div>
     </div>
   </section>
+  
   <footer class="bg-dark text-white py-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
