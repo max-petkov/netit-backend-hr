@@ -431,7 +431,7 @@
               <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" class="me-1" width="48px" alt="">
               <div class="d-flex flex-column">
                 <h4 class="m-0">
-                  <span class="">Medics Prosperity
+                  Medics Prosperity
                 </h4>
                 <span class="badges mt-1">
                   <span class="badge bg-danger rounded-pill">ux/ui</span>
