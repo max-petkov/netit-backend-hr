@@ -20,7 +20,9 @@ CREATE TABLE companies(
     password VARCHAR(50)
 );
 
-SELECT * FROM employees;
+RENAME TABLE `employees` TO `tb_employees`;
+RENAME TABLE `companies` TO `tb_companies`;
 
-SELECT * FROM companies;
+SELECT * FROM tb_employees;
+SELECT * FROM tb_companies;
 

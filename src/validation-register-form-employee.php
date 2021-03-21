@@ -71,7 +71,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_username    = 'is-invalid';
     $input_value_employee_username = $_POST['employee_username'];
 
-  } elseif (checking_existing_username_email('employees', 'username', $_POST['employee_username']) || checking_existing_username_email('companies', 'username', $_POST['employee_username'])) {
+  } elseif (checking_existing_username_email('tb_employees', 'username', $_POST['employee_username']) || checking_existing_username_email('tb_companies', 'username', $_POST['employee_username'])) {
     $error_message_username        = "<div class=\"invalid-feedback\"><i>Username already exists... Choose another one!</i></div>";
     $error_input_class_username    = 'is-invalid';
     $input_value_employee_username = $_POST['employee_username'];
@@ -155,7 +155,7 @@ $success_input_class_confirm_password = '';
     $error_input_class_email    = 'is-invalid';
     $input_value_employee_email = $_POST['email'];
     
-  } elseif (checking_existing_username_email('employees', 'email', $_POST['email']) || checking_existing_username_email('companies', 'email', $_POST['email'])) {
+  } elseif (checking_existing_username_email('tb_employees', 'email', $_POST['email']) || checking_existing_username_email('tb_companies', 'email', $_POST['email'])) {
     $error_message_email        = "<div class=\"invalid-feedback\"><i>Email is already taken... Try another one!</i></div>";
     $error_input_class_email    = 'is-invalid';
     $input_value_employee_email = $_POST['email'];

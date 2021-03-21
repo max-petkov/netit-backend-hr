@@ -1,7 +1,6 @@
 <?php 
 
 function checking_existing_username_email($db_table_name, $db_username_or_email, $input_value) {
-
   $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
   try {
     $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');

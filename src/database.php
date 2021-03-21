@@ -43,12 +43,12 @@ if (isset($_POST['submit_registration'])) {
       mb_strlen($_POST['email'])             <= 254                                                           && 
       mb_strlen($_POST['password'])          >= 4                                                             && 
       mb_strlen($_POST['password'])          <= 49                                                            &&
-      !checking_existing_username_email('employees', 'username', $_POST['employee_username'])                 && 
-      !checking_existing_username_email('companies', 'username', $_POST['employee_username'])                 && 
-      !checking_existing_username_email('employees', 'email', $_POST['email'])                                && 
-      !checking_existing_username_email('companies', 'email', $_POST['email'])) {
+      !checking_existing_username_email('tb_employees', 'username', $_POST['employee_username'])              && 
+      !checking_existing_username_email('tb_companies', 'username', $_POST['employee_username'])              && 
+      !checking_existing_username_email('tb_employees', 'email', $_POST['email'])                             && 
+      !checking_existing_username_email('tb_companies', 'email', $_POST['email'])) {
       
-      $stmt = $db_connection->prepare('INSERT INTO employees(username, first_name, last_name, email, password) VALUES(?, ?, ?, ?, ?)');
+      $stmt = $db_connection->prepare('INSERT INTO tb_employees(username, first_name, last_name, email, password) VALUES(?, ?, ?, ?, ?)');
       $stmt->bind_param('sssss', $username, $first_name, $last_name, $email, $password);
 
       $username   = $_POST['employee_username'];
@@ -91,10 +91,10 @@ if (isset($_POST['submit_registration_company'])) {
       mb_strlen($_POST['company_description']) <= 499                                                && 
       mb_strlen($_POST['password'])            >= 4                                                  && 
       mb_strlen($_POST['password'])            <= 49                                                 &&
-      !checking_existing_username_email('companies', 'username', $_POST['company_username'])         && 
-      !checking_existing_username_email('employees', 'username', $_POST['company_username'])         &&
-      !checking_existing_username_email('companies', 'email', $_POST['email'])                       && 
-      !checking_existing_username_email('employees', 'email', $_POST['email'])) {
+      !checking_existing_username_email('tb_companies', 'username', $_POST['company_username'])      && 
+      !checking_existing_username_email('tb_employees', 'username', $_POST['company_username'])      &&
+      !checking_existing_username_email('tb_companies', 'email', $_POST['email'])                    && 
+      !checking_existing_username_email('tb_employees', 'email', $_POST['email'])) {
 
         $company_username    = $_POST['company_username'];
         $company_name        = $_POST['company_name'];
@@ -103,7 +103,7 @@ if (isset($_POST['submit_registration_company'])) {
         $company_email       = $_POST['email'];
         $company_password    = $_POST['password'];
 
-        $sql  = ('INSERT INTO companies(username, company_name, company_it_branches, company_description, email, password) VALUES(?, ?, ?, ?, ?, ?)');
+        $sql  = ('INSERT INTO tb_companies(username, company_name, company_it_branches, company_description, email, password) VALUES(?, ?, ?, ?, ?, ?)');
         $stmt = $db_connection->prepare($sql);
         $stmt->bind_param('ssssss', $company_username, $company_name, $company_it_branches, $company_description, $company_email, $company_password);
 
@@ -122,8 +122,8 @@ if(isset($_POST['submit_login'])) {
   header('location: login.php');
   exit;
   
-  } elseif (login_attempt('companies', 'username', 'password', $_POST['username'], $_POST['password']) ||
-            login_attempt('employees', 'username', 'password', $_POST['username'], $_POST['password'])) {
+  } elseif (login_attempt('tb_companies', 'username', 'password', $_POST['username'], $_POST['password']) ||
+            login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])) {
   $_SESSION['success_message'] = "Welcome, {$_POST['username']}!";
   header('location: login.php');
   exit;
