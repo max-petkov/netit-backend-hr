@@ -8,9 +8,6 @@
   <link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/custom.css">
   <title>Monster HR | Dashboard</title>
-  <style>
-
-  </style>
 </head>
 
 <body>
