@@ -1,5 +1,6 @@
 <?php
-include_once 'src/functions.php';
+include_once 'functions.php';
+
 
 session_start();
 
@@ -14,7 +15,7 @@ if (!$db_connection) {
   die("Connection failed!:" . mysqli_connect_error());
 
 } else {
-  echo "SUCCESSFUL CONNECTION!";
+  // echo "SUCCESSFUL CONNECTION!";
 
 }
 
@@ -124,9 +125,9 @@ if(isset($_POST['submit_login'])) {
   
   } elseif (login_attempt('tb_companies', 'username', 'password', $_POST['username'], $_POST['password']) ||
             login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])) {
-  $_SESSION['success_message'] = "Welcome, {$_POST['username']}!";
-  header('location: login.php');
-  exit;
+  $_SESSION['employee_id'] = login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+  
+  redirect_to('employee-dashboard.php');
 
   } else {
   $_SESSION['error_message'] = 'Incorrect username or password... Try again!';
@@ -135,7 +136,7 @@ if(isset($_POST['submit_login'])) {
   }
     
 }
-
+ 
 
 mysqli_close($db_connection);
 

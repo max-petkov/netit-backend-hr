@@ -1,5 +1,5 @@
 <?php 
-include_once 'src/functions.php';
+include_once 'functions.php';
 
 $company_username         = '';
 $company_name             = '';

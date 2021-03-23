@@ -1,5 +1,5 @@
 <?php 
-include_once 'src/functions.php';
+include_once 'functions.php';
 // TODO PUTTING SOME htmlenteties, trim() and backslashesh TO THE POST VALUES
 // TODO VARCHAR VALIDATION (Min and Max symbols on input fields)
 
