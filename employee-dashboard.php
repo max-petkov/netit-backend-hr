@@ -1,3 +1,7 @@
+<!-- Database is needed because to get the id sessian value and make logout and login required session -->
+<?php include 'src/database.php'; ?>
+<?php include_once 'src/functions.php'; ?>
+<?php login_required(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,16 +15,11 @@
 </head>
 
 <body>
-
   <!-- Navigation bar -->
   <nav class="navbar navbar-dark bg-dark navbar-expand">
     <div class="container flex-column flex-sm-row">
       <p class="calistoga-font navbar-brand text-white mb-0">Monster HR</p>
-
-
-
       <div class="d-flex">
-
         <!-- Collapse dropdown -->
         <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
@@ -28,7 +27,7 @@
               <a id="greetings" class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li class="dropdown-item xsm-text-class text-center">Your are logged in as<br><b class="xsm-text-class">$employee_username</b>
+                <li class="dropdown-item xsm-text-class text-center">Your are logged in as<br><b id="employee_username" class="xsm-text-class"></b>
                 </li>
                 <div class="dropdown-divider"></div>
                 <li id="profile_button">
@@ -57,7 +56,7 @@
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                   </svg>
-                  <span>Maximilian Petkov</span>
+                  <span id="employee_first_last_name"></span>
                 </li>
                 <li class="dropdown-item xsm-text-class d-flex align-items-center">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
@@ -70,7 +69,7 @@
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                     <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
                   </svg>
-                  <span>maxy.dp@abv.bg</span>
+                  <span id="employee_email"></span>
                 </li>
                 <li class="dropdown-item xsm-text-class d-flex align-items-center">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
@@ -81,7 +80,7 @@
                 </li>
                 <div class="dropdown-divider"></div>
                 <li id="profile_button">
-                  <a id="logout_employee" class="dropdown-item xsm-text-class d-flex align-items-center" href="#">
+                  <a id="logout_employee" class="dropdown-item xsm-text-class d-flex align-items-center" href="logout.php">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
                       <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
@@ -518,7 +517,7 @@
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
-
+  <script src="assets/js/ajax.js"></script>
 </body>
 
 </html>
