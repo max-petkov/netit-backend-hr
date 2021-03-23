@@ -27,15 +27,15 @@
   let d = new Date();
   let h = d.getHours();
   let greetings = document.getElementById('greetings');
-
+  
   if (h >= 0 && h <= 11) {
-    greetings.textContent += 'Good morning, Maximilian!';
+    greetings.innerHTML = 'Good morning, ';
 
   } else if (h >= 12 && h <= 17) {
-    greetings.innerHTML = `Good afternoon, Maximilian!`;
+    greetings.innerHTML = `Good afternoon, `;
 
   } else if (h >= 18 && h <= 23) {
-    greetings.innerHTML = `Good evening, Maximilian!`;
+    greetings.innerHTML = `Good evening, `;
 
   }
 
