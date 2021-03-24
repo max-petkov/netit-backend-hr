@@ -20,6 +20,12 @@ CREATE TABLE companies(
     password VARCHAR(50)
 );
 
+ALTER TABLE tb_employees ADD address VARCHAR(50);
+ALTER TABLE tb_employees ADD website VARCHAR(255);
+ALTER TABLE tb_employees ADD short_description VARCHAR(500);
+
+
+
 RENAME TABLE `employees` TO `tb_employees`;
 RENAME TABLE `companies` TO `tb_companies`;
 
