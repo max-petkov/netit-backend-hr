@@ -1,10 +1,11 @@
 <!-- Database is needed because to get the id sessian value and make logout and login required session -->
 <?php include 'src/database.php'; ?>
 <?php include_once 'src/functions.php'; ?>
+
 <?php login_required(); ?>
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +25,8 @@
         <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a id="greetings" class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span id="greetings"></span> <span id="greetings_first_name"></span>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li class="dropdown-item xsm-text-class text-center">Your are logged in as<br><b id="employee_username" class="xsm-text-class"></b>
@@ -63,7 +65,7 @@
                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                   </svg>
-                  <span>Sofia, Mladost</span>
+                  <span id="employee_address">-</span>
                 </li>
                 <li class="dropdown-item xsm-text-class d-flex align-items-center">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
@@ -76,7 +78,7 @@
                     <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
                     <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
                   </svg>
-                  <span>www.maxy.portfolio.bg</span>
+                  <a href="#" class="text-decoration-none" id="employee_website"></a>
                 </li>
                 <div class="dropdown-divider"></div>
                 <li id="profile_button">
@@ -251,10 +253,10 @@
 
   <!-- Edit profile -->
   <div class="card d-none profile_box shadow-lg p-3 mb-5 bg-body rounded">
-    <div class="d-flex justify-content-between mt-4">
+    <div class="d-flex justify-content-between px-0 mt-2">
       <div class="ms-3">
         <h4 class="card-text">Edit profile:</h4>
-        <button class="btn btn-primary btn-sm d-flex align-items-center">
+        <button name="submit_update" class="btn btn-primary btn-sm d-flex align-items-center">
           <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
           </svg>
@@ -264,38 +266,38 @@
       <button class="btn-close me-3"></button>
     </div>
     <div class="card-body">
-      <form action="#" method="POST" class="row edit-profile pb-3">
+      <form action="employee-dashboard.php" method="POST" class="row edit-profile pb-1">
 
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="first_name">First name</label>
-            <input type="text" class="form-control form-control-sm" name="first_name" value="$employee_last_name">
+            <input type="text" class="form-control form-control-sm" name="employee_first_name">
           </div>
           <div class="form-group col-0 pe-0 col-sm-6">
             <label for="last_name">Last name</label>
-            <input type="text" class="form-control form-control-sm" name="last_name" value="$employee_first_name">
+            <input type="text" class="form-control form-control-sm" name="employee_last_name">
           </div>
         </div>
 
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="address_employee">Address</label>
-            <input type="text" class="form-control form-control-sm" name="address_employee" value="$employee_address">
+            <input type="text" class="form-control form-control-sm" name="address_employee" value="-">
           </div>
           <div class="form-group col-0 col-sm-6 pe-0">
             <label for="website_employee">Website</label>
-            <input type="text" class="form-control form-control-sm" name="website_employee" value="$employee_website">
+            <input type="text" class="form-control form-control-sm" name="website_employee" value="-">
           </div>
         </div>
 
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="username">Username</label>
-            <input type="text" class="form-control form-control-sm" name="username1" value="$employee_username" disabled>
+            <input type="text" class="form-control form-control-sm" name="employee_username" disabled>
           </div>
           <div class="form-group col-0 col-sm-6 pe-0">
             <label for="email">Email</label>
-            <input type="email" class="form-control form-control-sm" name="email" value="$employee_email" disabled>
+            <input type="email" class="form-control form-control-sm" name="employee_email" disabled>
           </div>
         </div>
 
@@ -307,7 +309,7 @@
 
         <div class="form-group">
           <label for="short_introduction_employee">Short introduction</label>
-          <textarea name="bio" class="form-control form-control-sm" id="bio" rows="6" placeholder="">
+          <textarea name="short_introduction" class="form-control form-control-sm"  rows="6">
 - 👋 Hi, I’m @max-petkov
 - 👀 I’m interested in ...
 - 🌱 I’m currently learning ...
