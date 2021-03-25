@@ -1,7 +1,7 @@
 CREATE DATABASE registered_users;
 USE registered_users;
 
-CREATE TABLE employees(
+CREATE TABLE tb_employees(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50),
     first_name VARCHAR(50),
@@ -10,7 +10,7 @@ CREATE TABLE employees(
     password VARCHAR(50)
 );
 
-CREATE TABLE companies(
+CREATE TABLE tb_companies(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50),
     company_name VARCHAR(255),
@@ -31,7 +31,6 @@ ALTER TABLE tb_employees ADD short_introduction VARCHAR(500) DEFAULT "- 👋 Hi,
 ALTER TABLE tb_employees DROP COLUMN address;
 ALTER TABLE tb_employees DROP COLUMN website;
 ALTER TABLE tb_employees DROP COLUMN short_introduction;
-
 
 SELECT * FROM tb_employees;
 SELECT * FROM tb_companies;
