@@ -266,8 +266,8 @@
       <button class="btn-close me-3"></button>
     </div>
     <div class="card-body">
-      <form action="employee-dashboard.php" method="POST" class="row edit-profile pb-1">
-
+      <form method="POST" class="row edit-profile pb-1">
+        <div id="success_mess_validation"></div>
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="first_name">First name</label>
