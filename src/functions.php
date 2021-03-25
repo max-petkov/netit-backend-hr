@@ -5,7 +5,7 @@ function checking_existing_username_email($db_table_name, $db_username_or_email,
   try {
     $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
     $db_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo 'CONNECTION 4 SUCCESS!';
+    // echo 'CONNECTION 4 SUCCESS!';
   } catch (PDOException $th) {
     echo 'FAILED!: ' . $th->getMessage();
   }
@@ -31,7 +31,7 @@ function login_attempt($db_table_name, $db_username, $db_password, $username_inp
   try {
     $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
     $db_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo 'CONNECTION 5 SUCCESS!';
+    // echo 'CONNECTION 5 SUCCESS!';
   } catch (PDOException $th) {
     echo 'Failed!:' . $th->getMessage();
   } 
