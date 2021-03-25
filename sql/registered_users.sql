@@ -20,14 +20,18 @@ CREATE TABLE companies(
     password VARCHAR(50)
 );
 
-ALTER TABLE tb_employees ADD address VARCHAR(50);
-ALTER TABLE tb_employees ADD website VARCHAR(255);
-ALTER TABLE tb_employees ADD short_description VARCHAR(500);
+ALTER TABLE tb_employees ADD address VARCHAR(50) DEFAULT "-";
+ALTER TABLE tb_employees ADD website VARCHAR(255) DEFAULT "-";
+ALTER TABLE tb_employees ADD short_introduction VARCHAR(500) DEFAULT "- 👋 Hi, I’m ...
+- 👀 I’m interested in ...
+- 🌱 I’m currently learning ...
+- 💞️ I’m looking to collaborate on ...
+- 📫 How to reach me ...";
 
+ALTER TABLE tb_employees DROP COLUMN address;
+ALTER TABLE tb_employees DROP COLUMN website;
+ALTER TABLE tb_employees DROP COLUMN short_introduction;
 
-
-RENAME TABLE `employees` TO `tb_employees`;
-RENAME TABLE `companies` TO `tb_companies`;
 
 SELECT * FROM tb_employees;
 SELECT * FROM tb_companies;

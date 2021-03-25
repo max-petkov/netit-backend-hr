@@ -58,14 +58,14 @@
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                   </svg>
-                  <span id="employee_first_last_name"></span>
+                  <span id="employee_first_name" class="me-1"></span><span id="employee_last_name"></span>
                 </li>
                 <li class="dropdown-item xsm-text-class d-flex align-items-center">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                   </svg>
-                  <span id="employee_address">-</span>
+                  <span id="employee_address"></span>
                 </li>
                 <li class="dropdown-item xsm-text-class d-flex align-items-center">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
@@ -78,11 +78,11 @@
                     <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
                     <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
                   </svg>
-                  <a href="#" class="text-decoration-none" id="employee_website"></a>
+                  <a href="#" target="_blank" class="text-decoration-none" id="employee_website"></a>
                 </li>
                 <div class="dropdown-divider"></div>
                 <li id="profile_button">
-                  <a id="logout_employee" class="dropdown-item xsm-text-class d-flex align-items-center" href="logout.php">
+                  <a id="logout_employee" class="dropdown-item xsm-text-class d-flex align-items-center" href="src/logout.php">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
                       <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
@@ -272,21 +272,25 @@
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="first_name">First name</label>
             <input type="text" class="form-control form-control-sm" name="employee_first_name">
+            <div></div>
           </div>
           <div class="form-group col-0 pe-0 col-sm-6">
             <label for="last_name">Last name</label>
             <input type="text" class="form-control form-control-sm" name="employee_last_name">
+            <div></div>
           </div>
         </div>
 
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="address_employee">Address</label>
-            <input type="text" class="form-control form-control-sm" name="address_employee" value="-">
+            <input type="text" class="form-control form-control-sm" name="address_employee">
+            <div></div>
           </div>
           <div class="form-group col-0 col-sm-6 pe-0">
             <label for="website_employee">Website</label>
-            <input type="text" class="form-control form-control-sm" name="website_employee" value="-">
+            <input type="text" class="form-control form-control-sm" name="website_employee">
+            <div></div>
           </div>
         </div>
 
@@ -309,13 +313,14 @@
 
         <div class="form-group">
           <label for="short_introduction_employee">Short introduction</label>
-          <textarea name="short_introduction" class="form-control form-control-sm"  rows="6">
-- 👋 Hi, I’m @max-petkov
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-                </textarea>
+          <textarea name="short_introduction" class="form-control form-control-sm" rows="6">
+            <span id="textarea_default_text">- 👋 Hi, I’m ...
+  - 👀 I’m interested in ...
+  - 🌱 I’m currently learning ...
+  - 💞️ I’m looking to collaborate on ...
+  - 📫 How to reach me ...</span>
+          </textarea>
+          <div></div>
         </div>
       </form>
     </div>
