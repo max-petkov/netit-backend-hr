@@ -271,12 +271,12 @@
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="first_name">First name</label>
-            <input type="text" class="form-control form-control-sm" name="employee_first_name">
+            <input type="text" class="successful-validation form-control form-control-sm" name="employee_first_name">
             <div></div>
           </div>
           <div class="form-group col-0 pe-0 col-sm-6">
             <label for="last_name">Last name</label>
-            <input type="text" class="form-control form-control-sm" name="employee_last_name">
+            <input type="text" class="successful-validation form-control form-control-sm" name="employee_last_name">
             <div></div>
           </div>
         </div>
@@ -284,12 +284,12 @@
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="address_employee">Address</label>
-            <input type="text" class="form-control form-control-sm" name="address_employee">
+            <input type="text" class="successful-validation form-control form-control-sm" name="address_employee">
             <div></div>
           </div>
           <div class="form-group col-0 col-sm-6 pe-0">
             <label for="website_employee">Website</label>
-            <input type="text" class="form-control form-control-sm" name="website_employee">
+            <input type="text" class="successful-validation form-control form-control-sm" name="website_employee">
             <div></div>
           </div>
         </div>
@@ -313,7 +313,7 @@
 
         <div class="form-group">
           <label for="short_introduction_employee">Short introduction</label>
-          <textarea name="short_introduction" class="form-control form-control-sm" rows="6">
+          <textarea name="short_introduction" class="successful-validation form-control form-control-sm" rows="6">
             <span id="textarea_default_text">- 👋 Hi, I’m ...
   - 👀 I’m interested in ...
   - 🌱 I’m currently learning ...
