@@ -99,7 +99,8 @@ if (isset($_POST['submit_registration_company'])) {
 
         $company_username    = $_POST['company_username'];
         $company_name        = $_POST['company_name'];
-        $company_it_branches = $_POST['it_branch'];
+        // implode() separates the string values and return the whole value like a string
+        $company_it_branches = implode(' ', $_POST['it_branch']);
         $company_description = $_POST['company_description'];
         $company_email       = $_POST['email'];
         $company_password    = $_POST['password'];
@@ -125,9 +126,13 @@ if(isset($_POST['submit_login'])) {
   
   } elseif (login_attempt('tb_companies', 'username', 'password', $_POST['username'], $_POST['password']) ||
             login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])) {
-  $_SESSION['employee_id'] = login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
-  
-  redirect_to('employee-dashboard.php');
+    if (login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
+      $_SESSION['employee_id'] = login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+      redirect_to('employee-dashboard.php');
+    } else {
+      $_SESSION['company_id'] = login_attempt('tb_companies', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+      redirect_to('company-dashboard.php');
+    }
 
   } else {
   $_SESSION['error_message'] = 'Incorrect username or password... Try again!';

@@ -1,6 +1,12 @@
+<?php include 'src/database.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+if (isset($_SESSION['company_id'])) {
+  echo $_SESSION['company_id'];
+}
 
+?>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

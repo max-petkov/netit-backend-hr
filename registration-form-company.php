@@ -56,27 +56,27 @@
           <div class="form-group mb-3">
             <h4>IT Branches:</h4>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $success_class_check_front_end; ?>" name="it_branch[]" value="Front-end Development" <?php echo $success_check_front_end; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $success_class_check_front_end; ?>" name="it_branch[]" value="frontend" <?php echo $success_check_front_end; ?>>
               <label class="form-check-label" for="it_branch">Front-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $success_class_check_back_end; ?>" name="it_branch[]" value="Back-end Development" <?php echo $success_check_back_end; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $success_class_check_back_end; ?>" name="it_branch[]" value="backend" <?php echo $success_check_back_end; ?>>
               <label class="form-check-label" for="it_branch">Back-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $success_class_check_fullstack; ?>" name="it_branch[]" value="Fullstack Development" <?php echo $success_check_fullstack; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $success_class_check_fullstack; ?>" name="it_branch[]" value="fullstack" <?php echo $success_check_fullstack; ?>>
               <label class="form-check-label" for="it_branch">Fullstack Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $success_class_check_qa; ?>" name="it_branch[]" value="Quality Assurance" <?php echo $success_check_qa; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $success_class_check_qa; ?>" name="it_branch[]" value="qa" <?php echo $success_check_qa; ?>>
               <label class="form-check-label" for="it_branch">Quality Assurance</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $success_class_check_mob_dev; ?>" name="it_branch[]" value="Mobile Development" <?php echo $success_check_mob_dev; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $success_class_check_mob_dev; ?>" name="it_branch[]" value="mobdev" <?php echo $success_check_mob_dev; ?>>
               <label class="form-check-label" for="it_branch">Mobile Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $success_class_check_ux_ui; ?>" name="it_branch[]" value="UX/UI" <?php echo $success_check_ux_ui; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $success_class_check_ux_ui; ?>" name="it_branch[]" value="ux/ui" <?php echo $success_check_ux_ui; ?>>
               <label class="form-check-label" for="it_branch">UX/UI</label>
             </div>
             <?php echo $error_message_company_branch; ?>
