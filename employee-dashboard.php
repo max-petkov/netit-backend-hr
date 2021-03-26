@@ -307,7 +307,7 @@
 
         <div class="form-group d-flex flex-column mb-3">
           <label for="resume" class="file">Attach resume:</label>
-          <input type="file" class="form-contro-file">
+          <input type="file" class="form-control-file">
           <small class="form-text form-muted">Max 3mb size</small>
         </div>
 
