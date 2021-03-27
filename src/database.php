@@ -99,15 +99,19 @@ if (isset($_POST['submit_registration_company'])) {
 
         $company_username    = $_POST['company_username'];
         $company_name        = $_POST['company_name'];
-        // implode() separates the string values and return the whole value like a string
-        $company_it_branches = implode(' ', $_POST['it_branch']);
+        $frontend_branch     = $_POST['it_branch'][0];
+        $backend_branch      = $_POST['it_branch'][1];
+        $fullstack_branch    = $_POST['it_branch'][2];
+        $qa_branch           = $_POST['it_branch'][3];
+        $mobdev_branch       = $_POST['it_branch'][4];
+        $ux_ui_branch        = $_POST['it_branch'][5];
         $company_description = $_POST['company_description'];
         $company_email       = $_POST['email'];
         $company_password    = $_POST['password'];
 
-        $sql  = ('INSERT INTO tb_companies(username, company_name, company_it_branches, company_description, email, password) VALUES(?, ?, ?, ?, ?, ?)');
+        $sql  = ('INSERT INTO tb_companies(username, company_name, frontend_branch, backend_branch, fullstack_branch, qa_branch, mobdev_branch, ux_ui_branch , company_description, email, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt = $db_connection->prepare($sql);
-        $stmt->bind_param('ssssss', $company_username, $company_name, $company_it_branches, $company_description, $company_email, $company_password);
+        $stmt->bind_param('sssssssssss', $company_username, $company_name, $frontend_branch, $backend_branch, $fullstack_branch, $qa_branch, $mobdev_branch, $ux_ui_branch, $company_description, $company_email, $company_password);
 
         $stmt->execute();
         $stmt->close();
@@ -141,7 +145,7 @@ if(isset($_POST['submit_login'])) {
   }
     
 }
- 
+  
 
 mysqli_close($db_connection);
 

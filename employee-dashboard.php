@@ -1,4 +1,4 @@
-<!-- Database is needed because to get the id sessian value and make logout and login required session -->
+<!-- Database is needed because to get the id session value and make logout and login required session -->
 <?php include 'src/database.php'; ?>
 <?php include_once 'src/functions.php'; ?>
 <?php login_required($_SESSION['employee_id']); ?>
@@ -340,7 +340,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold">122</div>
+                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_branch', 'frontend'); ?></div>
                 </div>
               </div>
             </div>
@@ -352,7 +352,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold">95</div>
+                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('backend_branch', 'backend'); ?></div>
                 </div>
               </div>
             </div>
@@ -364,7 +364,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold">32</div>
+                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_branch', 'fullstack'); ?></div>
                 </div>
               </div>
             </div>
@@ -376,7 +376,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold">201</div>
+                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('qa_branch', 'qa'); ?></div>
                 </div>
               </div>
             </div>
@@ -388,7 +388,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold">300</div>
+                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_branch', 'mobdev'); ?></div>
                 </div>
               </div>
             </div>
@@ -400,7 +400,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold">71</div>
+                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_branch', 'ux/ui'); ?></div>
                 </div>
               </div>
             </div>

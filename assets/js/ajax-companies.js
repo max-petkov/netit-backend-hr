@@ -19,7 +19,24 @@ $(function () {
       $('#showcase_company_slogan').text(response.slogan);
       $('#showcase_company_history').text(response.company_history);
       $('#showcase_company_mission').text(response.company_mission);
-      $('#showcase_it_branches').html(response.company_it_branches);
+      if (response.frontend_branch !== null) {
+        $('#showcase_it_branches').append(`<span class="badge bg-secondary me-2">${response.frontend_branch}</span>`);
+      }
+      if (response.backend_branch !== null) {
+        $('#showcase_it_branches').append(`<span class="badge bg-dark me-2">${response.backend_branch}</span>`);
+      }
+      if (response.fullstack_branch !== null) {
+        $('#showcase_it_branches').append(`<span class="badge bg-success me-2">${response.fullstack_branch}</span>`);
+      }
+      if (response.qa_branch !== null) {
+        $('#showcase_it_branches').append(`<span class="badge bg-danger me-2">${response.qa_branch}</span>`);
+      }
+      if (response.mobdev_branch !== null) {
+        $('#showcase_it_branches').append(`<span class="badge bg-warning me-2">${response.mobdev_branch}</span>`);
+      }
+      if (response.ux_ui_branch !== null) {
+        $('#showcase_it_branches').append(`<span class="badge bg-primary me-2">${response.ux_ui_branch}</span>`);
+      }
 
       // Edit profile data
       $('input[name="company_username"]').val(response.username);

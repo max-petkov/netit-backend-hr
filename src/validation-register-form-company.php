@@ -61,7 +61,7 @@ $success_check_mob_dev   = '';
 $success_check_ux_ui     = '';
 
 
-
+ 
 
 // TODO --> VALIDATION EXISTANCE & CONVERTING ARRAY INTO A STRING FOR CHECKBOX CUZ VALUES ARE GETTING AS ARRAY IN MYSQL;
 
@@ -190,32 +190,32 @@ $success_check_ux_ui     = '';
     $error_input_class_company_branch = 'is-invalid';
   } else {
 
-    if(in_array('Front-end Development', $_POST['it_branch'])) {
+    if(in_array('frontend', $_POST['it_branch'])) {
       $success_check_front_end       = 'checked';
       $success_class_check_front_end = 'is-valid';
     }
 
-    if(in_array('Back-end Development', $_POST['it_branch'])) {
+    if(in_array('backend', $_POST['it_branch'])) {
       $success_check_back_end       = 'checked';
       $success_class_check_back_end = 'is-valid';
     } 
 
-    if(in_array('Fullstack Development', $_POST['it_branch'])) {
+    if(in_array('fullstack', $_POST['it_branch'])) {
       $success_check_fullstack       = 'checked';
       $success_class_check_fullstack = 'is-valid';
     } 
 
-    if(in_array('Quality Assurance', $_POST['it_branch'])) {
+    if(in_array('qa', $_POST['it_branch'])) {
       $success_check_qa       = 'checked';
       $success_class_check_qa = 'is-valid';
     } 
 
-    if(in_array('Mobile Development', $_POST['it_branch'])) {
+    if(in_array('mobdev', $_POST['it_branch'])) {
       $success_check_mob_dev       = 'checked';
       $success_class_check_mob_dev = 'is-valid';
     } 
 
-    if(in_array('UX/UI', $_POST['it_branch'])) {
+    if(in_array('ux/ui', $_POST['it_branch'])) {
       $success_check_ux_ui       = 'checked';
       $success_class_check_ux_ui = 'is-valid';
     } 

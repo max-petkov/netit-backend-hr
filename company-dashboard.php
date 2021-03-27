@@ -488,10 +488,7 @@
             <h1 id="showcase_company_name" class="m-0 display-4">
             </h1>
             <p id="showcase_company_slogan" class="lead mb-0"></p>
-            <span id="showcase_it_branches" class="badges mt-1">
-            <!-- find branch words > contain > replace them via regex and html jquery -->
-
-            </span>
+            <div id="showcase_it_branches" class="badges mt-1"></div>
           </div>
         </div>
 
