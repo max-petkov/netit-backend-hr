@@ -28,9 +28,19 @@ ALTER TABLE tb_employees ADD short_introduction VARCHAR(500) DEFAULT "- 👋 Hi,
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me ...";
 
-ALTER TABLE tb_employees DROP COLUMN address;
-ALTER TABLE tb_employees DROP COLUMN website;
-ALTER TABLE tb_employees DROP COLUMN short_introduction;
+ALTER TABLE tb_companies ADD address VARCHAR(50) DEFAULT "-";
+ALTER TABLE tb_companies ADD website VARCHAR(255) DEFAULT "-";
+ALTER TABLE tb_companies ADD slogan VARCHAR(50);
+ALTER TABLE tb_companies ADD company_history VARCHAR(500);
+ALTER TABLE tb_companies ADD company_mission VARCHAR(255);
+
+
+-- ALTER TABLE tb_companies DROP COLUMN slogan;
+-- ALTER TABLE tb_companies DROP COLUMN company_history;
+-- ALTER TABLE tb_companies DROP COLUMN company_mission;
+-- ALTER TABLE tb_employees DROP COLUMN website;
+-- ALTER TABLE tb_employees DROP COLUMN short_introduction;
+
 
 SELECT * FROM tb_employees;
 SELECT * FROM tb_companies;
