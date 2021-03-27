@@ -7,13 +7,13 @@ if (isset($_SESSION['employee_id'])) {
   $result = $db->query($sql)->fetch();
   
   while ($row = $result) {
-    $data['username'] = $row['username']; 
-    $data['first_name'] = $row['first_name']; 
-    $data['last_name'] = $row['last_name']; 
-    $data['email'] = $row['email'];
-    $data['website'] = $row['website'];
+    $data['username']           = $row['username']; 
+    $data['first_name']         = $row['first_name']; 
+    $data['last_name']          = $row['last_name']; 
+    $data['email']              = $row['email'];
+    $data['website']            = $row['website'];
     $data['short_introduction'] = $row['short_introduction']; 
-    $data['address'] = $row['address'];
+    $data['address']            = $row['address'];
     
     // Има break, защото се увеличава loading time на сайта и не го отваря
     break;

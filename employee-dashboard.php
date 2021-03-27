@@ -1,8 +1,8 @@
 <!-- Database is needed because to get the id sessian value and make logout and login required session -->
 <?php include 'src/database.php'; ?>
 <?php include_once 'src/functions.php'; ?>
+<?php login_required($_SESSION['employee_id']); ?>
 
-<?php login_required(); ?>
 <!DOCTYPE html>
 <html lang="en">
  
@@ -91,7 +91,7 @@
                   </a>
                 </li>
                 <div class="dropdown-divider"></div>
-                <li class="dropdown-item xsm-text-class d-flex align-items-center">
+                <li class="dropdown-item xsm-text-class d-flex align-items-center justify-content-center">
                   <span id="date_time">
 
                   </span>
@@ -524,7 +524,7 @@
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
-  <script src="assets/js/ajax.js"></script>
+  <script src="assets/js/ajax-employees.js"></script>
 </body>
 
 </html>
