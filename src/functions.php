@@ -80,8 +80,8 @@ function checkbox_array_display() {
 // checkbox_array_display();
 
 
-function login_required() {
-  if (isset($_SESSION['employee_id'])) {
+function login_required($session_id) {
+  if (isset($session_id)) {
     return true;
   } else {
     $_SESSION['error_message'] = 'Login required!';
