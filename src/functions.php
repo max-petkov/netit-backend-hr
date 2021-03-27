@@ -89,5 +89,26 @@ function login_required($session_id) {
   }
 }
 
+// Counting published jobs
+// FOR NOW IT'S NOT COUNTING THE PUBLISHED JOBS BUT ONLY THE CHECKBOX VALUES WHICH THE COMPANIES SELECTED AFTER REGISTRATION
+function published_job($branch_column, $branch_value) {
+  $db = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+  try {
+    $db = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // echo 'Success';
+  } catch (PDOException $th) {
+    echo 'Fail!' . $th->getMessage();
+  }
+
+  $sql = ("SELECT $branch_column FROM tb_companies WHERE {$branch_column}='{$branch_value}'");
+  $stmt = $db->query($sql);
+  $stmt->execute();
+  $result = $stmt->rowCount();
+
+  echo $result;
+
+  $db = null;
+}
 
 ?>
