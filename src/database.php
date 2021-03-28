@@ -62,7 +62,7 @@ if (isset($_POST['submit_registration'])) {
       $stmt->close();
 
       $_SESSION['success_message'] = 'Your account has been created successfully!';
-      redirect_to('registration-form-employee.php');
+      redirect_to('login.php');
       
   }
 }
@@ -117,7 +117,7 @@ if (isset($_POST['submit_registration_company'])) {
         $stmt->close();
 
         $_SESSION['success_message'] = 'Your account has been created successfully!';
-        redirect_to('registration-form-company.php');
+        redirect_to('login.php');
   }
 }
 
