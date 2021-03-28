@@ -61,10 +61,6 @@ $success_check_mob_dev   = '';
 $success_check_ux_ui     = '';
 
 
- 
-
-// TODO --> VALIDATION EXISTANCE & CONVERTING ARRAY INTO A STRING FOR CHECKBOX CUZ VALUES ARE GETTING AS ARRAY IN MYSQL;
-
  if(isset($_POST['submit_registration_company'])) {
   
   // Username validation
