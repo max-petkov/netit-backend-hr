@@ -81,7 +81,7 @@
                     <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
                     <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
                   </svg>
-                  <span id="company_website"></span>
+                  <a target="_blank" id="company_website"></a>
                 </li>
                 <div class="dropdown-divider"></div>
                 <li id="profile_button">
@@ -197,22 +197,24 @@
           <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
           </svg>
-          Update profile
+          Save profile
         </button>
       </div>
       <button class="btn-close me-3"></button>
     </div>
     <div class="card-body">
       <form method="POST" class="row edit-profile pb-3">
-
+        <div id="success_mess_validation"></div>
         <div class="form-group row mb-3 pe-0">
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="first_name">Company name</label>
             <input type="text" class="form-control form-control-sm" name="company_name">
+            <div></div>
           </div>
           <div class="form-group col-0 pe-0 col-sm-6">
             <label for="last_name">Slogan</label>
             <input type="text" class="form-control form-control-sm" name="company_slogan" placeholder="Write company slogan...">
+            <div></div>
           </div>
         </div>
 
@@ -220,10 +222,12 @@
           <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
             <label for="address_employee">Address</label>
             <input type="text" class="form-control form-control-sm" name="company_address">
+            <div></div>
           </div>
           <div class="form-group col-0 col-sm-6 pe-0">
             <label for="website_employee">Website</label>
             <input type="text" class="form-control form-control-sm" name="company_website">
+            <div></div>
           </div>
         </div>
 
@@ -240,28 +244,29 @@
         <div class="company_branches">
           <div class="form-group mb-3">
             <label for="it_branches">IT branches</label>
+            <div id="checkbox_response"></div>
             <div class="form-check my-2">
-              <input type="checkbox" class="form-check-input" name="it_branch[]" value="frontend">
+              <input id="frontend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="it_branch[0]" value="frontend">
               <label class="form-check-label" for="it_branch">Front-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input" name="it_branch[]" value="backend">
+              <input id="backend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="it_branch[1]" value="backend">
               <label class="form-check-label" for="it_branch">Back-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input" name="it_branch[]" value="fullstack">
+              <input id="fullstack_checked_status" type="checkbox" class="checkbox_length form-check-input" name="it_branch[2]" value="fullstack">
               <label class="form-check-label" for="it_branch">Fullstack Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input" name="it_branch[]" value="qa">
+              <input id="qa_checked_status" type="checkbox" class="checkbox_length form-check-input" name="it_branch[3]" value="qa">
               <label class="form-check-label" for="it_branch">Quality Assurance</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input" name="it_branch[]" value="mobdev">
+              <input id="mobdev_checked_status" type="checkbox" class="checkbox_length form-check-input" name="it_branch[4]" value="mobdev">
               <label class="form-check-label" for="it_branch">Mobile Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input" name="it_branch[]" value="ux/ui">
+              <input id="ux_ui_checked_status" type="checkbox" class="checkbox_length form-check-input" name="it_branch[5]" value="ux/ui">
               <label class="form-check-label" for="it_branch">UX/UI</label>
             </div>
           </div>
@@ -274,14 +279,17 @@
         <div class="form-group mb-3">
           <label for="company_description">Company description</label>
           <textarea name="company_description" class="form-control form-control-sm" rows="4"></textarea>
+          <div></div>
         </div>
         <div class="form-group mb-3">
           <label for="company_history">Company history</label>
           <textarea name="company_history" class="form-control form-control-sm" rows="4" placeholder="Write company history..."></textarea>
+          <div></div>
         </div>
         <div class="form-group mb-3">
           <label for="company_mission">Company mission</label>
           <textarea name="company_mission" class="form-control form-control-sm" rows="4" placeholder="Write company mission..."></textarea>
+          <div></div>
         </div>
       </form>
     </div>
@@ -419,6 +427,7 @@
         <div class="card-body">
 
           <form method="POST" action="#">
+            <div id="success_mess_validation"></div>
             <div class="form-group mb-3">
               <label for="job_title">Job title</label>
               <input type="text" name="job_title" class="form-control form-control-sm">
@@ -429,38 +438,38 @@
               <div class="form-group mb-3 order-1">
                 <label for="">Job time</label>
                 <div class="form-group mt-1">
-                  <input type="checkbox" name="job_title" name="job_hours" class="form-check-input" value="Full time">
+                  <input type="checkbox" name="job_title" class="form-check-input" value="Full time">
                   <label for="job_title">Full time</label>
                 </div>
-                <input type="checkbox" name="job_title" name="job_hours" class="form-check-input" value="Part time">
+                <input type="checkbox" name="job_title" class="form-check-input" value="Part time">
                 <label for="job_title">Part time</label>
               </div>
-
+ 
               <div class="company_branches me-4">
                 <div class="form-group">
                   <label for="it_branches">IT branches</label>
                   <div class="form-check mt-1">
-                    <input type="checkbox" class="form-check-input" name="it_branch[]" value="Front-end Development">
+                    <input id="checked_frontend" type="checkbox" class="checkbox_length form-check-input"  value="frontend">
                     <label class="form-check-label" for="it_branch">Front-end Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" name="it_branch[]" value="Back-end Development">
+                    <input id="checked_backend" type="checkbox" class="checkbox_length form-check-input" value="backend">
                     <label class="form-check-label" for="it_branch">Back-end Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" name="it_branch[]" value="Fullstack Development">
+                    <input id="checked_fullstack" type="checkbox" class="checkbox_length form-check-input"  value="fullstack">
                     <label class="form-check-label" for="it_branch">Fullstack Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" name="it_branch[]" value="Quality Assurance">
+                    <input id="checked_qa" type="checkbox" class="checkbox_length form-check-input"  value="qa">
                     <label class="form-check-label" for="it_branch">Quality Assurance</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" name="it_branch[]" value="Mobile Development">
+                    <input id="checked_mobdev" type="checkbox" class="checkbox_length form-check-input"  value="mobdev">
                     <label class="form-check-label" for="it_branch">Mobile Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" name="it_branch[]" value="UX/UI">
+                    <input id="checked_ux_ui" type="checkbox" class="checkbox_length form-check-input"  value="ux/ui">
                     <label class="form-check-label" for="it_branch">UX/UI</label>
                   </div>
                 </div>
@@ -488,14 +497,27 @@
             <h1 id="showcase_company_name" class="m-0 display-4">
             </h1>
             <p id="showcase_company_slogan" class="lead mb-0"></p>
-            <div id="showcase_it_branches" class="badges mt-1"></div>
+            <div id="showcase_it_branches" class="badges mt-1">
+              <span id="frontend_badge"></span>
+              <span id="backend_badge"></span>
+              <span id="fullstack_badge"></span>
+              <span id="qa_badge"></span>
+              <span id="mobdev_badge"></span>
+              <span id="ux_ui_badge"></span>
+            </div>
           </div>
         </div>
 
         <p id="showcase_company_description"></p>
         <ul class="mb-0">
-          <li id="showcase_company_history" class="d-none"></li>
-          <li id="showcase_company_mission" class="d-none"></li>
+          <li>
+            <span><b>Company history:</b></span>
+            <p id="showcase_company_history"></p>
+          </li>
+          <li>
+          <span><b>Company mission:</b></span> 
+          <p id="showcase_company_mission"></p>
+          </li>
         </ul>
       </div>
     </div>
