@@ -34,7 +34,6 @@
           <i><a href="registration-form-company.php" class="text-decoration-none">Company</a></i>
         </div>
         <form action="registration-form-employee.php" class="mt-5" method="POST">
-          <?php echo success_message(); ?>
           <h4 class="text-center">For Employees</h4>
           <p class="text-muted text-center mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, mollitia!</p>
           <div class="form-group mb-3">
