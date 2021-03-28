@@ -23,8 +23,8 @@ empty($_POST['short_introduction'])) {
   return false;
 
 } else {
-  $db = new PDO("mysql:host=localhost;dbname=registered_users", "root", '');
-  $sql = ("UPDATE tb_employees SET first_name=:first_name, last_name=:last_name, address=:address, website=:website, short_introduction=:short_introduction WHERE id='{$_SESSION['employee_id']}'");
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("UPDATE tb_job_seeker_profile SET first_name=:first_name, last_name=:last_name, address=:address, website=:website, short_introduction=:short_introduction WHERE id='{$_SESSION['employee_id']}'");
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':first_name', $_POST['first_name']);
   $stmt->bindValue(':last_name', $_POST['last_name']);

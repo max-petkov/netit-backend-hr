@@ -6,7 +6,7 @@ session_start();
 
 $host     = 'localhost';
 $user     = 'root';
-$db = 'registered_users';
+$db = 'monster_hr_db';
 $password = '';
 
 $db_connection = mysqli_connect($host, $user, $password, $db);
@@ -44,12 +44,12 @@ if (isset($_POST['submit_registration'])) {
       mb_strlen($_POST['email'])             <= 254                                                           && 
       mb_strlen($_POST['password'])          >= 4                                                             && 
       mb_strlen($_POST['password'])          <= 49                                                            &&
-      !checking_existing_username_email('tb_employees', 'username', $_POST['employee_username'])              && 
-      !checking_existing_username_email('tb_companies', 'username', $_POST['employee_username'])              && 
-      !checking_existing_username_email('tb_employees', 'email', $_POST['email'])                             && 
-      !checking_existing_username_email('tb_companies', 'email', $_POST['email'])) {
+      !checking_existing_username_email('tb_job_seeker_profile', 'username', $_POST['employee_username'])              && 
+      !checking_existing_username_email('tb_company_profile', 'username', $_POST['employee_username'])              && 
+      !checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['email'])                             && 
+      !checking_existing_username_email('tb_company_profile', 'email', $_POST['email'])) {
       
-      $stmt = $db_connection->prepare('INSERT INTO tb_employees(username, first_name, last_name, email, password) VALUES(?, ?, ?, ?, ?)');
+      $stmt = $db_connection->prepare('INSERT INTO tb_job_seeker_profile(username, first_name, last_name, email, password) VALUES(?, ?, ?, ?, ?)');
       $stmt->bind_param('sssss', $username, $first_name, $last_name, $email, $password);
 
       $username   = $_POST['employee_username'];
@@ -92,10 +92,10 @@ if (isset($_POST['submit_registration_company'])) {
       mb_strlen($_POST['company_description']) <= 499                                                && 
       mb_strlen($_POST['password'])            >= 4                                                  && 
       mb_strlen($_POST['password'])            <= 49                                                 &&
-      !checking_existing_username_email('tb_companies', 'username', $_POST['company_username'])      && 
-      !checking_existing_username_email('tb_employees', 'username', $_POST['company_username'])      &&
-      !checking_existing_username_email('tb_companies', 'email', $_POST['email'])                    && 
-      !checking_existing_username_email('tb_employees', 'email', $_POST['email'])) {
+      !checking_existing_username_email('tb_company_profile', 'username', $_POST['company_username'])      && 
+      !checking_existing_username_email('tb_job_seeker_profile', 'username', $_POST['company_username'])      &&
+      !checking_existing_username_email('tb_company_profile', 'email', $_POST['email'])                    && 
+      !checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['email'])) {
 
         $company_username    = $_POST['company_username'];
         $company_name        = $_POST['company_name'];
@@ -109,7 +109,7 @@ if (isset($_POST['submit_registration_company'])) {
         $company_email       = $_POST['email'];
         $company_password    = $_POST['password'];
 
-        $sql  = ('INSERT INTO tb_companies(username, company_name, frontend_branch, backend_branch, fullstack_branch, qa_branch, mobdev_branch, ux_ui_branch , company_description, email, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $sql  = ('INSERT INTO tb_company_profile(username, company_name, frontend_branch, backend_branch, fullstack_branch, qa_branch, mobdev_branch, ux_ui_branch , company_description, email, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt = $db_connection->prepare($sql);
         $stmt->bind_param('sssssssssss', $company_username, $company_name, $frontend_branch, $backend_branch, $fullstack_branch, $qa_branch, $mobdev_branch, $ux_ui_branch, $company_description, $company_email, $company_password);
 
@@ -128,13 +128,13 @@ if(isset($_POST['submit_login'])) {
   header('location: login.php');
   exit;
   
-  } elseif (login_attempt('tb_companies', 'username', 'password', $_POST['username'], $_POST['password']) ||
-            login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])) {
-    if (login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
-      $_SESSION['employee_id'] = login_attempt('tb_employees', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+  } elseif (login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password']) ||
+            login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password'])) {
+    if (login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
+      $_SESSION['employee_id'] = login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
       redirect_to('employee-dashboard.php');
     } else {
-      $_SESSION['company_id'] = login_attempt('tb_companies', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+      $_SESSION['company_id'] = login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
       redirect_to('company-dashboard.php');
     }
 

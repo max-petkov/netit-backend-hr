@@ -23,8 +23,8 @@ mb_strlen($_POST['company_mission']) > 254) {
   return false;
 
 } else {
-  $db = new PDO("mysql:host=localhost;dbname=registered_users", "root", '');
-  $sql = ("UPDATE tb_companies SET company_name=:company_name, slogan=:slogan, address=:address, website=:website, company_description=:company_description, company_history=:company_history, company_mission=:company_mission, frontend_branch=:frontend_branch, backend_branch=:backend_branch, fullstack_branch=:fullstack_branch, qa_branch=:qa_branch, mobdev_branch=:mobdev_branch, ux_ui_branch=:ux_ui_branch WHERE id='{$_SESSION['company_id']}'");
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("UPDATE tb_company_profile SET company_name=:company_name, slogan=:slogan, address=:address, website=:website, company_description=:company_description, company_history=:company_history, company_mission=:company_mission, frontend_branch=:frontend_branch, backend_branch=:backend_branch, fullstack_branch=:fullstack_branch, qa_branch=:qa_branch, mobdev_branch=:mobdev_branch, ux_ui_branch=:ux_ui_branch WHERE id='{$_SESSION['company_id']}'");
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':company_name', $_POST['company_name']);
   $stmt->bindValue(':slogan', $_POST['slogan']);

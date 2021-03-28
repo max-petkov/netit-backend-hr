@@ -1,9 +1,9 @@
 <?php 
 
 function checking_existing_username_email($db_table_name, $db_username_or_email, $input_value) {
-  $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+  $db_connection = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
   try {
-    $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+    $db_connection = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
     $db_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo 'CONNECTION 4 SUCCESS!';
   } catch (PDOException $th) {
@@ -27,9 +27,9 @@ function checking_existing_username_email($db_table_name, $db_username_or_email,
 
 
 function login_attempt($db_table_name, $db_username, $db_password, $username_input_value, $password_input_value) {
-  $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+  $db_connection = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
   try {
-    $db_connection = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+    $db_connection = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
     $db_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo 'CONNECTION 5 SUCCESS!';
   } catch (PDOException $th) {
@@ -92,16 +92,16 @@ function login_required($session_id) {
 // Counting published jobs
 // FOR NOW IT'S NOT COUNTING THE PUBLISHED JOBS BUT ONLY THE CHECKBOX VALUES WHICH THE COMPANIES SELECTED AFTER REGISTRATION
 function published_job($branch_column, $branch_value) {
-  $db = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+  $db = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
   try {
-    $db = new PDO('mysql:host=localhost;dbname=registered_users', 'root', '');
+    $db = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // echo 'Success';
   } catch (PDOException $th) {
     echo 'Fail!' . $th->getMessage();
   }
 
-  $sql = ("SELECT $branch_column FROM tb_companies WHERE {$branch_column}='{$branch_value}'");
+  $sql = ("SELECT $branch_column FROM tb_company_profile WHERE {$branch_column}='{$branch_value}'");
   $stmt = $db->query($sql);
   $stmt->execute();
   $result = $stmt->rowCount();

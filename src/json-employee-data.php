@@ -2,8 +2,8 @@
 include 'database.php';
 if (isset($_SESSION['employee_id'])) {
    
-  $db = new PDO("mysql:host=localhost;dbname=registered_users", "root", '');
-  $sql = ("SELECT id, username, first_name, last_name, email, website, short_introduction, address FROM tb_employees WHERE id={$_SESSION['employee_id']}");
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("SELECT id, username, first_name, last_name, email, website, short_introduction, address FROM tb_job_seeker_profile WHERE id={$_SESSION['employee_id']}");
   $result = $db->query($sql)->fetch();
   
   while ($row = $result) {

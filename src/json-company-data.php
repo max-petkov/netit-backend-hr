@@ -2,8 +2,8 @@
 include 'database.php';
 if (isset($_SESSION['company_id'])) {
    
-  $db = new PDO("mysql:host=localhost;dbname=registered_users", "root", '');
-  $sql = ("SELECT id, username, company_name, frontend_branch, backend_branch, fullstack_branch, qa_branch, mobdev_branch, ux_ui_branch, company_description, email, website, address, slogan, company_history, company_mission FROM tb_companies WHERE id={$_SESSION['company_id']}");
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("SELECT id, username, company_name, frontend_branch, backend_branch, fullstack_branch, qa_branch, mobdev_branch, ux_ui_branch, company_description, email, website, address, slogan, company_history, company_mission FROM tb_company_profile WHERE id={$_SESSION['company_id']}");
   $result = $db->query($sql)->fetch();
   
   while ($row = $result) {
