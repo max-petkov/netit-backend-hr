@@ -35,10 +35,10 @@
           <nav class="navbar navbar-expand my-4">
             <ul class="navbar-nav align-items-center justify-content-center">
               <li class="me-4">
-                <i><a href="homepage-employee.php" class="text-decoration-none">Find a job</a></i>
+                <a href="homepage-employee.php" class="text-decoration-none">Find a job</a>
               </li>
               <li>
-                <i><a href="homepage-company.php" class="fw-bold fs-5">Hire a professional</a></i>
+                <a href="homepage-company.php" class="fw-bold fs-5">Hire a professional</a>
               </li>
             </ul>
           </nav>
