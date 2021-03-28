@@ -47,7 +47,7 @@ ALTER TABLE tb_companies ADD ux_ui_branch VARCHAR(10);
 -- ALTER TABLE tb_employees DROP COLUMN website;
 -- ALTER TABLE tb_employees DROP COLUMN short_introduction;
 
-truncate table tb_companies;
+
 
 SELECT * FROM tb_employees;
 SELECT * FROM tb_companies;
