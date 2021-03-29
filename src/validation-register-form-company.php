@@ -168,8 +168,8 @@ $success_check_ux_ui     = '';
     $error_input_class_company_description = 'is-invalid';
     $input_value_company_description       = $_POST['company_description'];
 
-  }elseif (mb_strlen($_POST['company_description']) > 499) {
-    $error_message_company_description     = "<div class=\"invalid-feedback\"><i>Must be lower than 500 characters</i></div>";
+  }elseif (mb_strlen($_POST['company_description']) > 999) {
+    $error_message_company_description     = "<div class=\"invalid-feedback\"><i>Must be lower than 999 characters</i></div>";
     $error_input_class_company_description = 'is-invalid';
     $input_value_company_description       = $_POST['company_description'];
 

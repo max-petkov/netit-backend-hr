@@ -270,7 +270,7 @@ $(function () {
 
       proceed = false;
 
-    } else if (short_introduction.val().length > 500) {
+    } else if (short_introduction.val().length > 999) {
       short_introduction.val(`  - 👋 Hi, I’m ...
   - 👀 I’m interested in ...
   - 🌱 I’m currently learning ...
@@ -280,7 +280,7 @@ $(function () {
       short_introduction.addClass('is-invalid')
         .next()
         .addClass('invalid-feedback')
-        .text('You can put no more than 500 symbols or leave it like this!');
+        .text('You can put no more than 999 symbols or leave it like this!');
 
       setTimeout(function () {
         if (short_introduction.hasClass('is-invalid')) {

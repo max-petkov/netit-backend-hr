@@ -324,13 +324,13 @@ $(function () {
       }, 10000);
       proceed = false;
 
-    } else if (company_description.val().length > 499) {
+    } else if (company_description.val().length > 999) {
       company_description.val();
 
       company_description.addClass('is-invalid')
         .next()
         .addClass('invalid-feedback')
-        .text('You need to put less than 500 symbols!');
+        .text('You need to put less than 999 symbols!');
 
       setTimeout(function () {
         if (company_description.hasClass('is-invalid')) {
@@ -382,13 +382,13 @@ $(function () {
     }
 
     // COMPANY HISTORY
-    if (company_history.val().length > 499) {
+    if (company_history.val().length > 999) {
 
 
       company_history.addClass('is-invalid')
         .next()
         .addClass('invalid-feedback')
-        .text('You need to put less than 500 symbols!');
+        .text('You need to put less than 999 symbols!');
 
       setTimeout(function () {
         if (company_history.hasClass('is-invalid')) {
@@ -422,12 +422,12 @@ $(function () {
     }
 
     // COMPANY MISSION
-    if (company_mission.val().length > 254) {
+    if (company_mission.val().length > 999) {
 
       company_mission.addClass('is-invalid')
         .next()
         .addClass('invalid-feedback')
-        .text('You need to put less than 255 symbols!');
+        .text('You need to put less than 999 symbols!');
 
       setTimeout(function () {
         if (company_mission.hasClass('is-invalid')) {

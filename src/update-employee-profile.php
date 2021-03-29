@@ -17,7 +17,7 @@ mb_strlen($_POST['website']) > 49                                               
 !preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) || 
 empty($_POST['website'])                                                                                                      || 
 mb_strlen($_POST['short_introduction']) < 49                                                                                  ||
-mb_strlen($_POST['short_introduction']) > 500                                                                                 ||
+mb_strlen($_POST['short_introduction']) > 999                                                                                 ||
 empty($_POST['short_introduction'])) {
 
   return false;

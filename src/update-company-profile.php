@@ -14,11 +14,11 @@ mb_strlen($_POST['website']) > 49                                               
 !preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) || 
 empty($_POST['website'])                                                                                                      || 
 mb_strlen($_POST['company_description']) < 49                                                                                  ||
-mb_strlen($_POST['company_description']) > 499                                                                                 ||
+mb_strlen($_POST['company_description']) > 999                                                                                 ||
 empty($_POST['company_description']) || 
 !preg_match('/^[a-zA-Z0-9-\'!.,; \p{Cyrillic}]+$/u', $_POST['company_description']) ||
-mb_strlen($_POST['company_history']) > 499 ||
-mb_strlen($_POST['company_mission']) > 254) {
+mb_strlen($_POST['company_history']) > 999 ||
+mb_strlen($_POST['company_mission']) > 999) {
 
   return false;
 

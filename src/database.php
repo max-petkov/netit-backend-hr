@@ -89,7 +89,7 @@ if (isset($_POST['submit_registration_company'])) {
       mb_strlen($_POST['company_name'])        <= 254                                                && 
       mb_strlen($_POST['email'])               <= 254                                                && 
       mb_strlen($_POST['company_description']) >= 49                                                 && 
-      mb_strlen($_POST['company_description']) <= 499                                                && 
+      mb_strlen($_POST['company_description']) <= 999                                                && 
       mb_strlen($_POST['password'])            >= 4                                                  && 
       mb_strlen($_POST['password'])            <= 49                                                 &&
       !checking_existing_username_email('tb_company_profile', 'username', $_POST['company_username'])      && 
