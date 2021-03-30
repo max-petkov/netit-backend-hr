@@ -1,12 +1,13 @@
 <?php include 'src/database.php'; ?>
 <?php include_once 'src/functions.php'; ?>
 <?php login_required($_SESSION['company_id']); ?>
-<?php 
+<?php
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -244,7 +245,7 @@
         <div class="company_branches">
           <div class="form-group mb-3">
             <label for="it_branches">IT branches</label>
-            <div id="checkbox_response"></div>
+            <p id="checkbox_response" class="mb-2"></p>
             <div class="form-check my-2">
               <input id="frontend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="it_branch[0]" value="frontend">
               <label class="form-check-label" for="it_branch">Front-end Development</label>
@@ -272,9 +273,9 @@
           </div>
         </div>
         <div class="form-group mb-3 d-flex flex-column">
-        <label for="company_img" class="mb-1">Company Logo</label>
-        <input type="file" class="form-control-file">
-        <small class="form-text form-muted">Max 3mb size</small>
+          <label for="company_img" class="mb-1">Company Logo</label>
+          <input type="file" class="form-control-file">
+          <small class="form-text form-muted">Max 3mb size</small>
         </div>
         <div class="form-group mb-3">
           <label for="company_description">Company description</label>
@@ -417,7 +418,7 @@
 
 
   <!-- Publish a job -->
-  <div class="container mt-4 d-none">
+  <div class="container mt-4">
     <div class="row">
       <div class="card col-8 mx-auto">
         <div class="d-flex justify-content-between mt-3 mb-2 px-3">
@@ -425,61 +426,111 @@
           <button class="btn-close align-self-end"></button>
         </div>
         <div class="card-body">
-
-          <form method="POST" action="#">
-            <div id="success_mess_validation"></div>
+          <form id="publish_form" method="POST" action="src/database.php">
+            <div id="publish_succ_mess"></div>
             <div class="form-group mb-3">
-              <label for="job_title">Job title</label>
+              <label for="job_title" class="fw-bold">Job title</label>
               <input type="text" name="job_title" class="form-control form-control-sm">
+              <p id="job_title_response_text"></p>
+            </div>
+            <div class="mb-3">
+              <div class="form-group d-flex">
+                <div class="form-group mb-3 order-1">
+                  <label for="job_time" class="fw-bold">Job time</label>
+                  <div class="form-group mt-1">
+                    <input type="checkbox" name="job_time[0]" class="job_time_length form-check-input" value="full time">
+                    <label for="job_title">Full time</label>
+                  </div>
+                  <input type="checkbox" name="job_time[1]" class="job_time_length form-check-input" value="part time">
+                  <label for="job_title">Part time</label>
+                </div>
+
+                <div class="me-4">
+                  <div class="form-group">
+                    <label for="it_branches" class="fw-bold">IT tag
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                      </svg>
+                    </label>
+                    <div class="form-check mt-1">
+                      <input id="frontend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[0]" value="frontend">
+                      <label class="form-check-label" for="it_branch">Front-end Development</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input id="backend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[1]" value="backend">
+                      <label class="form-check-label" for="it_branch">Back-end Development</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input id="fullstack_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[2]" value="fullstack">
+                      <label class="form-check-label" for="it_branch">Fullstack Development</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input id="qa_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[3]" value="qa">
+                      <label class="form-check-label" for="it_branch">Quality Assurance</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input id="mobdev_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[4]" value="mobdev">
+                      <label class="form-check-label" for="it_branch">Mobile Development</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input id="ux_ui_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[5]" value="ux/ui">
+                      <label class="form-check-label" for="it_branch">UX/UI</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p id="job_tag_response_text" class="mb-0"></p>
+              <p id="job_time_response_text" class="mb-0"></p>
+
             </div>
 
-            <div class="form-group d-flex mb-3">
 
-              <div class="form-group mb-3 order-1">
-                <label for="">Job time</label>
-                <div class="form-group mt-1">
-                  <input type="checkbox" name="job_title" class="form-check-input" value="Full time">
-                  <label for="job_title">Full time</label>
-                </div>
-                <input type="checkbox" name="job_title" class="form-check-input" value="Part time">
-                <label for="job_title">Part time</label>
+            <div class="form-group mb-3 d-flex">
+              <div class="form-group me-3">
+                <label for="" class="fw-bold">Salary:</label>
+                <input type="text" class="form-control" name="job_salary">
+                <p id="salary_response_text" class="m-0"></p>
               </div>
- 
-              <div class="company_branches me-4">
-                <div class="form-group">
-                  <label for="it_branches">IT branches</label>
-                  <div class="form-check mt-1">
-                    <input id="checked_frontend" type="checkbox" class="checkbox_length form-check-input"  value="frontend">
-                    <label class="form-check-label" for="it_branch">Front-end Development</label>
+
+              <div class="form-group me-3">
+                <label for="job_salary_currency" class="fw-bold">Currency:</label>
+                <div class="d-flex justify-content-center">
+                  <div class="form-group me-2">
+                    <label for="euro_currency">€</label>
+                    <input type="radio" class="form-check-input" name="currency" value="€">
                   </div>
-                  <div class="form-check mb-2">
-                    <input id="checked_backend" type="checkbox" class="checkbox_length form-check-input" value="backend">
-                    <label class="form-check-label" for="it_branch">Back-end Development</label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input id="checked_fullstack" type="checkbox" class="checkbox_length form-check-input"  value="fullstack">
-                    <label class="form-check-label" for="it_branch">Fullstack Development</label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input id="checked_qa" type="checkbox" class="checkbox_length form-check-input"  value="qa">
-                    <label class="form-check-label" for="it_branch">Quality Assurance</label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input id="checked_mobdev" type="checkbox" class="checkbox_length form-check-input"  value="mobdev">
-                    <label class="form-check-label" for="it_branch">Mobile Development</label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input id="checked_ux_ui" type="checkbox" class="checkbox_length form-check-input"  value="ux/ui">
-                    <label class="form-check-label" for="it_branch">UX/UI</label>
+                  <div class="form-group">
+                    <label for="dollar_currency">$</label>
+                    <input type="radio" class="form-check-input" name="currency" value="$">
                   </div>
                 </div>
+                <p id="currency_response_text" class="m-0"></p>
               </div>
+
+              <div class="form-group">
+                <label for="job_salary_year_month" class="fw-bold">Month/Year:</label>
+                <div class="d-flex justify-content-center">
+                  <div class="form-group me-2">
+                    <label for="month_salary">per month</label>
+                    <input type="radio" class="form-check-input" name="month_year_salary" value="per month">
+                  </div>
+                  <div class="form-group">
+                    <label for="year_salar">per year</label>
+                    <input type="radio" class="form-check-input" name="month_year_salary" value="per year">
+                  </div>
+                </div>
+                <p id="job_month_year_response_text" class="m-0"></p>
+              </div>
+
             </div>
             <div class="form-group">
-              <label for="job_description">Job Description</label>
-              <textarea name="job_description" id="" cols="30" rows="8" class="form-control">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis aspernatur voluptas fugiat alias, vel optio deserunt deleniti asperiores perferendis porro omnis quisquam, velit fuga perspiciatis ipsa quo reprehenderit quaerat quasi iusto consectetur labore ullam temporibus. Commodi obcaecati, quibusdam saepe assumenda itaque nulla voluptates aut deserunt quod, beatae harum a maiores eligendi repellat repudiandae quidem ipsam. Ea, totam corporis. Soluta recusandae tempora totam, inventore corporis rerum minima vitae quae eligendi officiis nihil? Optio quia veritatis doloremque autem ipsum dolore eum labore et officia nisi, libero dignissimos dolorum ullam necessitatibus totam nam quo nihil, fugiat error voluptate. Nam ipsa quis voluptatum in?</textarea>
+              <label for="job_description" class="fw-bold">Job Description</label>
+              <textarea name="job_description" rows="8" class="form-control"></textarea>
+              <p id="job_description_response_text" class="m-0"></p>
             </div>
-            <input type="submit" class="btn btn-primary mt-3" value="Publish">
+            <!-- <button id="publish_job_btn" class="btn btn-primary mt-3">Publish</button> -->
+            <input type="submit" value="Publish" name="publish_submit" id="publish_job_btn" class="btn btn-primary mt-3">
           </form>
         </div>
       </div>
@@ -515,8 +566,8 @@
             <p id="showcase_company_history"></p>
           </li>
           <li>
-          <span><b>Company mission:</b></span> 
-          <p id="showcase_company_mission"></p>
+            <span><b>Company mission:</b></span>
+            <p id="showcase_company_mission"></p>
           </li>
         </ul>
       </div>

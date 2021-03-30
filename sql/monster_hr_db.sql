@@ -36,3 +36,27 @@ CREATE TABLE tb_company_profile (
 	ux_ui_branch VARCHAR(10),
     password VARCHAR(50)
 );
+
+CREATE TABLE tb_published_jobs (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    published_date VARCHAR(10),
+    company_id VARCHAR(1000),
+    company_username VARCHAR(50),
+    company_name VARCHAR(255),
+    company_email VARCHAR(255),
+    job_title VARCHAR(255),
+    job_time VARCHAR(20),
+    frontend_tag VARCHAR(10),
+    backend_tag VARCHAR(10),
+    fullstack_tag VARCHAR(10),
+    qa_tag VARCHAR(10),
+    mobdev_tag VARCHAR(10),
+    ux_ui_tag VARCHAR(10),
+    job_salary VARCHAR(100),
+    job_description VARCHAR(1000),
+    is_active VARCHAR(1) DEFAULT 'Y'
+);
+
+SELECT * FROM tb_published_jobs;
+truncate table tb_published_jobs;
+SELECT * FROM tb_company_profile;

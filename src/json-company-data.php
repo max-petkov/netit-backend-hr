@@ -7,6 +7,7 @@ if (isset($_SESSION['company_id'])) {
   $result = $db->query($sql)->fetch();
   
   while ($row = $result) {
+    $json_data["id"]                  = $row["id"]; 
     $json_data["username"]            = $row["username"]; 
     $json_data["company_name"]        = $row["company_name"]; 
     $json_data["frontend_branch"]     = $row["frontend_branch"]; 

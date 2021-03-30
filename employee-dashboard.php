@@ -423,7 +423,7 @@
               <option class="text-dark" value="">Fullstack</option>
               <option class="text-dark" value="">QA</option>
               <option class="text-dark" value="">UX/UI</option>
-              <option class="text-dark" value="">Mob Develmp</option>
+              <option class="text-dark" value="">MobDev</option>
             </select>
           </div>
         </div>
