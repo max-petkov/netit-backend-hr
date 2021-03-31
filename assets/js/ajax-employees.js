@@ -1,5 +1,8 @@
 $(function () {
 
+  // Getting job_seeker_id value from response.id & passing it to apply_job
+    let job_seeker_id = '';
+
     // Fetching json data from json-employee-data.php
     $.ajax({
       url: './src/json-employee-data.php',
@@ -8,6 +11,7 @@ $(function () {
       cache: 'false',
       success: function (response) {
         console.log(response);
+        job_seeker_id = response.id;
         // collapse menu data
         $('#employee_username').text(response.username);
         $('#employee_email').text(response.email);
@@ -31,6 +35,23 @@ $(function () {
         console.log('error');
       }
     });
+
+       // Getting id value from dynamically created button
+       $(document).on('click', '#apply_job', function() {
+        console.log($(this).val());
+        $.ajax({
+          url: 'src/applied-jobs.php',
+          method: 'post',
+          data:{
+            job_id: $(this).val(),
+            job_seeker_id: job_seeker_id
+          },
+          success: function() {
+            $(this).removeClass('btn-warning').addClass('btn-success').html('Applied!');
+          }
+        })
+  
+      });
 
     // Refreshing job list elements and lazy load list items
     (function refresh_content(){
@@ -450,6 +471,6 @@ $(function () {
 
   });
 
-
-
+ 
+  
 })

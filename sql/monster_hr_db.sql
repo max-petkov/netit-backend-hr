@@ -57,6 +57,13 @@ CREATE TABLE tb_published_jobs (
     is_active VARCHAR(1) DEFAULT 'Y'
 );
 
+CREATE TABLE tb_applied_jobs (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    job_id INT,
+    job_seeker_id INT,
+    is_active VARCHAR(1) DEFAULT 'Y'
+);
+
+SELECT * FROM tb_applied_jobs;
 SELECT * FROM tb_published_jobs;
-truncate table tb_published_jobs;
 SELECT * FROM tb_company_profile;

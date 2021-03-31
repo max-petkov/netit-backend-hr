@@ -8,6 +8,7 @@ if (isset($_SESSION['employee_id'])) {
   $stmt->execute();
 
   while ($row = $stmt->fetch()) {
+    $data['id']                 = $row['id']; 
     $data['username']           = $row['username']; 
     $data['first_name']         = $row['first_name']; 
     $data['last_name']          = $row['last_name']; 
