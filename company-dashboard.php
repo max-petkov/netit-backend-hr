@@ -426,7 +426,7 @@
           <button class="btn-close align-self-end"></button>
         </div>
         <div class="card-body">
-          <form id="publish_form" method="POST" action="src/database.php">
+          <form id="publish_form" method="POST" action="company-dashboard.php">
             <div id="publish_succ_mess"></div>
             <div class="form-group mb-3">
               <label for="job_title" class="fw-bold">Job title</label>
@@ -530,12 +530,17 @@
               <p id="job_description_response_text" class="m-0"></p>
             </div>
             <!-- <button id="publish_job_btn" class="btn btn-primary mt-3">Publish</button> -->
-            <input type="submit" value="Publish" name="publish_submit" id="publish_job_btn" class="btn btn-primary mt-3">
+            <input type="submit" value="Publish" name="publish_submit" class="btn btn-primary mt-3">
           </form>
         </div>
       </div>
     </div>
   </div>
+
+<!-- View published jobs -->
+  <ul id="view_published_jobs" class="container">
+    
+  </ul>
 
 
   <!-- Company showcase -->
@@ -587,6 +592,7 @@
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
   <script src="assets/js/ajax-companies.js"></script>
+ 
 
 </body>
 

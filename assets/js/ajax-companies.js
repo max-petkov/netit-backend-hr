@@ -12,65 +12,59 @@ $(function () {
     success: function (response) {
       console.log(response);
       // collapse menu data
-      company_username = response.username;
-      company_id = response.id;
-      company_email = response.email;
-      company_name = response.company_name;
-      console.log(company_username);
-      console.log(company_id);
-      $('#company_username').text(response.username);
-      $('#company_email').text(response.email);
-      $('#company_name').text(response.company_name);
-      $('#greetings_company_name').append(`${response.company_name}!`);
-      $('#company_address').text(response.address);
-      $('#company_website').text(response.website);
-      $('#company_website').attr('href', response.website);
-      $('#showcase_company_name').text(response.company_name);
-      $('#showcase_company_description').text(response.company_description);
-      $('#showcase_company_slogan').text(response.slogan);
-      $('#showcase_company_history').text(response.company_history);
-      $('#showcase_company_mission').text(response.company_mission);
+      company_username = response.company_data.username;
+      company_id = response.company_data.id;
+      company_email = response.company_data.email;
+      company_name = response.company_data.company_name;
+      $('#company_username').text(response.company_data.username);
+      $('#company_email').text(response.company_data.email);
+      $('#company_name').text(response.company_data.company_name);
+      $('#greetings_company_name').append(`${response.company_data.company_name}!`);
+      $('#company_address').text(response.company_data.address);
+      $('#company_website').text(response.company_data.website);
+      $('#company_website').attr('href', response.company_data.website);
+      $('#showcase_company_name').text(response.company_data.company_name);
+      $('#showcase_company_description').text(response.company_data.company_description);
+      $('#showcase_company_slogan').text(response.company_data.slogan);
+      $('#showcase_company_history').text(response.company_data.company_history);
+      $('#showcase_company_mission').text(response.company_data.company_mission);
 
-      if (response.frontend_branch !== '' && response.frontend_branch !== null) {
-        $('#frontend_badge').addClass('badge bg-secondary').html(response.frontend_branch);
+      if (response.company_data.frontend_branch !== '' && response.company_data.frontend_branch !== null) {
+        $('#frontend_badge').addClass('badge bg-secondary').html(response.company_data.frontend_branch);
         $('#frontend_checked_status').prop('checked', true);
       }
-      if (response.backend_branch !== '' && response.backend_branch !== null) {
-        $('#backend_badge').addClass('badge bg-dark').html(response.backend_branch);
+      if (response.company_data.backend_branch !== '' && response.company_data.backend_branch !== null) {
+        $('#backend_badge').addClass('badge bg-dark').html(response.company_data.backend_branch);
         $('#backend_checked_status').prop('checked', true);
       }
-      if (response.fullstack_branch !== '' && response.fullstack_branch !== null) {
-        $('#fullstack_badge').addClass('badge bg-success').html(response.fullstack_branch);
+      if (response.company_data.fullstack_branch !== '' && response.company_data.fullstack_branch !== null) {
+        $('#fullstack_badge').addClass('badge bg-success').html(response.company_data.fullstack_branch);
         $('#fullstack_checked_status').prop('checked', true);
       }
-      if (response.qa_branch !== '' && response.qa_branch !== null) {
-        $('#qa_badge').addClass('badge bg-danger').html(response.qa_branch);
+      if (response.company_data.qa_branch !== '' && response.company_data.qa_branch !== null) {
+        $('#qa_badge').addClass('badge bg-danger').html(response.company_data.qa_branch);
         $('#qa_checked_status').prop('checked', true);
       }
-      if (response.mobdev_branch !== '' && response.mobdev_branch !== null) {
-        $('#mobdev_badge').addClass('badge bg-warning').html(response.mobdev_branch);
+      if (response.company_data.mobdev_branch !== '' && response.company_data.mobdev_branch !== null) {
+        $('#mobdev_badge').addClass('badge bg-warning').html(response.company_data.mobdev_branch);
         $('#mobdev_checked_status').prop('checked', true);
       }
-      if (response.ux_ui_branch !== '' && response.ux_ui_branch !== null) {
-        $('#ux_ui_badge').addClass('badge bg-primary').html(response.ux_ui_branch);
+      if (response.company_data.ux_ui_branch !== '' && response.company_data.ux_ui_branch !== null) {
+        $('#ux_ui_badge').addClass('badge bg-primary').html(response.company_data.ux_ui_branch);
         $('#ux_ui_checked_status').prop('checked', true);
       }
 
       // Edit profile data
-      $('input[name="company_username"]').val(response.username);
-      $('input[name="company_email"]').val(response.email);
-      $('input[name="company_name"]').val(response.company_name);
-      $('input[name="company_address"]').val(response.address);
-      $('input[name="company_website"]').val(response.website);
-      $('textarea[name="company_description"]').val(response.company_description);
-      $('textarea[name="company_history"]').val(response.company_history);
-      $('textarea[name="company_mission"]').val(response.company_mission);
-      $('input[name="company_slogan"]').val(response.slogan);
-    },
-    error: function (jqXHR, text, errorThrown) {
-      console.log(jqXHR + " " + text + " " + errorThrown);
+      $('input[name="company_username"]').val(response.company_data.username);
+      $('input[name="company_email"]').val(response.company_data.email);
+      $('input[name="company_name"]').val(response.company_data.company_name);
+      $('input[name="company_address"]').val(response.company_data.address);
+      $('input[name="company_website"]').val(response.company_data.website);
+      $('textarea[name="company_description"]').val(response.company_data.company_description);
+      $('textarea[name="company_history"]').val(response.company_data.company_history);
+      $('textarea[name="company_mission"]').val(response.company_data.company_mission);
+      $('input[name="company_slogan"]').val(response.company_data.slogan);
     }
-
   });
 
   // Update Company profile 
@@ -633,12 +627,10 @@ $(function () {
       });
     }
 
-  });
+  }); 
 
-  // Publish a job
   $('#publish_form').on('submit', function(event) {
     event.preventDefault();
-    console.log('click');
     let job_title = $('input[name="job_title"]');
     let job_title_response_text = $('#job_title_response_text');
     let job_fulltime = $('input[name="job_time[0]"');
@@ -660,21 +652,21 @@ $(function () {
     let job_description = $('textarea[name="job_description"]');
     let job_description_response_text = $('#job_description_response_text');
     let proceed = true;
-
+  
     // Job title
     if (job_title.val().trim().length < 20 || job_title.val().trim().length > 254) {
       job_title_response_text.show('fast');
       job_title.addClass('is-invalid');
       job_title_response_text.addClass('text-danger')
       .html('You need to put more than 20 symbols or less than 255!');
-
+  
       if (job_title_response_text.hasClass('text-success') && job_title.hasClass('is-valid')) {
         job_title.removeClass('is-valid').addClass('is-invalid');
         job_title_response_text.removeClass('text-success')
         .addClass('text-danger')
         .html('You need to put more than 20 symbols or less than 255!');
       }
-
+  
       proceed = false;
     } else {
       job_title_response_text.show('fast');
@@ -692,12 +684,12 @@ $(function () {
       job_title_response_text.hide('fast');
      }, 5000)
     }
-
+  
     // IT tag
     if ($('.it_tag_length:checked').length === 0) {
       job_tag_response_text.show('fast');
       job_tag_response_text.addClass('text-danger').text('You need to select atleast one tag... This will help applicants to find more easy your publish!');
-
+  
       proceed = false;
     } else{
       job_tag_response_text.show('fast');
@@ -715,7 +707,7 @@ $(function () {
       } else {
         frontend_tag.val('');
       }
-
+  
       if ($.inArray('backend', backend_tag) && backend_tag.is(':checked')) {
         backend_tag.val('backend');
       } else {
@@ -739,7 +731,7 @@ $(function () {
       } else {
         mobdev_tag.val('');
       }
-
+  
       if ($.inArray('ux/ui', ux_ui_tag) && ux_ui_tag.is(':checked')) {
         ux_ui_tag.val('ux/ui');
       } else {
@@ -747,12 +739,12 @@ $(function () {
       }
       
     }
-
+  
     // Job time
     if ($('.job_time_length:checked').length === 0) {
       job_time_response_text.show('fast');
       job_time_response_text.addClass('text-danger').text('You need to choose between Fulltime or Part time or you can choose both!');
-
+  
       proceed = false;
     } else{
       job_time_response_text.show('fast');
@@ -764,20 +756,20 @@ $(function () {
       setTimeout(function(){
         job_time_response_text.hide('fast');
       }, 5000);
-
+  
       if ($.inArray('full time', job_fulltime) && job_fulltime.is(':checked')) {
         job_fulltime.val('full time');
       } else {
         job_fulltime.val('');
       }
-
+  
       if ($.inArray('part time', job_part_time) && job_part_time.is(':checked')) {
         job_part_time.val('part time');
       } else {
         job_part_time.val('');
       }
     }
-
+  
     // Job Salary
     if (job_salary.val().match(/[a-zA-Z)(*&^%$#@!)]/) || job_salary.val() == '') {
       
@@ -785,14 +777,14 @@ $(function () {
       job_salary.addClass('is-invalid');
       salary_response_text.addClass('text-danger')
       .html('You can put only [0-9,-.]!');
-
+  
       if (salary_response_text.hasClass('text-success') && job_salary.hasClass('is-valid')) {
         job_salary.removeClass('is-valid').addClass('is-invalid');
         salary_response_text.removeClass('text-success')
         .addClass('text-danger')
         .html('You can put only [0-9,-.]!');
       }
-
+  
       proceed = false;
     } else {
       salary_response_text.show('fast');
@@ -810,12 +802,12 @@ $(function () {
       salary_response_text.hide('fast');
      }, 5000)
     }
-
+  
     // Salary currency
     if (salary_currency.length === 0) {
       currency_response_text.show('fast');
       currency_response_text.addClass('text-danger').text('Field is required!');
-
+  
       proceed = false;
     } else{
       currency_response_text.show('fast');
@@ -829,12 +821,12 @@ $(function () {
         currency_response_text.hide('fast');
       }, 5000);
     }
-
+  
     // Salary month year 
     if (salary_month_year.length === 0) {
       job_month_year_response_text.show('fast');
       job_month_year_response_text.addClass('text-danger').text('Field is required!');
-
+  
       proceed = false;
     } else{
       job_month_year_response_text.show('fast');
@@ -848,21 +840,21 @@ $(function () {
         job_month_year_response_text.hide('fast');
       }, 5000);
     }
-
+  
     // Job description
     if (job_description.val().trim().length < 49 || job_description.val().trim().length > 999) {
       job_description_response_text.show('fast');
       job_description.addClass('is-invalid');
       job_description_response_text.addClass('text-danger')
       .html('You need to put more than 50 symbols or less than 999!');
-
+  
       if (job_description_response_text.hasClass('text-success') && job_description.hasClass('is-valid')) {
         job_description.removeClass('is-valid').addClass('is-invalid');
         job_description_response_text.removeClass('text-success')
         .addClass('text-danger')
         .html('You need to put more than 20 symbols or less than 255!');
       }
-
+  
       proceed = false;
     } else {
       job_description_response_text.show('fast');
@@ -880,11 +872,12 @@ $(function () {
       job_description_response_text.hide('fast');
      }, 5000)
     }
-
+  
     if (proceed) {
       $.ajax({
-        url: 'src/publish_job.php',
-        type: 'POST',
+        url: 'src/publish-job.php',
+        method: 'POST',
+        cache: 'false',
         data: {
           job_company_id: company_id,
           job_company_username: company_username,
@@ -909,17 +902,18 @@ $(function () {
           
           $('#publish_succ_mess').show('fast');
           $('#publish_succ_mess').addClass('alert alert-success').html('Publish successful!')
-
+  
           setTimeout(function(){
             $('#publish_succ_mess').hide('fast');
           }, 5000)
         },
         error: function (jqXHR, text, errorThrown) {
           console.log(jqXHR + " " + text + " " + errorThrown);
-        }
+        },
+        
       });
     }
    
   });
-
+  
 });

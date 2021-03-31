@@ -91,7 +91,7 @@ function login_required($session_id) {
 
 // Counting published jobs
 // FOR NOW IT'S NOT COUNTING THE PUBLISHED JOBS BUT ONLY THE CHECKBOX VALUES WHICH THE COMPANIES SELECTED AFTER REGISTRATION
-function published_job($branch_column, $branch_value) {
+function published_job($tag_column, $tag_value) {
   $db = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
   try {
     $db = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
@@ -101,7 +101,7 @@ function published_job($branch_column, $branch_value) {
     echo 'Fail!' . $th->getMessage();
   }
 
-  $sql = ("SELECT $branch_column FROM tb_company_profile WHERE {$branch_column}='{$branch_value}'");
+  $sql = ("SELECT {$tag_column}, is_active FROM tb_published_jobs WHERE {$tag_column}='{$tag_value}' AND is_active='Y'");
   $stmt = $db->query($sql);
   $stmt->execute();
   $result = $stmt->rowCount();

@@ -1,4 +1,78 @@
 $(function () {
+
+    // Fetching json data from json-employee-data.php
+    $.ajax({
+      url: './src/json-employee-data.php',
+      dataType: 'json',
+      method: 'post',
+      cache: 'false',
+      success: function (response) {
+        console.log(response);
+        // collapse menu data
+        $('#employee_username').text(response.username);
+        $('#employee_email').text(response.email);
+        $('#employee_first_name').text(response.first_name);
+        $('#employee_last_name').text(response.last_name);
+        $('#greetings_first_name').append(`${response.first_name}!`);
+        $('#employee_address').text(response.address);
+        $('#employee_website').text(response.website);
+        $('#employee_website').attr('href', response.website);
+  
+        // Edit profile data
+        $('input[name="employee_username"]').val(response.username);
+        $('input[name="employee_email"]').val(response.email);
+        $('input[name="employee_first_name"]').val(response.first_name);
+        $('input[name="employee_last_name"]').val(response.last_name);
+        $('input[name="address_employee"]').val(response.address);
+        $('input[name="website_employee"]').val(response.website);
+        $('textarea[name="short_introduction"]').val(response.short_introduction);
+      },
+      error: function () {
+        console.log('error');
+      }
+    });
+
+    // Refreshing job list elements and lazy load list items
+    (function refresh_content(){
+      $('#published_job_list').load('employee-dashboard.php #published_job_list', setTimeout(refresh_content, 5000), function() {
+        $("#published_job_list li").slice(10).hide();
+        let mincount = 10;
+        let maxcount = 20;
+        $(window).on('scroll', function() {
+          if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
+            $("#published_job_list li").slice(mincount, maxcount).show();
+            mincount = mincount+10;
+            maxcount = maxcount+10;
+          }
+        });
+      });
+    })();
+
+    // REFRESH JOB COUNTER on every 5 seconds
+    (function refresh_frontend_tag_counter(){
+      $('#refresh_frontend_tag').load('employee-dashboard.php #refresh_frontend_tag', setTimeout(refresh_frontend_tag_counter, 5000));
+    })();
+
+    (function refresh_backend_tag_counter(){
+      $('#refresh_backend_tag').load('employee-dashboard.php #refresh_backend_tag', setTimeout(refresh_backend_tag_counter, 5000));
+    })();
+
+    (function refresh_fullstack_tag_counter(){
+      $('#refresh_fullstack_tag').load('employee-dashboard.php #refresh_fullstack_tag', setTimeout(refresh_fullstack_tag_counter, 5000));
+    })();
+
+    (function refresh_qa_tag_counter(){
+      $('#refresh_qa_tag').load('employee-dashboard.php #refresh_qa_tag', setTimeout(refresh_qa_tag_counter, 5000));
+    })();
+
+    (function refresh_mobdev_tag_counter(){
+      $('#refresh_mobdev_tag').load('employee-dashboard.php #refresh_mobdev_tag', setTimeout(refresh_mobdev_tag_counter, 5000));
+    })();
+
+    (function refresh_ux_ui_tag_counter(){
+      $('#refresh_ux_ui_tag').load('employee-dashboard.php #refresh_ux_ui_tag', setTimeout(refresh_ux_ui_tag_counter, 5000));
+    })();
+
   // Update Employee profile 
   $('button[name="submit_update"]').on('click', function () {
     
@@ -267,7 +341,7 @@ $(function () {
             .next().removeClass('invalid-feedback').hide('slow');
         }
       }, 10000);
-
+ 
       proceed = false;
 
     } else if (short_introduction.val().length > 999) {
@@ -376,34 +450,6 @@ $(function () {
 
   });
 
-  // Fetching json data from json-employee-data.php
-  $.ajax({
-    url: './src/json-employee-data.php',
-    dataType: 'json',
-    success: function (response) {
-      console.log(response);
-      // collapse menu data
-      $('#employee_username').text(response.username);
-      $('#employee_email').text(response.email);
-      $('#employee_first_name').text(response.first_name);
-      $('#employee_last_name').text(response.last_name);
-      $('#greetings_first_name').append(`${response.first_name}!`);
-      $('#employee_address').text(response.address);
-      $('#employee_website').text(response.website);
-      $('#employee_website').attr('href', response.website);
 
-      // Edit profile data
-      $('input[name="employee_username"]').val(response.username);
-      $('input[name="employee_email"]').val(response.email);
-      $('input[name="employee_first_name"]').val(response.first_name);
-      $('input[name="employee_last_name"]').val(response.last_name);
-      $('input[name="address_employee"]').val(response.address);
-      $('input[name="website_employee"]').val(response.website);
-      $('textarea[name="short_introduction"]').val(response.short_introduction);
-    },
-    error: function () {
-      console.log('error');
-    }
-  });
 
 })

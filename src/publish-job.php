@@ -42,10 +42,8 @@ if (mb_strlen($_POST['job_title']) > 20 &&
         $sql  = ('INSERT INTO tb_published_jobs(published_date, company_id, company_username, company_name, company_email, job_title, job_time, frontend_tag, backend_tag , fullstack_tag, qa_tag, mobdev_tag, ux_ui_tag, job_salary, job_description) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt = $db_connection->prepare($sql);
         $stmt->bind_param('sssssssssssssss', $published_date, $company_id, $company_username, $company_name, $company_email, $job_title, $job_time, $frontend_tag, $backend_tag, $fullstack_tag, $qa_tag, $mobdev_tag, $ux_ui_tag, $job_salary, $job_description);
-        
         $stmt->execute();
-        $stmt->close();
-        echo 'success';
+        
   }  else {
     echo 'error';
   }

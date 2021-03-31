@@ -64,7 +64,7 @@
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_branch', 'frontend'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_tag', 'frontend'); ?></div>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('backend_branch', 'backend'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('backend_tag', 'backend'); ?></div>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_branch', 'fullstack'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_tag', 'fullstack'); ?></div>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('qa_branch', 'qa'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('qa_tag', 'qa'); ?></div>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_branch', 'mobdev'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_tag', 'mobdev'); ?></div>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_branch', 'ux/ui'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_tag', 'ux/ui'); ?></div>
             </div>
           </div>
         </div>

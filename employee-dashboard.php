@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +26,7 @@
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span id="greetings"></span> <span id="greetings_first_name"></span>
+                <span id="greetings"></span> <span id="greetings_first_name"></span>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li class="dropdown-item xsm-text-class text-center">Your are logged in as<br><b id="employee_username" class="xsm-text-class"></b>
@@ -340,7 +340,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_branch', 'frontend'); ?></div>
+                  <div id="refresh_frontend_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_tag', 'frontend'); ?></div>
                 </div>
               </div>
             </div>
@@ -352,7 +352,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('backend_branch', 'backend'); ?></div>
+                  <div id="refresh_backend_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('backend_tag', 'backend'); ?></div>
                 </div>
               </div>
             </div>
@@ -364,7 +364,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_branch', 'fullstack'); ?></div>
+                  <div id="refresh_fullstack_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_tag', 'fullstack'); ?></div>
                 </div>
               </div>
             </div>
@@ -376,7 +376,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('qa_branch', 'qa'); ?></div>
+                  <div id="refresh_qa_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('qa_tag', 'qa'); ?></div>
                 </div>
               </div>
             </div>
@@ -388,7 +388,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_branch', 'mobdev'); ?></div>
+                  <div id="refresh_mobdev_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_tag', 'mobdev'); ?></div>
                 </div>
               </div>
             </div>
@@ -400,7 +400,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_branch', 'ux/ui'); ?></div>
+                  <div id="refresh_ux_ui_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_tag', 'ux/ui'); ?></div>
                 </div>
               </div>
             </div>
@@ -427,88 +427,73 @@
             </select>
           </div>
         </div>
-        <ul class="list-group-flush ps-0">
-          <li class="list-group-item px-2">
-            <p class="text-muted mb-3">Published: 03.10.2021 by</p>
-            <div class="mb-3 d-flex align-items-center">
-              <div class="d-flex flex-column me-1">
-                <h4 class="m-0">
-                  Medics Prosperity
-                </h4>
-                <span class="badges mt-1">
-                  <span class="badge bg-danger rounded-pill">ux/ui</span>
-                  <span class="badge bg-primary rounded-pill">frontend</span>
-                  <span class="badge bg-secondary rounded-pill">backend</span>
-                </span>
-              </div>
-              <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" width="56px" alt="">
-            </div>
-            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam pariatur libero reiciendis
-              doloremque in magni atque consequuntur, laudantium, maxime rerum, id ratione alias consectetur
-              maiores?
-              Quaerat atque earum cum dolorem? Quasi corporis illo dolorem ut unde quibusdam ipsa minima architecto
-              inventore, possimus reprehenderit labore ad harum itaque voluptatibus dolorum libero.
-            </p>
-            <button href="#" class="btn btn-primary d-flex align-items-center btn-sm mb-2">
-              <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-              </svg>
-              Read more
-            </button>
-          </li>
-          <li class="list-group-item px-2">
-            <p class="text-muted mb-2">Published: 03.10.2021 by</p>
-            <div class="mb-4">
-              <h4 class="m-0">
-                <span>Artromedica</span>
-                <img src="https://seeklogo.com/images/H/health-care-logo-9EFC79AFAC-seeklogo.com.png" width="48px" alt="">
-              </h4>
-              <span class="badge bg-danger rounded-pill">ux/ui</span>
-              <span class="badge bg-primary rounded-pill">frontend</span>
-              <span class="badge bg-dark rounded-pill">mobdev</span>
-            </div>
-            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam pariatur libero reiciendis
-              doloremque in magni atque consequuntur, laudantium, maxime rerum, id ratione alias consectetur
-              maiores?
-              Quaerat atque earum cum dolorem? Quasi corporis illo dolorem ut unde quibusdam ipsa minima architecto
-              inventore, possimus reprehenderit labore ad harum itaque voluptatibus dolorum libero.
-            </p>
-            <button href="#" class="btn btn-primary d-flex align-items-center btn-sm mb-2">
-              <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-              </svg>
-              Read more
-            </button>
-          </li>
-          <li class="list-group-item px-2">
-            <p class="text-muted mb-2">Published: 03.10.2021 by</p>
-            <div class="mb-4">
-              <h4 class="m-0">
-                <span>Family Studio</span>
-                <img src="https://seeklogo.com/images/S/Stevens_Healthcare-logo-5F0F02A23C-seeklogo.com.png" width="48px" alt="">
-              </h4>
-              <span class="badge bg-info rounded-pill">QA</span>
-              <span class="badge bg-primary rounded-pill">frontend</span>
-              <span class="badge bg-warning rounded-pill">backend</span>
-            </div>
-            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam pariatur libero reiciendis
-              doloremque in magni atque consequuntur, laudantium, maxime rerum, id ratione alias consectetur
-              maiores?
-              Quaerat atque earum cum dolorem? Quasi corporis illo dolorem ut unde quibusdam ipsa minima architecto
-              inventore, possimus reprehenderit labore ad harum itaque voluptatibus dolorum libero.
-            </p>
-            <button href="#" class="btn btn-primary d-flex align-items-center btn-sm mb-2">
-              <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-              </svg>
-              Read more
-            </button>
-          </li>
-        </ul>
+        <ul id="published_job_list" class="list-group-flush ps-0">
+          <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+          // $sql = ("SELECT id, username, company_name, frontend_branch, backend_branch, fullstack_branch, qa_branch, mobdev_branch, ux_ui_branch, company_description, email, website, address, slogan, company_history, company_mission FROM tb_company_profile WHERE id={$_SESSION['company_id']}");
+          $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY id DESC");
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
 
+          $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          // echo json_encode($row);
+
+          foreach ($row as $value) {
+
+          ?>
+            <li class="list-group-item py-3">
+              <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?> by</p>
+              <div class="d-flex align-items-center">
+                <div class="mb-2 d-flex flex-column">
+                  <h4 class="m-0">
+                    <?php echo $value['company_name']; ?>
+                  </h4>
+                </div>
+                <!-- <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" width="56px" alt=""> -->
+              </div>
+              <p class="m-0 fw-bold"> <?php echo $value['job_title']; ?> </p>
+              <span class="badges mt-1">
+                
+                <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
+                  echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
+                }
+                 ?>
+                <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
+                  echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
+                }
+                 ?>
+                <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
+                  echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
+                }
+                 ?>
+                 <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
+                  echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
+                }
+                 ?>
+                 <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
+                  echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
+                }
+                 ?>
+                 <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
+                  echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
+                }
+                 ?>
+                 
+                <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
+                <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
+
+                <button href="#" class="btn btn-primary d-flex align-items-center btn-sm">
+                  <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                  </svg>
+                  Read more
+                </button>
+                <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
+            </li>
+          <?php
+          }
+          ?>
+        </ul>
       </div>
     </div>
   </section>
