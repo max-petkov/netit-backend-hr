@@ -64,6 +64,9 @@ CREATE TABLE tb_applied_jobs (
     is_active VARCHAR(1) DEFAULT 'Y'
 );
 
+SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b ON b.job_id=a.id AND b.job_seeker_id=2;
+
 SELECT * FROM tb_applied_jobs;
+SELECT * FROM tb_job_seeker_profile;
 SELECT * FROM tb_published_jobs;
 SELECT * FROM tb_company_profile;

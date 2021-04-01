@@ -92,6 +92,7 @@
           right: '32px',
           opacity: '1'
         }, 'fast');
+        $('#applied_job_container').load('employee-dashboard.php .applied_job_data');
       }
     });
 

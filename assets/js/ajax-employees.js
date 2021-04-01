@@ -39,6 +39,7 @@ $(function () {
        // Getting id value from dynamically created button
        $(document).on('click', '#apply_job', function() {
         console.log($(this).val());
+        $(this).hide();
         $.ajax({
           url: 'src/applied-jobs.php',
           method: 'post',
@@ -55,7 +56,7 @@ $(function () {
 
     // Refreshing job list elements and lazy load list items
     (function refresh_content(){
-      $('#published_job_list').load('employee-dashboard.php #published_job_list', setTimeout(refresh_content, 5000), function() {
+      $('#published_job_list').load('employee-dashboard.php .job_li', setTimeout(refresh_content, 5000), function() {
         $("#published_job_list li").slice(10).hide();
         let mincount = 10;
         let maxcount = 20;

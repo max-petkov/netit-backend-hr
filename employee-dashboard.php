@@ -199,56 +199,65 @@
       <h4 class="m-0">Applications:</h4>
       <button class="btn-close align-self-end"></button>
     </div>
-    <div class="card-body">
-      <span class="small text-muted">
-        03.10.2020 <b class="fs-6 text-dark">Artromedica</b>
-      </span>
-      <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis a dolorum vel,
-        molestias exercitationem.</p>
-      <p><b>Salary:</b> 10 000 - 15 000$</p>
-      <button class="btn btn-primary btn-sm d-flex align-items-center">
-        <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-          <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-        </svg>
-        Read more
-      </button>
+    <div id="applied_job_container" class="card-body">
+      <div class="applied_job_data">
+        <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+        $sql = ("SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b WHERE b.job_id=a.id AND b.job_seeker_id={$_SESSION['employee_id']} ORDER BY b.id DESC");
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($row as $value) : ?>
+          <div class="small text-muted d-flex align-items-center">
+            <?php echo "<span class=\"me-1\">{$value['published_date']}</span> <span class=\"text-dark fw-bold fs-5\"> {$value['company_name']}</span>"; ?>
+            <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
+              echo "<span class=\"badge bg-secondary mx-1\"> {$value['frontend_tag']} </span>";
+            }
+            ?>
+            <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
+              echo "<span class=\"badge bg-dark mx-1\"> {$value['backend_tag']} </span>";
+            }
+            ?>
+            <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
+              echo "<span class=\"badge bg-success mx-1\"> {$value['fullstack_tag']} </span>";
+            }
+            ?>
+            <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
+              echo "<span class=\"badge bg-danger mx-1\"> {$value['qa_tag']} </span>";
+            }
+            ?>
+            <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
+              echo "<span class=\"badge bg-warning mx-1\"> {$value['mobdev_tag']} </span>";
+            }
+            ?>
+            <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
+              echo "<span class=\"badge bg-primary mx-1\"> {$value['ux_ui_tag']} </span>";
+            }
+            ?>
+            <span class="badge bg-info mx-1"> <?php echo $value['job_time']; ?> </span>
+          </div>
+          <p class="mt-2"><?php echo $value['job_title']; ?></p>
+          <p><b>Salary: </b><?php echo $value['job_salary']; ?> </p>
+          <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
+          <div class="d-flex">
+            <button class="btn btn-primary btn-sm d-flex align-items-center me-2">
+              <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+              Read more
+            </button>
+            <button id="cancel_application" class="btn btn-danger btn-sm d-flex align-items-center" value="<?php echo $value['id'] ?>">
+              <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+              Reject
+            </button>
+          </div>
+          <hr class="m-2">
+        <?php endforeach; ?>
+      </div>
     </div>
-    <hr class="m-2">
-
-    <div class="card-body">
-      <span class="small text-muted">
-        03.10.2020 <b class="fs-6 text-dark">Family Studio</b>
-      </span>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio obcaecati ab placeat perferendis expedita vel
-        eligendi magni quidem ad, in minus, earum doloribus reprehenderit dicta.</p>
-      <p><b>Salary:</b> 10 000 - 15 000$</p>
-      <button class="btn btn-primary btn-sm d-flex align-items-center">
-        <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-          <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-        </svg>
-        Read more
-      </button>
-    </div>
-    <hr class="m-2">
-
-    <div class="card-body">
-      <span class="small text-muted">
-        03.10.2020 <b class="fs-6 text-dark">Medics Prosperity</b>
-      </span>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio obcaecati ab placeat perferendis expedita vel
-        eligendi magni quidem ad, in minus, earum doloribus reprehenderit dicta.</p>
-      <p><b>Salary:</b> 10 000 - 15 000$</p>
-      <button class="btn btn-primary btn-sm d-flex align-items-center">
-        <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-          <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-        </svg>
-        Read more
-      </button>
-    </div>
-    <hr class="m-2">
   </div>
 
   <!-- Edit profile -->
@@ -437,9 +446,9 @@
           $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
           // echo json_encode($row);
 
-          foreach ($row as $value):?>
+          foreach ($row as $value) : ?>
 
-            <li class="list-group-item py-3">
+            <li class="job_li list-group-item py-3">
               <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?> by</p>
               <div class="d-flex align-items-center">
                 <div class="mb-2 d-flex flex-column">
@@ -476,7 +485,6 @@
                   echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
                 }
                 ?>
-
                 <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
                 <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
 
@@ -488,7 +496,7 @@
                     </svg>
                     Read more
                   </button>
-                  <button id="apply_job" class="btn btn-warning d-flex align-items-center btn-sm" value="<?php echo $value['id'] ?>">
+                  <button id="apply_job" class="btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value['id'] ?>">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                       <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -498,7 +506,7 @@
                 </div>
                 <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
             </li>
-          <?php endforeach;?>
+          <?php endforeach; ?>
         </ul>
       </div>
     </div>
