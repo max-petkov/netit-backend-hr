@@ -2,7 +2,6 @@ $(function () {
 
   // Getting id value from dynamically created button
   $(document).on('click', '#apply_job', function () {
-    console.log($(this).val());
     $(this).hide();
     $.ajax({
       url: 'src/applied-jobs.php',
@@ -180,7 +179,7 @@ $(function () {
       website.addClass('is-invalid')
         .next()
         .addClass('invalid-feedback')
-        .text('Field can not be empty or leave it like this!');
+        .text('Field can not be empty or SAVE it like this!');
 
       setTimeout(function () {
         if (website.hasClass('is-invalid')) {
