@@ -54,19 +54,30 @@ CREATE TABLE tb_published_jobs (
     ux_ui_tag VARCHAR(10),
     job_salary VARCHAR(100),
     job_description VARCHAR(1000),
-    is_active VARCHAR(1) DEFAULT 'Y'
+    is_active VARCHAR(1) DEFAULT 'Y',
+    random_chars CHAR(32)
 );
 
 CREATE TABLE tb_applied_jobs (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	applied_id INT AUTO_INCREMENT PRIMARY KEY,
     job_id INT,
     job_seeker_id INT,
-    is_active VARCHAR(1) DEFAULT 'Y'
-);
+    is_applied VARCHAR(1)
+); 
 
-SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b ON b.job_id=a.id AND b.job_seeker_id=2;
+SELECT a.*, b.id, b.random_chars FROM tb_applied_jobs AS a INNER JOIN tb_published_jobs AS b ON a.job_id=b.id WHERE a.job_id=7;
+
+SELECT a.job_id, b.id, b.random_chars FROM tb_applied_jobs AS a INNER JOIN tb_published_jobs AS b ON a.job_id=b.id WHERE a.job_id=7 AND b.random_chars='1b8fb74e377077e070ed6bf8d47297fb';
 
 SELECT * FROM tb_applied_jobs;
+TRUNCATE TABLE tb_applied_jobs;
+
+SELECT a.*, b.* FROM tb_published_jobs AS a LEFT JOIN tb_applied_jobs AS b ON a.id group by a.id;
+
+SELECT a.*, b.* FROM tb_published_jobs AS a LEFT JOIN tb_applied_jobs AS b ON a.id WHERE a.is_active='Y' GROUP BY a.id ORDER BY a.id DESC;
+
+-- SELECT a.*, b.* FROM tb_published_jobs AS a LEFT JOIN tb_applied_jobs AS b WHERE a.is_active='Y' ORDER BY a.id DESC;
+
 SELECT * FROM tb_job_seeker_profile;
 SELECT * FROM tb_published_jobs;
 SELECT * FROM tb_company_profile;

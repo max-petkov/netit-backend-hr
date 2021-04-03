@@ -1,21 +1,49 @@
 $(function () {
 
-  // Getting id value from dynamically created button
-  $(document).on('click', '#apply_job', function () {
-    $(this).hide();
+  // Getting values from dynamically created button
+  $(document).on('click', '.js-apply-job', function () {
+    $apply_button = $(this);
+    $apply_button.text('Loading...').addClass('disabled');
     $.ajax({
       url: 'src/applied-jobs.php',
       method: 'post',
       data: {
-        job_id: $(this).val(),
-        job_seeker_id: $(this).next().val()
+        job_id: $apply_button.val(),
+        job_seeker_id: $apply_button.next().val(),
+        random_chars: $apply_button.next().next().val(),
+        is_applied: 'Y'
       },
       success: function () {
-      //  HOW TO STYLE DYNAMICALLY CREATED PHP ELEMENTS AFTER VIA JQUERY AFTER SUCCESS
+        $apply_button.text('Applied!').addClass('disabled');
       }
-    })
-
+    });
   });
+
+  // Cancel applications
+  $('#applied_job_container').on('click', '.js-cancel-application', function (e) {
+    e.preventDefault();
+    $cancel_application_button = $(this);
+    $cancel_application_button.text('Loading...').addClass('disabled');
+
+    $.ajax({
+      url: 'src/database.php',
+      method: 'post',
+      data: {
+        cancel_job_id: $cancel_application_button.val(),
+        job_seeker_id: $cancel_application_button.next().val(),
+        applied_id: $cancel_application_button.next().next().val()
+
+        // random_chars: $cancel_application_button.next().next().next().val() THIS IS FOR SECURITY REASON
+      },
+      success: function () {
+        $cancel_application_button.closest('li').fadeOut('slow', function () {
+          $cancel_application_button.closest('li').remove();
+          $('#published_job_list').load('employee-dashboard.php .job_li');
+        })
+      }
+    });
+  });
+
 
   // Refreshing job list elements and lazy load list items
   // (function refresh_content() {
@@ -186,7 +214,7 @@ $(function () {
           website.removeClass('is-invalid')
             .next().removeClass('invalid-feedback').hide('slow');
         }
- 
+
       }, 10000);
       proceed = false;
 
@@ -293,7 +321,7 @@ $(function () {
 
       proceed = false;
 
-    } 
+    }
 
     // AJAX
     if (proceed) {
@@ -310,23 +338,23 @@ $(function () {
         },
         success: function (response) {
           $('#success_mess_validation').slideDown('slow').addClass('alert alert-success').text('Update successful!');
-            setTimeout(function(){
-              $('#success_mess_validation').slideUp('slow');
-            }, 2000);
-            $('#greetings_first_name').html(`${response.first_name}!`);
-            $('#employee_first_name').html(response.first_name);
-            $('#employee_last_name').html(response.last_name);
-            $('#employee_address').html(response.address);
-            $('#employee_website').attr('href', response.website);
-            $('#employee_website').html(response.website);
-    
-            first_name.val(response.first_name);
-            last_name.val(response.last_name);
-            address.val(response.address);
-            website.val(response.website);
-            short_introduction.val(response.short_introduction);
+          setTimeout(function () {
+            $('#success_mess_validation').slideUp('slow');
+          }, 2000);
+          $('#greetings_first_name').html(`${response.first_name}!`);
+          $('#employee_first_name').html(response.first_name);
+          $('#employee_last_name').html(response.last_name);
+          $('#employee_address').html(response.address);
+          $('#employee_website').attr('href', response.website);
+          $('#employee_website').html(response.website);
 
-       
+          first_name.val(response.first_name);
+          last_name.val(response.last_name);
+          address.val(response.address);
+          website.val(response.website);
+          short_introduction.val(response.short_introduction);
+
+
         },
         error: function () {
           console.log('error');

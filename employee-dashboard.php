@@ -2,7 +2,8 @@
 <?php include 'src/database.php'; ?>
 <?php include_once 'src/functions.php'; ?>
 <?php login_required($_SESSION['employee_id']); ?>
- 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -228,14 +229,14 @@
       <h4 class="m-0">Applications:</h4>
       <button class="btn-close align-self-end"></button>
     </div>
-    <div id="applied_job_container" class="card-body">
-      <div class="applied_job_data">
-        <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql = ("SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b WHERE b.job_id=a.id AND b.job_seeker_id={$_SESSION['employee_id']} ORDER BY b.id DESC");
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($row as $value) : ?>
+    <ul id="applied_job_container" class="card-body list-group-flush">
+      <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+      $sql = ("SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b WHERE b.job_id=a.id AND b.job_seeker_id={$_SESSION['employee_id']} AND is_applied='Y' ORDER BY b.applied_id DESC");
+      $stmt = $db->prepare($sql);
+      $stmt->execute();
+      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($row as $value) : ?>
+        <li class="applied_job_data list-group-item">
           <div class="small text-muted d-flex align-items-center">
             <?php echo "<span class=\"me-1\">{$value['published_date']}</span> <span class=\"text-dark fw-bold fs-5\"> {$value['company_name']}</span>"; ?>
             <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
@@ -275,21 +276,26 @@
               </svg>
               Read more
             </button>
-            <button id="cancel_application" class="btn btn-danger btn-sm d-flex align-items-center" value="<?php echo $value['id'] ?>">
+            <button class="js-cancel-application btn btn-danger btn-sm d-flex align-items-center" value="<?php echo $value['job_id'] ?>">
               <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                 <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
               </svg>
               Reject
             </button>
+
+            </form>
+            <input type="hidden" value="<?php echo $_SESSION['employee_id']; ?>">
+            <input type="hidden" value="<?php echo $value['applied_id']; ?>">
+            <input type="hidden" value="<?php echo $value['random_chars']; ?>">
           </div>
           <hr class="m-2">
-        <?php
-        endforeach;
-        $db = null;
-        ?>
-      </div>
-    </div>
+        </li>
+      <?php
+      endforeach;
+      $db = null;
+      ?>
+    </ul>
   </div>
 
   <!-- Edit profile -->
@@ -489,12 +495,11 @@
 
           <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
           $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY id DESC");
-          $stmt = $db->prepare($sql);
+          $stmt = $db->query($sql);
           $stmt->execute();
 
           $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
           foreach ($row as $value) : ?>
-
             <li class="job_li list-group-item py-3">
               <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?> by</p>
               <div class="d-flex align-items-center">
@@ -543,14 +548,25 @@
                     </svg>
                     Read more
                   </button>
-                  <button id="apply_job" class="btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value['id'] ?>">
-                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                    Apply
-                  </button>
-                  <input type="hidden" value="<?php echo $_SESSION['employee_id'] ?>">
+                  <?php
+                  $stmt2 = $db->query("SELECT applied_id, job_id, job_seeker_id, is_applied FROM tb_applied_jobs WHERE job_id='{$value['id']}' AND job_seeker_id='{$_SESSION['employee_id']}' AND is_applied='Y'");
+                  $stmt2->execute();
+                  $row2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                  if ($stmt2->rowCount() === 0 ) : ?>
+                    <button class="js-apply-job btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value['id']; ?>">
+                      <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      Apply
+                    </button>
+                    <input type="hidden" value="<?php echo $_SESSION['employee_id']; ?>">
+                    <input type="hidden" value="<?php echo $value['random_chars']; ?>">
+                  <?php else : ?>
+                    <button class="btn btn-success d-flex align-items-center btn-sm disabled">
+                      Applied!
+                    </button>
+                  <?php endif; ?>
                 </div>
                 <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
             </li>
