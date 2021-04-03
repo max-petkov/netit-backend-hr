@@ -477,27 +477,28 @@
       <div id="list-jobs">
         <div class="row search-bar my-4">
           <div class="col-sm-8 col-md-6">
-            <input type="text" class="form-control" placeholder="Search job...">
+            <input id="search_by_title_company" type="text" class="form-control" placeholder="Search by job title...">
           </div>
           <div class="order-1 order-sm-0 col-6 mt-3 col-sm-3 mt-sm-0 ps-sm-0 col-md-2">
-            <select class="form-select" name="it_branches" id="it_branches">
-              <option class="text-dark" selected>Sort by...</option>
-              <option class="text-dark" value="">Frontend</option>
-              <option class="text-dark" value="">Backend</option>
-              <option class="text-dark" value="">Fullstack</option>
-              <option class="text-dark" value="">QA</option>
-              <option class="text-dark" value="">UX/UI</option>
-              <option class="text-dark" value="">MobDev</option>
+            <select class="form-select" id="select_it_tag">
+              <option class="text-dark" value="*">Sort by...</option>
+              <option class="js-select-tag text-dark" value="frontend">Frontend</option>
+              <option class="js-select-tag text-dark" value="backend">Backend</option>
+              <option class="js-select-tag text-dark" value="fullstack">Fullstack</option>
+              <option class="js-select-tag text-dark" value="qa">QA</option>
+              <option class="js-select-tag text-dark" value="ux_ui">UX/UI</option>
+              <option class="js-select-tag text-dark" value="mobdev">MobDev</option>
             </select>
           </div>
         </div>
         <ul id="published_job_list" class="list-group-flush ps-0">
+        <?php
 
-          <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+           $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  
           $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY id DESC");
           $stmt = $db->query($sql);
           $stmt->execute();
-
           $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
           foreach ($row as $value) : ?>
             <li class="job_li list-group-item py-3">
@@ -570,7 +571,7 @@
                 </div>
                 <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
             </li>
-          <?php endforeach; ?>
+          <?php endforeach;?>
         </ul>
       </div>
     </div>

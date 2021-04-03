@@ -44,6 +44,97 @@ $(function () {
     });
   });
 
+  // Sorting job list
+  $('#select_it_tag').on("change", function () {
+    $('#published_job_list').html('Loading results...');
+    if ($(this).val() === '*') {
+      $.ajax({
+        url: 'src/sort-job-list.php',
+        method: 'post',
+        data: {
+          default_list: $(this).val()
+        },
+        success: function (response) {
+          if (!$.trim(response)) {
+            $('#published_job_list').html('There are no results...');
+          } else {
+            $('#published_job_list').html($.trim(response));
+          }
+        }
+      });
+    } else if ($(this).val() === 'ux_ui') {
+      $.ajax({
+        url: 'src/sort-job-list.php',
+        method: 'post',
+        data: {
+          ux_ui: $(this).val(),
+          ux_ui_tag: 'ux/ui'
+        },
+        success: function (response) {
+          if (!$.trim(response)) {
+            $('#published_job_list').html('There are no results...');
+          } else {
+            $('#published_job_list').html($.trim(response));
+          }
+        }
+      });
+    } else {
+      $.ajax({
+        url: 'src/sort-job-list.php',
+        method: 'post',
+        data: {
+          tag_list: $(this).val()
+        },
+        success: function (response) {
+          if (!$.trim(response)) {
+            $('#published_job_list').html('There are no results...');
+          } else {
+            $('#published_job_list').html($.trim(response));
+          }
+        }
+      });
+    }
+  });
+
+// Search by title or company name
+$('#search_by_title_company').on('keyup', function() {
+  
+  
+  console.log($(this).val());
+  // Reseting job when there is no input value
+  if (!$(this).val()) {
+    $.ajax({
+      url: 'src/sort-job-list.php',
+      method: 'post',
+      data: {
+        default_list: '*'
+      },
+      success: function (response) {
+        if (!$.trim(response)) {
+          $('#published_job_list').html('There are no results...');
+        } else {
+          $('#published_job_list').html($.trim(response));
+        }
+      }
+    });
+  } else {
+    $.ajax({
+      url:'src/sort-job-list.php',
+      method: 'post',
+      data: {
+        search_by_job_title: $(this).val()
+      },
+      success: function (response) {
+        if (!$.trim(response)) {
+          $('#published_job_list').html('There are no results...');
+        } else {
+          $('#published_job_list').html($.trim(response));
+        }
+      }
+    })
+
+  }
+});
 
   // Refreshing job list elements and lazy load list items
   // (function refresh_content() {
