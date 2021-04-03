@@ -15,6 +15,3 @@ function error_message() {
     return $output;
   }
 }
-
-
-?>

@@ -26,6 +26,7 @@ function checking_existing_username_email($db_table_name, $db_username_or_email,
 }
 
 
+
 function login_attempt($db_table_name, $db_username, $db_password, $username_input_value, $password_input_value) {
   $db_connection = new PDO('mysql:host=localhost;dbname=monster_hr_db', 'root', '');
   try {
@@ -110,5 +111,3 @@ function published_job($tag_column, $tag_value) {
 
   $db = null;
 }
-
-?>
