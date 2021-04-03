@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<!-- Showcase -->
+  <!-- Showcase -->
   <header>
     <nav class="navbar shadow-custom-navbar flex-wrap navbar-expand py-3 mb-5">
       <div class="container">
@@ -55,82 +55,82 @@
   </header>
   <!-- Card published jobs -->
   <div id="cards-job-container">
-        <div class="d-flex justify-content-center flex-wrap">
+    <div class="d-flex justify-content-center flex-wrap">
 
-          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+        <div class="card-body p-2">
+          <div class="card-title text-center">Frontend</div>
+          <div class="card">
             <div class="card-body p-2">
-              <div class="card-title text-center">Frontend</div>
-              <div class="card">
-                <div class="card-body p-2">
-                  <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_tag', 'frontend'); ?></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
-            <div class="card-body p-2">
-              <div class="card-title text-center">Backend</div>
-              <div class="card">
-                <div class="card-body p-2">
-                  <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('backend_tag', 'backend'); ?></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
-            <div class="card-body p-2">
-              <div class="card-title text-center">Fullstack</div>
-              <div class="card">
-                <div class="card-body p-2">
-                  <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_tag', 'fullstack'); ?></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
-            <div class="card-body p-2">
-              <div class="card-title text-center">QA</div>
-              <div class="card">
-                <div class="card-body p-2">
-                  <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('qa_tag', 'qa'); ?></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
-            <div class="card-body p-2">
-              <div class="card-title text-center">MobDev</div>
-              <div class="card">
-                <div class="card-body p-2">
-                  <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_tag', 'mobdev'); ?></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
-            <div class="card-body p-2">
-              <div class="card-title text-center">UX/UI</div>
-              <div class="card">
-                <div class="card-body p-2">
-                  <div class="card-subttile text-center small">Published jobs:</div>
-                  <div class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_tag', 'ux/ui'); ?></div>
-                </div>
-              </div>
+              <div class="card-subttile text-center small">Published jobs:</div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_tag', 'frontend'); ?></div>
             </div>
           </div>
         </div>
-        <hr class="my-4">
       </div>
+
+      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+        <div class="card-body p-2">
+          <div class="card-title text-center">Backend</div>
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="card-subttile text-center small">Published jobs:</div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('backend_tag', 'backend'); ?></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+        <div class="card-body p-2">
+          <div class="card-title text-center">Fullstack</div>
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="card-subttile text-center small">Published jobs:</div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_tag', 'fullstack'); ?></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+        <div class="card-body p-2">
+          <div class="card-title text-center">QA</div>
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="card-subttile text-center small">Published jobs:</div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('qa_tag', 'qa'); ?></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+        <div class="card-body p-2">
+          <div class="card-title text-center">MobDev</div>
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="card-subttile text-center small">Published jobs:</div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_tag', 'mobdev'); ?></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+        <div class="card-body p-2">
+          <div class="card-title text-center">UX/UI</div>
+          <div class="card">
+            <div class="card-body p-2">
+              <div class="card-subttile text-center small">Published jobs:</div>
+              <div class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_tag', 'ux/ui'); ?></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4">
+  </div>
   <!-- Used languages -->
   <section class="bg-dark py-5">
     <div class="container">
@@ -164,10 +164,10 @@
   <!-- Team -->
   <section class="py-5">
     <div class="container">
-      
-        <h1 class="text-center mt-5">Meet the Creators</h1>
-        <p class="text-center lead mx-auto mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iusto dignissimos eius iste maxime ullam placeat vitae porro unde </p>
-     
+
+      <h1 class="text-center mt-5">Meet the Creators</h1>
+      <p class="text-center lead mx-auto mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iusto dignissimos eius iste maxime ullam placeat vitae porro unde </p>
+
       <div class="row mb-5 justify-content-center">
 
         <div class="col-lg-3 col-md-6">
@@ -237,13 +237,12 @@
       </div>
     </div>
   </section>
-  
+
   <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
       <hr class="mx-auto my-1" width="256px">
-      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg"
-          class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
+      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg" class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
     </div>
   </footer>
 </body>

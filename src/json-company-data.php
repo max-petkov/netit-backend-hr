@@ -34,5 +34,3 @@ if (isset($_SESSION['company_id'])) {
 } else {
   echo 'error';
 }
-
-?>

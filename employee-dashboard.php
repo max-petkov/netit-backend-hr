@@ -3,6 +3,7 @@
 <?php include_once 'src/functions.php'; ?>
 <?php login_required($_SESSION['employee_id']); ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,61 +26,92 @@
         <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span id="greetings"></span> <span id="greetings_first_name"></span>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li class="dropdown-item xsm-text-class text-center">Your are logged in as<br><b id="employee_username" class="xsm-text-class"></b>
-                </li>
-                <div class="dropdown-divider"></div>
-                <li id="profile_button">
-                  <a class="dropdown-item xsm-text-class" href="#">Edit Profile</a>
-                </li>
-                <li>
-                  <a class="message_icon dropdown-item xsm-text-class" href="#">Messages<span class="badge rounded-pill bg-danger ms-1">3</span>
-                  </a>
-                </li>
-                <li id="addplication_button">
-                  <a class="dropdown-item xsm-text-class" href="#">Applications</a>
-                </li>
+              <?php
+              $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+              $sql = ("SELECT username, first_name, last_name, email, website, address FROM tb_job_seeker_profile WHERE id={$_SESSION['employee_id']}");
+              $stmt = $db->query($sql);
+              $stmt->execute();
+              while ($row = $stmt->fetch()) :
+                $job_seeker_username           = $row['username'];
+                $job_seeker_first_name         = $row['first_name'];
+                $job_seeker_last_name          = $row['last_name'];
+                $job_seeker_email              = $row['email'];
+                $job_seeker_website            = $row['website'];
+                $job_seeker_address            = $row['address'];
+              ?>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span id="greetings"></span>
+                  <span id="greetings_first_name">
+                    <?php echo $job_seeker_first_name; ?>
+                  </span>
+                </a>
+                <ul id="job_seeker_navbar_data" class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li class="dropdown-item xsm-text-class text-center">Your are logged in as<br><b id="employee_username" class="xsm-text-class"><?php echo $job_seeker_username; ?></b>
+                  </li>
+                  <div class="dropdown-divider"></div>
+                  <li id="profile_button">
+                    <a class="dropdown-item xsm-text-class" href="#">Edit Profile</a>
+                  </li>
+                  <li>
+                    <a class="message_icon dropdown-item xsm-text-class" href="#">Messages<span class="badge rounded-pill bg-danger ms-1">3</span>
+                    </a>
+                  </li>
+                  <li id="addplication_button">
+                    <a class="dropdown-item xsm-text-class" href="#">Applications</a>
+                  </li>
 
-                <li>
-                  <a class="dropdown-item xsm-text-class d-flex align-items-center" href="#">
-                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                  <li>
+                    <a class="dropdown-item xsm-text-class d-flex align-items-center" href="#">
+                      <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                      </svg>
+                      Resume
+                    </a>
+                  </li>
+                  <div class="dropdown-divider"></div>
+
+                  <li class="dropdown-item xsm-text-class d-flex align-items-center">
+                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                     </svg>
-                    Resume
-                  </a>
-                </li>
-                <div class="dropdown-divider"></div>
-
-                <li class="dropdown-item xsm-text-class d-flex align-items-center">
-                  <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                  </svg>
-                  <span id="employee_first_name" class="me-1"></span><span id="employee_last_name"></span>
-                </li>
-                <li class="dropdown-item xsm-text-class d-flex align-items-center">
-                  <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
-                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                  </svg>
-                  <span id="employee_address"></span>
-                </li>
-                <li class="dropdown-item xsm-text-class d-flex align-items-center">
-                  <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
-                  </svg>
-                  <span id="employee_email"></span>
-                </li>
-                <li class="dropdown-item xsm-text-class d-flex align-items-center">
-                  <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                    <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
-                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
-                  </svg>
-                  <a href="#" target="_blank" class="text-decoration-none" id="employee_website"></a>
-                </li>
+                    <span id="employee_first_name" class="me-1">
+                      <?php echo $job_seeker_first_name; ?>
+                    </span>
+                    <span id="employee_last_name">
+                      <?php echo $job_seeker_last_name; ?>
+                    </span>
+                  </li>
+                  <li class="dropdown-item xsm-text-class d-flex align-items-center">
+                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                      <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+                      <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    </svg>
+                    <span id="employee_address">
+                      <?php echo $job_seeker_address; ?>
+                    </span>
+                  </li>
+                  <li class="dropdown-item xsm-text-class d-flex align-items-center">
+                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
+                    </svg>
+                    <span id="employee_email">
+                      <?php echo $job_seeker_email; ?>
+                    </span>
+                  </li>
+                  <li class="dropdown-item xsm-text-class d-flex align-items-center">
+                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                      <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                      <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
+                    </svg>
+                    <a href="<?php echo $job_seeker_website; ?>" target="_blank" class="text-decoration-none" id="employee_website">
+                      <?php echo $job_seeker_website; ?>
+                    </a>
+                  </li>
+                <?php
+              endwhile;
+              $db = null;
+                ?>
                 <div class="dropdown-divider"></div>
                 <li id="profile_button">
                   <a id="logout_employee" class="dropdown-item xsm-text-class d-flex align-items-center" href="src/logout.php">
@@ -92,11 +124,9 @@
                 </li>
                 <div class="dropdown-divider"></div>
                 <li class="dropdown-item xsm-text-class d-flex align-items-center justify-content-center">
-                  <span id="date_time">
-
-                  </span>
+                  <span id="date_time"></span>
                 </li>
-              </ul>
+                </ul>
             </li>
           </ul>
         </div>
@@ -199,14 +229,14 @@
       <h4 class="m-0">Applications:</h4>
       <button class="btn-close align-self-end"></button>
     </div>
-    <div id="applied_job_container" class="card-body">
-      <div class="applied_job_data">
-        <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql = ("SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b WHERE b.job_id=a.id AND b.job_seeker_id={$_SESSION['employee_id']} ORDER BY b.id DESC");
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($row as $value) : ?>
+    <ul id="applied_job_container" class="card-body list-group-flush">
+      <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+      $sql = ("SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b WHERE b.job_id=a.id AND b.job_seeker_id={$_SESSION['employee_id']} AND is_applied='Y' ORDER BY b.applied_id DESC");
+      $stmt = $db->prepare($sql);
+      $stmt->execute();
+      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($row as $value) : ?>
+        <li class="applied_job_data list-group-item">
           <div class="small text-muted d-flex align-items-center">
             <?php echo "<span class=\"me-1\">{$value['published_date']}</span> <span class=\"text-dark fw-bold fs-5\"> {$value['company_name']}</span>"; ?>
             <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
@@ -246,91 +276,116 @@
               </svg>
               Read more
             </button>
-            <button id="cancel_application" class="btn btn-danger btn-sm d-flex align-items-center" value="<?php echo $value['id'] ?>">
+            <button class="js-cancel-application btn btn-danger btn-sm d-flex align-items-center" value="<?php echo $value['job_id'] ?>">
               <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                 <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
               </svg>
               Reject
             </button>
+
+            </form>
+            <input type="hidden" value="<?php echo $_SESSION['employee_id']; ?>">
+            <input type="hidden" value="<?php echo $value['applied_id']; ?>">
+            <input type="hidden" value="<?php echo $value['random_chars']; ?>">
           </div>
           <hr class="m-2">
-        <?php endforeach; ?>
-      </div>
-    </div>
+        </li>
+      <?php
+      endforeach;
+      $db = null;
+      ?>
+    </ul>
   </div>
 
   <!-- Edit profile -->
   <div class="card d-none profile_box shadow-lg p-3 mb-5 bg-body rounded">
-    <div class="d-flex justify-content-between px-0 mt-2">
-      <div class="ms-3">
-        <h4 class="card-text">Edit profile:</h4>
-        <button name="submit_update" class="btn btn-primary btn-sm d-flex align-items-center">
-          <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-          </svg>
-          Save profile
-        </button>
-      </div>
-      <button class="btn-close me-3"></button>
+    <div class="d-flex justify-content-end pt-2">
+
+      <button class="btn-close"></button>
     </div>
-    <div class="card-body">
-      <form method="POST" class="row edit-profile pb-1">
-        <div id="success_mess_validation"></div>
-        <div class="form-group row mb-3 pe-0">
-          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
-            <label for="first_name">First name</label>
-            <input type="text" class="successful-validation form-control form-control-sm" name="employee_first_name">
-            <div></div>
-          </div>
-          <div class="form-group col-0 pe-0 col-sm-6">
-            <label for="last_name">Last name</label>
-            <input type="text" class="successful-validation form-control form-control-sm" name="employee_last_name">
-            <div></div>
-          </div>
+    <div class="card-body pt-0">
+      <form id="job_seeker_profile_form" method="POST" class="row edit-profile pb-1">
+        <div class="ps-3 mb-3">
+          <h4 class="card-text">Edit profile:</h4>
+          <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center">
+            <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+            </svg>
+            Save profile
+          </button>
         </div>
 
-        <div class="form-group row mb-3 pe-0">
-          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
-            <label for="address_employee">Address</label>
-            <input type="text" class="successful-validation form-control form-control-sm" name="address_employee">
-            <div></div>
-          </div>
-          <div class="form-group col-0 col-sm-6 pe-0">
-            <label for="website_employee">Website</label>
-            <input type="text" class="successful-validation form-control form-control-sm" name="website_employee">
-            <div></div>
-          </div>
-        </div>
+        <?php
+        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+        $sql = ("SELECT id, username, first_name, last_name, email, website, short_introduction, address FROM tb_job_seeker_profile WHERE id={$_SESSION['employee_id']}");
+        $stmt = $db->query($sql);
+        $stmt->execute();
 
-        <div class="form-group row mb-3 pe-0">
-          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
-            <label for="username">Username</label>
-            <input type="text" class="form-control form-control-sm" name="employee_username" disabled>
-          </div>
-          <div class="form-group col-0 col-sm-6 pe-0">
-            <label for="email">Email</label>
-            <input type="email" class="form-control form-control-sm" name="employee_email" disabled>
-          </div>
-        </div>
+        while ($row = $stmt->fetch()) :
+          $job_seeker_username           = $row['username'];
+          $job_seeker_first_name         = $row['first_name'];
+          $job_seeker_last_name          = $row['last_name'];
+          $job_seeker_email              = $row['email'];
+          $job_seeker_website            = $row['website'];
+          $job_seeker_short_introduction = $row['short_introduction'];
+          $job_seeker_address            = $row['address'];
+        ?>
+          <div>
+            <div id="success_mess_validation"></div>
+            <div class="form-group row mb-3 pe-0">
+              <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
+                <label for="first_name">First name</label>
+                <input type="text" class="successful-validation form-control form-control-sm" name="employee_first_name" value="<?php echo $job_seeker_first_name; ?>">
+                <div></div>
+              </div>
+              <div class="form-group col-0 pe-0 col-sm-6">
+                <label for="last_name">Last name</label>
+                <input type="text" class="successful-validation form-control form-control-sm" name="employee_last_name" value="<?php echo $job_seeker_last_name; ?>">
+                <div></div>
+              </div>
+            </div>
 
-        <div class="form-group d-flex flex-column mb-3">
-          <label for="resume" class="file">Attach resume:</label>
-          <input type="file" class="form-control-file">
-          <small class="form-text form-muted">Max 3mb size</small>
-        </div>
+            <div class="form-group row mb-3 pe-0">
+              <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
+                <label for="address_employee">Address</label>
+                <input type="text" class="successful-validation form-control form-control-sm" name="address_employee" value="<?php echo $job_seeker_address; ?>">
+                <div></div>
+              </div>
+              <div class="form-group col-0 col-sm-6 pe-0">
+                <label for="website_employee">Website</label>
+                <input type="text" class="successful-validation form-control form-control-sm" name="website_employee" value="<?php echo $job_seeker_website; ?>">
+                <div></div>
+              </div>
+            </div>
 
-        <div class="form-group">
-          <label for="short_introduction_employee">Short introduction</label>
-          <textarea name="short_introduction" class="successful-validation form-control form-control-sm" rows="6">
-            <span id="textarea_default_text">- 👋 Hi, I’m ...
-  - 👀 I’m interested in ...
-  - 🌱 I’m currently learning ...
-  - 💞️ I’m looking to collaborate on ...
-  - 📫 How to reach me ...</span>
-          </textarea>
-          <div></div>
-        </div>
+            <div class="form-group row mb-3 pe-0">
+              <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
+                <label for="username">Username</label>
+                <input type="text" class="form-control form-control-sm" name="employee_username" value="<?php echo $job_seeker_username; ?>" disabled>
+              </div>
+              <div class="form-group col-0 col-sm-6 pe-0">
+                <label for="email">Email</label>
+                <input type="email" class="form-control form-control-sm" name="employee_email" value="<?php echo $job_seeker_email; ?>" disabled>
+              </div>
+            </div>
+
+            <div class="form-group d-flex flex-column mb-3">
+              <label for="resume" class="file">Attach resume:</label>
+              <input type="file" class="form-control-file">
+              <small class="form-text form-muted">Max 3mb size</small>
+            </div>
+
+            <div class="form-group">
+              <label for="short_introduction_employee">Short introduction</label>
+              <textarea name="short_introduction" class="successful-validation form-control form-control-sm" rows="6"><?php echo $job_seeker_short_introduction; ?></textarea>
+              <div></div>
+            </div>
+          <?php
+        endwhile;
+        $db = null;
+          ?>
+          </div>
       </form>
     </div>
   </div>
@@ -422,32 +477,30 @@
       <div id="list-jobs">
         <div class="row search-bar my-4">
           <div class="col-sm-8 col-md-6">
-            <input type="text" class="form-control" placeholder="Search job...">
+            <input id="search_by_title_company" type="text" class="form-control" placeholder="Search by job title...">
           </div>
           <div class="order-1 order-sm-0 col-6 mt-3 col-sm-3 mt-sm-0 ps-sm-0 col-md-2">
-            <select class="form-select" name="it_branches" id="it_branches">
-              <option class="text-dark" selected>Sort by...</option>
-              <option class="text-dark" value="">Frontend</option>
-              <option class="text-dark" value="">Backend</option>
-              <option class="text-dark" value="">Fullstack</option>
-              <option class="text-dark" value="">QA</option>
-              <option class="text-dark" value="">UX/UI</option>
-              <option class="text-dark" value="">MobDev</option>
+            <select class="form-select" id="select_it_tag">
+              <option class="text-dark" value="*">Sort by...</option>
+              <option class="js-select-tag text-dark" value="frontend">Frontend</option>
+              <option class="js-select-tag text-dark" value="backend">Backend</option>
+              <option class="js-select-tag text-dark" value="fullstack">Fullstack</option>
+              <option class="js-select-tag text-dark" value="qa">QA</option>
+              <option class="js-select-tag text-dark" value="ux_ui">UX/UI</option>
+              <option class="js-select-tag text-dark" value="mobdev">MobDev</option>
             </select>
           </div>
         </div>
         <ul id="published_job_list" class="list-group-flush ps-0">
+        <?php
 
-          <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+           $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  
           $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY id DESC");
-          $stmt = $db->prepare($sql);
+          $stmt = $db->query($sql);
           $stmt->execute();
-
           $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-          // echo json_encode($row);
-
           foreach ($row as $value) : ?>
-
             <li class="job_li list-group-item py-3">
               <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?> by</p>
               <div class="d-flex align-items-center">
@@ -496,17 +549,29 @@
                     </svg>
                     Read more
                   </button>
-                  <button id="apply_job" class="btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value['id'] ?>">
-                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                    Apply
-                  </button>
+                  <?php
+                  $stmt2 = $db->query("SELECT applied_id, job_id, job_seeker_id, is_applied FROM tb_applied_jobs WHERE job_id='{$value['id']}' AND job_seeker_id='{$_SESSION['employee_id']}' AND is_applied='Y'");
+                  $stmt2->execute();
+                  $row2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                  if ($stmt2->rowCount() === 0 ) : ?>
+                    <button class="js-apply-job btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value['id']; ?>">
+                      <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      Apply
+                    </button>
+                    <input type="hidden" value="<?php echo $_SESSION['employee_id']; ?>">
+                    <input type="hidden" value="<?php echo $value['random_chars']; ?>">
+                  <?php else : ?>
+                    <button class="btn btn-success d-flex align-items-center btn-sm disabled">
+                      Applied!
+                    </button>
+                  <?php endif; ?>
                 </div>
                 <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
             </li>
-          <?php endforeach; ?>
+          <?php endforeach;?>
         </ul>
       </div>
     </div>

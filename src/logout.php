@@ -9,5 +9,3 @@ $_SESSION['company_id']      = null;
 $_SESSION['success_message'] = "Successfully logged out!";
 redirect_to('../login.php');
 session_destroy();
-
-?>

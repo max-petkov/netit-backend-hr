@@ -38,11 +38,13 @@ if (mb_strlen($_POST['job_title']) > 20 &&
         $ux_ui_tag = $_POST['ux_ui_tag'];
         $job_salary = $_POST['job_salary'] . $_POST['salary_currency'] . ' ' . $_POST['salary_month_year'];
         $job_description = $_POST['job_description'];
+        $random_chars =  bin2hex(random_bytes(16));
 
-        $sql  = ('INSERT INTO tb_published_jobs(published_date, company_id, company_username, company_name, company_email, job_title, job_time, frontend_tag, backend_tag , fullstack_tag, qa_tag, mobdev_tag, ux_ui_tag, job_salary, job_description) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $sql  = ('INSERT INTO tb_published_jobs(published_date, company_id, company_username, company_name, company_email, job_title, job_time, frontend_tag, backend_tag , fullstack_tag, qa_tag, mobdev_tag, ux_ui_tag, job_salary, job_description, random_chars) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt = $db_connection->prepare($sql);
-        $stmt->bind_param('sssssssssssssss', $published_date, $company_id, $company_username, $company_name, $company_email, $job_title, $job_time, $frontend_tag, $backend_tag, $fullstack_tag, $qa_tag, $mobdev_tag, $ux_ui_tag, $job_salary, $job_description);
+        $stmt->bind_param('ssssssssssssssss', $published_date, $company_id, $company_username, $company_name, $company_email, $job_title, $job_time, $frontend_tag, $backend_tag, $fullstack_tag, $qa_tag, $mobdev_tag, $ux_ui_tag, $job_salary, $job_description, $random_chars);
         $stmt->execute();
+        
         
   }  else {
     echo 'error';

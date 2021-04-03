@@ -1,27 +1,28 @@
-<?php 
+<?php
 include 'database.php';
- 
+
 // Update company profile via ajax
-if (mb_strlen($_POST['company_name']) < 4                                                                                       ||  
-mb_strlen($_POST['company_name']) > 254                                                                                          || 
-!preg_match('/^[a-zA-Z0-9- \p{Cyrillic}]+$/u', $_POST['company_name'])                                                               ||
-empty($_POST['company_name'])                                                                                                   ||                       
-mb_strlen($_POST['slogan']) > 49                                                                                           || 
-mb_strlen($_POST['address']) > 49                                                                                             ||
-!preg_match('/^[a-zA-Z0-9-,\'. \p{Cyrillic}]+$/u', $_POST['address'])                                                         ||
-empty($_POST['address'])                                                                                                      ||
-mb_strlen($_POST['website']) > 49                                                                                             || 
-!preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) || 
-empty($_POST['website'])                                                                                                      || 
-mb_strlen($_POST['company_description']) < 49                                                                                  ||
-mb_strlen($_POST['company_description']) > 999                                                                                 ||
-empty($_POST['company_description']) || 
-!preg_match('/^[a-zA-Z0-9-\'!.,; \p{Cyrillic}]+$/u', $_POST['company_description']) ||
-mb_strlen($_POST['company_history']) > 999 ||
-mb_strlen($_POST['company_mission']) > 999) {
+if (
+  mb_strlen($_POST['company_name']) < 4                                                                                       ||
+  mb_strlen($_POST['company_name']) > 254                                                                                          ||
+  !preg_match('/^[a-zA-Z0-9- \p{Cyrillic}]+$/u', $_POST['company_name'])                                                               ||
+  empty($_POST['company_name'])                                                                                                   ||
+  mb_strlen($_POST['slogan']) > 49                                                                                           ||
+  mb_strlen($_POST['address']) > 49                                                                                             ||
+  !preg_match('/^[a-zA-Z0-9-,\'. \p{Cyrillic}]+$/u', $_POST['address'])                                                         ||
+  empty($_POST['address'])                                                                                                      ||
+  mb_strlen($_POST['website']) > 49                                                                                             ||
+  !preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) ||
+  empty($_POST['website'])                                                                                                      ||
+  mb_strlen($_POST['company_description']) < 49                                                                                  ||
+  mb_strlen($_POST['company_description']) > 999                                                                                 ||
+  empty($_POST['company_description']) ||
+  !preg_match('/^[a-zA-Z0-9-\'!.,; \p{Cyrillic}]+$/u', $_POST['company_description']) ||
+  mb_strlen($_POST['company_history']) > 999 ||
+  mb_strlen($_POST['company_mission']) > 999
+) {
 
   return false;
-
 } else {
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
   $sql = ("UPDATE tb_company_profile SET company_name=:company_name, slogan=:slogan, address=:address, website=:website, company_description=:company_description, company_history=:company_history, company_mission=:company_mission, frontend_branch=:frontend_branch, backend_branch=:backend_branch, fullstack_branch=:fullstack_branch, qa_branch=:qa_branch, mobdev_branch=:mobdev_branch, ux_ui_branch=:ux_ui_branch WHERE id='{$_SESSION['company_id']}'");
@@ -41,7 +42,7 @@ mb_strlen($_POST['company_mission']) > 999) {
   $stmt->bindValue(':ux_ui_branch', $_POST['ux_ui_branch']);
 
   $stmt->execute();
-  
+
   $json_data['company_name']         = $_POST['company_name'];
   $json_data['slogan']          = $_POST['slogan'];
   $json_data['address']            = $_POST['address'];
@@ -57,7 +58,4 @@ mb_strlen($_POST['company_mission']) > 999) {
   $json_data['ux_ui_branch'] = $_POST['ux_ui_branch'];
 
   echo json_encode($json_data);
-
-
 }
-

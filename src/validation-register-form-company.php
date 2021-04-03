@@ -260,10 +260,6 @@ $success_check_ux_ui     = '';
     $input_value_confirm_password = $_POST['confirm_password'];
     $success_input_class_confirm_password  = 'is-valid';
     $success_message_confirm_password      = "<div class=\"valid-feedback\"><i>Password confirmed!</i></div>";
-    
-
   }
 
  }
-
-?>
