@@ -1,74 +1,7 @@
-
 $(function () {
 
-  // Fetching json data from json-company-data.php
-  let company_id = '';
-  let company_username = '';
-  let company_email = '';
-  let company_name = '';
-  $.ajax({
-    url: 'src/json-company-data.php',
-    dataType: 'json',
-    success: function (response) {
-      console.log(response);
-      // collapse menu data
-      company_username = response.company_data.username;
-      company_id = response.company_data.id;
-      company_email = response.company_data.email;
-      company_name = response.company_data.company_name;
-      $('#company_username').text(response.company_data.username);
-      $('#company_email').text(response.company_data.email);
-      $('#company_name').text(response.company_data.company_name);
-      $('#greetings_company_name').append(`${response.company_data.company_name}!`);
-      $('#company_address').text(response.company_data.address);
-      $('#company_website').text(response.company_data.website);
-      $('#company_website').attr('href', response.company_data.website);
-      $('#showcase_company_name').text(response.company_data.company_name);
-      $('#showcase_company_description').text(response.company_data.company_description);
-      $('#showcase_company_slogan').text(response.company_data.slogan);
-      $('#showcase_company_history').text(response.company_data.company_history);
-      $('#showcase_company_mission').text(response.company_data.company_mission);
-
-      if (response.company_data.frontend_branch !== '' && response.company_data.frontend_branch !== null) {
-        $('#frontend_badge').addClass('badge bg-secondary').html(response.company_data.frontend_branch);
-        $('#frontend_checked_status').prop('checked', true);
-      }
-      if (response.company_data.backend_branch !== '' && response.company_data.backend_branch !== null) {
-        $('#backend_badge').addClass('badge bg-dark').html(response.company_data.backend_branch);
-        $('#backend_checked_status').prop('checked', true);
-      }
-      if (response.company_data.fullstack_branch !== '' && response.company_data.fullstack_branch !== null) {
-        $('#fullstack_badge').addClass('badge bg-success').html(response.company_data.fullstack_branch);
-        $('#fullstack_checked_status').prop('checked', true);
-      }
-      if (response.company_data.qa_branch !== '' && response.company_data.qa_branch !== null) {
-        $('#qa_badge').addClass('badge bg-danger').html(response.company_data.qa_branch);
-        $('#qa_checked_status').prop('checked', true);
-      }
-      if (response.company_data.mobdev_branch !== '' && response.company_data.mobdev_branch !== null) {
-        $('#mobdev_badge').addClass('badge bg-warning').html(response.company_data.mobdev_branch);
-        $('#mobdev_checked_status').prop('checked', true);
-      }
-      if (response.company_data.ux_ui_branch !== '' && response.company_data.ux_ui_branch !== null) {
-        $('#ux_ui_badge').addClass('badge bg-primary').html(response.company_data.ux_ui_branch);
-        $('#ux_ui_checked_status').prop('checked', true);
-      }
-
-      // Edit profile data
-      $('input[name="company_username"]').val(response.company_data.username);
-      $('input[name="company_email"]').val(response.company_data.email);
-      $('input[name="company_name"]').val(response.company_data.company_name);
-      $('input[name="company_address"]').val(response.company_data.address);
-      $('input[name="company_website"]').val(response.company_data.website);
-      $('textarea[name="company_description"]').val(response.company_data.company_description);
-      $('textarea[name="company_history"]').val(response.company_data.company_history);
-      $('textarea[name="company_mission"]').val(response.company_data.company_mission);
-      $('input[name="company_slogan"]').val(response.company_data.slogan);
-    }
-  });
-
   // Update Company profile 
-  $('#update_company_profile').on('click', function (event) {
+  $('#update_company_profile').on('submit', function (event) {
     event.preventDefault();
     let company_name = $('input[name="company_name"]');
     let slogan = $('input[name="company_slogan"]');
@@ -108,27 +41,7 @@ $(function () {
         .text('You need to put atleast 4 symbols and no more than 255!');
       proceed = false;
 
-    } else {
-      if (company_name.hasClass('is-invalid')) {
-        company_name.removeClass('is-invalid')
-          .addClass('is-valid')
-          .next()
-          .removeClass('invalid-feedback')
-          .addClass('valid-feedback')
-          .text('Great!').show('slow');
-      } else {
-        company_name.addClass('is-valid')
-          .next()
-          .addClass('valid-feedback')
-          .text('OK!').show('slow');
-      }
-      setTimeout(function () {
-        if (company_name.hasClass('is-valid')) {
-          company_name.removeClass('is-valid')
-            .next().hide('slow');
-        }
-      }, 5000);
-    }
+    } 
 
     // SLOGAN
     if (slogan.val().trim().length > 49) {
@@ -138,27 +51,7 @@ $(function () {
         .text('You need to put atleast 4 symbols and no more than 50!');
       proceed = false;
 
-    } else {
-      if (slogan.hasClass('is-invalid')) {
-        slogan.removeClass('is-invalid')
-          .addClass('is-valid')
-          .next()
-          .removeClass('invalid-feedback')
-          .addClass('valid-feedback')
-          .text('Great!').show('slow');
-      } else {
-        slogan.addClass('is-valid')
-          .next()
-          .addClass('valid-feedback')
-          .text('OK!').show('slow');
-      }
-      setTimeout(function () {
-        if (slogan.hasClass('is-valid')) {
-          slogan.removeClass('is-valid')
-            .next().hide('slow');
-        }
-      }, 5000);
-    }
+    } 
 
     // ADDRESS
     if (address.val().trim().length > 49) {
@@ -212,27 +105,7 @@ $(function () {
       }, 10000);
       proceed = false;
 
-    } else {
-      if (address.hasClass('is-invalid')) {
-        address.removeClass('is-invalid')
-          .addClass('is-valid')
-          .next()
-          .removeClass('invalid-feedback')
-          .addClass('valid-feedback')
-          .text('Great!').show('slow');
-      } else {
-        address.addClass('is-valid')
-          .next()
-          .addClass('valid-feedback')
-          .text('OK!').show('slow');
-      }
-      setTimeout(function () {
-        if (address.hasClass('is-valid')) {
-          address.removeClass('is-valid')
-            .next().hide('slow');
-        }
-      }, 5000);
-    }
+    } 
 
     // WEBSITE
     if (website.val() == '') {
@@ -289,82 +162,61 @@ $(function () {
 
       proceed = false;
 
-    } else {
-      if (website.hasClass('is-invalid')) {
-        website.removeClass('is-invalid')
-          .addClass('is-valid')
-          .next()
-          .removeClass('invalid-feedback')
-          .addClass('valid-feedback')
-          .text('Great!').show('slow');
-      } else {
-        website.addClass('is-valid')
-          .next()
-          .addClass('valid-feedback')
-          .text('OK!').show('slow');
-      }
-      setTimeout(function () {
-        if (website.hasClass('is-valid')) {
-          website.removeClass('is-valid')
-            .next().hide('slow');
-        }
-      }, 5000);
-    }
+    } 
 
-    
     // IT BRANCHES
     // Checking how many checkboxes are checked with length 
-    if ($('.checkbox_length:checked').length === 0) {
-      $('#checkbox_response').show('fast');
-      $('#checkbox_response').addClass('text-danger').text('You need to select atleast one branch');
-      proceed = false;
-    } else{
-      $('#checkbox_response').show('fast');
-      if ($('#checkbox_response').hasClass('text-danger')) {
-        $('#checkbox_response').removeClass('text-danger')
-        .addClass('text-success');
-      }
-      $('#checkbox_response').text(`Great! You have selected ${$('.checkbox_length:checked').length} branches!`);
-      setTimeout(function(){
-        $('#checkbox_response').hide('fast');
-      }, 5000)
-      if ($.inArray('frontend', frontend_branch) && frontend_branch.is(':checked')) {
-        frontend_branch.val('frontend');
-      } else {
-        frontend_branch.val('');
-      }
+      if ($('.checkbox_length:checked').length === 0) {
+        $('#checkbox_response').show('fast');
+        $('#checkbox_response').addClass('text-danger').text('You need to select atleast one branch');
+        proceed = false;
+      } else{
+        $('#checkbox_response').show('fast');
+        if ($('#checkbox_response').hasClass('text-danger')) {
+          $('#checkbox_response').removeClass('text-danger')
+          .addClass('text-success');
+        }
+        $('#checkbox_response').text(`Great! You have selected ${$('.checkbox_length:checked').length} branches!`);
+        setTimeout(function(){
+          $('#checkbox_response').hide('fast');
+        }, 5000)
+        if ($.inArray('frontend', frontend_branch) && frontend_branch.is(':checked')) {
+          frontend_branch.val('frontend');
+        } else {
+          frontend_branch.val('');
+        }
 
-      if ($.inArray('backend', backend_branch) && backend_branch.is(':checked')) {
-        backend_branch.val('backend');
-      } else {
-        backend_branch.val('');
-      }
-      
-      if ($.inArray('fullstack', fullstack_branch) && fullstack_branch.is(':checked')) {
-        fullstack_branch.val('fullstack');
-      } else {
-        fullstack_branch.val('');
-      }
-      
-      if ($.inArray('qa', qa_branch) && qa_branch.is(':checked')) {
-        qa_branch.val('qa');
-      } else {
-        qa_branch.val('');
-      }
-      
-      if ($.inArray('mobdev', mobdev_branch) && mobdev_branch.is(':checked')) {
-        mobdev_branch.val('mobdev');
-      } else {
-        mobdev_branch.val('');
-      }
+        if ($.inArray('backend', backend_branch) && backend_branch.is(':checked')) {
+          backend_branch.val('backend');
+        } else {
+          backend_branch.val('');
+        }
+        
+        if ($.inArray('fullstack', fullstack_branch) && fullstack_branch.is(':checked')) {
+          fullstack_branch.val('fullstack');
+        } else {
+          fullstack_branch.val('');
+        }
+        
+        if ($.inArray('qa', qa_branch) && qa_branch.is(':checked')) {
+          qa_branch.val('qa');
+        } else {
+          qa_branch.val('');
+        }
+        
+        if ($.inArray('mobdev', mobdev_branch) && mobdev_branch.is(':checked')) {
+          mobdev_branch.val('mobdev');
+        } else {
+          mobdev_branch.val('');
+        }
 
-      if ($.inArray('ux/ui', ux_ui_branch) && ux_ui_branch.is(':checked')) {
-        ux_ui_branch.val('ux/ui');
-      } else {
-        ux_ui_branch.val('');
+        if ($.inArray('ux/ui', ux_ui_branch) && ux_ui_branch.is(':checked')) {
+          ux_ui_branch.val('ux/ui');
+        } else {
+          ux_ui_branch.val('');
+        }
+        
       }
-      
-    }
 
     // COMPANY DESCRIPTION
     if (company_description.val() == '') {
@@ -435,27 +287,7 @@ $(function () {
 
       proceed = false;
 
-    } else {
-      if (company_description.hasClass('is-invalid')) {
-        company_description.removeClass('is-invalid')
-          .addClass('is-valid')
-          .next()
-          .removeClass('invalid-feedback')
-          .addClass('valid-feedback')
-          .text('Great!').show('slow');
-      } else {
-        company_description.addClass('is-valid')
-          .next()
-          .addClass('valid-feedback')
-          .text('OK!').show('slow');
-      }
-      setTimeout(function () {
-        if (company_description.hasClass('is-valid')) {
-          company_description.removeClass('is-valid')
-            .next().hide('slow');
-        }
-      }, 5000);
-    }
+    } 
 
     // COMPANY HISTORY
     if (company_history.val().length > 999) {
@@ -475,27 +307,7 @@ $(function () {
 
       proceed = false;
 
-    } else {
-      if (company_history.hasClass('is-invalid')) {
-        company_history.removeClass('is-invalid')
-          .addClass('is-valid')
-          .next()
-          .removeClass('invalid-feedback')
-          .addClass('valid-feedback')
-          .text('Great!').show('slow');
-      } else {
-        company_history.addClass('is-valid')
-          .next()
-          .addClass('valid-feedback')
-          .text('OK!').show('slow');
-      }
-      setTimeout(function () {
-        if (company_history.hasClass('is-valid')) {
-          company_history.removeClass('is-valid')
-            .next().hide('slow');
-        }
-      }, 5000);
-    }
+    } 
 
     // COMPANY MISSION
     if (company_mission.val().length > 999) {
@@ -514,32 +326,10 @@ $(function () {
 
       proceed = false;
 
-    } else {
-      if (company_mission.hasClass('is-invalid')) {
-        company_mission.removeClass('is-invalid')
-          .addClass('is-valid')
-          .next()
-          .removeClass('invalid-feedback')
-          .addClass('valid-feedback')
-          .text('Great!').show('slow');
-      } else {
-        company_mission.addClass('is-valid')
-          .next()
-          .addClass('valid-feedback')
-          .text('OK!').show('slow');
-      }
-      setTimeout(function () {
-        if (company_mission.hasClass('is-valid')) {
-          company_mission.removeClass('is-valid')
-            .next().hide('slow');
-        }
-      }, 5000);
-    }
-
-    // AJAX
+    } 
     if (proceed) {
       $.ajax({
-        url: './src/update-company-profile.php',
+        url: './src/database.php',
         type: 'POST',
         dataType: 'JSON',
         data: {
@@ -562,7 +352,6 @@ $(function () {
           $('#success_mess_validation').slideDown('slow').addClass('alert alert-success').text('Update successful!');
           setTimeout(function () {
             $('#success_mess_validation').slideUp('slow');
-
           }, 2000);
           $('#company_name').html(response.company_name);
           $('#greetings_company_name').html(`${response.company_name}!`);
@@ -574,44 +363,7 @@ $(function () {
           $('#showcase_company_slogan').html(response.slogan);
           $('#showcase_company_history').html(response.company_history);
           $('#showcase_company_mission').html(response.company_mission);
-
-          if (response.frontend_branch !== '') {
-            $('#frontend_badge').addClass('badge bg-secondary').html(response.frontend_branch);
-            $('#frontend_checked_status').prop('checked', true);
-          } else {
-            $('#frontend_badge').removeClass('badge bg-secondary').html('');
-            
-          }
-          if (response.backend_branch !== '') {
-            $('#backend_badge').addClass('badge bg-dark').html(response.backend_branch);
-            $('#backend_checked_status').prop('checked', true);
-          }else {
-            $('#backend_badge').removeClass('badge bg-dark').html('');
-          }
-          if (response.fullstack_branch !== '') {
-            $('#fullstack_badge').addClass('badge bg-success').html(response.fullstack_branch);
-            $('#fullstack_checked_status').prop('checked', true);
-          }else {
-            $('#fullstack_badge').removeClass('badge bg-success').html('');
-          }
-          if (response.qa_branch !== '') {
-            $('#qa_badge').addClass('badge bg-danger').html(response.qa_branch);
-            $('#qa_checked_status').prop('checked', true);
-          } else {
-            $('#qa_badge').removeClass('badge bg-danger').html('');
-          }
-          if (response.mobdev_branch !== '') {
-            $('#mobdev_badge').addClass('badge bg-warning').html(response.mobdev_branch);
-            $('#mobdev_checked_status').prop('checked', true);
-          } else {
-            $('#mobdev_badge').removeClass('badge bg-warning').html('');
-          }
-          if (response.ux_ui_branch !== '') {
-            $('#ux_ui_badge').addClass('badge bg-primary').html(response.ux_ui_branch);
-            $('#ux_ui_checked_status').prop('checked', true);
-          } else {
-            $('#ux_ui_badge').removeClass('badge bg-primary').html('');
-          }
+          $('#showcase_it_branches').load('company-dashboard.php #badge_it_container');
 
           company_name.val(response.company_name);
           address.val(response.address);
@@ -629,6 +381,7 @@ $(function () {
 
   }); 
 
+  // Publish job ajax
   $('#publish_form').on('submit', function(event) {
     event.preventDefault();
     let job_title = $('input[name="job_title"]');
@@ -879,10 +632,10 @@ $(function () {
         method: 'POST',
         cache: 'false',
         data: {
-          job_company_id: company_id,
-          job_company_username: company_username,
-          job_company_name: company_name,
-          job_company_email: company_email,
+          job_company_id: $('input[name="secret_number"]').val(),
+          job_company_username: $('input[name="company_username"]').val(),
+          job_company_name: $('input[name="company_name"]').val(),
+          job_company_email: $('input[name="company_email"]').val(),
           job_title: job_title.val(),
           job_fulltime: job_fulltime.val(),
           job_part_time: job_part_time.val(),
@@ -902,7 +655,7 @@ $(function () {
           
           $('#publish_succ_mess').show('fast');
           $('#publish_succ_mess').addClass('alert alert-success').html('Publish successful!')
-  
+
           setTimeout(function(){
             $('#publish_succ_mess').hide('fast');
           }, 5000)
@@ -910,10 +663,28 @@ $(function () {
         error: function (jqXHR, text, errorThrown) {
           console.log(jqXHR + " " + text + " " + errorThrown);
         },
-        
       });
     }
    
   });
-  
+
+  // Remove published job
+  $('#view_published_jobs').on('click','#remove_published_job', function() {
+    $published_job_id = $(this);
+    $published_job_id.text('Loading...').addClass('disabled');
+
+    $.ajax({
+      url: 'src/database.php',
+      method: 'post',
+      data: {
+        published_job_id: $published_job_id.val(),
+        is_active: 'N'
+      },
+      success: function() {
+        $published_job_id.closest('li').fadeOut('slow', function () {
+          $published_job_id.closest('li').remove();
+        })
+      }
+    });
+  });
 });
