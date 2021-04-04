@@ -48,7 +48,9 @@
     let application_box = $('.application_box');
     let profile_open = $('#profile_button');
     let profile_box = $('.profile_box');
-    let all_boxes = $('.message_box, .application_box, .profile_box');
+    let $publish_job_open = $('#publish_job_button');
+    let $publish_job_box = $('.publish_job_box');
+    let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box');
 
     // Message box 
     message_icon.on({
@@ -106,6 +108,16 @@
       }
     });
 
+    // Publish job box
+    $publish_job_open.on('click', function () {
+      if ($publish_job_box.hasClass('d-none')) {
+        $publish_job_box.removeClass('d-none').animate({
+          right: '32px',
+          opacity: '1'
+        }, 'fast');
+      }
+    });
+
     // Close app, mess, profile on clicking the X
     $('.btn-close').on('click', function () {
       (all_boxes).animate({
@@ -115,8 +127,6 @@
         $(this).addClass('d-none');
       })
     });
-
-
 
     // Close mess, app, profile boxes when clicking outside
     $(document).on('mouseup', function (e) {
@@ -131,7 +141,6 @@
       }
 
     });
-    
   })
 
 
