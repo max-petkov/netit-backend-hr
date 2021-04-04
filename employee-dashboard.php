@@ -28,7 +28,7 @@
             <li class="nav-item dropdown">
               <?php
               $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-              $sql = ("SELECT username, first_name, last_name, email, website, address FROM tb_job_seeker_profile WHERE id={$_SESSION['employee_id']}");
+              $sql = ("SELECT id, username, first_name, last_name, email, website, address FROM tb_job_seeker_profile WHERE id={$_SESSION['employee_id']}");
               $stmt = $db->query($sql);
               $stmt->execute();
               while ($row = $stmt->fetch()) :
