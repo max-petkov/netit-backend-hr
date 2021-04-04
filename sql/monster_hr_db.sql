@@ -65,19 +65,6 @@ CREATE TABLE tb_applied_jobs (
     is_applied VARCHAR(1)
 ); 
 
-SELECT a.*, b.id, b.random_chars FROM tb_applied_jobs AS a INNER JOIN tb_published_jobs AS b ON a.job_id=b.id WHERE a.job_id=7;
-
-SELECT a.job_id, b.id, b.random_chars FROM tb_applied_jobs AS a INNER JOIN tb_published_jobs AS b ON a.job_id=b.id WHERE a.job_id=7 AND b.random_chars='1b8fb74e377077e070ed6bf8d47297fb';
-
-SELECT * FROM tb_applied_jobs;
-TRUNCATE TABLE tb_applied_jobs;
-
-SELECT a.*, b.* FROM tb_published_jobs AS a LEFT JOIN tb_applied_jobs AS b ON a.id group by a.id;
-
-SELECT a.*, b.* FROM tb_published_jobs AS a LEFT JOIN tb_applied_jobs AS b ON a.id WHERE a.is_active='Y' GROUP BY a.id ORDER BY a.id DESC;
-
--- SELECT a.*, b.* FROM tb_published_jobs AS a LEFT JOIN tb_applied_jobs AS b WHERE a.is_active='Y' ORDER BY a.id DESC;
-
 SELECT * FROM tb_job_seeker_profile;
 SELECT * FROM tb_published_jobs;
 SELECT * FROM tb_company_profile;
