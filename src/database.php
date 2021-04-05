@@ -267,3 +267,14 @@ if (isset($_POST['published_job_id'])) {
     $stmt->execute();
     echo 'Successfuly removed!';
 }
+
+// Activate published job
+if (isset($_POST['activate_published_job_id'])) {
+    $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+    $sql = ("UPDATE tb_published_jobs SET is_active=:is_active, published_date=:published_date WHERE company_id='{$_SESSION['company_id']}' AND id='{$_POST['activate_published_job_id']}'");
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':is_active', $_POST['is_active']);
+    $stmt->bindValue(':published_date', $_POST['published_date']);
+    $stmt->execute();
+    echo 'Activate successful!';
+}

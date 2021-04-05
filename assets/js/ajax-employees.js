@@ -56,7 +56,7 @@ $(function () {
         },
         success: function (response) {
           if (!$.trim(response)) {
-            $('#published_job_list').html('There are no results...');
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
           } else {
             $('#published_job_list').html($.trim(response));
           }
@@ -72,7 +72,7 @@ $(function () {
         },
         success: function (response) {
           if (!$.trim(response)) {
-            $('#published_job_list').html('There are no results...');
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
           } else {
             $('#published_job_list').html($.trim(response));
           }
@@ -87,7 +87,7 @@ $(function () {
         },
         success: function (response) {
           if (!$.trim(response)) {
-            $('#published_job_list').html('There are no results...');
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
           } else {
             $('#published_job_list').html($.trim(response));
           }
@@ -98,9 +98,6 @@ $(function () {
 
 // Search by title or company name
 $('#search_by_title_company').on('keyup', function() {
-  
-  
-  console.log($(this).val());
   // Reseting job when there is no input value
   if (!$(this).val()) {
     $.ajax({
@@ -111,7 +108,7 @@ $('#search_by_title_company').on('keyup', function() {
       },
       success: function (response) {
         if (!$.trim(response)) {
-          $('#published_job_list').html('There are no results...');
+          $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
         } else {
           $('#published_job_list').html($.trim(response));
         }
@@ -126,7 +123,7 @@ $('#search_by_title_company').on('keyup', function() {
       },
       success: function (response) {
         if (!$.trim(response)) {
-          $('#published_job_list').html('There are no results...');
+          $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
         } else {
           $('#published_job_list').html($.trim(response));
         }

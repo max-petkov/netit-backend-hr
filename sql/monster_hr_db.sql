@@ -66,5 +66,6 @@ CREATE TABLE tb_applied_jobs (
 ); 
 
 SELECT * FROM tb_job_seeker_profile;
-SELECT * FROM tb_published_jobs;
+
+SELECT * FROM tb_published_jobs ORDER BY id DESC;
 SELECT * FROM tb_company_profile;

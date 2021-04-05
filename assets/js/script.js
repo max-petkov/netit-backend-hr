@@ -141,6 +141,22 @@
       }
 
     });
+
+    // No there are no results on company-dashboard published jobs
+    if ($('#view_published_jobs li').length === 0) {
+      $('#view_published_jobs').html(`<h6>There are no published jobs...</h6>`);
+    }
+
+    // No there are no results on employee-dashboard published jobs
+    if ($('#published_job_list li').length === 0) {
+      $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
+    }
+
+ 
+
+
+
+
   })
 
 

@@ -496,7 +496,7 @@
 
            $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
   
-          $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY id DESC");
+          $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY published_date DESC");
           $stmt = $db->query($sql);
           $stmt->execute();
           $row = $stmt->fetchAll(PDO::FETCH_ASSOC);

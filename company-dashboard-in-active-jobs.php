@@ -677,22 +677,22 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <?php
-        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
-        $stmt = $db->query($sql);
-        $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-        <ul id="toggle_published_jobs" class="nav nav-tabs card-header-tabs">
-          <li class="nav-item"><a id="active_jobs" href="company-dashboard.php" class="nav-link active">Active jobs (<?php echo $stmt->rowCount(); ?>)</a></li>
+        <ul class="nav nav-tabs card-header-tabs">
           <?php
-          $sql2 = ("SELECT * FROM tb_published_jobs WHERE is_active='N' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
+          $sql2 = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
           $stmt2 = $db->query($sql2);
           $stmt2->execute();
-          $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+          $row2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
           ?>
-          <li class="nav-item"><a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link">In-active jobs (<?php echo $stmt2->rowCount(); ?>)</a></li>
+          <li class="nav-item"><a id="active_jobs" href="company-dashboard.php" class="nav-link">Active jobs (<?php echo $stmt2->rowCount(); ?>)</a></li>
+          <?php
+          $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+          $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='N' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
+          $stmt = $db->query($sql);
+          $stmt->execute();
+          $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          ?>
+          <li class="nav-item"><a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link active">In-active jobs(<?php echo $stmt->rowCount(); ?>)</a></li>
         </ul>
       </div>
       <div class="card-body">
@@ -704,6 +704,7 @@
               </div>
               <p id="update_job_title" class="m-0 fw-bold"> <?php echo $value['job_title']; ?> </p>
               <span class="badges mt-1">
+
                 <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
                   echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
                 }
@@ -730,37 +731,39 @@
                 ?>
                 <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
                 <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
-                <div class="d-flex">
-                  <button class="btn btn-primary d-flex align-items-center btn-sm me-2">
-                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                    Read more
-                  </button>
-                  <button id="update_published_job" class="btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
-                    Make changes
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-pencil-square" viewBox="0 0 16 16">
-                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                    </svg>
-                  </button>
-                  <div class="d-flex align-items-center">
-                    <button id="remove_published_job" class="btn btn-danger d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
-                      Remove
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex">
+                    <button class="btn btn-primary d-flex align-items-center btn-sm me-2">
+                      <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      Read more
+                    </button>
+                    <button id="update_published_job" class="btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
+                      Make changes
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                       </svg>
                     </button>
-                    <!-- IT WILL HAVE A TOOLTIP FOR IN ACTIVE INFO -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                    </svg>
+                    <button id="activate_published_job" class="btn btn-success d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
+                      Activate job
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-check2-circle" viewBox="0 0 16 16">
+                        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+                      </svg>
+                    </button>
                   </div>
+                  <!-- IT WILL HAVE A TOOLTIP FOR REMOVING COMPLETLY FROM DB -->
+                  <span id="remove_completely_from_db">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="text-danger ms-1 bi bi-trash" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                  </span>
                 </div>
-                <p class="m-0 d-none"> <?php echo $value['job_description']; ?></p>
+                <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
             </li>
           <?php endforeach; ?>
         </ul>
