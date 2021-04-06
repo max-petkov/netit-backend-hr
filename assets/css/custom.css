@@ -89,3 +89,12 @@ body {
   top: 50%;
   right: -544px;
 }
+
+.tooltip-icon {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tooltip-icon:active {
+  transform: scale(0.95);
+}

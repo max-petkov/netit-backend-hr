@@ -1,7 +1,6 @@
 // Adding custom font
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
 
-
 // Custom Style CSS
 body {
   overflow-x: hidden;
@@ -99,3 +98,13 @@ body {
   top: 50%;
   right: -544px;
 }
+
+.tooltip-icon {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tooltip-icon:active {
+  transform: scale(0.95);
+}
+
