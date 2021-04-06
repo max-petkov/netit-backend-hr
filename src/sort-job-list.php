@@ -4,7 +4,7 @@ include 'database.php';
 
 if (isset($_POST['tag_list'])) {
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND {$_POST['tag_list']}_tag='{$_POST['tag_list']}' ORDER BY id DESC");
+  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND {$_POST['tag_list']}_tag='{$_POST['tag_list']}' ORDER BY published_date DESC");
   $stmt = $db->query($sql);
   $stmt->execute();
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -85,7 +85,7 @@ if (isset($_POST['tag_list'])) {
 <?php
 if (isset($_POST['ux_ui'])) {
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND {$_POST['ux_ui']}_tag='{$_POST['ux_ui_tag']}' ORDER BY id DESC");
+  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND {$_POST['ux_ui']}_tag='{$_POST['ux_ui_tag']}' ORDER BY published_date DESC");
   $stmt = $db->query($sql);
   $stmt->execute();
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -166,7 +166,7 @@ if (isset($_POST['ux_ui'])) {
 <?php
 if (isset($_POST['default_list'])) {
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-  $sql = ("SELECT {$_POST['default_list']} FROM tb_published_jobs WHERE is_active='Y' ORDER BY id DESC");
+  $sql = ("SELECT {$_POST['default_list']} FROM tb_published_jobs WHERE is_active='Y' ORDER BY published_date DESC");
   $stmt = $db->query($sql);
   $stmt->execute();
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -248,7 +248,7 @@ if (isset($_POST['default_list'])) {
 // Searching by title
 if (!empty($_POST['search_by_job_title'])) {
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND job_title LIKE '{$_POST['search_by_job_title']}%' ORDER BY id DESC");
+  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND job_title LIKE '{$_POST['search_by_job_title']}%' ORDER BY published_date DESC");
   $stmt = $db->query($sql);
   $stmt->execute();
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
