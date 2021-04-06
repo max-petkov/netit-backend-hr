@@ -479,9 +479,8 @@
   </div>
 
   <!-- Publish job -->
-  <div class="d-none publish_job_box container">
-    <div class="row">
-      <div class="card col-8 mx-auto">
+  <div class="d-none publish_job_box">
+      <div class="card mx-auto shadow rounded p-3">
         <div class="d-flex justify-content-between mt-3 mb-2 px-3">
           <h4 class="m-0">Publish job:</h4>
           <button class="btn-close align-self-end"></button>
@@ -592,7 +591,6 @@
           </form>
         </div>
       </div>
-    </div>
   </div>
 
 
@@ -673,10 +671,14 @@
     </div>
   </section>
 
+  <!-- Update published job -->
+    <div class="d-none js-update-publish-job-form"></div>
+
   <!-- View published jobs -->
   <div class="container">
     <div class="card">
       <div class="card-header">
+        <ul id="toggle_published_jobs" class="nav nav-tabs card-header-tabs">
         <?php
         $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
         $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
@@ -684,7 +686,6 @@
         $stmt->execute();
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
-        <ul id="toggle_published_jobs" class="nav nav-tabs card-header-tabs">
           <li class="nav-item"><a id="active_jobs" href="company-dashboard.php" class="nav-link active">Active jobs (<?php echo $stmt->rowCount(); ?>)</a></li>
           <?php
           $sql2 = ("SELECT * FROM tb_published_jobs WHERE is_active='N' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");

@@ -50,7 +50,7 @@
     let profile_box = $('.profile_box');
     let $publish_job_open = $('#publish_job_button');
     let $publish_job_box = $('.publish_job_box');
-    let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box');
+    let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form');
 
     // Message box 
     message_icon.on({
@@ -128,6 +128,7 @@
       })
     });
 
+
     // Close mess, app, profile boxes when clicking outside
     $(document).on('mouseup', function (e) {
 
@@ -142,21 +143,17 @@
 
     });
 
-    // No there are no results on company-dashboard published jobs
+    // If There are no results on company-dashboard published jobs
     if ($('#view_published_jobs li').length === 0) {
       $('#view_published_jobs').html(`<h6>There are no published jobs...</h6>`);
     }
 
-    // No there are no results on employee-dashboard published jobs
+    // If there are no results on employee-dashboard published jobs
     if ($('#published_job_list li').length === 0) {
       $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
     }
 
  
-
-
-
-
   })
 
 

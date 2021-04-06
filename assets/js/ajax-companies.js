@@ -707,4 +707,38 @@ $(function () {
     });
   });
 
+  // Update published job
+  $('#view_published_jobs').on('click', '#update_published_job', function(){
+    $published_job_id = $(this).val();
+    $update_job_form_container = $('.js-update-publish-job-form');
+
+    $.ajax({
+      url: 'src/update_published_job.php',
+      method: 'post',
+      data: {
+        update_published_job_id: $published_job_id
+      },
+      success: function(response){
+        $update_job_form_container.html(`${response}`);
+        if ($update_job_form_container.hasClass('d-none')) {
+          $update_job_form_container.removeClass('d-none').animate({
+            top: '50%',
+            right: '32px',
+            opacity: '1'
+          }, 'fast');
+        }
+      }
+    });
+
+    $update_job_form_container.on('click', '.btn-close', function () {
+      $update_job_form_container.animate({
+        right: '-544px',
+        opacity: '0'
+      }, 'slow', function () {
+        $(this).addClass('d-none');
+      })
+    });
+
+  });
+
 });

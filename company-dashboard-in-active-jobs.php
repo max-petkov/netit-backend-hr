@@ -480,8 +480,7 @@
 
   <!-- Publish job -->
   <div class="d-none publish_job_box container">
-    <div class="row">
-      <div class="card col-8 mx-auto">
+      <div class="card mx-auto shadow rounded">
         <div class="d-flex justify-content-between mt-3 mb-2 px-3">
           <h4 class="m-0">Publish job:</h4>
           <button class="btn-close align-self-end"></button>
@@ -543,10 +542,7 @@
               </div>
               <p id="job_tag_response_text" class="mb-0"></p>
               <p id="job_time_response_text" class="mb-0"></p>
-
             </div>
-
-
             <div class="form-group mb-3 d-flex">
               <div class="form-group me-3">
                 <label for="" class="fw-bold">Salary:</label>
@@ -592,10 +588,10 @@
           </form>
         </div>
       </div>
-    </div>
   </div>
 
-
+ <!-- Update published job -->
+ <div class="d-none js-update-publish-job-form"></div>
 
   <!-- Company showcase -->
   <section class="container mt-4 my-md-5">
