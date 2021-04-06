@@ -191,8 +191,8 @@ if (isset($_POST['first_name'])) {
   }
 }
 
-// Update job application
-if(isset($_POST['cancel_job_id'])){
+// Delete job application
+if (isset($_POST['cancel_job_id'])) {
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
   $sql = ("DELETE FROM tb_applied_jobs WHERE applied_id='{$_POST['applied_id']}' AND job_seeker_id='{$_SESSION['employee_id']}'");
   $stmt = $db->query($sql);
@@ -237,9 +237,9 @@ if (isset($_POST['company_name'])) {
     $stmt->bindValue(':qa_branch', $_POST['qa_branch']);
     $stmt->bindValue(':mobdev_branch', $_POST['mobdev_branch']);
     $stmt->bindValue(':ux_ui_branch', $_POST['ux_ui_branch']);
-  
+
     $stmt->execute();
-  
+
     $json_data['company_name']         = $_POST['company_name'];
     $json_data['slogan']          = $_POST['slogan'];
     $json_data['address']            = $_POST['address'];
@@ -253,28 +253,83 @@ if (isset($_POST['company_name'])) {
     $json_data['qa_branch'] = $_POST['qa_branch'];
     $json_data['mobdev_branch'] = $_POST['mobdev_branch'];
     $json_data['ux_ui_branch'] = $_POST['ux_ui_branch'];
-  
+
     echo json_encode($json_data);
   }
 }
 
-// Remove published job
+// Make published job in-active
 if (isset($_POST['published_job_id'])) {
-    $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-    $sql = ("UPDATE tb_published_jobs SET is_active=:is_active WHERE company_id='{$_SESSION['company_id']}' AND id='{$_POST['published_job_id']}'");
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':is_active', $_POST['is_active']);
-    $stmt->execute();
-    echo 'Successfuly removed!';
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("UPDATE tb_published_jobs SET is_active=:is_active WHERE company_id='{$_SESSION['company_id']}' AND id='{$_POST['published_job_id']}'");
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(':is_active', $_POST['is_active']);
+  $stmt->execute();
+  echo 'Job is in-active!';
 }
 
 // Activate published job
 if (isset($_POST['activate_published_job_id'])) {
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("UPDATE tb_published_jobs SET is_active=:is_active, published_date=:published_date WHERE company_id='{$_SESSION['company_id']}' AND id='{$_POST['activate_published_job_id']}'");
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(':is_active', $_POST['is_active']);
+  $stmt->bindValue(':published_date', $_POST['published_date']);
+  $stmt->execute();
+  echo 'Activate successful!';
+}
+
+// Update published job
+if (isset($_POST['update_publish_job_submit'])) {
+  if (
+    mb_strlen($_POST['job_title']) > 20 &&
+    mb_strlen($_POST['job_title']) < 254 &&
+    // TODO ADDING !EMPTY IT_TAG AND JOB_TIME
+    !preg_match('/[a-zA-Z)(*&^%$#@!)]/', $_POST['job_salary']) &&
+    !empty($_POST['salary_currency']) &&
+    !empty($_POST['salary_month_year']) &&
+    mb_strlen($_POST['job_description']) > 49 &&
+    mb_strlen($_POST['job_description']) < 999
+  ) {
+
     $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-    $sql = ("UPDATE tb_published_jobs SET is_active=:is_active, published_date=:published_date WHERE company_id='{$_SESSION['company_id']}' AND id='{$_POST['activate_published_job_id']}'");
+    $sql = ("UPDATE tb_published_jobs SET published_date=:published_date, job_title=:job_title, job_time=:job_time, frontend_tag=:frontend_tag, backend_tag=:backend_tag, fullstack_tag=:fullstack_tag, qa_tag=:qa_tag, mobdev_tag=:mobdev_tag, ux_ui_tag=:ux_ui_tag, job_salary=:job_salary, job_description=:job_description WHERE company_id='{$_SESSION['company_id']}' AND id='{$_POST['update_publish_job_submit']}'");
+
+    $published_date = date('Y-m-d');
+    $job_title = $_POST['job_title'];
+    $job_time = $_POST['job_fulltime'] . ' ' . $_POST['job_part_time'];
+    $frontend_tag = $_POST['frontend_tag'];
+    $backend_tag = $_POST['backend_tag'];
+    $fullstack_tag = $_POST['fullstack_tag'];
+    $qa_tag = $_POST['qa_tag'];
+    $mobdev_tag = $_POST['mobdev_tag'];
+    $ux_ui_tag = $_POST['ux_ui_tag'];
+    $job_salary = $_POST['job_salary'] . $_POST['salary_currency'] . ' ' . $_POST['salary_month_year'];
+    $job_description = $_POST['job_description'];
+
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':is_active', $_POST['is_active']);
-    $stmt->bindValue(':published_date', $_POST['published_date']);
+    $stmt->bindValue(':published_date', $published_date);
+    $stmt->bindValue(':job_title', $job_title);
+    $stmt->bindValue(':job_time', $job_time);
+    $stmt->bindValue(':frontend_tag', $frontend_tag);
+    $stmt->bindValue(':backend_tag', $backend_tag);
+    $stmt->bindValue(':fullstack_tag', $fullstack_tag);
+    $stmt->bindValue(':qa_tag', $qa_tag);
+    $stmt->bindValue(':mobdev_tag', $mobdev_tag);
+    $stmt->bindValue(':ux_ui_tag', $ux_ui_tag);
+    $stmt->bindValue(':job_salary', $job_salary);
+    $stmt->bindValue(':job_description', $job_description);
     $stmt->execute();
-    echo 'Activate successful!';
+
+    echo 'Update Successful!';
+  }
+}
+
+// Delete Published job
+if (isset($_POST['delete_published_job_id'])) {
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("DELETE FROM tb_published_jobs WHERE id='{$_POST['delete_published_job_id']}' AND company_id='{$_SESSION['company_id']}'");
+  $stmt = $db->query($sql);
+  $stmt->execute();
+  echo 'Successful delete!';
 }

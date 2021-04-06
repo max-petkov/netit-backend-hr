@@ -590,9 +590,6 @@
       </div>
   </div>
 
- <!-- Update published job -->
- <div class="d-none js-update-publish-job-form"></div>
-
   <!-- Company showcase -->
   <section class="container mt-4 my-md-5">
     <div class="row">
@@ -669,11 +666,14 @@
     </div>
   </section>
 
+  <!-- Update published job -->
+  <div class="d-none js-update-publish-job-form"></div>
+
   <!-- View published jobs -->
   <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
+    <div  class="card">
+      <div id="published_job_tab_container" class="card-header">
+        <ul id="load_published_job_tab_container" class="nav nav-tabs card-header-tabs">
           <?php
           $sql2 = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
           $stmt2 = $db->query($sql2);
@@ -743,22 +743,24 @@
                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                       </svg>
                     </button>
-                    <button id="activate_published_job" class="btn btn-success d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
-                      Activate job
+                    <button id="activate_published_job" class="btn btn-success d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be active!">
+                      Turn on
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-check2-circle" viewBox="0 0 16 16">
                         <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
                         <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
                       </svg>
                     </button>
                   </div>
-                  <!-- IT WILL HAVE A TOOLTIP FOR REMOVING COMPLETLY FROM DB -->
-                  <span id="remove_completely_from_db">
+                  <!-- BS5 alpha3 have tooltip problem a multiple hover and dissappears so data-bs-animation="false" will make a workaround -->
+                  <span id="remove_completely_from_db" class="tooltip-icon" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be DELETED!">
+                    <input type="hidden" value="<?php echo $value['id']; ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="text-danger ms-1 bi bi-trash" viewBox="0 0 16 16">
                       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
                       <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                     </svg>
                   </span>
                 </div>
+                <div id="confirm_delete_published_job"></div>
                 <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
             </li>
           <?php endforeach; ?>
@@ -775,7 +777,7 @@
     </div>
   </footer>
 
-  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
   <script src="assets/js/ajax-companies.js"></script>
