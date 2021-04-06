@@ -119,7 +119,7 @@ $('#search_by_title_company').on('keyup', function() {
       url:'src/sort-job-list.php',
       method: 'post',
       data: {
-        search_by_job_title: $(this).val()
+        search_by_company_name: $(this).val()
       },
       success: function (response) {
         if (!$.trim(response)) {

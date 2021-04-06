@@ -245,10 +245,10 @@ if (isset($_POST['default_list'])) {
 } ?>
 
 <?php
-// Searching by title
-if (!empty($_POST['search_by_job_title'])) {
+// Searching by company
+if (!empty($_POST['search_by_company_name'])) {
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND job_title LIKE '{$_POST['search_by_job_title']}%' ORDER BY published_date DESC");
+  $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND company_name LIKE '{$_POST['search_by_company_name']}%' ORDER BY published_date DESC");
   $stmt = $db->query($sql);
   $stmt->execute();
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
