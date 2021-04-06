@@ -39,7 +39,7 @@ CREATE TABLE tb_company_profile (
 
 CREATE TABLE tb_published_jobs (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    published_date VARCHAR(10),
+    published_date DATE,
     company_id VARCHAR(1000),
     company_username VARCHAR(50),
     company_name VARCHAR(255),
@@ -66,6 +66,6 @@ CREATE TABLE tb_applied_jobs (
 ); 
 
 SELECT * FROM tb_job_seeker_profile;
-
-SELECT * FROM tb_published_jobs ORDER BY id DESC;
+TRUNCATE TABLE tb_published_jobs;
+SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY published_date DESC;
 SELECT * FROM tb_company_profile;
