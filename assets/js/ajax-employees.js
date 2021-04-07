@@ -133,7 +133,7 @@ $('#search_by_title_company').on('keyup', function() {
   }
 });
 
-  // Refreshing job list elements and lazy load list items
+  // // Refreshing job list elements and lazy load list items
   // (function refresh_content() {
   //   $('#published_job_list').load('employee-dashboard.php .job_li', setTimeout(refresh_content, 5000), function () {
   //     $("#published_job_list li").slice(10).hide();
