@@ -1,5 +1,6 @@
 <?php include 'src/database.php'; ?>
 <?php include_once 'src/functions.php'; ?>
+<?php include 'src/checking-existing-username-email-hr.php'; ?>
 <?php login_required($_SESSION['company_id']); ?>
 
 <!DOCTYPE html>
@@ -67,7 +68,7 @@
                     <a class="dropdown-item xsm-text-class" href="#">View candidates</a>
                   </li>
                   <li>
-                    <a class="dropdown-item xsm-text-class" href="#"><b>Create HR account</b></a>
+                    <a id="hr_button" class="dropdown-item xsm-text-class" href="#"><b>Create HR account</b></a>
                   </li>
                   <div class="dropdown-divider"></div>
 
@@ -357,30 +358,35 @@
   </div>
 
   <!-- HR -->
-  <div class="container mt-4 d-none">
+  <div class="js_hr_box container d-none mt-4">
     <div class="row">
-      <div class="card col-8 mx-auto">
+      <div class="card col-8 mx-auto shadow rounded">
         <div class="d-flex justify-content-between mt-3 mb-2 px-3">
           <h4 class="m-0">Create HR account:</h4>
           <button class="btn-close align-self-end"></button>
         </div>
         <div class="card-body">
-          <form action="#">
+          <form id="hr_acc_form" method="POST" action="company-dashboard.php">
+            <div id="hr_succ_mess"></div>
             <div class="form-group mb-2">
               <label for="hr_account">Username</label>
               <input type="text" name="hr_username" class="form-control form-control-sm">
+              <div id="hr_username_response_text"></div>                                                                                                                             
             </div>
             <div class="form-group mb-2">
               <label for="hr_account">Email</label>
-              <input type="email" name="hr_email" class="form-control form-control-sm">
+              <input type="text" name="hr_email" class="form-control form-control-sm">
+              <div id="hr_email_response_text"></div> 
             </div>
             <div class="form-group mb-2">
               <label for="hr_account">Password</label>
               <input type="password" name="password" class="form-control form-control-sm">
+              <div id="hr_password_response_text"></div> 
             </div>
             <div class="form-group mb-3">
               <label for="hr_account">Confirm password</label>
               <input type="password" name="confirm_password" class="form-control form-control-sm">
+              <div id="hr_confirm_password_response_text"></div> 
             </div>
             <input type="submit" name="submit_hr_acc" value="Submit" class="btn btn-primary">
           </form>
@@ -388,6 +394,8 @@
       </div>
     </div>
   </div>
+
+  
   <!-- View candidates -->
   <div class="container mt-4 d-none">
     <div class="row">
@@ -505,10 +513,12 @@
               <div class="me-4">
                 <div class="form-group">
                   <label for="it_branches" class="fw-bold">IT tag
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                      <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                    </svg>
+                    <span class="tooltip-icon" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="IT tag will help candidates to find your publish easy!">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                      </svg>
+                    </span>
                   </label>
                   <div class="form-check mt-1">
                     <input id="frontend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[0]" value="frontend">
@@ -737,7 +747,7 @@
                     </svg>
                     Read more
                   </button>
-                  <button id="update_published_job" class="btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
+                  <button id="update_published_job" class="js-update-active-publish btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
                     Make changes
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-pencil-square" viewBox="0 0 16 16">
                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -751,6 +761,11 @@
                 <p class="m-0 d-none"> <?php echo $value['job_description']; ?></p>
             </li>
           <?php endforeach; ?>
+          <?php
+          if ($stmt->rowCount() === 0) {
+            echo "<h6>There are no published jobs...</h6>";
+          }
+          ?>
         </ul>
       </div>
     </div>

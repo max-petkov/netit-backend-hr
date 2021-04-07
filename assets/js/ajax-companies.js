@@ -655,7 +655,8 @@ $(function () {
 
           $('#publish_succ_mess').show('fast');
           $('#publish_succ_mess').addClass('alert alert-success').html('Publish successful!')
-
+          $('#view_published_jobs').load('company-dashboard.php .job-li');
+          $('#published_job_tab_container').load('company-dashboard.php #load_published_job_tab_container');
           setTimeout(function () {
             $('#publish_succ_mess').hide('fast');
           }, 5000)
@@ -672,6 +673,7 @@ $(function () {
   $('#view_published_jobs').on('click', '#remove_published_job', function () {
     $published_job_id = $(this);
     $published_job_id.html('Loading...').addClass('disabled');
+
     $.ajax({
       url: 'src/database.php',
       method: 'post',
@@ -681,8 +683,11 @@ $(function () {
       },
       success: function () {
         $published_job_id.closest('li').fadeOut('slow', function () {
+          $published_job_id.closest('li').remove();
           $('#published_job_tab_container').load('company-dashboard.php #load_published_job_tab_container');
-          $('#view_published_jobs').load('company-dashboard.php .job-li');
+          if ($('#view_published_jobs li').length === 0) {
+            $('#view_published_jobs').html(`<h6>There are no published jobs...</h6>`);
+          }
         })
       }
     });
@@ -693,6 +698,7 @@ $(function () {
     $activate_published_job_id = $(this);
     $activate_published_job_id.html('Loading...').addClass('disabled');
     let $published_date = `${new Date().getFullYear()}-${adding_zeros_time(new Date().getMonth() + 1)}-${adding_zeros_time(new Date().getDate())}`;
+
     $.ajax({
       url: 'src/database.php',
       method: 'post',
@@ -703,7 +709,11 @@ $(function () {
       },
       success: function () {
         $activate_published_job_id.closest('li').fadeOut('slow', function () {
+          $activate_published_job_id.closest('li').remove();
           $('#published_job_tab_container').load('company-dashboard-in-active-jobs.php #load_published_job_tab_container');
+          if ($('#view_published_jobs li').length === 0) {
+            $('#view_published_jobs').html(`<h6>There are no published jobs...</h6>`);
+          }
         })
       }
     });
@@ -713,6 +723,7 @@ $(function () {
   $('#view_published_jobs').on('click', '#update_published_job', function () {
     $published_job_id = $(this);
     $update_job_form_container = $('.js-update-publish-job-form');
+
     $.ajax({
       url: 'src/getting-published-job-data.php',
       method: 'post',
@@ -1001,10 +1012,16 @@ $(function () {
 
                   $('#update_publish_succ_mess').show('fast');
                   $('#update_publish_succ_mess').addClass('alert alert-success').html('Update successful!')
-
                   setTimeout(function () {
                     $('#update_publish_succ_mess').hide('fast');
                   }, 5000)
+
+                  if ($published_job_id.hasClass('js-update-active-publish')) {
+                    $('#view_published_jobs').load('company-dashboard.php .job-li');
+                  } else if ($published_job_id.hasClass('js-update-in-active-publish')) {
+                    $('#view_published_jobs').load('company-dashboard-in-active-jobs.php .job-li');
+                  }
+
                 },
                 error: function (jqXHR, text, errorThrown) {
                   console.log(jqXHR + " " + text + " " + errorThrown);
@@ -1049,7 +1066,11 @@ $(function () {
         },
         success: function () {
           $published_job_id.closest('li').fadeOut('slow', function () {
+            $published_job_id.closest('li').remove();
             $('#published_job_tab_container').load('company-dashboard-in-active-jobs.php #load_published_job_tab_container');
+            if ($('#view_published_jobs li').length === 0) {
+              $('#view_published_jobs').html(`<h6>There are no published jobs...</h6>`);
+            }
           })
         },
         error: function () {
@@ -1060,6 +1081,337 @@ $(function () {
     $confirm_container.on('click', '#close_confirm_container', function () {
       $confirm_container.slideUp('fast');
     })
+  });
+
+  $(document).on('click', '#in_active_jobs', function (event) {
+    event.preventDefault();
+    if ($('#active_jobs').hasClass('active')) {
+      $('#active_jobs').removeClass('active');
+      $(this).addClass('active');
+      $('#view_published_jobs').load('company-dashboard-in-active-jobs.php .job-li');
+    }
+  });
+
+  $(document).on('click', '#active_jobs', function (event) {
+    event.preventDefault();
+    if ($('#in_active_jobs').hasClass('active')) {
+      $('#in_active_jobs').removeClass('active');
+      $(this).addClass('active');
+      $('#view_published_jobs').load('company-dashboard.php .job-li');
+    }
+  });
+
+
+
+  $('#hr_acc_form').on('submit', function (e) {
+    e.preventDefault();
+    let $username = $('input[name="hr_username"]');
+    let $username_response_text = $('#hr_username_response_text');
+    let $email = $('input[name="hr_email"]');
+    let $email_response_text = $('#hr_email_response_text');
+    let $password = $('input[name="password"]');
+    let $password_response_text = $('#hr_password_response_text');
+    let $confirm_password = $('input[name="confirm_password"]');
+    let $confirm_password_response_text = $('#hr_confirm_password_response_text');
+    let proceed = true;
+
+    // Checking for existing username and storing response value into a variable
+
+
+    // function check_existing_username(){
+    //   let $existing_username;
+    //   $.ajax({
+    //       url: 'src/checking-existing-username-email-hr.php',
+    //       method: 'post',
+    //       global: 'false',
+    //       data: {
+    //         check_existing_username: $username.val()
+    //       }
+    //     }).done(function(response){
+    //       $existing_username = response;
+    //     });
+    //     return $existing_username;
+    // }
+
+    
+
+    // TODO CHECKEXISTING USERNAME HR & HR EMAIL
+    function check_existing_username(response) {
+      response;
+      // Do whatever you need with result variable
+    }
+
+    $.ajax({
+      url: 'src/checking-existing-username-email-hr.php',
+      method: 'post',
+      data: {
+        check_existing_username: $username.val()
+      },
+      success: check_existing_username,
+    });
+
+
+console.log(check_existing_username());
+    // HR username
+    if (!$username.val().trim()) {
+      $username_response_text.show('fast');
+      $username.addClass('is-invalid');
+      $username_response_text.addClass('text-danger')
+        .html('Field can not be empty!');
+      if ($username_response_text.hasClass('text-success') && $username.hasClass('is-valid')) {
+        $username.removeClass('is-valid').addClass('is-invalid');
+        $username_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Field can not be empy!');
+      }
+      proceed = false;
+    } else if ($username.val().trim().length < 4 || $username.val().trim().length > 49) {
+      $username_response_text.show('fast');
+      $username.addClass('is-invalid');
+      $username_response_text.addClass('text-danger')
+        .html('Field must be more than 3 or less than 50 symbols!');
+      if ($username_response_text.hasClass('text-success') && $username.hasClass('is-valid')) {
+        $username.removeClass('is-valid').addClass('is-invalid');
+        $username_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Field must be more than 3 or less than 50 symbols!');
+      }
+      proceed = false;
+    } else if (!$username.val().trim().match(/^[a-zA-Z0-9- \u0400-\u04FF]+$/u)) {
+      $username_response_text.show('fast');
+      $username.addClass('is-invalid');
+      $username_response_text.addClass('text-danger')
+        .html('You can use from a-z|A-Z|а-я|А-Я|0-9, hyphens and spaces!');
+      if ($username_response_text.hasClass('text-success') && $username.hasClass('is-valid')) {
+        $username.removeClass('is-valid').addClass('is-invalid');
+        $username_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('You can use from a-z|A-Z|а-я|А-Я|0-9, hyphens and spaces');
+      }
+      proceed = false;
+      // CHECK EXISTING USERNAME AND EMAIL
+    } else if (check_existing_username() === 'username is taken') {
+      $username_response_text.show('fast');
+      $username.addClass('is-invalid');
+      $username_response_text.addClass('text-danger')
+        .html('Username is taken!');
+      if ($username_response_text.hasClass('text-success') && $username.hasClass('is-valid')) {
+        $username.removeClass('is-valid').addClass('is-invalid');
+        $username_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Username is taken!');
+      }
+      proceed = false;
+    } else {
+      $username_response_text.show('fast');
+      $username.addClass('is-valid');
+      $username_response_text.addClass('text-success')
+        .html('OK!');
+      if ($username_response_text.hasClass('text-danger') && $username.hasClass('is-invalid')) {
+        $username.removeClass('is-invalid').addClass('is-valid');
+        $username_response_text.removeClass('text-danger')
+          .addClass('text-success')
+          .html('OK!');
+      }
+
+      setTimeout(function () {
+        $username_response_text.hide('fast');
+      }, 5000)
+    }
+
+    // HR email
+    if (!$email.val().trim()) {
+      $email_response_text.show('fast');
+      $email.addClass('is-invalid');
+      $email_response_text.addClass('text-danger')
+        .html('Field can not be empty!');
+      if ($email_response_text.hasClass('text-success') && $email.hasClass('is-valid')) {
+        $email.removeClass('is-valid').addClass('is-invalid');
+        $email_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Field can not be empy!');
+      }
+      proceed = false;
+    } else if ($email.val().trim().length > 254) {
+      $email_response_text.show('fast');
+      $email.addClass('is-invalid');
+      $email_response_text.addClass('text-danger')
+        .html('Field must less than 254 symbols!');
+      if ($email_response_text.hasClass('text-success') && $email.hasClass('is-valid')) {
+        $email.removeClass('is-valid').addClass('is-invalid');
+        $email_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Field must less than 254 symbols!');
+      }
+      proceed = false;
+    } else if (!$email.val().trim().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+      $email_response_text.show('fast');
+      $email.addClass('is-invalid');
+      $email_response_text.addClass('text-danger')
+        .html('You must use valid email format example@mail.com!');
+      if ($email_response_text.hasClass('text-success') && $email.hasClass('is-valid')) {
+        $email.removeClass('is-valid').addClass('is-invalid');
+        $email_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('You must use valid email format example@mail.com!');
+      }
+      proceed = false;
+    } else {
+      $email_response_text.show('fast');
+      $email.addClass('is-valid');
+      $email_response_text.addClass('text-success')
+        .html('OK!');
+      if ($email_response_text.hasClass('text-danger') && $email.hasClass('is-invalid')) {
+        $email.removeClass('is-invalid').addClass('is-valid');
+        $email_response_text.removeClass('text-danger')
+          .addClass('text-success')
+          .html('OK!');
+      }
+
+      setTimeout(function () {
+        $email_response_text.hide('fast');
+      }, 5000)
+    }
+    // Checking existing email
+    // $.ajax({
+    //   url: 'src/checking-existing-username-email-hr.php',
+    //   method: 'post',
+    //   data: {
+    //     check_existing_email: $email.val()
+    //   },
+    //   success: function (response) {
+    //     $existing_email = response;
+    //      if ($existing_email === 'email is taken') {
+    //       $email_response_text.show('fast');
+    //       $email.addClass('is-invalid');
+    //       $email_response_text.addClass('text-danger')
+    //         .html('Email is taken!');
+    //       if ($email_response_text.hasClass('text-success') && $email.hasClass('is-valid')) {
+    //         $email.removeClass('is-valid').addClass('is-invalid');
+    //         $email_response_text.removeClass('text-success')
+    //           .addClass('text-danger')
+    //           .html('Email is taken!');
+    //       }
+    //       proceed = false;
+    //     } 
+    //   }
+    // })
+
+    // HR password
+    if (!$password.val().trim()) {
+      $password_response_text.show('fast');
+      $password.addClass('is-invalid');
+      $password_response_text.addClass('text-danger')
+        .html('Field can not be empty!');
+      if ($password_response_text.hasClass('text-success') && $password.hasClass('is-valid')) {
+        $password.removeClass('is-valid').addClass('is-invalid');
+        $password_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Field can not be empy!');
+      }
+      proceed = false;
+    } else if ($password.val().trim().length < 4 || $password.val().trim().length > 49) {
+      $password_response_text.show('fast');
+      $password.addClass('is-invalid');
+      $password_response_text.addClass('text-danger')
+        .html('Field must more than 3 symbols and less than 49 symbols!');
+      if ($password_response_text.hasClass('text-success') && $password.hasClass('is-valid')) {
+        $password.removeClass('is-valid').addClass('is-invalid');
+        $password_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Field must more than 3 symbols and less than 49 symbols!');
+      }
+      proceed = false;
+    } else if (!$password.val().trim().match(/^[a-zA-Z0-9-]+$/u)) {
+      $password_response_text.show('fast');
+      $password.addClass('is-invalid');
+      $password_response_text.addClass('text-danger')
+        .html('Password can have from a-z|A-Z|0-9| and hyphens!');
+      if ($password_response_text.hasClass('text-success') && $password.hasClass('is-valid')) {
+        $password.removeClass('is-valid').addClass('is-invalid');
+        $password_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Password can have from a-z|A-Z|0-9| and hyphens!');
+      }
+      proceed = false;
+    } else {
+      $password_response_text.show('fast');
+      $password.addClass('is-valid');
+      $password_response_text.addClass('text-success')
+        .html('OK!');
+      if ($password_response_text.hasClass('text-danger') && $password.hasClass('is-invalid')) {
+        $password.removeClass('is-invalid').addClass('is-valid');
+        $password_response_text.removeClass('text-danger')
+          .addClass('text-success')
+          .html('OK!');
+      }
+
+      setTimeout(function () {
+        $password_response_text.hide('fast');
+      }, 5000)
+    }
+
+    // HR confirm password
+    if (!$confirm_password.val().trim()) {
+      $confirm_password_response_text.show('fast');
+      $confirm_password.addClass('is-invalid');
+      $confirm_password_response_text.addClass('text-danger')
+        .html('Field can not be empty!');
+      if ($confirm_password_response_text.hasClass('text-success') && $confirm_password.hasClass('is-valid')) {
+        $confirm_password.removeClass('is-valid').addClass('is-invalid');
+        $confirm_password_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Field can not be empy!');
+      }
+      proceed = false;
+    } else if ($confirm_password.val().trim() !== $password.val().trim()) {
+      $confirm_password_response_text.show('fast');
+      $confirm_password.addClass('is-invalid');
+      $confirm_password_response_text.addClass('text-danger')
+        .html('Passwords must match!');
+      if ($confirm_password_response_text.hasClass('text-success') && $confirm_password.hasClass('is-valid')) {
+        $confirm_password.removeClass('is-valid').addClass('is-invalid');
+        $confirm_password_response_text.removeClass('text-success')
+          .addClass('text-danger')
+          .html('Passwords must match!');
+      }
+      proceed = false;
+    } else {
+      $confirm_password_response_text.show('fast');
+      $confirm_password.addClass('is-valid');
+      $confirm_password_response_text.addClass('text-success')
+        .html('OK!');
+      if ($confirm_password_response_text.hasClass('text-danger') && $confirm_password.hasClass('is-invalid')) {
+        $confirm_password.removeClass('is-invalid').addClass('is-valid');
+        $confirm_password_response_text.removeClass('text-danger')
+          .addClass('text-success')
+          .html('OK!');
+      }
+
+      setTimeout(function () {
+        $confirm_password_response_text.hide('fast');
+      }, 5000)
+    }
+
+    if (proceed) {
+      $.ajax({
+        url: 'src/database.php',
+        method: 'post',
+        data: {
+          hr_username: $username.val(),
+          hr_email: $email.val(),
+          hr_password: $password.val(),
+          hr_confirm_password: $confirm_password.val()
+        },
+        success: function () {
+          $('#hr_succ_mess').show('fast');
+          $('#hr_succ_mess').addClass('alert alert-success').html('Account created successfully!')
+          setTimeout(function () {
+            $('#hr_succ_mess').hide('fast');
+          }, 5000)
+        }
+      })
+    }
   });
 
 });
