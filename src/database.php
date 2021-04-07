@@ -67,7 +67,6 @@ if (isset($_POST['submit_registration'])) {
 
 
 if (isset($_POST['submit_registration_company'])) {
-
   if (
     !empty($_POST['company_username'])                                                             &&
     preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['company_username'])                      &&
@@ -118,6 +117,41 @@ if (isset($_POST['submit_registration_company'])) {
 
     $_SESSION['success_message'] = 'Your account has been created successfully!';
     redirect_to('login.php');
+  }
+}
+
+// Insert HR into DB
+if (isset($_POST['hr_username'])) {
+  if (
+    !empty($_POST['hr_username'])                                                             &&
+    preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['hr_username'])                      &&                                                                          
+    !empty($_POST['hr_email'])                                                                        &&
+    filter_var($_POST['hr_email'], FILTER_VALIDATE_EMAIL)                                            &&
+    !empty($_POST['hr_password'])                                                                     &&
+    preg_match('/^[a-zA-Z0-9-]+$/u', $_POST['hr_password'])                              &&
+    !empty($_POST['hr_confirm_password'])                                                             &&
+    $_POST['hr_password'] == $_POST['hr_confirm_password']                                               &&
+    mb_strlen($_POST['hr_username'])    >= 4                                                  &&
+    mb_strlen($_POST['hr_username'])    <= 49                                                 &&
+    mb_strlen($_POST['hr_email'])       <= 254                                                &&
+    mb_strlen($_POST['hr_password'])            >= 4                                                  &&
+    mb_strlen($_POST['hr_password'])            <= 49                                                 &&
+    !checking_existing_username_email('tb_company_profile', 'username', $_POST['hr_username'])      &&
+    !checking_existing_username_email('tb_job_seeker_profile', 'username', $_POST['hr_username'])      &&
+    !checking_existing_username_email('tb_company_profile', 'email', $_POST['hr_email'])                    &&
+    !checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['hr_email'])
+  ) {
+
+    $hr_username    = $_POST['hr_username'];
+    $hr_email      = $_POST['hr_email'];
+    $hr_password    = $_POST['hr_password'];
+
+    $sql  = ('INSERT INTO tb_hr(company_id, username, email, password) VALUES(?, ?, ?, ?)');
+    $stmt = $db_connection->prepare($sql);
+    $stmt->bind_param('ssss', $_SESSION['company_id'], $hr_username, $hr_email, $hr_password);
+    $stmt->execute();
+    $stmt->close();
+
   }
 }
 
