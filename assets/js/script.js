@@ -40,17 +40,6 @@
 
    }
 
-   // Bootstrap 5 tooltips
-  //  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  //  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  //    return new bootstrap.Tooltip(tooltipTriggerEl);
-  //  })
-
-  //  var exampleEl = document.getElementById('example')
-  //  var tooltip = new bootstrap.Tooltip(exampleEl, {
-  //    boundary: 'window'
-  //  })
-
    // jQuery
    $(function () {
 
@@ -62,7 +51,9 @@
      let profile_box = $('.profile_box');
      let $publish_job_open = $('#publish_job_button');
      let $publish_job_box = $('.publish_job_box');
-     let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form');
+     let $hr_open = $('#hr_button');
+     let $hr_box = $('.js_hr_box');
+     let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form, .js_hr_box');
 
      // Message box 
      message_icon.on({
@@ -130,6 +121,16 @@
        }
      });
 
+     // HR box
+     $hr_open.on('click', function () {
+       if ($hr_box.hasClass('d-none')) {
+         $hr_box.removeClass('d-none').animate({
+           right: '32px',
+           opacity: '1'
+         }, 'fast');
+       }
+     });
+
      // Close app, mess, profile on clicking the X
      $('.btn-close').on('click', function () {
        (all_boxes).animate({
@@ -153,11 +154,6 @@
        }
      });
 
-     // If There are no results on company-dashboard published jobs
-     if ($('#view_published_jobs li').length === 0) {
-       $('#view_published_jobs').html(`<h6>There are no published jobs...</h6>`);
-     }
-
      // If there are no results on employee-dashboard published jobs
      if ($('#published_job_list li').length === 0) {
        $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
@@ -165,12 +161,6 @@
 
     // Bootstrap 5 tooltip FIY-> data-bs-animation="false" will prevent from dissapering the tooltip after multiple hovers
     $('[data-bs-toggle="tooltip"]').tooltip('enable', {boundary: 'window'});
+
      
-
-    
-      
-        
-      
-    
-
    })

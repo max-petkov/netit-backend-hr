@@ -63,8 +63,17 @@ CREATE TABLE tb_applied_jobs (
     job_id INT,
     job_seeker_id INT,
     is_applied VARCHAR(1)
-); 
+);
 
+CREATE TABLE tb_hr (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT,
+    username VARCHAR(50),
+    email VARCHAR(255),
+    password VARCHAR(50)
+);
+
+SELECT * FROM tb_hr;
 SELECT * FROM tb_job_seeker_profile;
 TRUNCATE TABLE tb_published_jobs;
 SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY published_date DESC;
