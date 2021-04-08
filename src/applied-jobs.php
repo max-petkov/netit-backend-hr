@@ -16,12 +16,18 @@ $stmt2->bindValue(':job_seeker_id', $_POST['job_seeker_id']);
 $stmt2->bindValue(':is_applied', $_POST['is_applied']);
 $stmt2->execute();
 
-if ($stmt->rowCount() === 1 && $stmt2->rowCount() === 0 && $_SESSION['employee_id'] === $_POST['job_seeker_id']) {
-  $sql = ("INSERT INTO tb_applied_jobs(job_id, job_seeker_id, is_applied) VALUES(:job_id, :job_seeker_id, :is_applied)");
+if (
+  $stmt->rowCount() === 1 && $stmt2->rowCount() === 0 &&
+  $_SESSION['employee_id'] === $_POST['job_seeker_id'] &&
+  mb_strlen($_POST['motivation_speech']) >= 49 &&
+  mb_strlen($_POST['motivation_speech']) <= 999
+) {
+  $sql = ("INSERT INTO tb_applied_jobs(job_id, job_seeker_id, is_applied, motivation_speech) VALUES(:job_id, :job_seeker_id, :is_applied, :motivation_speech)");
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':job_id', $_POST['job_id']);
   $stmt->bindValue(':job_seeker_id', $_POST['job_seeker_id']);
   $stmt->bindValue(':is_applied', $_POST['is_applied']);
+  $stmt->bindValue(':motivation_speech', $_POST['motivation_speech']);
   $stmt->execute();
 } else {
   echo 'Scammer... Don\'t change input values!';

@@ -62,7 +62,10 @@ CREATE TABLE tb_applied_jobs (
 	applied_id INT AUTO_INCREMENT PRIMARY KEY,
     job_id INT,
     job_seeker_id INT,
-    is_applied VARCHAR(1)
+    motivation_speech VARCHAR(1000),
+    is_applied VARCHAR(1),
+    is_interviewed VARCHAR (1),
+    is_approved VARCHAR (1)
 );
 
 CREATE TABLE tb_hr (
@@ -73,8 +76,10 @@ CREATE TABLE tb_hr (
     password VARCHAR(50)
 );
 
+-- TRUNCATE TABLE tb_published_jobs;
+TRUNCATE TABLE tb_applied_jobs;
 SELECT * FROM tb_hr;
+SELECT * FROM tb_applied_jobs;
 SELECT * FROM tb_job_seeker_profile;
-TRUNCATE TABLE tb_published_jobs;
-SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY published_date DESC;
+SELECT * FROM tb_published_jobs;
 SELECT * FROM tb_company_profile;

@@ -1,20 +1,91 @@
 $(function () {
 
-  // Getting values from dynamically created button
+  // Apply job
   $(document).on('click', '.js-apply-job', function () {
     $apply_button = $(this);
-    $apply_button.text('Loading...').addClass('disabled');
-    $.ajax({
-      url: 'src/applied-jobs.php',
-      method: 'post',
-      data: {
-        job_id: $apply_button.val(),
-        job_seeker_id: $apply_button.next().val(),
-        random_chars: $apply_button.next().next().val(),
-        is_applied: 'Y'
-      },
-      success: function () {
-        $apply_button.text('Applied!').addClass('disabled');
+    $apply_button.closest('div')
+      .next()
+      .next()
+      .removeClass('d-none').animate({
+        top: '0px',
+        right: '32px',
+        opacity: '1'
+      }, 'fast', function () {
+        $apply_button.text('Waiting...').addClass('disabled')
+      });
+
+    $('.job_li').on('click', '.btn-close', function () {
+      $close_motivation_speech_container = $(this).closest('.container');
+
+      $close_motivation_speech_container.animate({
+        right: '-544px',
+        opacity: '0'
+      }, 'slow', function () {
+        $close_motivation_speech_container.addClass('d-none');
+        if ($(this).closest('.job_li').children('.d-flex').children('.js-apply-job').text() !== 'Applied!') {
+          $(this).closest('.job_li').children('.d-flex').children('.js-apply-job').html(`
+            <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+            <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+          </svg>
+          Apply`).removeClass('disabled');
+        }
+      });
+    });
+
+    $('.js-motivation-speech').on('click', '#send_speech', function () {
+      $send_speech = $(this);
+      $proceed = true;
+
+      if ($send_speech.prev().prev().val().trim().length < 49 || $send_speech.prev().prev().val().trim().length > 999) {
+        $send_speech.prev().show('fast');
+        $send_speech.prev().prev().addClass('is-invalid');
+        $send_speech.prev().addClass('text-danger')
+          .html('Field must be more than 49 and less than 1000 symbols!');
+        if ($send_speech.prev().hasClass('text-success') && $send_speech.prev().prev().hasClass('is-valid')) {
+          $send_speech.prev().prev().removeClass('is-valid').addClass('is-invalid');
+          $send_speech.prev().removeClass('text-success')
+            .addClass('text-danger')
+            .html('Field must be more than 49 and less than 1000 symbols!');
+        }
+        $proceed = false;
+      } else {
+        $send_speech.prev().show('fast');
+        $send_speech.prev().prev().addClass('is-valid');
+        $send_speech.prev().addClass('text-success')
+          .html('OK!');
+        if ($send_speech.prev().hasClass('text-danger') && $send_speech.prev().prev().hasClass('is-invalid')) {
+          $send_speech.prev().prev().removeClass('is-invalid').addClass('is-valid');
+          $send_speech.prev().removeClass('text-danger')
+            .addClass('text-success')
+            .html('OK!');
+        }
+        setTimeout(function () {
+          $send_speech.prev().hide('fast');
+        }, 5000)
+      }
+
+      if ($proceed) {
+        $.ajax({
+          url: 'src/applied-jobs.php',
+          method: 'post',
+          data: {
+            job_id: $apply_button.val(),
+            job_seeker_id: $apply_button.next().val(),
+            random_chars: $apply_button.next().next().val(),
+            is_applied: 'Y',
+            motivation_speech: $send_speech.prev().prev().val()
+          },
+          success: function () {
+            $apply_button.text('Applied!').addClass('disabled');
+            $send_speech.text('SUCCESS!').addClass('disabled');
+
+            $send_speech.closest('.card-body').children('#apply_succ_mess').slideDown('slow').addClass('alert alert-success').text('Apply successful!');
+            setTimeout(function () {
+              $send_speech.closest('.card-body').children('#apply_succ_mess').slideUp('slow');
+            }, 2000);
+          }
+        });
       }
     });
   });
@@ -96,42 +167,42 @@ $(function () {
     }
   });
 
-// Search by title or company name
-$('#search_by_title_company').on('keyup', function() {
-  // Reseting job when there is no input value
-  if (!$(this).val()) {
-    $.ajax({
-      url: 'src/sort-job-list.php',
-      method: 'post',
-      data: {
-        default_list: '*'
-      },
-      success: function (response) {
-        if (!$.trim(response)) {
-          $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
-        } else {
-          $('#published_job_list').html($.trim(response));
+  // Search by title or company name
+  $('#search_by_title_company').on('keyup', function () {
+    // Reseting job when there is no input value
+    if (!$(this).val()) {
+      $.ajax({
+        url: 'src/sort-job-list.php',
+        method: 'post',
+        data: {
+          default_list: '*'
+        },
+        success: function (response) {
+          if (!$.trim(response)) {
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
+          } else {
+            $('#published_job_list').html($.trim(response));
+          }
         }
-      }
-    });
-  } else {
-    $.ajax({
-      url:'src/sort-job-list.php',
-      method: 'post',
-      data: {
-        search_by_company_name: $(this).val()
-      },
-      success: function (response) {
-        if (!$.trim(response)) {
-          $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
-        } else {
-          $('#published_job_list').html($.trim(response));
+      });
+    } else {
+      $.ajax({
+        url: 'src/sort-job-list.php',
+        method: 'post',
+        data: {
+          search_by_company_name: $(this).val()
+        },
+        success: function (response) {
+          if (!$.trim(response)) {
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
+          } else {
+            $('#published_job_list').html($.trim(response));
+          }
         }
-      }
-    })
+      })
 
-  }
-});
+    }
+  });
 
   // // Refreshing job list elements and lazy load list items
   // (function refresh_content() {

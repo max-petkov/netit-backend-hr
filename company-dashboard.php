@@ -1,6 +1,5 @@
 <?php include 'src/database.php'; ?>
 <?php include_once 'src/functions.php'; ?>
-<?php include 'src/checking-existing-username-email-hr.php'; ?>
 <?php login_required($_SESSION['company_id']); ?>
 
 <!DOCTYPE html>

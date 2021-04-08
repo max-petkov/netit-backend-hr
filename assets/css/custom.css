@@ -98,6 +98,15 @@ body {
   right: -544px;
 }
 
+.js-motivation-speech {
+  max-width: 768px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  top: 0px;
+  right: -544px;
+}
+
 .tooltip-icon {
   cursor: pointer;
   transition: 0.3s;
