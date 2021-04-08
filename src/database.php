@@ -124,7 +124,7 @@ if (isset($_POST['submit_registration_company'])) {
 if (isset($_POST['hr_username'])) {
   if (
     !empty($_POST['hr_username'])                                                             &&
-    preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['hr_username'])                      &&                                                                          
+    preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['hr_username'])                      &&
     !empty($_POST['hr_email'])                                                                        &&
     filter_var($_POST['hr_email'], FILTER_VALIDATE_EMAIL)                                            &&
     !empty($_POST['hr_password'])                                                                     &&
@@ -138,8 +138,10 @@ if (isset($_POST['hr_username'])) {
     mb_strlen($_POST['hr_password'])            <= 49                                                 &&
     !checking_existing_username_email('tb_company_profile', 'username', $_POST['hr_username'])      &&
     !checking_existing_username_email('tb_job_seeker_profile', 'username', $_POST['hr_username'])      &&
+    !checking_existing_username_email('tb_hr', 'username', $_POST['hr_username'])      &&
     !checking_existing_username_email('tb_company_profile', 'email', $_POST['hr_email'])                    &&
-    !checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['hr_email'])
+    !checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['hr_email']) &&
+    !checking_existing_username_email('tb_hr', 'email', $_POST['hr_email'])
   ) {
 
     $hr_username    = $_POST['hr_username'];
@@ -151,7 +153,6 @@ if (isset($_POST['hr_username'])) {
     $stmt->bind_param('ssss', $_SESSION['company_id'], $hr_username, $hr_email, $hr_password);
     $stmt->execute();
     $stmt->close();
-
   }
 }
 
@@ -163,14 +164,18 @@ if (isset($_POST['submit_login'])) {
     exit;
   } elseif (
     login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password']) ||
-    login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password'])
+    login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password']) ||
+    login_attempt('tb_hr', 'username', 'password', $_POST['username'], $_POST['password'])
   ) {
     if (login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
       $_SESSION['employee_id'] = login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
       redirect_to('employee-dashboard.php');
-    } else {
+    } else if (login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
       $_SESSION['company_id'] = login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
       redirect_to('company-dashboard.php');
+    } else {
+      $_SESSION['hr_id'] = login_attempt('tb_hr', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+      redirect_to('hr-dashboard.php');
     }
   } else {
     $_SESSION['error_message'] = 'Incorrect username or password... Try again!';

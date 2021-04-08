@@ -371,22 +371,23 @@
             <div class="form-group mb-2">
               <label for="hr_account">Username</label>
               <input type="text" name="hr_username" class="form-control form-control-sm">
-              <div id="hr_username_response_text"></div>                                                                                                                             
+              <input type="hidden">
+              <div id="hr_username_response_text"></div>
             </div>
             <div class="form-group mb-2">
               <label for="hr_account">Email</label>
               <input type="text" name="hr_email" class="form-control form-control-sm">
-              <div id="hr_email_response_text"></div> 
+              <div id="hr_email_response_text"></div>
             </div>
             <div class="form-group mb-2">
               <label for="hr_account">Password</label>
               <input type="password" name="password" class="form-control form-control-sm">
-              <div id="hr_password_response_text"></div> 
+              <div id="hr_password_response_text"></div>
             </div>
             <div class="form-group mb-3">
               <label for="hr_account">Confirm password</label>
               <input type="password" name="confirm_password" class="form-control form-control-sm">
-              <div id="hr_confirm_password_response_text"></div> 
+              <div id="hr_confirm_password_response_text"></div>
             </div>
             <input type="submit" name="submit_hr_acc" value="Submit" class="btn btn-primary">
           </form>
@@ -395,7 +396,7 @@
     </div>
   </div>
 
-  
+
   <!-- View candidates -->
   <div class="container mt-4 d-none">
     <div class="row">
