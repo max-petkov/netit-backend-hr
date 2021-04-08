@@ -56,7 +56,7 @@ $(function () {
         },
         success: function (response) {
           if (!$.trim(response)) {
-            $('#published_job_list').html('There are no results...');
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
           } else {
             $('#published_job_list').html($.trim(response));
           }
@@ -72,7 +72,7 @@ $(function () {
         },
         success: function (response) {
           if (!$.trim(response)) {
-            $('#published_job_list').html('There are no results...');
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
           } else {
             $('#published_job_list').html($.trim(response));
           }
@@ -87,7 +87,7 @@ $(function () {
         },
         success: function (response) {
           if (!$.trim(response)) {
-            $('#published_job_list').html('There are no results...');
+            $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
           } else {
             $('#published_job_list').html($.trim(response));
           }
@@ -98,9 +98,6 @@ $(function () {
 
 // Search by title or company name
 $('#search_by_title_company').on('keyup', function() {
-  
-  
-  console.log($(this).val());
   // Reseting job when there is no input value
   if (!$(this).val()) {
     $.ajax({
@@ -111,7 +108,7 @@ $('#search_by_title_company').on('keyup', function() {
       },
       success: function (response) {
         if (!$.trim(response)) {
-          $('#published_job_list').html('There are no results...');
+          $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
         } else {
           $('#published_job_list').html($.trim(response));
         }
@@ -122,11 +119,11 @@ $('#search_by_title_company').on('keyup', function() {
       url:'src/sort-job-list.php',
       method: 'post',
       data: {
-        search_by_job_title: $(this).val()
+        search_by_company_name: $(this).val()
       },
       success: function (response) {
         if (!$.trim(response)) {
-          $('#published_job_list').html('There are no results...');
+          $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
         } else {
           $('#published_job_list').html($.trim(response));
         }
@@ -136,7 +133,7 @@ $('#search_by_title_company').on('keyup', function() {
   }
 });
 
-  // Refreshing job list elements and lazy load list items
+  // // Refreshing job list elements and lazy load list items
   // (function refresh_content() {
   //   $('#published_job_list').load('employee-dashboard.php .job_li', setTimeout(refresh_content, 5000), function () {
   //     $("#published_job_list li").slice(10).hide();

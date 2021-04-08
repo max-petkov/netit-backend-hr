@@ -23,7 +23,7 @@ if (mb_strlen($_POST['job_title']) > 20 &&
       mb_strlen($_POST['job_description']) > 49 &&
       mb_strlen($_POST['job_description']) < 999) {
 
-        $published_date = date('m.d.Y');
+        $published_date = date('Y-m-d');
         $company_id = $_POST['job_company_id'];
         $company_username = $_POST['job_company_username'];
         $company_name = $_POST['job_company_name'];

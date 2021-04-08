@@ -1,7 +1,6 @@
 // Adding custom font
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
 
-
 // Custom Style CSS
 body {
   overflow-x: hidden;
@@ -81,3 +80,39 @@ body {
   opacity: 0;
   right: -544px;
 }
+
+.publish_job_box {
+  max-width: 768px;
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  opacity: 0;
+  right: -544px;
+}
+
+.js-update-publish-job-form{
+  max-width: 768px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  top: 50%;
+  right: -544px;
+}
+
+.js_hr_box{
+  max-width: 768px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  right: -544px;
+}
+
+.tooltip-icon {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tooltip-icon:active {
+  transform: scale(0.95);
+}
+
