@@ -22,8 +22,9 @@ if (
   mb_strlen($_POST['motivation_speech']) >= 49 &&
   mb_strlen($_POST['motivation_speech']) <= 999
 ) {
-  $sql = ("INSERT INTO tb_applied_jobs(job_id, job_seeker_id, is_applied, motivation_speech) VALUES(:job_id, :job_seeker_id, :is_applied, :motivation_speech)");
+  $sql = ("INSERT INTO tb_applied_jobs(applied_date, job_id, job_seeker_id, is_applied, motivation_speech) VALUES(:applied_date, :job_id, :job_seeker_id, :is_applied, :motivation_speech)");
   $stmt = $db->prepare($sql);
+  $stmt->bindValue(':applied_date', date('Y-m-d'));
   $stmt->bindValue(':job_id', $_POST['job_id']);
   $stmt->bindValue(':job_seeker_id', $_POST['job_seeker_id']);
   $stmt->bindValue(':is_applied', $_POST['is_applied']);
