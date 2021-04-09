@@ -711,54 +711,55 @@
               <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?></p>
               <div class="d-flex align-items-center">
               </div>
-              <p id="update_job_title" class="m-0 fw-bold"> <?php echo $value['job_title']; ?> </p>
-              <span class="badges mt-1">
-                <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                  echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                  echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                  echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                  echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                  echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                  echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
-                }
-                ?>
-                <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
-                <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
-                <div class="d-flex">
-                  <button class="btn btn-primary d-flex align-items-center btn-sm me-2">
-                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                    Read more
-                  </button>
-                  <button id="update_published_job" class="js-update-active-publish btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
-                    Make changes
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-pencil-square" viewBox="0 0 16 16">
-                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                    </svg>
-                  </button>
-                  <button id="remove_published_job" class="btn btn-danger d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be in-active!">
-                    Turn off
-                  </button>
-                </div>
-                <p class="m-0 d-none"> <?php echo $value['job_description']; ?></p>
+              <p id="update_job_title" class="m-0 fw-bold">
+                <?php echo $value['job_title']; ?>
+              </p>
+              <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
+                echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
+              }
+              ?>
+              <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
+                echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
+              }
+              ?>
+              <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
+                echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
+              }
+              ?>
+              <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
+                echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
+              }
+              ?>
+              <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
+                echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
+              }
+              ?>
+              <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
+                echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
+              }
+              ?>
+              <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
+              <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
+              <div class="d-flex">
+                <button class="btn btn-primary d-flex align-items-center btn-sm me-2">
+                  <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                  </svg>
+                  Read more
+                </button>
+                <button id="update_published_job" class="js-update-active-publish btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
+                  Make changes
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                  </svg>
+                </button>
+                <button id="remove_published_job" class="btn btn-danger d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be in-active!">
+                  Turn off
+                </button>
+              </div>
+              <p class="m-0 d-none"> <?php echo $value['job_description']; ?></p>
             </li>
           <?php endforeach; ?>
           <?php
