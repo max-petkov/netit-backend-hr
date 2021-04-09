@@ -60,6 +60,7 @@ CREATE TABLE tb_published_jobs (
 
 CREATE TABLE tb_applied_jobs (
 	applied_id INT AUTO_INCREMENT PRIMARY KEY,
+    applied_date DATE,
     job_id INT,
     job_seeker_id INT,
     motivation_speech VARCHAR(1000),
