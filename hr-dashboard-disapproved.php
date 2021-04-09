@@ -180,7 +180,7 @@
       <ul class="nav nav-tabs card-header-tabs">
         <?php
         $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
+        $sql3 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
           FROM tb_hr AS a 
           INNER JOIN tb_company_profile AS b 
           ON b.id=a.company_id
@@ -193,12 +193,11 @@
           WHERE  a.id='{$_SESSION['hr_id']}'
           AND d.is_approved IS null 
           AND d.is_interviewed IS null");
-        $stmt = $db->query($sql);
-        $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt3 = $db->query($sql3);
+        $stmt3->execute();
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard.php" class="nav-link active">New applicants (<?php echo $stmt->rowCount(); ?>)</a>
+          <a href="hr-dashboard.php" class="nav-link">New applicants (<?php echo $stmt3->rowCount(); ?>)</a>
         </li>
         <?php
         $sql2 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
@@ -220,7 +219,8 @@
           <a href="hr-dashboard-approved.php" class="nav-link">Approved (<?php echo $stmt2->rowCount(); ?>)</a>
         </li>
         <?php
-        $sql3 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
+        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+        $sql = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
           FROM tb_hr AS a 
           INNER JOIN tb_company_profile AS b 
           ON b.id=a.company_id
@@ -232,11 +232,12 @@
           ON d.job_seeker_id = e.id
           WHERE  a.id='{$_SESSION['hr_id']}'
           AND d.is_approved='N'");
-        $stmt3 = $db->query($sql3);
-        $stmt3->execute();
+        $stmt = $db->query($sql);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard-disapproved.php" class="nav-link">Disapproved (<?php echo $stmt3->rowCount(); ?>)</a>
+          <a href="hr-dashboard-disapproved.php" class="nav-link active">Disapproved (<?php echo $stmt->rowCount(); ?>)</a>
         </li>
       </ul>
     </div>
@@ -390,7 +391,6 @@
                   <button class="js-approve-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
                   <button class="js-approve-answer btn btn-danger btn-sm" value="N">No</button>
                 </div>
-                <div class="js-confirm-approve"></div>
               </td>
             </tr>
           <?php endforeach; ?>

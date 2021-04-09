@@ -76,6 +76,17 @@ CREATE TABLE tb_hr (
     email VARCHAR(255),
     password VARCHAR(50)
 );
+SELECT a.*, b.id, b.username, c.*, d.*, e.* FROM tb_hr AS a 
+INNER JOIN tb_company_profile AS b 
+ON b.id=a.company_id
+INNER JOIN tb_published_jobs AS c 
+ON c.company_id=b.id
+INNER JOIN tb_applied_jobs AS d
+ON d.job_id = c.id
+INNER JOIN tb_job_seeker_profile AS e
+ON d.job_seeker_id = e.id
+WHERE a.id=2 AND d.is_approved IS null AND d.is_interviewed IS null;
+
 
 -- TRUNCATE TABLE tb_published_jobs;
 TRUNCATE TABLE tb_applied_jobs;
