@@ -20,66 +20,92 @@ $(function () {
         </svg>`);
       })
     }
+
   });
 
   // Getting response after approve
-  $('.js-applicants-data').on('click', '.js-approve-answer', function () {
-    $btn_answer = $(this);
-    $btn_confirm_answer = $btn_answer.closest('.d-flex').next();
+    $('body').on('click', '.js-approve-answer', function () {
+      $btn_answer = $(this);
+      $('.js-approve-answer').addClass('disabled');
+      $btn_confirm_answer = $btn_answer.closest('.d-flex').next();
 
-    if ($btn_answer.val() === 'Y') {
-      $btn_confirm_answer.animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast', function () {
-        $btn_confirm_answer.addClass('card border-primary shadow rounded')
-          .html(`<div class="card-body">
-        <h5 class="mb-3">Candidate will go into <u>approved</u> tab! Do you want to proceed?</h5>
+      if ($btn_answer.val() === 'Y') {
+        $btn_confirm_answer.animate({
+          right: '32px',
+          opacity: '1'
+        }, 'fast', function () {
+          $btn_confirm_answer.addClass('card border-primary shadow rounded')
+            .html(`<div class="card-body">
+        <h5 class="mb-3">${$btn_answer.next().next().next().next().val()} will go into <u>approved</u> tab! Do you want to proceed?</h5>
         <button id="approve_candidate" class="btn btn-primary btn-sm" value="Y">Yes, proceed!</button>
         <button id="close_confirm_approve_box" class="btn btn-secondary btn-sm" value="N">Close</button>
         </div>`);
-      });
+        });
 
-      $btn_confirm_answer.on('click', '#approve_candidate', function () {
-        $(this).closest('.js-applicants-data').fadeOut('slow', function () {
-          $(this).closest('#is_approved').remove();
-        })
-      });
+        $('body').on('click', '#approve_candidate', function () {
+          $yes_btn = $(this);
+          $.ajax({
+            url: 'src/candidate-status.php',
+            method: 'post',
+            data: {
+              approve_candidate: $btn_answer.val(),
+              job_id: $btn_answer.next().next().val(),
+              job_seeker_id: $btn_answer.next().next().next().val()
+            },
+            success: function () {
+              $yes_btn.closest('.js-applicants-data').fadeOut('slow', function () {
+                $('#applicants_container').load('hr-dashboard.php #applicants_data');
+              });
+            }
+          });
+        });
 
-      $btn_confirm_answer.on('click', '#close_confirm_approve_box', function () {
-        $(this).closest('.js-confirm-approve').animate({
-          right: '-544px',
-          opacity: '0'
-        }, 'fast');
-      });
-    }
+        $btn_confirm_answer.on('click', '#close_confirm_approve_box', function () {
+          $(this).closest('.js-confirm-approve').animate({
+            right: '-544px',
+            opacity: '0'
+          }, 'fast',function(){$('.js-approve-answer').removeClass('disabled')});
+        });
+      }
 
-    if ($btn_answer.val() === 'N') {
-      $btn_confirm_answer.animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast', function () {
-        $btn_confirm_answer.addClass('card border-primary shadow rounded')
-          .html(`<div class="card-body">
-        <h5 class="mb-3">Candidate will go into <u>disapproved</u> tab! Do you want to proceed?</h5>
+      if ($btn_answer.val() === 'N') {
+        $btn_confirm_answer.animate({
+          right: '32px',
+          opacity: '1'
+        }, 'fast', function () {
+          $btn_confirm_answer.addClass('card border-primary shadow rounded')
+            .html(`<div class="card-body">
+        <h5 class="mb-3">${$btn_answer.next().next().next().val()} will go into <u>rejected</u> tab! Do you want to proceed?</h5>
         <button id="approve_candidate" class="btn btn-primary btn-sm" value="Y">Yes, proceed!</button>
         <button id="close_confirm_approve_box" class="btn btn-secondary btn-sm" value="N">Close</button>
         </div>`);
-      });
+        });
 
-      $btn_confirm_answer.on('click', '#approve_candidate', function () {
-        $(this).closest('.js-applicants-data').fadeOut('slow', function () {
-          $(this).closest('#is_approved').remove();
-        })
-      });
+        $('body').on('click', '#approve_candidate', function () {
+          $no_btn = $(this);
+          $.ajax({
+            url: 'src/candidate-status.php',
+            method: 'post',
+            data: {
+              reject_candidate: $btn_answer.val(),
+              job_id: $btn_answer.next().val(),
+              job_seeker_id: $btn_answer.next().next().val()
+            },
+            success: function () {
+              $no_btn.closest('.js-applicants-data').fadeOut('slow', function () {
+                $('#applicants_container').load('hr-dashboard.php #applicants_data');
+              });
+            }
+          });
+        });
 
-      $btn_confirm_answer.on('click', '#close_confirm_approve_box', function () {
-        $(this).closest('.js-confirm-approve').animate({
-          right: '-544px',
-          opacity: '0'
-        }, 'fast');
-      });
-    }
+        $btn_confirm_answer.on('click', '#close_confirm_approve_box', function () {
+          $(this).closest('.js-confirm-approve').animate({
+            right: '-544px',
+            opacity: '0'
+          }, 'fast',function(){$('.js-approve-answer').removeClass('disabled')});
+        });
+      }
+    });
 
-  });
 })

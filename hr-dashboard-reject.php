@@ -180,7 +180,7 @@
       <ul class="nav nav-tabs card-header-tabs">
         <?php
         $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql2 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
+        $sql3 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
           FROM tb_hr AS a 
           INNER JOIN tb_company_profile AS b 
           ON b.id=a.company_id
@@ -192,11 +192,30 @@
           ON d.job_seeker_id = e.id
           WHERE  a.id='{$_SESSION['hr_id']}'
           AND d.is_approved IS null");
+        $stmt3 = $db->query($sql3);
+        $stmt3->execute();
+        ?>
+        <li class="nav-item">
+          <a href="hr-dashboard.php" class="nav-link">New applicants (<?php echo $stmt3->rowCount(); ?>)</a>
+        </li>
+        <?php
+        $sql2 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
+          FROM tb_hr AS a 
+          INNER JOIN tb_company_profile AS b 
+          ON b.id=a.company_id
+          INNER JOIN tb_published_jobs AS c 
+          ON c.company_id=b.id
+          INNER JOIN tb_applied_jobs AS d
+          ON d.job_id = c.id
+          INNER JOIN tb_job_seeker_profile AS e
+          ON d.job_seeker_id = e.id
+          WHERE  a.id='{$_SESSION['hr_id']}'
+          AND d.is_approved='Y'");
         $stmt2 = $db->query($sql2);
         $stmt2->execute();
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard.php" class="nav-link">New applicants (<?php echo $stmt2->rowCount(); ?>)</a>
+          <a href="hr-dashboard-approved.php" class="nav-link">Approved (<?php echo $stmt2->rowCount(); ?>)</a>
         </li>
         <?php
         $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
@@ -211,32 +230,13 @@
           INNER JOIN tb_job_seeker_profile AS e
           ON d.job_seeker_id = e.id
           WHERE  a.id='{$_SESSION['hr_id']}'
-          AND d.is_approved='Y'");
+          AND d.is_approved='N'");
         $stmt = $db->query($sql);
         $stmt->execute();
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard-approved.php" class="nav-link active">Approved (<?php echo $stmt->rowCount(); ?>)</a>
-        </li>
-        <?php
-        $sql3 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
-          FROM tb_hr AS a 
-          INNER JOIN tb_company_profile AS b 
-          ON b.id=a.company_id
-          INNER JOIN tb_published_jobs AS c 
-          ON c.company_id=b.id
-          INNER JOIN tb_applied_jobs AS d
-          ON d.job_id = c.id
-          INNER JOIN tb_job_seeker_profile AS e
-          ON d.job_seeker_id = e.id
-          WHERE  a.id='{$_SESSION['hr_id']}'
-          AND d.is_approved='N'");
-        $stmt3 = $db->query($sql3);
-        $stmt3->execute();
-        ?>
-        <li class="nav-item">
-          <a href="hr-dashboard-reject.php" class="nav-link">Reject (<?php echo $stmt3->rowCount(); ?>)</a>
+          <a href="hr-dashboard-reject.php" class="nav-link active">Reject (<?php echo $stmt->rowCount(); ?>)</a>
         </li>
       </ul>
     </div>

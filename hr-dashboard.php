@@ -172,9 +172,10 @@
     <!-- <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" class="me-1" width="80px" alt=""> -->
   </div>
 <?php endwhile; ?>
+
 <!-- Applicants -->
-<div class="container-sm mt-4">
-  <div class="card shadow-lg rounded">
+<div id="applicants_container" class="container-sm mt-4">
+  <div id="applicants_data" class="card shadow-lg rounded">
     <div class="card-header">
       <h4 class="my-3">Applicants</h4>
       <ul class="nav nav-tabs card-header-tabs">
@@ -191,8 +192,7 @@
           INNER JOIN tb_job_seeker_profile AS e
           ON d.job_seeker_id = e.id
           WHERE  a.id='{$_SESSION['hr_id']}'
-          AND d.is_approved IS null 
-          AND d.is_interviewed IS null");
+          AND d.is_approved IS null");
         $stmt = $db->query($sql);
         $stmt->execute();
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -236,7 +236,7 @@
         $stmt3->execute();
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard-disapproved.php" class="nav-link">Disapproved (<?php echo $stmt3->rowCount(); ?>)</a>
+          <a href="hr-dashboard-reject.php" class="nav-link">Reject (<?php echo $stmt3->rowCount(); ?>)</a>
         </li>
       </ul>
     </div>
@@ -254,7 +254,7 @@
         <tbody>
           <?php foreach ($row as $key => $value) : ?>
             <tr class="js-applicants-data">
-              <th scope="row">
+              <th scope="row" class="js-applicants-counter">
                 <?php echo $key + 1; ?>
               </th>
               <td class="w-50">
@@ -325,7 +325,7 @@
                   <?php echo $value['motivation_speech']; ?>
                 </p>
                 <!-- User profile -->
-                <div class="d-none card shadow rounded">
+                <div id="candidate_profile" class="d-none card shadow rounded">
                   <div class="d-flex justify-content-between mt-4">
                     <div class="ms-3">
                       <h4 class="card-text"><?php echo "{$value['first_name']}'s profile:"; ?></h4>
@@ -383,12 +383,17 @@
                 <div class="d-flex justify-content-center">
                   <button class="js-interview-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
                   <button class="js-interview-answer btn btn-danger btn-sm" value="N">No</button>
+                  <input type="hidden" value="<?php echo $value['job_id']; ?>">
+                  <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
                 </div>
               </td>
               <td id="is_approved" class="text-center">
                 <div class="d-flex justify-content-center">
                   <button class="js-approve-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
                   <button class="js-approve-answer btn btn-danger btn-sm" value="N">No</button>
+                  <input type="hidden" value="<?php echo $value['job_id']; ?>">
+                  <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                  <input type="hidden" name="candidate_name" value="<?php echo $value['first_name']; ?>">
                 </div>
                 <div class="js-confirm-approve"></div>
               </td>
@@ -484,8 +489,8 @@
 
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="assets/js/ajax-hr.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="assets/js/ajax-hr.js"></script>
 
 </body>
 
