@@ -160,7 +160,7 @@
      }
 
     // Bootstrap 5 tooltip FIY-> data-bs-animation="false" will prevent from dissapering the tooltip after multiple hovers
-    $('[data-bs-toggle="tooltip"]').tooltip('enable', {boundary: 'window'});
+    $('body').tooltip({boundary: 'window', selector: '[data-bs-toggle="tooltip"]'});
 
      
    })

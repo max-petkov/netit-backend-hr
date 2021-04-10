@@ -6,7 +6,7 @@ if (isset($_POST['update_published_job_id'])) :
   $stmt = $db->query($sql);
   $stmt->execute();
   $result = $stmt->fetch();
-  while ($row = $result) :?>
+  while ($row = $result) : ?>
 
     <div class="update_published_job_box container">
       <div class="card mx-auto shadow rounded p-3">
@@ -40,7 +40,15 @@ if (isset($_POST['update_published_job_id'])) :
 
                 <div class="me-4">
                   <div class="form-group">
-                    <label for="it_branches" class="fw-bold">IT tag</label>
+                    <label for="it_branches" class="fw-bold">
+                      IT tag
+                      <span class="tooltip-icon" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="IT tag will help candidates to find your publish easy!">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                      </span>
+                    </label>
                     <div class="form-check mt-1">
                       <input id="frontend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="update_it_tag[0]" value="frontend" <?php if ($row['frontend_tag'] != null || $row['frontend_tag'] != '') {
                                                                                                                                                           echo 'checked';
