@@ -77,16 +77,35 @@ CREATE TABLE tb_hr (
     password VARCHAR(50)
 );
 
-CREATE TABLE tb_message_hr__job_seeker(
+CREATE TABLE tb_msg_box_job_seeker(
 	id INT AUTO_INCREMENT PRIMARY KEY,
+    send_date DATE,
     hr_id INT,
     job_seeker_id INT,
     subject VARCHAR(255),
-    message VARCHAR(1000)
+    inbox_msg VARCHAR(1000),
+    sent_msg VARCHAR(1000)
 );
 
--- TRUNCATE TABLE tb_published_jobs;
-TRUNCATE TABLE tb_applied_jobs;
+CREATE TABLE tb_msg_box_hr(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    send_date DATE,
+    hr_id INT,
+    company_id INT,
+    job_seeker_id INT,
+    subject VARCHAR(255),
+    inbox_msg VARCHAR(1000),
+    sent_msg VARCHAR(1000)
+);
+
+-- TRUNCATE TABLE tb_msg_box_hr;
+-- TRUNCATE TABLE tb_msg_box_job_seeker;
+-- TRUNCATE TABLE tb_applied_jobs;
+
+SELECT * FROM tb_msg_box_hr;
+SELECT * FROM tb_msg_box_job_seeker;
+
+
 SELECT * FROM tb_hr;
 SELECT * FROM tb_applied_jobs;
 SELECT * FROM tb_job_seeker_profile;
