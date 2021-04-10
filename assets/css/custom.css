@@ -123,3 +123,7 @@ body {
 .tooltip-icon:active {
   transform: scale(0.95);
 }
+
+.hover-msg-box:hover {
+  cursor: pointer;
+}

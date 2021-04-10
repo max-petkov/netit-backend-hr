@@ -60,8 +60,7 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li>
-                    <a class="message_icon dropdown-item xsm-text-class" href="#">Messages<span class="badge rounded-pill bg-danger ms-1">3</span>
-                    </a>
+                    <a class="message_icon dropdown-item xsm-text-class" href="#">Messages</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="dropdown-item xsm-text-class d-flex align-items-center">
@@ -122,7 +121,14 @@
               <svg id="envelope_open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="me-1 d-none bi bi-envelope-open" viewBox="0 0 16 16">
                 <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z" />
               </svg>
-              <span class="badge bg-danger rounded-pill">3</span>
+              <?php
+              $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+              $sql = ("SELECT inbox_msg, hr_id FROM tb_msg_box_hr WHERE inbox_msg IS NOT NULL AND hr_id='{$_SESSION['hr_id']}'");
+              $stmt = $db->query($sql);
+              $stmt->execute();
+              $result = $stmt->rowCount();
+              ?>
+              <span class="badge bg-danger rounded-pill"><?php echo $result; ?></span>
             </a>
           </li>
         </ul>
@@ -439,71 +445,56 @@
   </div>
 </div>
 
-
-
 <!-- Message container -->
 <div class="card shadow-lg p-3 mb-5 bg-body rounded message_box d-none">
   <div class="d-flex justify-content-between mt-3 mb-2 px-3">
     <h4 class="m-0">Messages:</h4>
     <button class="btn-close align-self-end"></button>
   </div>
-
   <div class="card-body">
+    <!-- TODO INBOX TAB WITHOUT AJAX CALL -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item hover-msg-box">
+        <a class="nav-link">Inbox</a>
+      </li>
+      <li class="nav-item hover-msg-box">
+        <a class="nav-link active">Sent</a>
+      </li>
+    </ul>
     <ul class="list-group-flush p-0 pt-3">
-      <li class="list-group-item pb-0">
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="text-muted small">sent by <b class="text-dark">HR</b></p>
-          <p class="small">03.13.2021</p>
-        </div>
-        <div class="chevron_btn d-flex justify-content-between align-items-start">
-          <p><b>Subject:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe.</p>
-          <span class="ms-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </span>
-        </div>
-        <p class="chevron-expand-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae veniam beatae, quibusdam, est ex itaque
-          accusantium ea aut similique impedit vel, ullam cupiditate odio! Sequi.
-        </p>
-      </li>
-      <li class="list-group-item pb-0">
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="text-muted small">sent by <b class="text-dark">Family Studio</b></p>
-          <p class="small">03.13.2021</p>
-        </div>
-        <div class="chevron_btn d-flex justify-content-between align-items-start">
-          <p><b>Subject:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe.</p>
-          <span class="ms-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </span>
-        </div>
-        <p class="chevron-expand-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi eveniet nobis maxime eos reprehenderit
-          neque quibusdam! Labore commodi error illum laborum, rerum praesentium sint?
-        </p>
-      </li>
-      <li class="list-group-item pb-0">
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="text-muted small">sent by <b class="text-dark">Artromedika</b></p>
-          <p class="small">03.13.2021</p>
-        </div>
-        <div class="chevron_btn d-flex justify-content-between align-items-start">
-          <p><b>Subject:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe.</p>
-          <span class="ms-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </span>
-        </div>
-        <p class="chevron-expand-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi eveniet nobis maxime eos reprehenderit
-          neque quibusdam! Labore commodi error illum laborum, rerum praesentium sint?
-        </p>
-      </li>
+      <?php
+      $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+      $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name 
+      FROM tb_msg_box_hr AS a 
+      LEFT JOIN tb_company_profile AS b 
+      ON a.company_id=b.id 
+      LEFT JOIN tb_job_seeker_profile AS c 
+      ON c.id=a.job_seeker_id 
+      WHERE a.hr_id='{$_SESSION['hr_id']}' 
+      ORDER BY a.send_date DESC");
+      $stmt = $db->query($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      ?>
+      <?php foreach ($result as $value) : ?>
+        <li class="list-group-item pb-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-muted small">sent to <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
+            <p class="small"><?php echo $value['send_date']; ?></p>
+          </div>
+          <div class="chevron_btn d-flex justify-content-between align-items-start">
+            <p><b>Subject:</b><?php echo $value['subject']; ?></p>
+            <span class="ms-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </span>
+          </div>
+          <p class="chevron-expand-text">
+            <?php echo $value['sent_msg']; ?>
+          </p>
+        </li>
+      <?php endforeach; ?>
     </ul>
   </div>
 </div>
