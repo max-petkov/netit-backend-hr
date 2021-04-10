@@ -242,7 +242,7 @@
     </div>
     <div class="card-body">
       <table class="table table-hover">
-        <thead class="table">
+        <thead class="table table-secondary">
           <tr class="">
             <th>#</th>
             <th>Published job</th>
@@ -355,10 +355,11 @@
                   </div>
                   <div class="card-body">
                     <form method="POST">
+                      <div class="js-scs-msg-send"></div>
                       <div class="form-group mb-2">
                         <label for="to"><b>From:</b></label>
                         <input type="text" class="form-control form-control-sm" name="hr_id" value="<?php echo $value[2]; ?>" disabled>
-                        <input type="hidden" value="<?php echo $value[0]; ?>">
+                        <input type="hidden" value="<?php echo $_SESSION['hr_id']; ?>">
                       </div>
                       <div class="form-group mb-2">
                         <label for="to"> <b>To:</b></label>
