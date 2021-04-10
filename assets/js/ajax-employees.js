@@ -1,8 +1,7 @@
 $(function () {
 
   // Apply job
-  $(document).on('click', '.js-apply-job', function (event) {
-    event.preventDefault();
+  $(document).on('click', '.js-apply-job', function () {
     $apply_button = $(this);
     $apply_button.closest('div')
       .next()
@@ -34,9 +33,10 @@ $(function () {
       });
     });
 
-    // $('.js-motivation-speech') is changed with ('body') & on('click) is changed with ('one) that's how it is not sending multiple times 
-    $('body').one('click', '#send_speech', function (event) {
+
+    $('body').on('click', '#send_speech', function (event) {
       event.preventDefault();
+      event.stopImmediatePropagation();
       $send_speech = $(this);
       $proceed = true;
 
@@ -85,7 +85,14 @@ $(function () {
 
             $send_speech.closest('.card-body').children('#apply_succ_mess').slideDown('slow').addClass('alert alert-success').text('Apply successful!');
             setTimeout(function () {
-              $send_speech.closest('.card-body').children('#apply_succ_mess').slideUp('slow');
+              $send_speech.closest('.card-body').children('#apply_succ_mess').slideUp('slow', function () {
+                $send_speech.closest('.js-motivation-speech').animate({
+                  right: '-544px',
+                  opacity: '0'
+                }, 'slow', function () {
+                  $send_speech.closest('.js-motivation-speech').addClass('d-none');
+                });
+              });
             }, 2000);
           }
         });
