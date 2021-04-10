@@ -1,7 +1,8 @@
 $(function () {
 
   // Apply job
-  $(document).on('click', '.js-apply-job', function () {
+  $(document).on('click', '.js-apply-job', function (event) {
+    event.preventDefault();
     $apply_button = $(this);
     $apply_button.closest('div')
       .next()
@@ -33,7 +34,9 @@ $(function () {
       });
     });
 
-    $('.js-motivation-speech').on('click', '#send_speech', function () {
+    // $('.js-motivation-speech') is changed with ('body') & on('click) is changed with ('one) that's how it is not sending multiple times 
+    $('body').one('click', '#send_speech', function (event) {
+      event.preventDefault();
       $send_speech = $(this);
       $proceed = true;
 
