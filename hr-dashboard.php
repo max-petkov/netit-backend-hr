@@ -369,10 +369,12 @@
                       <div class="form-group mb-2">
                         <label for="subject"><b>Subject:</b></label>
                         <input type="text" class="form-control form-control-sm" name="message_subject" value="">
+                        <div class="js-subject-response-text"></div>
                       </div>
                       <div class="form-group">
                         <label for="message"><b>Message:</b></label>
                         <textarea name="message" class="form-control" rows="6"></textarea>
+                        <div class="js-message-response-text"></div>
                       </div>
                       <button class="js-submit-sending-msg-job-seeker btn btn-primary d-flex align-items-center mt-3">
                         <span>Send</span>
