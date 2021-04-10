@@ -195,7 +195,7 @@
           AND d.is_approved IS null");
         $stmt = $db->query($sql);
         $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $row = $stmt->fetchAll(PDO::FETCH_BOTH);
         ?>
         <li class="nav-item">
           <a id="new_applicants_tab" href="hr-dashboard.php" class="nav-link active">New applicants (<?php echo $stmt->rowCount(); ?>)</a>
@@ -299,7 +299,7 @@
               <td class="w-50">
                 <p class="small mb-0"><b>Date: </b><?php echo $value['applied_date']; ?></p>
                 <p class="mb-2"><b>Name: </b><?php echo "{$value['first_name']} {$value['last_name']}";  ?></p>
-                <div class="d-flex mb-2">
+                <div class="js-job-seeker-toogle-btns d-flex mb-2">
                   <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -314,7 +314,7 @@
                     </svg>
                     View Profile
                   </button>
-                  <button class="btn btn-outline-primary btn-sm d-flex align-items-center">
+                  <button class="js-send-message-job-seeker btn btn-outline-primary btn-sm d-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-reply" viewBox="0 0 16 16">
                       <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
                     </svg>
@@ -348,33 +348,41 @@
                   </div>
                 </div>
                 <!-- SEND MESSAGE -->
-                <div class="card shadow p-3 mb-5 bg-body rounded d-none">
-                  <div class="d-flex justify-content-between mt-4">
-                    <div class="ms-3">
-                      <h4 class="card-text">Send message:</h4>
-
-                    </div>
+                <div class="js-message-job-seeker-box card shadow rounded d-none">
+                  <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+                    <h4 class="m-0">Send message:</h4>
+                    <button class="btn-close align-self-end"></button>
                   </div>
                   <div class="card-body">
-                    <form action="#">
+                    <form method="POST">
                       <div class="form-group mb-2">
-                        <label for="to">From:</label>
-                        <input type="email" class="form-control form-control-sm" name="" value="$company_email" disabled>
+                        <label for="to"><b>From:</b></label>
+                        <input type="text" class="form-control form-control-sm" name="hr_id" value="<?php echo $value[2]; ?>" disabled>
+                        <input type="hidden" value="<?php echo $value[0]; ?>">
                       </div>
                       <div class="form-group mb-2">
-                        <label for="to">To:</label>
-                        <input type="email" class="form-control form-control-sm" name="" value="$candidate_email" disabled>
+                        <label for="to"> <b>To:</b></label>
+                        <input type="email" class="form-control form-control-sm" name="job_seeker_id" value="<?php echo $value['first_name']; ?>" disabled>
+                        <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
                       </div>
                       <div class="form-group mb-2">
-                        <label for="subject">Subject:</label>
-                        <input type="text" class="form-control form-control-sm" name="" value="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit, vitae.">
+                        <label for="subject"><b>Subject:</b></label>
+                        <input type="text" class="form-control form-control-sm" name="message_subject" value="">
                       </div>
                       <div class="form-group">
-                        <label for="message">Message:</label>
-                        <textarea name="" id="" class="form-control" rows="6">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos labore amet, saepe unde asperiores, nemo eos adipisci laboriosam doloribus perspiciatis commodi consectetur, a aperiam molestiae!
-                        </textarea>
+                        <label for="message"><b>Message:</b></label>
+                        <textarea name="message" class="form-control" rows="6"></textarea>
                       </div>
-                      <input type="submit" class="btn btn-primary mt-3" value="Send message">
+                      <button class="js-submit-sending-msg-job-seeker btn btn-primary d-flex align-items-center mt-3">
+                        <span>Send</span>
+                        <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="16.987" height="16.557" viewBox="0 0 16.987 16.557">
+                          <g id="send" transform="translate(0 -6.196)">
+                            <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                              <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                            </g>
+                          </g>
+                        </svg>
+                      </button>
                     </form>
                   </div>
                 </div>
@@ -508,6 +516,7 @@
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="assets/js/message-hr--job-seeker.js"></script>
 <script src="assets/js/ajax-hr.js"></script>
 
 </body>

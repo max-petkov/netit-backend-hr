@@ -1,8 +1,5 @@
 <?php include 'src/database.php'; ?>
 
-<!-- Update published job -->
-<!-- <div class="d-none js-update-publish-job-form"></div> -->
-
 <!-- View in-active published jobs -->
 <div class="container">
   <div class="card">
