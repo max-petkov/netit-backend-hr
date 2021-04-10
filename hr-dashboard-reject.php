@@ -173,8 +173,8 @@
   </div>
 <?php endwhile; ?>
 <!-- Applicants -->
-<div class="container-sm mt-4">
-  <div class="card shadow-lg rounded">
+<div id="applicants_container" class="container-sm mt-4">
+  <div id="applicants_data" class="card shadow-lg rounded">
     <div class="card-header">
       <h4 class="my-3">Applicants</h4>
       <ul class="nav nav-tabs card-header-tabs">
@@ -196,7 +196,7 @@
         $stmt3->execute();
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard.php" class="nav-link">New applicants (<?php echo $stmt3->rowCount(); ?>)</a>
+          <a id="new_applicants_tab" href="hr-dashboard.php" class="nav-link">New applicants (<?php echo $stmt3->rowCount(); ?>)</a>
         </li>
         <?php
         $sql2 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
@@ -215,7 +215,7 @@
         $stmt2->execute();
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard-approved.php" class="nav-link">Approved (<?php echo $stmt2->rowCount(); ?>)</a>
+          <a id="approved_applicants_tab" href="hr-dashboard-approved.php" class="nav-link">Approved (<?php echo $stmt2->rowCount(); ?>)</a>
         </li>
         <?php
         $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
@@ -236,7 +236,7 @@
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard-reject.php" class="nav-link active">Reject (<?php echo $stmt->rowCount(); ?>)</a>
+          <a id="reject_applicants_tab" href="hr-dashboard-reject.php" class="nav-link active">Reject (<?php echo $stmt->rowCount(); ?>)</a>
         </li>
       </ul>
     </div>

@@ -198,7 +198,7 @@
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard.php" class="nav-link active">New applicants (<?php echo $stmt->rowCount(); ?>)</a>
+          <a id="new_applicants_tab" href="hr-dashboard.php" class="nav-link active">New applicants (<?php echo $stmt->rowCount(); ?>)</a>
         </li>
         <?php
         $sql2 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
@@ -217,7 +217,7 @@
         $stmt2->execute();
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard-approved.php" class="nav-link">Approved (<?php echo $stmt2->rowCount(); ?>)</a>
+          <a id="approved_applicants_tab" href="hr-dashboard-approved.php" class="nav-link">Approved (<?php echo $stmt2->rowCount(); ?>)</a>
         </li>
         <?php
         $sql3 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
@@ -236,7 +236,7 @@
         $stmt3->execute();
         ?>
         <li class="nav-item">
-          <a href="hr-dashboard-reject.php" class="nav-link">Reject (<?php echo $stmt3->rowCount(); ?>)</a>
+          <a id="reject_applicants_tab" href="hr-dashboard-reject.php" class="nav-link">Reject (<?php echo $stmt3->rowCount(); ?>)</a>
         </li>
       </ul>
     </div>
@@ -380,12 +380,30 @@
                 </div>
               </td>
               <td id="is_interviewed" class="text-center">
-                <div class="d-flex justify-content-center">
-                  <button class="js-interview-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
-                  <button class="js-interview-answer btn btn-danger btn-sm" value="N">No</button>
-                  <input type="hidden" value="<?php echo $value['job_id']; ?>">
-                  <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
-                </div>
+                <?php if ($value['is_interviewed'] === 'Y') : ?>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-check2-circle text-success" viewBox="0 0 16 16">
+                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+                  </svg>
+                <?php elseif ($value['is_interviewed'] === 'N') : ?>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x-circle text-danger" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                  </svg>
+                <?php else : ?>
+                  <div class="d-flex justify-content-center">
+                    <button class="js-interview-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
+                    <button class="js-interview-answer btn btn-danger btn-sm" value="N">No</button>
+                    <span class="tooltip-icon ms-3" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your decision can't be reversed!">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                      </svg>
+                    </span>
+                    <input type="hidden" value="<?php echo $value['job_id']; ?>">
+                    <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                  </div>
+                <?php endif; ?>
               </td>
               <td id="is_approved" class="text-center">
                 <div class="d-flex justify-content-center">
