@@ -33,7 +33,10 @@ $(function () {
       });
     });
 
-    $('.js-motivation-speech').on('click', '#send_speech', function () {
+
+    $('body').on('click', '#send_speech', function (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
       $send_speech = $(this);
       $proceed = true;
 
@@ -82,7 +85,14 @@ $(function () {
 
             $send_speech.closest('.card-body').children('#apply_succ_mess').slideDown('slow').addClass('alert alert-success').text('Apply successful!');
             setTimeout(function () {
-              $send_speech.closest('.card-body').children('#apply_succ_mess').slideUp('slow');
+              $send_speech.closest('.card-body').children('#apply_succ_mess').slideUp('slow', function () {
+                $send_speech.closest('.js-motivation-speech').animate({
+                  right: '-544px',
+                  opacity: '0'
+                }, 'slow', function () {
+                  $send_speech.closest('.js-motivation-speech').addClass('d-none');
+                });
+              });
             }, 2000);
           }
         });
@@ -203,48 +213,6 @@ $(function () {
 
     }
   });
-
-  // // Refreshing job list elements and lazy load list items
-  // (function refresh_content() {
-  //   $('#published_job_list').load('employee-dashboard.php .job_li', setTimeout(refresh_content, 5000), function () {
-  //     $("#published_job_list li").slice(10).hide();
-  //     let mincount = 10;
-  //     let maxcount = 20;
-  //     $(window).on('scroll', function () {
-  //       if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
-  //         $("#published_job_list li").slice(mincount, maxcount).show();
-  //         mincount = mincount + 10;
-  //         maxcount = maxcount + 10;
-  //       }
-  //     });
-  //   });
-  // })();
-
-  // // REFRESH JOB COUNTER on every 5 seconds
-  // (function refresh_frontend_tag_counter() {
-  //   $('#refresh_frontend_tag').load('employee-dashboard.php #refresh_frontend_tag', setTimeout(refresh_frontend_tag_counter, 5000));
-  // })();
-
-  // (function refresh_backend_tag_counter() {
-  //   $('#refresh_backend_tag').load('employee-dashboard.php #refresh_backend_tag', setTimeout(refresh_backend_tag_counter, 5000));
-  // })();
-
-  // (function refresh_fullstack_tag_counter() {
-  //   $('#refresh_fullstack_tag').load('employee-dashboard.php #refresh_fullstack_tag', setTimeout(refresh_fullstack_tag_counter, 5000));
-  // })();
-
-  // (function refresh_qa_tag_counter() {
-  //   $('#refresh_qa_tag').load('employee-dashboard.php #refresh_qa_tag', setTimeout(refresh_qa_tag_counter, 5000));
-  // })();
-
-  // (function refresh_mobdev_tag_counter() {
-  //   $('#refresh_mobdev_tag').load('employee-dashboard.php #refresh_mobdev_tag', setTimeout(refresh_mobdev_tag_counter, 5000));
-  // })();
-
-  // (function refresh_ux_ui_tag_counter() {
-  //   $('#refresh_ux_ui_tag').load('employee-dashboard.php #refresh_ux_ui_tag', setTimeout(refresh_ux_ui_tag_counter, 5000));
-  // })();
-
 
   // Update Employee profile 
   $('#job_seeker_profile_form').on('submit', function (event) {
@@ -513,7 +481,6 @@ $(function () {
           website.val(response.website);
           short_introduction.val(response.short_introduction);
 
-
         },
         error: function () {
           console.log('error');
@@ -521,6 +488,22 @@ $(function () {
       });
     }
 
+  });
+
+  // Update inbox counter
+  $('body').on('click', '.message_icon', function () {
+    if ($(this).children('span').text() !== '0') {
+      $.ajax({
+        url: 'src/inbox-counter.php',
+        method: 'post',
+        data: {
+          inbox_job_seeker_counter: 'Y'
+        },
+        success: function () {
+          $('#inbox_job_seeker_counter_container').load('employee-dashboard.php #inbox_job_seeker_counter');
+        }
+      });
+    }
   });
 
 })

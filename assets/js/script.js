@@ -44,7 +44,6 @@
    $(function () {
 
      let message_box = $('.message_box');
-     let message_icon = $('.message_icon');
      let application_open = $('#addplication_button');
      let application_box = $('.application_box');
      let profile_open = $('#profile_button');
@@ -54,40 +53,34 @@
      let $hr_open = $('#hr_button');
      let $hr_box = $('.js_hr_box');
      let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form, .js_hr_box');
+     let $sent_tab = $('#sent_tab');
+     
+     // Message icon click event
+     $('body').on('click', '.message_icon', function () {
+       if (message_box.hasClass('d-none')) {
+         message_box.removeClass('d-none').animate({
+           right: '32px',
+           opacity: '1'
+         }, 'fast');
+       }
+     });
 
-     // Message box 
-     message_icon.on({
-       'click': function () {
-         if (message_box.hasClass('d-none')) {
-           message_box.removeClass('d-none').animate({
-             right: '32px',
-             opacity: '1'
-           }, 'fast');
-         }
-       },
+    //  Change message icon on hover
+     $('body').on('mouseenter', '.message_icon', function () {
+       $(this).find('#envelope_close').addClass('d-none');
+       $(this).find('#envelope_open').removeClass('d-none');
+     });
 
-       'mouseenter': function () {
-         $(this).find('#envelope_close').addClass('d-none');
-         $(this).find('#envelope_open').removeClass('d-none');
-       },
-
-       'mouseleave': function () {
-         $(this).find('#envelope_open').addClass('d-none');
-         $(this).find('#envelope_close').removeClass('d-none');
-       },
-
-
+     $('body').on('mouseleave', '.message_icon', function () {
+       $(this).find('#envelope_open').addClass('d-none');
+       $(this).find('#envelope_close').removeClass('d-none');
      });
 
      // Text expanding on message
      $('.chevron-expand-text').slideUp();
-
-     $('.chevron_btn').on('click', function () {
-
+     $('body').on('click', '.chevron_btn', function () {
        $(this).find('span').toggleClass('chevron-animation-open');
-
        $(this).next().slideToggle();
-
      });
 
      // Application box
@@ -154,13 +147,39 @@
        }
      });
 
+     //  Message box tabs
+     $sent_tab.closest('.nav').siblings('#sent_ul').slideUp();
+     $sent_tab.on('click', function () {
+       $sent_tab.closest('.nav')
+         .siblings('#inbox_ul')
+         .slideUp(function () {
+           $sent_tab.prev().children('a').removeClass('active');
+           $sent_tab.children('a').addClass('active');
+           $sent_tab.closest('.nav').siblings('#sent_ul').slideDown();
+         })
+     });
+
+     $('#inbox_tab').on('click', function () {
+       $inbox_tab = $('#inbox_tab');
+       $inbox_tab.closest('.nav')
+         .siblings('#sent_ul')
+         .slideUp(function () {
+           $inbox_tab.next().children('a').removeClass('active');
+           $inbox_tab.children('a').addClass('active');
+           $inbox_tab.closest('.nav').siblings('#inbox_ul').slideDown();
+         })
+     });
+
      // If there are no results on employee-dashboard published jobs
      if ($('#published_job_list li').length === 0) {
        $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
      }
 
-    // Bootstrap 5 tooltip FIY-> data-bs-animation="false" will prevent from dissapering the tooltip after multiple hovers
-    $('[data-bs-toggle="tooltip"]').tooltip('enable', {boundary: 'window'});
+     // Bootstrap 5 tooltip FIY-> data-bs-animation="false" will prevent from dissapering the tooltip after multiple hovers
+     $('body').tooltip({
+       boundary: 'window',
+       selector: '[data-bs-toggle="tooltip"]'
+     });
 
-     
+
    })

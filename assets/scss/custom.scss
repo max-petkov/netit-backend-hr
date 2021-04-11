@@ -116,6 +116,14 @@ body {
   right: -544px;
 }
 
+.js-confirm-approve{
+  max-width: 768px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  right: -544px;
+}
+
 .tooltip-icon {
   cursor: pointer;
   transition: 0.3s;
@@ -125,3 +133,9 @@ body {
   transform: scale(0.95);
 }
 
+.hover-msg-box:hover {
+  cursor: pointer;
+}
+.cursor-pointer:hover {
+  cursor: pointer;
+}

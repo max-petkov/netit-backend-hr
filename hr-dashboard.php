@@ -26,7 +26,11 @@
           <ul class="navbar-nav">
             <?php
             $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-            $sql = ("SELECT a.*, b.id, b.company_name, b.address, b.website, b.slogan, b.frontend_branch, b.backend_branch, b.fullstack_branch, b.qa_branch, b.mobdev_branch, b.ux_ui_branch, b.company_description FROM tb_hr AS a INNER JOIN tb_company_profile AS b ON a.company_id=b.id WHERE a.id={$_SESSION['hr_id']}");
+            $sql = ("SELECT a.*, b.id, b.company_name, b.address, b.website, b.slogan, b.frontend_branch, b.backend_branch, b.fullstack_branch, b.qa_branch, b.mobdev_branch, b.ux_ui_branch, b.company_description 
+            FROM tb_hr AS a 
+            INNER JOIN tb_company_profile AS b 
+            ON a.company_id=b.id 
+            WHERE a.id='{$_SESSION['hr_id']}'");
             $stmt = $db->query($sql);
             $stmt->execute();
             while ($row = $stmt->fetch()) :
@@ -56,8 +60,7 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li>
-                    <a class="message_icon dropdown-item xsm-text-class" href="#">Messages<span class="badge rounded-pill bg-danger ms-1">3</span>
-                    </a>
+                    <a class="message_icon dropdown-item xsm-text-class" href="#">Messages</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="dropdown-item xsm-text-class d-flex align-items-center">
@@ -107,18 +110,23 @@
               </li>
           </ul>
         </div>
-
         <!-- message icon -->
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="#" class="message_icon nav-link d-flex align-items-center">
+          <li id="inbox_hr_counter_container" class="nav-item">
+            <a id="inbox_hr_counter" href="#" class="message_icon nav-link d-flex align-items-center">
               <svg id="envelope_close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="me-1 envelope_closed bi bi-envelope" viewBox="0 0 16 16">
                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
               </svg>
               <svg id="envelope_open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="me-1 d-none bi bi-envelope-open" viewBox="0 0 16 16">
                 <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z" />
               </svg>
-              <span class="badge bg-danger rounded-pill">3</span>
+              <?php
+              $sql2 = ("SELECT inbox_msg, hr_id, is_viewed FROM tb_msg_box_hr WHERE inbox_msg IS NOT NULL AND is_viewed IS NULL AND hr_id='{$_SESSION['hr_id']}'");
+              $stmt2 = $db->query($sql2);
+              $stmt2->execute();
+              $result2 = $stmt2->rowCount();
+              ?>
+              <span class="badge bg-danger rounded-pill"><?php echo $result2; ?></span>
             </a>
           </li>
         </ul>
@@ -168,23 +176,77 @@
     <!-- <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" class="me-1" width="80px" alt=""> -->
   </div>
 <?php endwhile; ?>
+
 <!-- Applicants -->
-<div class="container-sm mt-4">
-  <div class="card mx-auto shadow-lg rounded">
-    <div class="d-flex mt-3 mb-2 px-3">
-      <h4 class="m-0">Applicants</h4>
-      <!-- applicant icon -->
-      <span href="#" class="message_icon nav-link d-flex align-items-center p-0 ms-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="me-1 bi bi-person-badge" viewBox="0 0 16 16">
-          <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-          <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z" />
-        </svg>
-        <span class="badge bg-danger rounded-pill">4</span>
-      </span>
+<div id="applicants_container" class="container-sm mt-4">
+  <div id="applicants_data" class="card shadow-lg rounded">
+    <div class="card-header">
+      <h4 class="my-3">Applicants</h4>
+      <ul class="nav nav-tabs card-header-tabs">
+        <?php
+        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+        $sql = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
+          FROM tb_hr AS a 
+          INNER JOIN tb_company_profile AS b 
+          ON b.id=a.company_id
+          INNER JOIN tb_published_jobs AS c 
+          ON c.company_id=b.id
+          INNER JOIN tb_applied_jobs AS d
+          ON d.job_id = c.id
+          INNER JOIN tb_job_seeker_profile AS e
+          ON d.job_seeker_id = e.id
+          WHERE  a.id='{$_SESSION['hr_id']}'
+          AND d.is_approved IS null");
+        $stmt = $db->query($sql);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_BOTH);
+        ?>
+        <li class="nav-item">
+          <a id="new_applicants_tab" href="hr-dashboard.php" class="nav-link active">New applicants (<?php echo $stmt->rowCount(); ?>)</a>
+        </li>
+        <?php
+        $sql2 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
+          FROM tb_hr AS a 
+          INNER JOIN tb_company_profile AS b 
+          ON b.id=a.company_id
+          INNER JOIN tb_published_jobs AS c 
+          ON c.company_id=b.id
+          INNER JOIN tb_applied_jobs AS d
+          ON d.job_id = c.id
+          INNER JOIN tb_job_seeker_profile AS e
+          ON d.job_seeker_id = e.id
+          WHERE  a.id='{$_SESSION['hr_id']}'
+          AND d.is_approved='Y'");
+        $stmt2 = $db->query($sql2);
+        $stmt2->execute();
+        ?>
+        <li class="nav-item">
+          <a id="approved_applicants_tab" href="hr-dashboard-approved.php" class="nav-link">Approved (<?php echo $stmt2->rowCount(); ?>)</a>
+        </li>
+        <?php
+        $sql3 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
+          FROM tb_hr AS a 
+          INNER JOIN tb_company_profile AS b 
+          ON b.id=a.company_id
+          INNER JOIN tb_published_jobs AS c 
+          ON c.company_id=b.id
+          INNER JOIN tb_applied_jobs AS d
+          ON d.job_id = c.id
+          INNER JOIN tb_job_seeker_profile AS e
+          ON d.job_seeker_id = e.id
+          WHERE  a.id='{$_SESSION['hr_id']}'
+          AND d.is_approved='N'");
+        $stmt3 = $db->query($sql3);
+        $stmt3->execute();
+        ?>
+        <li class="nav-item">
+          <a id="reject_applicants_tab" href="hr-dashboard-reject.php" class="nav-link">Reject (<?php echo $stmt3->rowCount(); ?>)</a>
+        </li>
+      </ul>
     </div>
     <div class="card-body">
       <table class="table table-hover">
-        <thead class="table">
+        <thead class="table table-secondary">
           <tr class="">
             <th>#</th>
             <th>Published job</th>
@@ -194,152 +256,192 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>
-              <p class="m-0 small"><span class="fw-bold">Date:</span> 2021-04-08</p>
-              <p class="m-0"><b>Title:</b> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur, aspernatur.</p>
-              <span>tags</span>
-              <span>tags</span>
-              <span>tags</span>
-              <button class="mt-3 me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                </svg>
-                Read more
-              </button>
-            </td>
-            <td>
-              <p class="small mb-0"><b>Date: </b>03.12.2021</p>
-              <p class="mb-2"><b>Name:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores consequatur quaesequi fuga animi.</p>
-              <div class="d-flex mb-2">
-                <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
+          <?php foreach ($row as $key => $value) : ?>
+            <tr class="js-applicants-data">
+              <th scope="row" class="js-applicants-counter">
+                <?php echo $key + 1; ?>
+              </th>
+              <td class="w-50">
+                <p class="m-0 small"><span class="fw-bold">Date:</span> <?php echo $value['published_date']; ?></p>
+                <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
+                  echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
+                  echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
+                  echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
+                  echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
+                  echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
+                  echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
+                }
+                ?>
+                <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
+                <p class="m-0"><b>Title:</b> <?php echo $value['job_title']; ?></p>
+                <p class="mt-3 d-none">
+                  <?php echo $value['job_description']; ?>
+                </p>
+                <button class="mt-3 me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                     <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                   </svg>
-                  Motivation Speech
+                  Read more
                 </button>
-                <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+              </td>
+              <td class="w-50">
+                <p class="small mb-0"><b>Date: </b><?php echo $value['applied_date']; ?></p>
+                <p class="mb-2"><b>Name: </b><?php echo "{$value['first_name']} {$value['last_name']}";  ?></p>
+                <div class="js-job-seeker-toogle-btns d-flex mb-2">
+                  <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                    Motivation Speech
+                  </button>
+                  <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                    View Profile
+                  </button>
+                  <button class="js-send-message-job-seeker btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-reply" viewBox="0 0 16 16">
+                      <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                    </svg>
+                    Send Message
+                  </button>
+                </div>
+                <p class="d-none">
+                  <?php echo $value['motivation_speech']; ?>
+                </p>
+                <!-- User profile -->
+                <div id="candidate_profile" class="d-none card shadow rounded">
+                  <div class="d-flex justify-content-between mt-4">
+                    <div class="ms-3">
+                      <h4 class="card-text"><?php echo "{$value['first_name']}'s profile:"; ?></h4>
+                      <button class="btn btn-primary btn-sm d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-download" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                        Resume
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <p class="m-0"><b>Email: </b><?php echo $value['email']; ?></p>
+                    <p class="m-0"><b>Website: </b>
+                      <a href="<?php echo $value['website']; ?>" target="_blank"><?php echo $value['website']; ?></a>
+                    </p>
+                    <p class="m-0"><b>Short introduction:</b></p>
+                    <p><?php echo $value['short_introduction']; ?></p>
+                  </div>
+                </div>
+                <!-- SEND MESSAGE -->
+                <div class="js-message-job-seeker-box card shadow rounded d-none">
+                  <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+                    <h4 class="m-0">Send message:</h4>
+                    <button class="btn-close align-self-end"></button>
+                  </div>
+                  <div class="card-body">
+                    <form method="POST">
+                      <div class="js-scs-msg-send"></div>
+                      <div class="form-group mb-2">
+                        <label for="to"><b>From:</b></label>
+                        <input type="text" class="form-control form-control-sm" name="hr_id" value="<?php echo $value[2]; ?>" disabled>
+                        <input type="hidden" value="<?php echo $_SESSION['hr_id']; ?>">
+                      </div>
+                      <div class="form-group mb-2">
+                        <label for="to"> <b>To:</b></label>
+                        <input type="email" class="form-control form-control-sm" name="job_seeker_id" value="<?php echo $value['first_name']; ?>" disabled>
+                        <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                      </div>
+                      <div class="form-group mb-2">
+                        <label for="subject"><b>Subject:</b></label>
+                        <input type="text" class="form-control form-control-sm" name="message_subject" value="">
+                        <div class="js-subject-response-text"></div>
+                      </div>
+                      <div class="form-group">
+                        <label for="message"><b>Message:</b></label>
+                        <textarea name="message" class="form-control" rows="6"></textarea>
+                        <div class="js-message-response-text"></div>
+                      </div>
+                      <button class="js-submit-sending-msg-job-seeker btn btn-primary d-flex align-items-center mt-3">
+                        <span>Send</span>
+                        <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="16.987" height="16.557" viewBox="0 0 16.987 16.557">
+                          <g id="send" transform="translate(0 -6.196)">
+                            <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                              <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                            </g>
+                          </g>
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </td>
+              <td id="is_interviewed" class="text-center">
+                <?php if ($value['is_interviewed'] === 'Y') : ?>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-check2-circle text-success" viewBox="0 0 16 16">
+                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
                   </svg>
-                  View Profile
-                </button>
-                <button class="btn btn-outline-primary btn-sm d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-reply" viewBox="0 0 16 16">
-                    <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                <?php elseif ($value['is_interviewed'] === 'N') : ?>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x-circle text-danger" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                   </svg>
-                  Send Message
-                </button>
-              </div>
-              <p class="d-none">
-                <!-- MOTIVATIONAL SPEACH WILL EXPAND ON CLICK -->
-                <br>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quasi tenetur autem fuga, magni
-                iusto reprehenderit sunt consectetur magnam ullam doloremque nulla perferendis laboriosam, praesentium
-                delectus modi incidunt at laborum.
-              </p>
-              <!-- User profile -->
-              <!-- USER PROFILE WILL EXPAND ON CLICK -->
-              <div class="card shadow p-3 mb-5 bg-body rounded d-none">
-                <div class="d-flex justify-content-between mt-4">
-                  <div class="ms-3">
-                    <h4 class="card-text">Maximilian's profile:</h4>
-                    <button class="btn btn-primary btn-sm d-flex align-items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-download" viewBox="0 0 16 16">
-                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                <?php else : ?>
+                  <div class="d-flex justify-content-center">
+                    <button class="js-interview-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
+                    <button class="js-interview-answer btn btn-danger btn-sm" value="N">No</button>
+                    <span class="tooltip-icon ms-3" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your decision can't be reversed!">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                       </svg>
-                      Resume
-                    </button>
+                    </span>
+                    <input type="hidden" value="<?php echo $value['job_id']; ?>">
+                    <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
                   </div>
+                <?php endif; ?>
+              </td>
+              <td id="is_approved" class="text-center">
+                <div class="d-flex justify-content-center">
+                  <button class="js-approve-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
+                  <button class="js-approve-answer btn btn-danger btn-sm" value="N">No</button>
+                  <input type="hidden" value="<?php echo $value['job_id']; ?>">
+                  <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                  <input type="hidden" name="candidate_name" value="<?php echo $value['first_name']; ?>">
                 </div>
-                <div class="card-body">
-                  <div class="form-group mb-2">
-                    <label for="first_name">First name</label>
-                    <input type="text" class="form-control form-control-sm" name="first_name" value="$employee_last_name" disabled>
-                  </div>
-                  <div class="form-group mb-2">
-                    <label for="last_name">Last name</label>
-                    <input type="text" class="form-control form-control-sm" name="last_name" value="$employee_first_name" disabled>
-                  </div>
-                  <div class="form-group mb-2">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control form-control-sm" name="email" value="$employee_email" disabled>
-                  </div>
-                  <div class="form-group mb-2">
-                    <label for="website_employee">Website</label>
-                    <input type="text" class="form-control form-control-sm" name="website_employee" value="$employee_website" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label for="short_introduction_employee">Short introduction</label>
-                    <textarea name="bio" class="form-control form-control-sm" id="bio" rows="6" placeholder="" disabled>
-- 👋 Hi, I’m @max-petkov
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-                </textarea>
-                  </div>
-                </div>
-              </div>
-
-
-              <!-- SEND MESSAGE -->
-              <div class="card shadow p-3 mb-5 bg-body rounded d-none">
-                <div class="d-flex justify-content-between mt-4">
-                  <div class="ms-3">
-                    <h4 class="card-text">Send message:</h4>
-
-                  </div>
-                </div>
-                <div class="card-body">
-                  <form action="#">
-                    <div class="form-group mb-2">
-                      <label for="to">From:</label>
-                      <input type="email" class="form-control form-control-sm" name="" value="$company_email" disabled>
-                    </div>
-                    <div class="form-group mb-2">
-                      <label for="to">To:</label>
-                      <input type="email" class="form-control form-control-sm" name="" value="$candidate_email" disabled>
-                    </div>
-                    <div class="form-group mb-2">
-                      <label for="subject">Subject:</label>
-                      <input type="text" class="form-control form-control-sm" name="" value="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit, vitae.">
-                    </div>
-                    <div class="form-group">
-                      <label for="message">Message:</label>
-                      <textarea name="" id="" class="form-control" rows="6">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos labore amet, saepe unde asperiores, nemo eos adipisci laboriosam doloribus perspiciatis commodi consectetur, a aperiam molestiae!
-                        </textarea>
-                    </div>
-                    <input type="submit" class="btn btn-primary mt-3" value="Send message">
-                  </form>
-                </div>
-              </div>
-            </td>
-            <td class="text-center">
-              <div class="d-flex justify-content-center">
-                <button class="btn btn-success btn-sm me-2">Yes</button>
-                <button class="btn btn-danger btn-sm">No</button>
-              </div>
-            </td>
-            <td class="text-center">
-              <div class="d-flex justify-content-center">
-                <button class="btn btn-success btn-sm me-2">Yes</button>
-                <button class="btn btn-danger btn-sm">No</button>
-              </div>
-            </td>
-          </tr>
+                <div class="js-confirm-approve"></div>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
+      <?php if ($stmt->rowCount() === 0) : ?>
+        <td>
+          <h5>There are no applicants...</h5>
+        </td>
+      <?php endif; ?>
     </div>
   </div>
 </div>
-
-
 
 <!-- Message container -->
 <div class="card shadow-lg p-3 mb-5 bg-body rounded message_box d-none">
@@ -347,63 +449,153 @@
     <h4 class="m-0">Messages:</h4>
     <button class="btn-close align-self-end"></button>
   </div>
-
   <div class="card-body">
-    <ul class="list-group-flush p-0 pt-3">
-      <li class="list-group-item pb-0">
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="text-muted small">sent by <b class="text-dark">HR</b></p>
-          <p class="small">03.13.2021</p>
-        </div>
-        <div class="chevron_btn d-flex justify-content-between align-items-start">
-          <p><b>Subject:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe.</p>
-          <span class="ms-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </span>
-        </div>
-        <p class="chevron-expand-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae veniam beatae, quibusdam, est ex itaque
-          accusantium ea aut similique impedit vel, ullam cupiditate odio! Sequi.
-        </p>
+    <ul class="nav nav-tabs">
+      <li id="inbox_tab" class="nav-item hover-msg-box">
+        <a class="nav-link active">Inbox</a>
       </li>
-      <li class="list-group-item pb-0">
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="text-muted small">sent by <b class="text-dark">Family Studio</b></p>
-          <p class="small">03.13.2021</p>
-        </div>
-        <div class="chevron_btn d-flex justify-content-between align-items-start">
-          <p><b>Subject:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe.</p>
-          <span class="ms-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </span>
-        </div>
-        <p class="chevron-expand-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi eveniet nobis maxime eos reprehenderit
-          neque quibusdam! Labore commodi error illum laborum, rerum praesentium sint?
-        </p>
+      <li id="sent_tab" class="nav-item hover-msg-box">
+        <a class="nav-link">Sent</a>
       </li>
-      <li class="list-group-item pb-0">
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="text-muted small">sent by <b class="text-dark">Artromedika</b></p>
-          <p class="small">03.13.2021</p>
-        </div>
-        <div class="chevron_btn d-flex justify-content-between align-items-start">
-          <p><b>Subject:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. A, saepe.</p>
-          <span class="ms-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+    </ul>
+    <ul id="inbox_ul" class="list-group-flush p-0 pt-3">
+      <?php
+      $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+      $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name, d.id, d.username
+      FROM tb_msg_box_hr AS a 
+      LEFT JOIN tb_company_profile AS b 
+      ON a.company_id=b.id 
+      LEFT JOIN tb_job_seeker_profile AS c 
+      ON c.id=a.job_seeker_id
+      LEFT JOIN tb_hr AS d
+      ON d.id='{$_SESSION['hr_id']}'
+      WHERE a.hr_id='{$_SESSION['hr_id']}'
+      AND inbox_msg IS NOT NULL
+      AND sent_msg IS NULL
+      ORDER BY a.id DESC");
+      $stmt = $db->query($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+      ?>
+      <?php foreach ($result as $value) : ?>
+        <li class="js-inbox-li list-group-item pb-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-muted small">sent by <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
+            <p class="small"><?php echo $value['send_date']; ?></p>
+          </div>
+          <div class="chevron_btn d-flex justify-content-between align-items-start">
+            <p><b>Subject:</b><?php echo $value['subject']; ?></p>
+            <span class="ms-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </span>
+          </div>
+          <p class="chevron-expand-text">
+            <?php echo $value['inbox_msg']; ?>
+          </p>
+          <button class="js-reply-job-seeker btn btn-primary btn-sm d-flex align-items-center mb-3">
+            <span>Reply</span>
+            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+              <g id="send" transform="translate(0 -6.196)">
+                <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                  <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                </g>
+              </g>
             </svg>
-          </span>
-        </div>
-        <p class="chevron-expand-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi eveniet nobis maxime eos reprehenderit
-          neque quibusdam! Labore commodi error illum laborum, rerum praesentium sint?
-        </p>
-      </li>
+          </button>
+          <!-- REPLY MESSAGE -->
+          <div class="js-message-job-seeker-box card shadow rounded mb-4 d-none">
+            <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+              <h4 class="m-0">Send message:</h4>
+              <!-- <button class="js-close-reply btn-close align-self-end"></button> -->
+              <span class="js-close-reply cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+              </span>
+            </div>
+            <div class="card-body">
+              <form method="POST">
+                <div class="js-scs-msg-send"></div>
+                <div class="form-group mb-2">
+                  <label for="to"><b>From:</b></label>
+                  <input type="text" class="form-control form-control-sm" name="reply_hr_id" value="<?php echo $value['username']; ?>" disabled>
+                  <input type="hidden" value="<?php echo $_SESSION['hr_id']; ?>">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="to"> <b>To:</b></label>
+                  <input type="email" class="form-control form-control-sm" name="reply_job_seeker_id'" value="<?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?>" disabled>
+                  <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="subject"><b>Subject:</b></label>
+                  <input type="text" class="form-control form-control-sm" name="message_subject" value="">
+                  <div class="js-subject-response-text"></div>
+                </div>
+                <div class="form-group">
+                  <label for="message"><b>Message:</b></label>
+                  <textarea name="message" class="form-control" rows="6"></textarea>
+                  <div class="js-message-response-text"></div>
+                </div>
+                <button class="js-submit-sending-msg-job-seeker btn btn-primary btn-sm d-flex align-items-center mt-3">
+                  <span>Send</span>
+                  <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+                    <g id="send" transform="translate(0 -6.196)">
+                      <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                        <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </li>
+      <?php endforeach; ?>
+      <?php if ($stmt->rowCount() === 0) : ?>
+        <h5>There are no inbox messages...</h5>
+      <?php endif; ?>
+    </ul>
+    <ul id="sent_ul" class="list-group-flush p-0 pt-3">
+      <?php
+      $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+      $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name 
+      FROM tb_msg_box_hr AS a 
+      LEFT JOIN tb_company_profile AS b 
+      ON a.company_id=b.id 
+      LEFT JOIN tb_job_seeker_profile AS c 
+      ON c.id=a.job_seeker_id 
+      WHERE a.hr_id='{$_SESSION['hr_id']}'
+      AND inbox_msg IS NULL
+      AND sent_msg IS NOT NULL 
+      ORDER BY a.id DESC");
+      $stmt = $db->query($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      ?>
+      <?php foreach ($result as $value) : ?>
+        <li class="js-sent-li list-group-item pb-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-muted small">sent to <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
+            <p class="small"><?php echo $value['send_date']; ?></p>
+          </div>
+          <div class="chevron_btn d-flex justify-content-between align-items-start">
+            <p><b>Subject: </b><?php echo $value['subject']; ?></p>
+            <span class="ms-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </span>
+          </div>
+          <p class="chevron-expand-text">
+            <?php echo $value['sent_msg']; ?>
+          </p>
+        </li>
+      <?php endforeach; ?>
+      <?php if ($stmt->rowCount() === 0) : ?>
+        <h5>There are no send messages...</h5>
+      <?php endif; ?>
     </ul>
   </div>
 </div>
@@ -419,6 +611,8 @@
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="assets/js/script.js"></script>
+<script src="assets/js/message-hr--job-seeker.js"></script>
+<script src="assets/js/ajax-hr.js"></script>
 
 </body>
 
