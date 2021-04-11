@@ -30,7 +30,7 @@
             FROM tb_hr AS a 
             INNER JOIN tb_company_profile AS b 
             ON a.company_id=b.id 
-            WHERE a.id={$_SESSION['hr_id']}");
+            WHERE a.id='{$_SESSION['hr_id']}'");
             $stmt = $db->query($sql);
             $stmt->execute();
             while ($row = $stmt->fetch()) :
@@ -110,11 +110,10 @@
               </li>
           </ul>
         </div>
-
         <!-- message icon -->
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="#" class="message_icon nav-link d-flex align-items-center">
+          <li id="inbox_hr_counter_container" class="nav-item">
+            <a id="inbox_hr_counter" href="#" class="message_icon nav-link d-flex align-items-center">
               <svg id="envelope_close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="me-1 envelope_closed bi bi-envelope" viewBox="0 0 16 16">
                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
               </svg>
@@ -122,13 +121,12 @@
                 <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z" />
               </svg>
               <?php
-              $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-              $sql = ("SELECT inbox_msg, hr_id FROM tb_msg_box_hr WHERE inbox_msg IS NOT NULL AND hr_id='{$_SESSION['hr_id']}'");
-              $stmt = $db->query($sql);
-              $stmt->execute();
-              $result = $stmt->rowCount();
+              $sql2 = ("SELECT inbox_msg, hr_id, is_viewed FROM tb_msg_box_hr WHERE inbox_msg IS NOT NULL AND is_viewed IS NULL AND hr_id='{$_SESSION['hr_id']}'");
+              $stmt2 = $db->query($sql2);
+              $stmt2->execute();
+              $result2 = $stmt2->rowCount();
               ?>
-              <span class="badge bg-danger rounded-pill"><?php echo $result; ?></span>
+              <span class="badge bg-danger rounded-pill"><?php echo $result2; ?></span>
             </a>
           </li>
         </ul>
@@ -452,34 +450,37 @@
     <button class="btn-close align-self-end"></button>
   </div>
   <div class="card-body">
-    <!-- TODO INBOX TAB WITHOUT AJAX CALL -->
     <ul class="nav nav-tabs">
-      <li class="nav-item hover-msg-box">
-        <a class="nav-link">Inbox</a>
+      <li id="inbox_tab" class="nav-item hover-msg-box">
+        <a class="nav-link active">Inbox</a>
       </li>
-      <li class="nav-item hover-msg-box">
-        <a class="nav-link active">Sent</a>
+      <li id="sent_tab" class="nav-item hover-msg-box">
+        <a class="nav-link">Sent</a>
       </li>
     </ul>
-    <ul class="list-group-flush p-0 pt-3">
+    <ul id="inbox_ul" class="list-group-flush p-0 pt-3">
       <?php
       $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-      $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name 
+      $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name, d.id, d.username
       FROM tb_msg_box_hr AS a 
       LEFT JOIN tb_company_profile AS b 
       ON a.company_id=b.id 
       LEFT JOIN tb_job_seeker_profile AS c 
-      ON c.id=a.job_seeker_id 
-      WHERE a.hr_id='{$_SESSION['hr_id']}' 
-      ORDER BY a.send_date DESC");
+      ON c.id=a.job_seeker_id
+      LEFT JOIN tb_hr AS d
+      ON d.id='{$_SESSION['hr_id']}'
+      WHERE a.hr_id='{$_SESSION['hr_id']}'
+      AND inbox_msg IS NOT NULL
+      AND sent_msg IS NULL
+      ORDER BY a.id DESC");
       $stmt = $db->query($sql);
       $stmt->execute();
-      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $result = $stmt->fetchAll(PDO::FETCH_BOTH);
       ?>
       <?php foreach ($result as $value) : ?>
-        <li class="list-group-item pb-0">
+        <li class="js-inbox-li list-group-item pb-0">
           <div class="d-flex justify-content-between align-items-center">
-            <p class="text-muted small">sent to <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
+            <p class="text-muted small">sent by <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
             <p class="small"><?php echo $value['send_date']; ?></p>
           </div>
           <div class="chevron_btn d-flex justify-content-between align-items-start">
@@ -491,10 +492,110 @@
             </span>
           </div>
           <p class="chevron-expand-text">
+            <?php echo $value['inbox_msg']; ?>
+          </p>
+          <button class="js-reply-job-seeker btn btn-primary btn-sm d-flex align-items-center mb-3">
+            <span>Reply</span>
+            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+              <g id="send" transform="translate(0 -6.196)">
+                <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                  <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                </g>
+              </g>
+            </svg>
+          </button>
+          <!-- REPLY MESSAGE -->
+          <div class="js-message-job-seeker-box card shadow rounded mb-4 d-none">
+            <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+              <h4 class="m-0">Send message:</h4>
+              <!-- <button class="js-close-reply btn-close align-self-end"></button> -->
+              <span class="js-close-reply cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+              </span>
+            </div>
+            <div class="card-body">
+              <form method="POST">
+                <div class="js-scs-msg-send"></div>
+                <div class="form-group mb-2">
+                  <label for="to"><b>From:</b></label>
+                  <input type="text" class="form-control form-control-sm" name="reply_hr_id" value="<?php echo $value['username']; ?>" disabled>
+                  <input type="hidden" value="<?php echo $_SESSION['hr_id']; ?>">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="to"> <b>To:</b></label>
+                  <input type="email" class="form-control form-control-sm" name="reply_job_seeker_id'" value="<?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?>" disabled>
+                  <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                </div>
+                <div class="form-group mb-2">
+                  <label for="subject"><b>Subject:</b></label>
+                  <input type="text" class="form-control form-control-sm" name="message_subject" value="">
+                  <div class="js-subject-response-text"></div>
+                </div>
+                <div class="form-group">
+                  <label for="message"><b>Message:</b></label>
+                  <textarea name="message" class="form-control" rows="6"></textarea>
+                  <div class="js-message-response-text"></div>
+                </div>
+                <button class="js-submit-sending-msg-job-seeker btn btn-primary btn-sm d-flex align-items-center mt-3">
+                  <span>Send</span>
+                  <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+                    <g id="send" transform="translate(0 -6.196)">
+                      <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                        <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </li>
+      <?php endforeach; ?>
+      <?php if ($stmt->rowCount() === 0) : ?>
+        <h5>There are no inbox messages...</h5>
+      <?php endif; ?>
+    </ul>
+    <ul id="sent_ul" class="list-group-flush p-0 pt-3">
+      <?php
+      $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+      $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name 
+      FROM tb_msg_box_hr AS a 
+      LEFT JOIN tb_company_profile AS b 
+      ON a.company_id=b.id 
+      LEFT JOIN tb_job_seeker_profile AS c 
+      ON c.id=a.job_seeker_id 
+      WHERE a.hr_id='{$_SESSION['hr_id']}'
+      AND inbox_msg IS NULL
+      AND sent_msg IS NOT NULL 
+      ORDER BY a.id DESC");
+      $stmt = $db->query($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      ?>
+      <?php foreach ($result as $value) : ?>
+        <li class="js-sent-li list-group-item pb-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-muted small">sent to <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
+            <p class="small"><?php echo $value['send_date']; ?></p>
+          </div>
+          <div class="chevron_btn d-flex justify-content-between align-items-start">
+            <p><b>Subject: </b><?php echo $value['subject']; ?></p>
+            <span class="ms-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </span>
+          </div>
+          <p class="chevron-expand-text">
             <?php echo $value['sent_msg']; ?>
           </p>
         </li>
       <?php endforeach; ?>
+      <?php if ($stmt->rowCount() === 0) : ?>
+        <h5>There are no send messages...</h5>
+      <?php endif; ?>
     </ul>
   </div>
 </div>

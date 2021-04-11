@@ -84,6 +84,7 @@ CREATE TABLE tb_msg_box_job_seeker(
     job_seeker_id INT,
     subject VARCHAR(255),
     inbox_msg VARCHAR(1000),
+    is_viewed VARCHAR(1),
     sent_msg VARCHAR(1000)
 );
 
@@ -95,6 +96,7 @@ CREATE TABLE tb_msg_box_hr(
     job_seeker_id INT,
     subject VARCHAR(255),
     inbox_msg VARCHAR(1000),
+    is_viewed VARCHAR(1),
     sent_msg VARCHAR(1000)
 );
 

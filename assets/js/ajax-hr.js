@@ -151,4 +151,19 @@ $(function () {
     $('#applicants_container').load('hr-dashboard-reject.php #applicants_data')
   });
 
+  // Update inbox counter
+  $('body').on('click', '.message_icon', function () {
+    if ($(this).children('span').text() !== '0') {
+      $.ajax({
+        url: 'src/inbox-counter.php',
+        method: 'post',
+        data: {
+          inbox_hr_counter: 'Y'
+        },
+        success: function () {
+          $('#inbox_hr_counter_container').load('hr-dashboard.php #inbox_hr_counter');
+        }
+      });
+    }
+  });
 })
