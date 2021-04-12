@@ -220,7 +220,7 @@
               <div class="d-flex justify-content-between mt-3 mb-2 px-3">
                 <h4 class="m-0">Send message:</h4>
                 <!-- <button class="js-close-reply btn-close align-self-end"></button> -->
-                <span class="js-close-reply cursor-pointer">
+                <span class="js-close-reply cursor-pointer transform-scale">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                   </svg>
@@ -728,7 +728,7 @@
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
   <script src="assets/js/ajax-employees.js"></script>
-  <script src="assets/js/message-hr--job-seeker.js"></script>
+  <script src="assets/js/message.js"></script>
 </body>
 
 </html>

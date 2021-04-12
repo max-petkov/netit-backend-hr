@@ -17,4 +17,12 @@ include 'database.php';
     $stmt->execute();
   }
 
+  if (isset($_POST['inbox_company_counter'])) {
+    $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+    $sql = ("UPDATE tb_msg_box_company SET is_viewed=:is_viewed WHERE company_id='{$_SESSION['company_id']}'");
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue('is_viewed', $_POST['inbox_company_counter']);
+    $stmt->execute();
+  }
+
 ?>

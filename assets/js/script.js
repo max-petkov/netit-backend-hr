@@ -52,9 +52,12 @@
      let $publish_job_box = $('.publish_job_box');
      let $hr_open = $('#hr_button');
      let $hr_box = $('.js_hr_box');
-     let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form, .js_hr_box');
+     let $open_sending_msg_hr = $('#open_sending_msg_container');
+     let $sending_msg_hr_box = $('#send_msg_hr_box');
+     let $sending_msg_company_box = $('#send_msg_company_box');
+     let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form, .js_hr_box, .js-send-msg-hr-box, .js-send-msg-company-box');
      let $sent_tab = $('#sent_tab');
-     
+
      // Message icon click event
      $('body').on('click', '.message_icon', function () {
        if (message_box.hasClass('d-none')) {
@@ -65,7 +68,7 @@
        }
      });
 
-    //  Change message icon on hover
+     //  Change message icon on hover
      $('body').on('mouseenter', '.message_icon', function () {
        $(this).find('#envelope_close').addClass('d-none');
        $(this).find('#envelope_open').removeClass('d-none');
@@ -118,6 +121,26 @@
      $hr_open.on('click', function () {
        if ($hr_box.hasClass('d-none')) {
          $hr_box.removeClass('d-none').animate({
+           right: '32px',
+           opacity: '1'
+         }, 'fast');
+       }
+     });
+
+     // Sending msg HR box
+     $open_sending_msg_hr.on('click', function () {
+       if ($sending_msg_hr_box.hasClass('d-none')) {
+         $sending_msg_hr_box.removeClass('d-none').animate({
+           right: '32px',
+           opacity: '1'
+         }, 'fast');
+       }
+     });
+
+     // Sending msg Company box
+     $open_sending_msg_hr.on('click', function () {
+       if ($sending_msg_company_box.hasClass('d-none')) {
+         $sending_msg_company_box.removeClass('d-none').animate({
            right: '32px',
            opacity: '1'
          }, 'fast');
@@ -180,6 +203,17 @@
        boundary: 'window',
        selector: '[data-bs-toggle="tooltip"]'
      });
+
+     //  Approved candidates company dashboard
+     $('#approved_candidates').on('click', function () {
+       $('#candidates_container').fadeIn('slow', function () {
+         $('#candidates_container').removeClass('d-none');
+       });
+     });
+
+     $('.js-close-approved-candidates').on('click', function(){
+      $('#candidates_container').fadeOut('slow');
+     })
 
 
    })

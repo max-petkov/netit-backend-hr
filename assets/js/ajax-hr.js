@@ -65,7 +65,8 @@ $(function () {
         </div>`);
       });
 
-      $('body').on('click', '#approve_candidate', function () {
+      $('body').on('click', '#approve_candidate', function (e) {
+        e.stopImmediatePropagation();
         $yes_btn = $(this);
         $.ajax({
           url: 'src/candidate-status.php',
@@ -106,7 +107,8 @@ $(function () {
         </div>`);
       });
 
-      $('body').on('click', '#approve_candidate', function () {
+      $('body').on('click', '#approve_candidate', function (e) {
+        e.stopImmediatePropagation();
         $no_btn = $(this);
         $.ajax({
           url: 'src/candidate-status.php',
