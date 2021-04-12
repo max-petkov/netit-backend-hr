@@ -1370,8 +1370,22 @@ $(function () {
         }
       }
     });
+  });
 
-
+  // Update inbox counter
+  $('body').on('click', '.message_icon', function () {
+    if ($(this).children('span').text() !== '0') {
+      $.ajax({
+        url: 'src/inbox-counter.php',
+        method: 'post',
+        data: {
+          inbox_company_counter: 'Y'
+        },
+        success: function () {
+          $('#inbox_company_counter_container').load('company-dashboard.php #inbox_company_counter');
+        }
+      });
+    }
   });
 
 });

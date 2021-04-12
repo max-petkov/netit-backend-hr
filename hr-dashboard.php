@@ -52,7 +52,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span id="greetings"></span>
                   <span id="greetings_first_name">
-                    <?php echo $company_name; ?>
+                    <?php echo $company_name; ?> HR
                   </span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
@@ -62,12 +62,22 @@
                   <li>
                     <a class="message_icon dropdown-item xsm-text-class" href="#">Messages</a>
                   </li>
+                  <li>
+                    <a id="open_sending_msg_container" class="dropdown-item xsm-text-class" href="#">
+                      <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16.987 16.557">
+                        <g id="send" transform="translate(0 -6.196)">
+                          <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                            <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#212529" />
+                          </g>
+                        </g>
+                      </svg>Send Company message</a>
+                  </li>
                   <div class="dropdown-divider"></div>
                   <li class="dropdown-item xsm-text-class d-flex align-items-center">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                       <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                     </svg>
-                    <span><?php echo $company_name; ?></span>
+                    <span><?php echo $company_name; ?> <b>HR</b></span>
                   </li>
                   <li class="dropdown-item xsm-text-class d-flex align-items-center">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
@@ -133,6 +143,63 @@
       </div>
     </div>
   </nav>
+
+  <!-- Send Company message -->
+  <div id="send_msg_company_box" class="js-send-msg-company-box card shadow rounded mb-4 d-none">
+    <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+      <h4 class="m-0">Send message:</h4>
+      <button class="btn-close align-self-end"></button>
+    </div>
+    <div class="card-body">
+      <form method="POST">
+        <?php
+              $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+              $sql = ("SELECT a.id, a.company_id, a.username, b.id, b.company_name
+        FROM tb_hr AS a
+        INNER JOIN tb_company_profile AS b
+        ON b.id=a.company_id
+        WHERE a.id='{$_SESSION['hr_id']}'");
+              $stmt = $db->query($sql);
+              $stmt->execute();
+              $result = $stmt->fetch(PDO::FETCH_BOTH);
+              while ($value = $result) :
+        ?>
+          <div class="js-scs-msg-send"></div>
+          <div class="form-group mb-2">
+            <label for="to"><b>From:</b></label>
+            <input type="text" class="form-control form-control-sm" name="hr_username" value="<?php echo $value['username']; ?>" disabled>
+            <input type="hidden" value="<?php echo $_SESSION['hr_id']; ?>">
+          </div>
+          <div class="form-group mb-2">
+            <label for="to"> <b>To:</b></label>
+            <input type="email" class="form-control form-control-sm" name="company_name'" value="<?php echo $value['company_name']; ?>" disabled>
+            <input type="hidden" value="<?php echo $value['company_id']; ?>">
+          </div>
+          <?php break; ?>
+        <?php endwhile; ?>
+        <div class="form-group mb-2">
+          <label for="subject"><b>Subject:</b></label>
+          <input type="text" class="form-control form-control-sm" name="message_subject" value="">
+          <div class="js-subject-response-text"></div>
+        </div>
+        <div class="form-group">
+          <label for="message"><b>Message:</b></label>
+          <textarea name="message" class="form-control" rows="6"></textarea>
+          <div class="js-message-response-text"></div>
+        </div>
+        <button class="js-send-msg-hr-to-company btn btn-primary btn-sm d-flex align-items-center mt-3">
+          <span>Send</span>
+          <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+            <g id="send" transform="translate(0 -6.196)">
+              <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+              </g>
+            </g>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
 
 
   <!-- Company showcase -->
@@ -476,6 +543,9 @@
       $stmt = $db->query($sql);
       $stmt->execute();
       $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+      // echo "<pre>";
+      // var_dump($result);
+      // echo "</pre>";
       ?>
       <?php foreach ($result as $value) : ?>
         <li class="js-inbox-li list-group-item pb-0">
@@ -494,22 +564,35 @@
           <p class="chevron-expand-text">
             <?php echo $value['inbox_msg']; ?>
           </p>
-          <button class="js-reply-job-seeker btn btn-primary btn-sm d-flex align-items-center mb-3">
-            <span>Reply</span>
-            <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
-              <g id="send" transform="translate(0 -6.196)">
-                <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
-                  <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+          <?php if ($value['company_id'] !== null) : ?>
+            <button class="js-reply-company btn btn-primary btn-sm d-flex align-items-center mb-3">
+              <span>Reply</span>
+              <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+                <g id="send" transform="translate(0 -6.196)">
+                  <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                    <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                  </g>
                 </g>
-              </g>
-            </svg>
-          </button>
+              </svg>
+            </button>
+          <?php else : ?>
+            <button class="js-reply-job-seeker btn btn-primary btn-sm d-flex align-items-center mb-3">
+              <span>Reply</span>
+              <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+                <g id="send" transform="translate(0 -6.196)">
+                  <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                    <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                  </g>
+                </g>
+              </svg>
+            </button>
+          <?php endif; ?>
           <!-- REPLY MESSAGE -->
           <div class="js-message-job-seeker-box card shadow rounded mb-4 d-none">
             <div class="d-flex justify-content-between mt-3 mb-2 px-3">
               <h4 class="m-0">Send message:</h4>
               <!-- <button class="js-close-reply btn-close align-self-end"></button> -->
-              <span class="js-close-reply cursor-pointer">
+              <span class="js-close-reply cursor-pointer transform-scale">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                 </svg>
@@ -526,7 +609,11 @@
                 <div class="form-group mb-2">
                   <label for="to"> <b>To:</b></label>
                   <input type="email" class="form-control form-control-sm" name="reply_job_seeker_id'" value="<?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?>" disabled>
-                  <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                  <?php if ($value['company_id'] !== null) : ?>
+                    <input type="hidden" value="<?php echo $value['company_id']; ?>">
+                  <?php else : ?>
+                    <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                  <?php endif; ?>
                 </div>
                 <div class="form-group mb-2">
                   <label for="subject"><b>Subject:</b></label>
@@ -538,16 +625,29 @@
                   <textarea name="message" class="form-control" rows="6"></textarea>
                   <div class="js-message-response-text"></div>
                 </div>
-                <button class="js-submit-sending-msg-job-seeker btn btn-primary btn-sm d-flex align-items-center mt-3">
-                  <span>Send</span>
-                  <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
-                    <g id="send" transform="translate(0 -6.196)">
-                      <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
-                        <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                <?php if ($value['company_id'] !== null) : ?>
+                  <button class="js-submit-sending-msg-company btn btn-primary btn-sm d-flex align-items-center mt-3">
+                    <span>Send</span>
+                    <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+                      <g id="send" transform="translate(0 -6.196)">
+                        <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                          <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                        </g>
                       </g>
-                    </g>
-                  </svg>
-                </button>
+                    </svg>
+                  </button>
+                <?php else : ?>
+                  <button class="js-submit-sending-msg-job-seeker btn btn-primary btn-sm d-flex align-items-center mt-3">
+                    <span>Send</span>
+                    <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+                      <g id="send" transform="translate(0 -6.196)">
+                        <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                          <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                        </g>
+                      </g>
+                    </svg>
+                  </button>
+                <?php endif; ?>
               </form>
             </div>
           </div>
@@ -611,8 +711,8 @@
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="assets/js/script.js"></script>
-<script src="assets/js/message-hr--job-seeker.js"></script>
 <script src="assets/js/ajax-hr.js"></script>
+<script src="assets/js/message.js"></script>
 
 </body>
 

@@ -90,7 +90,7 @@ body {
   right: -544px;
 }
 
-.js-update-publish-job-form{
+.js-update-publish-job-form {
   max-width: 768px;
   position: absolute;
   z-index: 1;
@@ -99,7 +99,7 @@ body {
   right: -544px;
 }
 
-.js_hr_box{
+.js_hr_box {
   max-width: 768px;
   position: absolute;
   z-index: 1;
@@ -107,7 +107,7 @@ body {
   right: -544px;
 }
 
-.js-motivation-speech{
+.js-motivation-speech {
   max-width: 768px;
   position: absolute;
   z-index: 1;
@@ -116,8 +116,24 @@ body {
   right: -544px;
 }
 
-.js-confirm-approve{
+.js-confirm-approve {
   max-width: 768px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  right: -544px;
+}
+
+.js-send-msg-hr-box {
+  width: 512px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  right: -544px;
+}
+
+.js-send-msg-company-box {
+  width: 512px;
   position: absolute;
   z-index: 1;
   opacity: 0;
@@ -136,6 +152,15 @@ body {
 .hover-msg-box:hover {
   cursor: pointer;
 }
+
 .cursor-pointer:hover {
   cursor: pointer;
+}
+
+.transform-scale {
+  transition: 0.2s;
+}
+
+.transform-scale:active {
+  transform: scale(0.90);
 }

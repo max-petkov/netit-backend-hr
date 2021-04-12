@@ -100,6 +100,17 @@ CREATE TABLE tb_msg_box_hr(
     sent_msg VARCHAR(1000)
 );
 
+CREATE TABLE tb_msg_box_company(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    send_date DATE,
+    hr_id INT,
+    company_id INT,
+    subject VARCHAR(255),
+    inbox_msg VARCHAR(1000),
+    is_viewed VARCHAR(1),
+    sent_msg VARCHAR(1000)
+);
+
 -- TRUNCATE TABLE tb_msg_box_hr;
 -- TRUNCATE TABLE tb_msg_box_job_seeker;
 -- TRUNCATE TABLE tb_applied_jobs;
