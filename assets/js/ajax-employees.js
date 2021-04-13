@@ -506,4 +506,14 @@ $(function () {
     }
   });
 
+  $("#published_job_list li").slice(10).hide();
+      let mincount = 10;
+      let maxcount = 20;
+      $(window).on('scroll', function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
+          $("#published_job_list li").slice(mincount, maxcount).show();
+          mincount = mincount + 10;
+          maxcount = maxcount + 10;
+        }
+      });
 })
