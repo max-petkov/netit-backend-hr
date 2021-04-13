@@ -58,16 +58,6 @@
                   <li id="addplication_button">
                     <a class="dropdown-item xsm-text-class" href="#">Applications</a>
                   </li>
-
-                  <li>
-                    <a class="dropdown-item xsm-text-class d-flex align-items-center" href="#">
-                      <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                      </svg>
-                      Resume
-                    </a>
-                  </li>
                   <div class="dropdown-divider"></div>
 
                   <li class="dropdown-item xsm-text-class d-flex align-items-center">
@@ -456,13 +446,6 @@
                 <input type="email" class="form-control form-control-sm" name="employee_email" value="<?php echo $job_seeker_email; ?>" disabled>
               </div>
             </div>
-
-            <div class="form-group d-flex flex-column mb-3">
-              <label for="resume" class="file">Attach resume:</label>
-              <input type="file" class="form-control-file">
-              <small class="form-text form-muted">Max 3mb size</small>
-            </div>
-
             <div class="form-group">
               <label for="short_introduction_employee">Short introduction</label>
               <textarea name="short_introduction" class="successful-validation form-control form-control-sm" rows="6"><?php echo $job_seeker_short_introduction; ?></textarea>

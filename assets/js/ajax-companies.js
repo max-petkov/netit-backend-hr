@@ -378,6 +378,65 @@ $(function () {
         }
       });
     }
+  });
+
+  // Upload image
+  $('#upload_company_img').on('submit', function (e) {
+    // TODO VALIDATION
+    e.preventDefault();
+    let img = new FormData($(this)[0]);
+    $.ajax({
+      url: 'src/upload-file.php',
+      method: 'post',
+      processData: false,
+      contentType: false,
+      data: img,
+      success: function () {
+        $('#showcase_container').load('company-dashboard.php #showcase_data');
+      },
+      error: function () {
+        console.log('error');
+      }
+    })
+  });
+
+  // Change image
+  $('body').on('click', '#change_logo', function () {
+    $change = $(this).siblings('div');
+    $close_btn = $(this).next();
+    $close_btn.removeClass('d-none');
+    $change.slideDown('slow').html(`<form id="upload_company_img" class="mt-3 method="POST" enctype="multipart/form-data">
+    <div class="form-group mb-3">
+      <input type="file" class="form-control-file" name="img_file">
+      <div></div>
+      <small class="form-text form-muted">Max 3mb size</small>
+    </div>
+    <input type="submit" id="submit_upload" class="btn btn-primary btn-sm" value="Upload">
+  </form>`);
+    $('body').on('click', '#close_change_logo', function(){
+      $change.slideUp('slow');
+      $(this).addClass('d-none');
+    });
+
+    $('#upload_company_img').on('submit', function (e) {
+      // TODO VALIDATION
+      e.preventDefault();
+      let img = new FormData($(this)[0]);
+      $.ajax({
+        url: 'src/upload-file.php',
+        method: 'post',
+        processData: false,
+        contentType: false,
+        data: img,
+        success: function () {
+          $('#showcase_container').load('company-dashboard.php #showcase_data');
+          $('#change_container').load('company-dashboard.php #changed_data');
+        },
+        error: function () {
+          console.log('error');
+        }
+      })
+    });
 
   });
 
