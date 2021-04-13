@@ -55,7 +55,9 @@
      let $open_sending_msg_hr = $('#open_sending_msg_container');
      let $sending_msg_hr_box = $('#send_msg_hr_box');
      let $sending_msg_company_box = $('#send_msg_company_box');
-     let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form, .js_hr_box, .js-send-msg-hr-box, .js-send-msg-company-box');
+     let $open_upload_img = $('#open_upload_img');
+     let $upload_img_box = $('.js-upload-logo-box');
+     let all_boxes = $('.message_box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form, .js_hr_box, .js-send-msg-hr-box, .js-send-msg-company-box, .js-upload-logo-box ');
      let $sent_tab = $('#sent_tab');
 
      // Message icon click event
@@ -141,6 +143,15 @@
      $open_sending_msg_hr.on('click', function () {
        if ($sending_msg_company_box.hasClass('d-none')) {
          $sending_msg_company_box.removeClass('d-none').animate({
+           right: '32px',
+           opacity: '1'
+         }, 'fast');
+       }
+     });
+
+     $open_upload_img.on('click', function () {
+       if ($upload_img_box.hasClass('d-none')) {
+         $upload_img_box.removeClass('d-none').animate({
            right: '32px',
            opacity: '1'
          }, 'fast');

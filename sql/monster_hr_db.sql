@@ -34,7 +34,11 @@ CREATE TABLE tb_company_profile (
 	qa_branch VARCHAR(10),
 	mobdev_branch VARCHAR(10),
 	ux_ui_branch VARCHAR(10),
-    password VARCHAR(50)
+    password VARCHAR(50),
+    file_name VARCHAR(255),
+    file_mime VARCHAR(255),
+    file_size INT,
+    file_data MEDIUMBLOB
 );
 
 CREATE TABLE tb_published_jobs (
@@ -111,9 +115,15 @@ CREATE TABLE tb_msg_box_company(
     sent_msg VARCHAR(1000)
 );
 
--- TRUNCATE TABLE tb_msg_box_hr;
--- TRUNCATE TABLE tb_msg_box_job_seeker;
--- TRUNCATE TABLE tb_applied_jobs;
+TRUNCATE TABLE tb_msg_box_hr;
+TRUNCATE TABLE tb_msg_box_job_seeker;
+TRUNCATE TABLE tb_applied_jobs;
+
+TRUNCATE TABLE tb_msg_box_company;
+TRUNCATE TABLE tb_published_jobs;
+TRUNCATE TABLE tb_job_seeker_profile;
+TRUNCATE TABLE tb_hr;
+TRUNCATE TABLE tb_company_profile;
 
 SELECT * FROM tb_msg_box_hr;
 SELECT * FROM tb_msg_box_job_seeker;

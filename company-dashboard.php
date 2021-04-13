@@ -38,7 +38,7 @@
               ?>
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span id="greetings"></span>
-                  <span id="greetings_first_name">
+                  <span id="greetings_company_name">
                     <?php echo $company_name; ?>
                   </span>
                 </a>
@@ -48,6 +48,15 @@
                   <div class="dropdown-divider"></div>
                   <li id="profile_button">
                     <a class="dropdown-item xsm-text-class" href="#">Edit Profile</a>
+                  </li>
+                  <li id="upload_img_btn">
+                    <!-- TODO ANIMATION -->
+                    <a id="open_upload_img" class="dropdown-item xsm-text-class" href="#">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-upload" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                      </svg>
+                      Upload logo</a>
                   </li>
                   <li>
                     <a class="message_icon dropdown-item xsm-text-class" href="#">Messages</a>
@@ -84,7 +93,7 @@
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                       <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                     </svg>
-                    <span id="employee_first_name" class="me-1">
+                    <span id="company_name" class="me-1">
                       <?php echo $company_name; ?>
                     </span>
                   </li>
@@ -93,7 +102,7 @@
                       <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                       <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
-                    <span id="employee_address">
+                    <span id="company_address">
                       <?php echo $company_address; ?>
                     </span>
                   </li>
@@ -101,7 +110,7 @@
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                       <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
                     </svg>
-                    <span id="employee_email">
+                    <span id="company_email">
                       <?php echo $company_email; ?>
                     </span>
                   </li>
@@ -110,7 +119,7 @@
                       <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
                       <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
                     </svg>
-                    <a href="<?php echo $company_website; ?>" target="_blank" class="text-decoration-none" id="employee_website">
+                    <a href="<?php echo $company_website; ?>" target="_blank" class="text-decoration-none" id="company_website">
                       <?php echo $company_website; ?>
                     </a>
                   </li>
@@ -492,11 +501,6 @@
               </div>
             </div>
           </div>
-          <div class="form-group mb-3 d-flex flex-column">
-            <label for="company_img" class="mb-1">Company Logo</label>
-            <input type="file" class="form-control-file">
-            <small class="form-text form-muted">Max 3mb size</small>
-          </div>
           <div class="form-group mb-3">
             <label for="company_description">Company description</label>
             <textarea name="company_description" class="form-control form-control-sm" rows="4"><?php echo $company_description; ?></textarea>
@@ -516,6 +520,49 @@
       </form>
     </div>
   </div>
+
+  <?php
+  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+  $sql = ("SELECT file_name, file_mime, file_data FROM tb_company_profile WHERE id='{$_SESSION['company_id']}'");
+  $stmt = $db->query($sql);
+  $stmt->execute();
+  while ($row = $stmt->fetch()) :
+    if ($row['file_data'] !== null) : ?>
+      <div class="js-upload-logo-box card shadow rounded">
+        <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+          <h4 class="m-0">Upload logo:</h4>
+          <button class="btn-close align-self-end"></button>
+        </div>
+        <div id="change_container" class="card-body">
+          <div id="changed_data">
+            <img id="showcase_company_logo" src="data:<?php $row['file_mime']; ?>;base64,<?php echo base64_encode($row['file_data']); ?>" class="me-2" alt="uploaded-picture" width="80px">
+            <div class="mt-3">
+              <button id="change_logo" class="btn btn-primary btn-sm">Change</button>
+              <button id="close_change_logo" class="btn btn-secondary btn-sm d-none ms-1">Close</button>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php else : ?>
+      <div class="js-upload-logo-box card  shadow rounded">
+        <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+          <h4 class="m-0">Upload logo:</h4>
+          <button class="btn-close align-self-end"></button>
+        </div>
+        <div class="card-body">
+          <form id="upload_company_img" method="POST" enctype="multipart/form-data">
+            <div class="form-group mb-3 d-flex flex-column">
+              <input type="file" class="form-control-file" name="img_file">
+              <div></div>
+              <small class="form-text form-muted">Max 3mb size</small>
+            </div>
+            <input type="submit" id="submit_upload" class="btn btn-primary btn-sm" value="Upload">
+          </form>
+        </div>
+      </div>
+    <?php endif; ?>
+  <?php endwhile; ?>
 
   <!-- HR -->
   <div class="js_hr_box container d-none mt-4">
@@ -700,42 +747,47 @@
           $company_mission               = $row['company_mission'];
         ?>
           <div class="mb-3 d-flex">
-            <!-- <img id="showcase_company_logo" src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" class="me-1" width="80px" alt=""> -->
-            <div class="d-flex flex-column">
-              <h1 id="showcase_company_name" class="m-0 display-4">
-                <?php echo $company_name; ?>
-              </h1>
-              <p id="showcase_company_slogan" class="lead mb-0"><?php echo $slogan; ?></p>
-              <div id="showcase_it_branches" class="badges mt-1">
-                <div id="badge_it_container">
-
-                  <?php if ($frontend_branch != null || $frontend_branch != '') {
-                    echo "<span class=\"badge bg-secondary\"> {$frontend_branch} </span>";
-                  }
-                  ?>
-                  <?php if ($backend_branch != null || $backend_branch != '') {
-                    echo "<span class=\"badge bg-dark\"> {$backend_branch} </span>";
-                  }
-                  ?>
-                  <?php if ($fullstack_branch != null || $fullstack_branch != '') {
-                    echo "<span class=\"badge bg-success\"> {$fullstack_branch} </span>";
-                  }
-                  ?>
-                  <?php if ($qa_branch != null || $qa_branch != '') {
-                    echo "<span class=\"badge bg-danger\"> {$qa_branch} </span>";
-                  }
-                  ?>
-                  <?php if ($mobdev_branch != null || $mobdev_branch != '') {
-                    echo "<span class=\"badge bg-warning\"> {$mobdev_branch} </span>";
-                  }
-                  ?>
-                  <?php if ($ux_ui_branch != null || $ux_ui_branch != '') {
-                    echo "<span class=\"badge bg-primary\"> {$ux_ui_branch} </span>";
-                  }
-                  ?>
+            <di id="showcase_container">
+              <div id="showcase_data" class="d-flex">
+                <?php if($row['file_data'] !== null): ?>
+                <img id="showcase_company_logo" src="data:<?php $row['file_mime']; ?>;base64,<?php echo base64_encode($row['file_data']); ?>" class="me-2" alt="uploaded-picture" width="120px">
+                <?php endif; ?>
+                <div>
+                  <h1 id="showcase_company_name" class="m-0 display-4">
+                    <?php echo $company_name; ?>
+                  </h1>
+                  <p id="showcase_company_slogan" class="lead mb-0"><?php echo $slogan; ?></p>
+                  <div id="showcase_it_branches" class="badges mt-1">
+                    <div id="badge_it_container">
+                      <?php if ($frontend_branch != null || $frontend_branch != '') {
+                        echo "<span class=\"badge bg-secondary\"> {$frontend_branch} </span>";
+                      }
+                      ?>
+                      <?php if ($backend_branch != null || $backend_branch != '') {
+                        echo "<span class=\"badge bg-dark\"> {$backend_branch} </span>";
+                      }
+                      ?>
+                      <?php if ($fullstack_branch != null || $fullstack_branch != '') {
+                        echo "<span class=\"badge bg-success\"> {$fullstack_branch} </span>";
+                      }
+                      ?>
+                      <?php if ($qa_branch != null || $qa_branch != '') {
+                        echo "<span class=\"badge bg-danger\"> {$qa_branch} </span>";
+                      }
+                      ?>
+                      <?php if ($mobdev_branch != null || $mobdev_branch != '') {
+                        echo "<span class=\"badge bg-warning\"> {$mobdev_branch} </span>";
+                      }
+                      ?>
+                      <?php if ($ux_ui_branch != null || $ux_ui_branch != '') {
+                        echo "<span class=\"badge bg-primary\"> {$ux_ui_branch} </span>";
+                      }
+                      ?>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </di>
           </div>
           <p id="showcase_company_description"><?php echo $company_description; ?></p>
           <ul class="mb-0">

@@ -26,7 +26,7 @@
           <ul class="navbar-nav">
             <?php
             $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-            $sql = ("SELECT a.*, b.id, b.company_name, b.address, b.website, b.slogan, b.frontend_branch, b.backend_branch, b.fullstack_branch, b.qa_branch, b.mobdev_branch, b.ux_ui_branch, b.company_description 
+            $sql = ("SELECT a.*, b.id, b.company_name, b.address, b.website, b.slogan, b.frontend_branch, b.backend_branch, b.fullstack_branch, b.qa_branch, b.mobdev_branch, b.ux_ui_branch, b.company_description, b.file_mime, b.file_data 
             FROM tb_hr AS a 
             INNER JOIN tb_company_profile AS b 
             ON a.company_id=b.id 
@@ -204,43 +204,47 @@
 
   <!-- Company showcase -->
   <div class="container mt-4">
-    <div class="mb-2">
-      <h1 id="showcase_company_name" class="m-0 display-6">
-        <?php echo $company_name; ?>
-      </h1>
-      <p id="showcase_company_slogan" class="lead mb-0"><?php echo $slogan; ?></p>
-      <div id="showcase_it_branches" class="badges mt-1">
-        <div id="badge_it_container">
-
-          <?php if ($frontend_branch != null || $frontend_branch != '') {
+    <div class="d-flex">
+      <?php if ($row['file_data'] !== null) : ?>
+        <img id="showcase_company_logo" src="data:<?php $row['file_mime']; ?>;base64,<?php echo base64_encode($row['file_data']); ?>" class="me-2" alt="uploaded-picture" width="120px">
+      <?php endif; ?>
+      <div>
+        <h1 id="showcase_company_name" class="m-0 display-4">
+          <?php echo $company_name; ?>
+        </h1>
+        <p id="showcase_company_slogan" class="lead mb-0"><?php echo $slogan; ?></p>
+        <div id="showcase_it_branches" class="badges mt-1">
+          <div id="badge_it_container">
+            <?php if ($frontend_branch != null || $frontend_branch != '') {
                 echo "<span class=\"badge bg-secondary\"> {$frontend_branch} </span>";
               }
-          ?>
-          <?php if ($backend_branch != null || $backend_branch != '') {
+            ?>
+            <?php if ($backend_branch != null || $backend_branch != '') {
                 echo "<span class=\"badge bg-dark\"> {$backend_branch} </span>";
               }
-          ?>
-          <?php if ($fullstack_branch != null || $fullstack_branch != '') {
+            ?>
+            <?php if ($fullstack_branch != null || $fullstack_branch != '') {
                 echo "<span class=\"badge bg-success\"> {$fullstack_branch} </span>";
               }
-          ?>
-          <?php if ($qa_branch != null || $qa_branch != '') {
+            ?>
+            <?php if ($qa_branch != null || $qa_branch != '') {
                 echo "<span class=\"badge bg-danger\"> {$qa_branch} </span>";
               }
-          ?>
-          <?php if ($mobdev_branch != null || $mobdev_branch != '') {
+            ?>
+            <?php if ($mobdev_branch != null || $mobdev_branch != '') {
                 echo "<span class=\"badge bg-warning\"> {$mobdev_branch} </span>";
               }
-          ?>
-          <?php if ($ux_ui_branch != null || $ux_ui_branch != '') {
+            ?>
+            <?php if ($ux_ui_branch != null || $ux_ui_branch != '') {
                 echo "<span class=\"badge bg-primary\"> {$ux_ui_branch} </span>";
               }
-          ?>
+            ?>
+          </div>
         </div>
       </div>
     </div>
     <p id="showcase_company_description"><?php echo $company_description; ?></p>
-    <!-- <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" class="me-1" width="80px" alt=""> -->
+
   </div>
 <?php endwhile; ?>
 
