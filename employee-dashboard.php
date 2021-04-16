@@ -344,9 +344,9 @@
           </div>
           <p class="mt-2"><?php echo $value['job_title']; ?></p>
           <p><b>Salary: </b><?php echo $value['job_salary']; ?> </p>
-          <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
+          <p class="d-none"><b>Job description: </b> <?php echo $value['job_description']; ?> </p>
           <div class="d-flex">
-            <button class="btn btn-primary btn-sm d-flex align-items-center me-2">
+            <button class="js-show-job-description btn btn-primary btn-sm d-flex align-items-center me-2">
               <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                 <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -566,51 +566,56 @@
 
           $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
 
-          $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' ORDER BY published_date DESC");
+          $sql = ("SELECT a.*, b.id, b.file_mime, b.file_data 
+          FROM tb_published_jobs AS a
+          INNER JOIN tb_company_profile AS b
+          ON b.id=a.company_id 
+          WHERE a.is_active='Y' 
+          ORDER BY a.published_date DESC");
           $stmt = $db->query($sql);
           $stmt->execute();
-          $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          $row = $stmt->fetchAll(PDO::FETCH_BOTH);
           foreach ($row as $value) : ?>
             <li class="job_li list-group-item py-3">
-              <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?> by</p>
               <div class="d-flex align-items-center">
-                <div class="mb-2 d-flex flex-column">
-                  <h4 class="m-0">
-                    <?php echo $value['company_name']; ?>
-                  </h4>
-                </div>
-                <!-- <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" width="56px" alt=""> -->
+                <span class="text-muted me-2">Published: <?php echo $value['published_date']; ?> by </span>
+                <?php if ($value['file_data'] !== null) : ?>
+                  <img id="showcase_company_logo" src="data:<?php $value['file_mime']; ?>;base64,<?php echo base64_encode($value['file_data']); ?>" class="me-1" alt="uploaded-picture" width="32px">
+                <?php endif; ?>
+                <?php echo "<span class=\"fw-bold text-dark fs-5 me-2\">{$value['company_name']}</span>"; ?>
+                <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
+                  echo "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
+                  echo "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
+                  echo "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
+                  echo "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
+                  echo "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>";
+                }
+                ?>
+                <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
+                  echo "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>";
+                }
+                ?>
+                <span class="badge bg-info me-1"> <?php echo $value['job_time']; ?> </span>
               </div>
-              <p class="m-0 fw-bold"> <?php echo $value['job_title']; ?> </p>
-              <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
-              }
-              ?>
-              <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
+
+              <p class="w-50 mt-2"><b>Job title: </b> <?php echo $value['job_title']; ?> </p>
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
 
+              <p class="js-job-description d-none mt-3"> <?php echo $value['job_description']; ?> </p>
               <div class="d-flex">
-                <button class="btn btn-primary d-flex align-items-center btn-sm me-2">
+                <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                     <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -618,11 +623,11 @@
                   Read more
                 </button>
                 <?php
-                $stmt2 = $db->query("SELECT applied_id, job_id, job_seeker_id, is_applied FROM tb_applied_jobs WHERE job_id='{$value['id']}' AND job_seeker_id='{$_SESSION['employee_id']}' AND is_applied='Y'");
+                $stmt2 = $db->query("SELECT applied_id, job_id, job_seeker_id, is_applied FROM tb_applied_jobs WHERE job_id='{$value[0]}' AND job_seeker_id='{$_SESSION['employee_id']}' AND is_applied='Y'");
                 $stmt2->execute();
                 $row2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
                 if ($stmt2->rowCount() === 0) : ?>
-                  <button class="js-apply-job btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value['id']; ?>">
+                  <button class="js-apply-job btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value[0]; ?>">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                       <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -637,7 +642,6 @@
                   </button>
                 <?php endif; ?>
               </div>
-              <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
               <div class="js-motivation-speech container d-none">
                 <div class="card shadow rounded">
                   <div class="d-flex justify-content-between mt-3 mb-2 px-3">

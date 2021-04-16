@@ -749,8 +749,8 @@
           <div class="mb-3 d-flex">
             <di id="showcase_container">
               <div id="showcase_data" class="d-flex">
-                <?php if($row['file_data'] !== null): ?>
-                <img id="showcase_company_logo" src="data:<?php $row['file_mime']; ?>;base64,<?php echo base64_encode($row['file_data']); ?>" class="me-2" alt="uploaded-picture" width="120px">
+                <?php if ($row['file_data'] !== null) : ?>
+                  <img id="showcase_company_logo" src="data:<?php $row['file_mime']; ?>;base64,<?php echo base64_encode($row['file_data']); ?>" class="me-2" alt="uploaded-picture" width="120px">
                 <?php endif; ?>
                 <div>
                   <h1 id="showcase_company_name" class="m-0 display-4">
@@ -1009,8 +1009,9 @@
               ?>
               <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
+              <p class="d-none"><b>Job description: </b> <?php echo $value['job_description']; ?></p>
               <div class="d-flex">
-                <button class="btn btn-primary d-flex align-items-center btn-sm me-2">
+                <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                     <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -1028,7 +1029,6 @@
                   Turn off
                 </button>
               </div>
-              <p class="m-0 d-none"> <?php echo $value['job_description']; ?></p>
             </li>
           <?php endforeach; ?>
           <?php
