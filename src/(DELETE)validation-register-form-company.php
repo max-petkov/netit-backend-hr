@@ -1,0 +1,223 @@
+<?php
+// include_once 'functions.php';
+// include_once 'Validator.php';
+
+// if (isset($_POST['register_company'])) {
+//     $validator = new Validator($_POST);
+//     $validator->validate_username();
+//     $validator->validate_name();
+//     $validator->validate_email();
+//     $validator->validate_branches();
+//     $validator->validate_description();
+//     $validator->validate_password();
+//     $validator->validate_confirm_password();
+
+//     //   When using empty on $_POST['it_branch'] via Validator object it gives undefined array key 'it_branch' BUT When using it without Validator object work perfectly
+//     // if (empty($_POST['it_branch'])) {
+//     //     $error['branch'] = '<div class="text-danger">You need to check atleast one branch!</div>';
+//     //     $validator->error_msg['branch'] = 'Error';
+//     // } else {
+//     //     $validator->valid_branch($_POST['it_branch']);
+//     // }
+
+//     //   var_dump($_POST['it_branch']);
+//     // // Username validation
+//     // if (empty($_POST['company_username'])) {
+//     //   $error_message_company_username     = "<div class=\"invalid-feedback\"><i>You must fill the required field...</i></div>";
+//     //   $error_input_class_company_username = 'is-invalid';
+//     //   $input_value_company_username       = $_POST['company_username'];
+
+//     // } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['company_username'])) {
+//     //   $error_message_company_username     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and dashes - ....</i></div>";
+//     //   $error_input_class_company_username = 'is-invalid';
+//     //   $input_value_company_username       = $_POST['company_username'];
+
+//     // } elseif (checking_existing_username_email('tb_company_profile', 'username', $_POST['company_username']) || checking_existing_username_email('tb_job_seeker_profile', 'username', $_POST['company_username'])) {
+//     //   $error_message_company_username     = "<div class=\"invalid-feedback\"><i>Username already exists... Try another one!</i></div>";
+//     //   $error_input_class_company_username = 'is-invalid';
+//     //   $input_value_company_username       = $_POST['company_username'];
+
+//     // } elseif (mb_strlen($_POST['company_username']) < 4) {
+//     //   $error_message_company_username     = "<div class=\"invalid-feedback\"><i>Must be more than 3 characters</i></div>";
+//     //   $error_input_class_company_username = 'is-invalid';
+//     //   $input_value_company_username       = $_POST['company_username'];
+
+//     // } elseif (mb_strlen($_POST['company_username']) > 49) {
+//     //   $error_message_company_username     = "<div class=\"invalid-feedback\"><i>Must be lower than 50 characters</i></div>";
+//     //   $error_input_class_company_username = 'is-invalid';
+//     //   $input_value_company_username       = $_POST['company_username'];
+
+//     // } else {
+//     //   $input_value_company_username         = $_POST['company_username'];
+//     //   $success_input_class_company_username = 'is-valid';
+//     //   $success_message_company_username     = "<div class=\"valid-feedback\"><i>Great!</i></div>";
+
+//     // }
+
+//     // // Company name validation
+//     // if (empty($_POST['company_name'])) {
+//     //   $error_message_company_name     = "<div class=\"invalid-feedback\"><i>You must fill the required field...</i></div>";
+//     //   $error_input_class_company_name = 'is-invalid';
+//     //   $input_value_company_name       = $_POST['company_name'];
+
+//     // } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\- ]+$/u', $_POST['company_name'])) {
+//     //   $error_message_company_name     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and white space...</i></div>";
+//     //   $error_input_class_company_name = 'is-invalid';
+//     //   $input_value_company_name       = $_POST['company_name'];
+
+//     // } elseif (mb_strlen($_POST['company_name']) < 4) {
+//     //   $error_message_company_name     = "<div class=\"invalid-feedback\"><i>Must be more than 3 characters</i></div>";
+//     //   $error_input_class_company_name = 'is-invalid';
+//     //   $input_value_company_name       = $_POST['company_name'];
+
+//     // } elseif (mb_strlen($_POST['company_name']) > 254) {
+//     //   $error_message_company_name     = "<div class=\"invalid-feedback\"><i>Must be lower than 255 characters</i></div>";
+//     //   $error_input_class_company_name = 'is-invalid';
+//     //   $input_value_company_name       = $_POST['company_name'];
+
+//     // } else {
+//     //   $input_value_company_name         = $_POST['company_name'];
+//     //   $success_input_class_company_name = 'is-valid';
+//     //   $success_message_company_name     = "<div class=\"valid-feedback\"><i>Hello, {$_POST['company_name']}!</i></div>";
+
+//     // }
+
+//     // // Email validation
+//     // if (empty($_POST['email'])) {
+//     //   $error_message_email       = "<div class=\"invalid-feedback\"><i>You must fill the required field...</i></div>";
+//     //   $error_input_class_email   = 'is-invalid';
+//     //   $input_value_company_email = $_POST['email'];
+
+//     // } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+//     //   $input_value_company_email = $_POST['email'];
+//     //   $error_input_class_email   = 'is-invalid';
+//     //   $error_message_email       = "<div class=\"invalid-feedback\"><i>Invalid email format... Try again!</i></div>";
+
+//     // } elseif (checking_existing_username_email('tb_company_profile', 'email', $_POST['email']) || checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['email'])) {
+//     //   $input_value_company_email = $_POST['email'];
+//     //   $error_input_class_email   = 'is-invalid';
+//     //   $error_message_email       = "<div class=\"invalid-feedback\"><i>Email is already been taken... Try another one!</i></div>";
+
+//     // } elseif (mb_strlen($_POST['email']) > 254) {
+//     //   $error_message_email     = "<div class=\"invalid-feedback\"><i>Must be lower than 255 characters</i></div>";
+//     //   $error_input_class_email = 'is-invalid';
+//     //   $input_value_email       = $_POST['email'];
+
+//     // } else {
+//     //   $input_value_company_email = $_POST['email'];
+//     //   $success_input_class_email = 'is-valid';
+//     //   $success_message_email     = "<div class=\"valid-feedback\"><i>OK!</i></div>";
+
+//     // }
+
+//     // // Company description validation
+//     // if (empty($_POST['company_description'])) {
+//     //   $error_message_company_description     = "<div class=\"invalid-feedback\"><i>You must fill the required field...</i></div>";
+//     //   $error_input_class_company_description = 'is-invalid';
+//     //   $input_value_company_description       = $_POST['company_description'];
+
+//     // } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-\'!.,; ]+$/u', $_POST['company_description'])) {
+//     //   $error_message_company_description     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and white space...</i></div>";
+//     //   $error_input_class_company_description = 'is-invalid';
+//     //   $input_value_company_description       = $_POST['company_description'];
+
+//     // } elseif (mb_strlen($_POST['company_description']) < 49) {
+//     //   $error_message_company_description     = "<div class=\"invalid-feedback\"><i>Must be more than 49 characters</i></div>";
+//     //   $error_input_class_company_description = 'is-invalid';
+//     //   $input_value_company_description       = $_POST['company_description'];
+
+//     // }elseif (mb_strlen($_POST['company_description']) > 999) {
+//     //   $error_message_company_description     = "<div class=\"invalid-feedback\"><i>Must be lower than 999 characters</i></div>";
+//     //   $error_input_class_company_description = 'is-invalid';
+//     //   $input_value_company_description       = $_POST['company_description'];
+
+//     // } else {
+//     //   $input_value_company_description         = $_POST['company_description'];
+//     //   $success_input_class_company_description = 'is-valid';
+//     //   $success_message_company_description     = "<div class=\"valid-feedback\"><i>Good to know!</i></div>";
+
+//     // }
+
+//     // // IT Branch validation
+//     // if (empty($_POST['it_branch'])) {
+//     //   $error_message_company_branch     = "<i class=\"text-danger\">You need to check at least one branch...</i>";
+//     //   $error_input_class_company_branch = 'is-invalid';
+//     // } else {
+
+//     //   if(in_array('frontend', $_POST['it_branch'])) {
+//     //     $success_check_front_end       = 'checked';
+//     //     $success_class_check_front_end = 'is-valid';
+//     //   }
+
+//     //   if(in_array('backend', $_POST['it_branch'])) {
+//     //     $success_check_back_end       = 'checked';
+//     //     $success_class_check_back_end = 'is-valid';
+//     //   } 
+
+//     //   if(in_array('fullstack', $_POST['it_branch'])) {
+//     //     $success_check_fullstack       = 'checked';
+//     //     $success_class_check_fullstack = 'is-valid';
+//     //   } 
+
+//     //   if(in_array('qa', $_POST['it_branch'])) {
+//     //     $success_check_qa       = 'checked';
+//     //     $success_class_check_qa = 'is-valid';
+//     //   } 
+
+//     //   if(in_array('mobdev', $_POST['it_branch'])) {
+//     //     $success_check_mob_dev       = 'checked';
+//     //     $success_class_check_mob_dev = 'is-valid';
+//     //   } 
+
+//     //   if(in_array('ux/ui', $_POST['it_branch'])) {
+//     //     $success_check_ux_ui       = 'checked';
+//     //     $success_class_check_ux_ui = 'is-valid';
+//     //   } 
+
+//     // }
+
+//     // // Password validation
+//     // if (empty($_POST['password'])) {
+//     //   $error_message_password     = "<div class=\"invalid-feedback\"><i>You must fill the required field...</i></div>";
+//     //   $error_input_class_password = 'is-invalid';
+//     //   $input_value_password       = $_POST['password'];
+
+//     // } elseif (!preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['password'])) {
+//     //   $input_value_password       = $_POST['password'];
+//     //   $error_input_class_password = 'is-invalid';
+//     //   $error_message_password     = "<div class=\"invalid-feedback\"><i>You can use only letters, numbers and dashes - ...</i></div>";
+
+//     // } elseif (mb_strlen($_POST['password']) < 4) {
+//     //   $error_message_password     = "<div class=\"invalid-feedback\"><i>Must be more than 3 characters</i></div>";
+//     //   $error_input_class_password = 'is-invalid';
+//     //   $input_value_password       = $_POST['password'];
+
+//     // } elseif (mb_strlen($_POST['password']) > 49) {
+//     //   $error_message_password     = "<div class=\"invalid-feedback\"><i>Must be lower than 50 characters</i></div>";
+//     //   $error_input_class_password = 'is-invalid';
+//     //   $input_value_password       = $_POST['password'];
+
+//     // }else {
+//     //   $input_value_password = $_POST['password'];
+//     //   $success_input_class_password = 'is-valid';
+//     //   $success_message_password     = "<div class=\"valid-feedback\"><i>Great! Now you need to confirm it...</i></div>";
+
+//     // }
+
+//     // if (empty($_POST['confirm_password'])) {
+//     //   $error_message_confirm_password     = "<div class=\"invalid-feedback\"><i>You must fill the required field...</i></div>";
+//     //   $error_input_class_confirm_password = 'is-invalid';
+//     //   $input_value_confirm_password       = $_POST['confirm_password'];
+
+//     // } elseif ($_POST['password'] != $_POST['confirm_password']) {
+//     //   $input_value_confirm_password       = $_POST['confirm_password'];
+//     //   $error_input_class_confirm_password = 'is-invalid';
+//     //   $error_message_confirm_password     = "<div class=\"invalid-feedback\"><i>Passwords must match... Try again!</i></div>";
+
+//     // } else {
+//     //   $input_value_confirm_password = $_POST['confirm_password'];
+//     //   $success_input_class_confirm_password  = 'is-valid';
+//     //   $success_message_confirm_password      = "<div class=\"valid-feedback\"><i>Password confirmed!</i></div>";
+//     // }
+
+// } 

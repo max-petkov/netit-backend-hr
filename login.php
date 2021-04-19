@@ -1,5 +1,6 @@
-<?php include 'src/database.php' ?>
-<?php include_once 'src/sessions.php' ?>
+<?php include_once 'src/sessions.php'; ?>
+<?php include_once 'src/create-profile.php'; ?>
+<?php include_once 'src/login-profile.php'; ?>
 
 
 <!DOCTYPE html>
@@ -32,17 +33,17 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 mx-auto">
         <h3 class="text-center mb-3">Monster HR</h3>
-        <form action="login.php" class="" method="POST">
+        <form action="login.php" method="POST">
           <?php echo success_message(); ?>
           <?php echo error_message(); ?>
           <div class="form-group mb-3">
-            <input type="text" class="form-control" name="username" placeholder="Username" value="">
+            <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo $_POST['username'] ?? '' ?>">
           </div>
           <div class="form-group mb-3">
-            <input type="password" class="form-control" name="password" placeholder="Password" value="">
+            <input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo $_POST['password'] ?? '' ?>">
           </div>
           <div class="d-grid col-6 mx-auto">
-            <input type="submit" name="submit_login" class="btn btn-primary" value="Login">
+            <input type="submit" name="login_user" class="btn btn-primary" value="Login">
           </div>
         </form>
         <p class="small text-center mt-3">Dont't have an account? Create one as <a href="registration-form-employee.php">Candidate</a> or as <a href="registration-form-company.php">Company</a></p>

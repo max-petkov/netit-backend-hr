@@ -115,16 +115,6 @@ CREATE TABLE tb_msg_box_company(
     sent_msg VARCHAR(1000)
 );
 
-TRUNCATE TABLE tb_msg_box_hr;
-TRUNCATE TABLE tb_msg_box_job_seeker;
-TRUNCATE TABLE tb_applied_jobs;
-
-TRUNCATE TABLE tb_msg_box_company;
-TRUNCATE TABLE tb_published_jobs;
-TRUNCATE TABLE tb_job_seeker_profile;
-TRUNCATE TABLE tb_hr;
-TRUNCATE TABLE tb_company_profile;
-
 SELECT * FROM tb_msg_box_hr;
 SELECT * FROM tb_msg_box_job_seeker;
 SELECT * FROM tb_hr;
@@ -132,3 +122,7 @@ SELECT * FROM tb_applied_jobs;
 SELECT * FROM tb_job_seeker_profile;
 SELECT * FROM tb_published_jobs;
 SELECT * FROM tb_company_profile;
+
+-- Got a packet bigger than 'max_allowed_packet' bytes in C:\xampp\htdocs\netit-backend-hr\src\upload-file.php:15
+set global net_buffer_length=1000000; 
+set global max_allowed_packet=1000000000; 

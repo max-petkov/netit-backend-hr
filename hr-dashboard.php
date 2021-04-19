@@ -1,4 +1,4 @@
-<?php include 'src/database.php'; ?>
+<?php session_start(); ?>
 <?php include_once 'src/functions.php'; ?>
 <?php login_required($_SESSION['hr_id']); ?>
 

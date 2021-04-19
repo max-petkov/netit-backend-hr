@@ -1,8 +1,6 @@
-<!-- Database is needed because to get the id session value and make logout and login required session -->
-<?php include 'src/database.php'; ?>
+<?php session_start(); ?>
 <?php include_once 'src/functions.php'; ?>
 <?php login_required($_SESSION['employee_id']); ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
