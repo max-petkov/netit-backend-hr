@@ -9,7 +9,7 @@ class Validator
     public $check_box = [];
     private $post_data;
 
-    function __construct($data)
+    function __construct($data = null)
     {
         $this->post_data = $data;
     }
@@ -19,17 +19,21 @@ class Validator
         if ($this->empty_field($this->post_data['username'])) {
             $this->error_msg['username'] = '<div class="invalid-feedback">Field can not be empty!</div>';
             $this->style_input['username'] = 'is-invalid';
+            return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['username'])) {
+            if ($this->count_symbols_input($this->post_data['username'], 4)) {
                 $this->error_msg['username'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
                 $this->style_input['username'] = 'is-invalid';
+                return false;
             } else {
                 if ($this->existing_acc($this->post_data['username'])) {
                     $this->error_msg['username'] = '<div class="invalid-feedback">Username exists!</div>';
                     $this->style_input['username'] = 'is-invalid';
+                    return false;
                 } else {
                     $this->succ_msg['username'] = '<div class="valid-feedback">Great!</div>';
                     $this->style_input['username'] = 'is-valid';
+                    return true;
                 }
             }
         }
@@ -40,13 +44,16 @@ class Validator
         if ($this->empty_field($this->post_data['name'])) {
             $this->error_msg['name'] = '<div class="invalid-feedback">Field can not be empty!</div>';
             $this->style_input['name'] = 'is-invalid';
+            return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['name'])) {
+            if ($this->count_symbols_input($this->post_data['name'], 4)) {
                 $this->error_msg['name'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
                 $this->style_input['name'] = 'is-invalid';
+                return false;
             } else {
                 $this->succ_msg['name'] = "<div class=\"valid-feedback\">Hello, {$this->post_data['name']}!</div>";
                 $this->style_input['name'] = 'is-valid';
+                return true;
             }
         }
     }
@@ -56,13 +63,16 @@ class Validator
         if ($this->empty_field($this->post_data['last_name'])) {
             $this->error_msg['last_name'] = '<div class="invalid-feedback">Field can not be empty!</div>';
             $this->style_input['last_name'] = 'is-invalid';
+            return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['last_name'])) {
+            if ($this->count_symbols_input($this->post_data['last_name'], 4)) {
                 $this->error_msg['last_name'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
                 $this->style_input['last_name'] = 'is-invalid';
+                return false;
             } else {
                 $this->succ_msg['last_name'] = "<div class=\"valid-feedback\">OK!</div>";
                 $this->style_input['last_name'] = 'is-valid';
+                return true;
             }
         }
     }
@@ -72,21 +82,26 @@ class Validator
         if ($this->empty_field($this->post_data['email'])) {
             $this->error_msg['email'] = '<div class="invalid-feedback">Field can not be empty!</div>';
             $this->style_input['email'] = 'is-invalid';
+            return false;
         } else {
             if ($this->count_symbols_input($this->post_data['email'])) {
                 $this->error_msg['email'] = '<div class="invalid-feedback">Email must be less than 49 symbols!</div>';
                 $this->style_input['email'] = 'is-invalid';
+                return false;
             } else {
                 if ($this->existing_email($this->post_data['email'])) {
                     $this->error_msg['email'] = '<div class="invalid-feedback">Email exists!</div>';
                     $this->style_input['email'] = 'is-invalid';
+                    return false;
                 } else {
                     if ($this->email_format($this->post_data['email'])) {
                         $this->error_msg['email'] = '<div class="invalid-feedback">Invalid email format... example@mail.com!</div>';
                         $this->style_input['email'] = 'is-invalid';
+                        return false;
                     } else {
                         $this->succ_msg['email'] = '<div class="valid-feedback">Perfect!</div>';
                         $this->style_input['email'] = 'is-valid';
+                        return true;
                     }
                 }
             }
@@ -98,13 +113,16 @@ class Validator
         if ($this->empty_field($this->post_data['password'])) {
             $this->error_msg['password'] = '<div class="invalid-feedback">Field can not be empty!</div>';
             $this->style_input['password'] = 'is-invalid';
+            return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['password'])) {
+            if ($this->count_symbols_input($this->post_data['password'], 4)) {
                 $this->error_msg['password'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
                 $this->style_input['password'] = 'is-invalid';
+                return false;
             } else {
                 $this->succ_msg['password'] = "<div class=\"valid-feedback\">So far, so good!</div>";
                 $this->style_input['password'] = 'is-valid';
+                return true;
             }
         }
     }
@@ -114,13 +132,16 @@ class Validator
         if ($this->empty_field($this->post_data['confirm_password'])) {
             $this->error_msg['confirm_password'] = '<div class="invalid-feedback">Field can not be empty!</div>';
             $this->style_input['confirm_password'] = 'is-invalid';
+            return false;
         } else {
             if ($this->confirm_pass($this->post_data['password'], $this->post_data['confirm_password'])) {
                 $this->error_msg['confirm_password'] = '<div class="invalid-feedback">Passwords must match!</div>';
                 $this->style_input['confirm_password'] = 'is-invalid';
+                return false;
             } else {
                 $this->succ_msg['confirm_password'] = "<div class=\"valid-feedback\">Perfect!</div>";
                 $this->style_input['confirm_password'] = 'is-valid';
+                return true;
             }
         }
     }
@@ -130,13 +151,16 @@ class Validator
         if ($this->empty_field($this->post_data['company_description'])) {
             $this->error_msg['description'] = '<div class="invalid-feedback">Field can not be empty!</div>';
             $this->style_input['description'] = 'is-invalid';
+            return false;
         } else {
-            if ($this->count_symbols_textarea($this->post_data['company_description'])) {
+            if ($this->count_symbols_textarea($this->post_data['company_description'], 49)) {
                 $this->error_msg['description'] = '<div class="invalid-feedback">Field must be more than 50 and less than 1000 symbols!</div>';
                 $this->style_input['description'] = 'is-invalid';
+                return false;
             } else {
                 $this->succ_msg['description'] = '<div class="valid-feedback">Great!</div>';
                 $this->style_input['description'] = 'is-valid';
+                return true;
             }
         }
     }
@@ -146,23 +170,145 @@ class Validator
 
         if (empty($this->post_data['it_branch'])) {
             $this->error_msg['branch'] = '<div class="text-danger">You need to check atleast one branch!</div>';
+            return false;
         } else {
             $this->valid_branch($this->post_data['it_branch']);
+            return true;
+        }
+    }
+
+    public function validate_address()
+    {
+        if ($this->empty_field($this->post_data['address'])) {
+            return false;
+        } else {
+            if ($this->count_symbols_input($this->post_data['address'])) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_website()
+    {
+        if ($this->empty_field($this->post_data['website'])) {
+            return false;
+        } else {
+            if ($this->count_symbols_input($this->post_data['website'])) {
+                return false;
+            } else {
+                if (!preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $this->post_data['website'])) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+
+    public function validate_short_introduction()
+    {
+        if ($this->empty_field($this->post_data['short_introduction'])) {
+            return false;
+        } else {
+            if ($this->count_symbols_textarea($this->post_data['short_introduction'])) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_slogan()
+    {
+        if ($this->count_symbols_input($this->post_data['slogan'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function validate_history()
+    {
+        if ($this->empty_field($this->post_data['company_history'])) {
+            return false;
+        } else {
+            if ($this->count_symbols_textarea($this->post_data['company_history'])) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_mission()
+    {
+        if ($this->empty_field($this->post_data['company_mission'])) {
+            return false;
+        } else {
+            if ($this->count_symbols_textarea($this->post_data['company_mission'])) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
     public function is_valid()
     {
-        if (
-            $this->error_msg['username'] == '' &&
-            $this->error_msg['name'] == '' &&
-            $this->error_msg['last_name'] == '' &&
-            $this->error_msg['email'] == '' &&
-            $this->error_msg['password'] == '' &&
-            $this->error_msg['company_description'] == '' &&
-            $this->error_msg['it_branch'] == ''
-        ) {
-            return true;
+        if (isset($this->post_data['register_employee'])) {
+            if (
+                $this->validate_username() === true &&
+                $this->validate_name() === true &&
+                $this->validate_last_name() === true &&
+                $this->validate_email() === true &&
+                $this->validate_password() === true &&
+                $this->validate_confirm_password() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['update_employee'])) {
+            if (
+                $this->validate_name() === true &&
+                $this->validate_last_name() === true &&
+                $this->validate_address() === true &&
+                $this->validate_website() === true &&
+                $this->validate_short_introduction() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['register_company'])) {
+            if (
+                $this->validate_username() === true &&
+                $this->validate_name() === true &&
+                $this->validate_email() === true &&
+                $this->validate_password() === true &&
+                $this->validate_confirm_password() === true &&
+                $this->validate_description() === true &&
+                $this->validate_branches() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['update_company'])) {
+            if (
+                $this->validate_name() === true &&
+                $this->validate_address() === true &&
+                $this->validate_website() === true &&
+                $this->validate_slogan() === true &&
+                $this->validate_description() === true &&
+                $this->validate_history() === true &&
+                $this->validate_mission() === true &&
+                $this->update_branch() === true
+            ) {
+                return true;
+            }
         }
     }
 
@@ -176,17 +322,17 @@ class Validator
     }
 
     // Input string lenght
-    private function count_symbols_input($value)
+    private function count_symbols_input($value, $min = null)
     {
-        if (mb_strlen(trim($value)) < 4 || mb_strlen(trim($value)) > 49) {
+        if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > 49) {
             return true;
         }
     }
 
     // Textarea string lenght
-    private function count_symbols_textarea($value)
+    private function count_symbols_textarea($value, $min = null)
     {
-        if (mb_strlen(trim($value)) < 49 || mb_strlen(trim($value)) > 999) {
+        if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > 999) {
             return true;
         }
     }
@@ -241,6 +387,23 @@ class Validator
         }
     }
 
+    // Branch validation on update
+    private function update_branch()
+    {
+        if (
+            empty($this->post_data['frontend']) &&
+            empty($this->post_data['backend']) &&
+            empty($this->post_data['fullstack']) &&
+            empty($this->post_data['qa']) &&
+            empty($this->post_data['mobdev']) &&
+            empty($this->post_data['ux/ui'])
+        ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     // Existing username
     private function existing_acc($value)
     {
@@ -283,66 +446,66 @@ class Validator
     // Validate login
     public function login()
     {
-        if (
-            $this->find_acc_pass('tb_job_seeker_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password']) ||
-            $this->find_acc_pass('tb_company_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password']) ||
-            $this->find_acc_pass('tb_hr', 'username', 'password', $this->post_data['username'], $this->post_data['password'])
-        ) {
-            $this->login_job_seeker();
-            $this->login_company();
-            $this->login_hr();
-        }
+        $this->login_job_seeker();
+        $this->login_company();
+        $this->login_hr();
     }
 
     private function login_job_seeker()
     {
-
-        if ($this->find_acc_pass('tb_job_seeker_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password']) === true) {
-            $_SESSION['employee_id'] = $this->find_acc_pass('tb_job_seeker_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password'])['id'];
+        if ($this->find_acc_pass('tb_job_seeker_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password'])) {
+            global $pdo;
+            $sql = ("SELECT id, username, password FROM tb_job_seeker_profile 
+                     WHERE username='{$this->post_data['username']}' 
+                     AND password='{$this->post_data['password']}' LIMIT 1");
+            $stmt = $pdo->prepare_query($sql);
+            while ($row = $stmt->fetch()) {
+                $_SESSION['employee_id'] = $row['id'];
+            }
+            redirect_to('employee-dashboard.php');
         }
     }
 
     private function login_company()
     {
         if ($this->find_acc_pass('tb_company_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password']) === true) {
-            $_SESSION['company_id'] = $this->find_acc_pass('tb_company_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password'])['id'];
+            global $pdo;
+            $sql = ("SELECT id, username, password FROM tb_company_profile 
+                     WHERE username='{$this->post_data['username']}' 
+                     AND password='{$this->post_data['password']}' LIMIT 1");
+            $stmt = $pdo->prepare_query($sql);
+            while ($row = $stmt->fetch()) {
+                $_SESSION['company_id'] = $row['id'];
+            }
+            redirect_to('company-dashboard.php');
         }
     }
 
     private function login_hr()
     {
         if ($this->find_acc_pass('tb_hr', 'username', 'password', $this->post_data['username'], $this->post_data['password']) === true) {
-            $_SESSION['hr_id'] = $this->find_acc_pass('tb_hr', 'username', 'password', $this->post_data['username'], $this->post_data['password'])['id'];
+            global $pdo;
+            $sql = ("SELECT id, username, password FROM tb_hr 
+                     WHERE username='{$this->post_data['username']}' 
+                     AND password='{$this->post_data['password']}' LIMIT 1");
+            $stmt = $pdo->prepare_query($sql);
+            while ($row = $stmt->fetch()) {
+                $_SESSION['hr_id'] = $row['id'];
+            }
+            redirect_to('hr-dashboard.php');
         }
     }
 
     private function find_acc_pass($db_tb, $db_username, $db_password, $username_val, $pass_val)
     {
         global $pdo;
-        $data = [
-            ":{$db_username}" => $username_val,
-            ":{$db_password}" => $pass_val,
-        ];
         $sql  = ("SELECT id, {$db_username}, {$db_password} FROM {$db_tb} 
-                  WHERE BINARY {$db_username}=:{$db_username} 
-                  AND BINARY {$db_password}=:{$db_password} LIMIT 1");
-        $stmt = $pdo->prepare_query($sql, $data);
+                  WHERE BINARY {$db_username}='{$username_val}' 
+                  AND BINARY {$db_password}='{$pass_val}' LIMIT 1");
+        $stmt = $pdo->prepare_query($sql);
 
-        $result = $stmt->rowCount();
-        $data = $stmt->fetch();
-        if ($result === 1) {
-            if ($db_tb === 'tb_job_seeker_profile') {
-                redirect_to('employee-dashboard.php');
-            }
-
-            if ($db_tb === 'tb_company_profile') {
-                redirect_to('company-dashboard.php');
-            }
-
-            if ($db_tb === 'tb_hr') {
-                redirect_to('hr-dashboard.php');
-            }
-            return $data;
+        if ($stmt->rowCount() === 1) {
+            return true;
         } else {
             return false;
         }

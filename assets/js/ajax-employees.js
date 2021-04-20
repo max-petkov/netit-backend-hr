@@ -217,14 +217,19 @@ $(function () {
   // Update Employee profile 
   $('#job_seeker_profile_form').on('submit', function (event) {
     event.preventDefault();
-    let first_name = $('input[name="employee_first_name"]');
-    let last_name = $('input[name="employee_last_name"]');
-    let address = $('input[name="address_employee"]');
-    let website = $('input[name="website_employee"]');
+    let first_name = $('input[name="name"]');
+    let last_name = $('input[name="last_name"]');
+    let address = $('input[name="address"]');
+    let website = $('input[name="website"]');
     let short_introduction = $('textarea[name="short_introduction"]');
-
-    // Proceed will tell ajax if everything is true proceed with ajax call if proceed is false don't make ajax call
-    let proceed = true;
+    let proceed = true; // Proceed will tell ajax if everything is true proceed with ajax call if proceed is false don't make ajax call
+    let $form_data = $(this).serializeArray();
+    
+    $form_data.push({
+      name: 'update_employee', //It will be used as isset() at server side validation
+      value: null
+    });
+    
 
     // FIRST NAME
     if (first_name.val().trim() == '') {
@@ -297,7 +302,7 @@ $(function () {
       address.addClass('is-invalid')
         .next()
         .addClass('invalid-feedback')
-        .text('Field can not be empty or leave it like this!');
+        .text('Field can not be empty or SAVE it like this!');
 
       setTimeout(function () {
         if (address.hasClass('is-invalid')) {
@@ -394,7 +399,7 @@ $(function () {
       short_introduction.addClass('is-invalid')
         .next()
         .addClass('invalid-feedback')
-        .text('Field can not be empty or leave it like this!');
+        .text('Field can not be empty or SAVE it like this!');
 
       setTimeout(function () {
         if (short_introduction.hasClass('is-invalid')) {
@@ -447,47 +452,32 @@ $(function () {
       }, 10000);
 
       proceed = false;
-
     }
 
     // AJAX
     if (proceed) {
       $.ajax({
-        url: './src/database.php',
-        type: 'POST',
-        dataType: 'JSON',
-        data: {
-          first_name: first_name.val(),
-          last_name: last_name.val(),
-          address: address.val(),
-          website: website.val(),
-          short_introduction: short_introduction.val()
-        },
+        url: 'src/update-profile.php',
+        method: 'post',
+        dataType: 'json',
+        data: $form_data,
         success: function (response) {
           $('#success_mess_validation').slideDown('slow').addClass('alert alert-success').text('Update successful!');
           setTimeout(function () {
             $('#success_mess_validation').slideUp('slow');
           }, 2000);
-          $('#greetings_first_name').html(`${response.first_name}!`);
-          $('#employee_first_name').html(response.first_name);
+          $('#greetings_first_name').html(`${response.name}`);
+          $('#employee_first_name').html(response.name);
           $('#employee_last_name').html(response.last_name);
           $('#employee_address').html(response.address);
           $('#employee_website').attr('href', response.website);
           $('#employee_website').html(response.website);
-
-          first_name.val(response.first_name);
-          last_name.val(response.last_name);
-          address.val(response.address);
-          website.val(response.website);
-          short_introduction.val(response.short_introduction);
-
         },
         error: function () {
           console.log('error');
         }
       });
     }
-
   });
 
   // Update inbox counter
@@ -507,13 +497,13 @@ $(function () {
   });
 
   $("#published_job_list li").slice(10).hide();
-      let mincount = 10;
-      let maxcount = 20;
-      $(window).on('scroll', function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
-          $("#published_job_list li").slice(mincount, maxcount).show();
-          mincount = mincount + 10;
-          maxcount = maxcount + 10;
-        }
-      });
+  let mincount = 10;
+  let maxcount = 20;
+  $(window).on('scroll', function () {
+    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
+      $("#published_job_list li").slice(mincount, maxcount).show();
+      mincount = mincount + 10;
+      maxcount = maxcount + 10;
+    }
+  });
 })

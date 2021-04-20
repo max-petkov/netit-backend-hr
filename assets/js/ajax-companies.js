@@ -3,10 +3,10 @@ $(function () {
   // Update Company profile 
   $('#update_company_profile').on('submit', function (event) {
     event.preventDefault();
-    let company_name = $('input[name="company_name"]');
-    let slogan = $('input[name="company_slogan"]');
-    let address = $('input[name="company_address"]');
-    let website = $('input[name="company_website"]');
+    let company_name = $('input[name="name"]');
+    let slogan = $('input[name="slogan"]');
+    let address = $('input[name="address"]');
+    let website = $('input[name="website"]');
     let company_description = $('textarea[name="company_description"]');
     let company_history = $('textarea[name="company_history"]');
     let company_mission = $('textarea[name="company_mission"]');
@@ -16,9 +16,15 @@ $(function () {
     let qa_branch = $('input[name="it_branch[3]"]');
     let mobdev_branch = $('input[name="it_branch[4]"]');
     let ux_ui_branch = $('input[name="it_branch[5]"]');
-
-    // Proceed will tell ajax if everything is true proceed with ajax call if proceed is false don't make ajax call
     let proceed = true;
+    let $form_data = $(this).serializeArray();
+    $form_data.push({
+      name: 'update_company', //It will be used as isset() at server side validation
+      value: null
+    });
+
+    console.log($form_data);
+    // Proceed will tell ajax if everything is true proceed with ajax call if proceed is false don't make ajax call
 
     // COMPANY NAME
     if (company_name.val().trim() == '') {
@@ -329,49 +335,34 @@ $(function () {
     }
     if (proceed) {
       $.ajax({
-        url: './src/database.php',
-        type: 'POST',
-        dataType: 'JSON',
-        data: {
-          company_name: company_name.val(),
-          slogan: slogan.val(),
-          address: address.val(),
-          website: website.val(),
-          company_description: company_description.val(),
-          company_history: company_history.val(),
-          company_mission: company_mission.val(),
-          frontend_branch: frontend_branch.val(),
-          backend_branch: backend_branch.val(),
-          fullstack_branch: fullstack_branch.val(),
-          qa_branch: qa_branch.val(),
-          mobdev_branch: mobdev_branch.val(),
-          ux_ui_branch: ux_ui_branch.val()
-
-        },
+        url: './src/update-profile.php',
+        method: 'post',
+        dataType: 'json',
+        data: $form_data,
         success: function (response) {
           $('#success_mess_validation').slideDown('slow').addClass('alert alert-success').text('Update successful!');
           setTimeout(function () {
             $('#success_mess_validation').slideUp('slow');
           }, 2000);
-          $('#company_name').html(response.company_name);
-          $('#greetings_company_name').html(`${response.company_name}!`);
+          $('#company_name').html(response.name);
+          $('#greetings_company_name').html(`${response.name}`);
           $('#company_address').html(response.address);
           $('#company_website').html(response.website);
           $('#company_website').attr('href', response.website);
-          $('#showcase_company_name').text(response.company_name);
+          $('#showcase_company_name').text(response.name);
           $('#showcase_company_description').html(response.company_description);
           $('#showcase_company_slogan').html(response.slogan);
           $('#showcase_company_history').html(response.company_history);
           $('#showcase_company_mission').html(response.company_mission);
           $('#showcase_it_branches').load('company-dashboard.php #badge_it_container');
 
-          company_name.val(response.company_name);
-          address.val(response.address);
-          website.val(response.website);
-          company_description.val(response.company_description);
-          slogan.val(response.slogan);
-          company_history.val(response.company_history);
-          company_mission.val(response.company_mission);
+          // company_name.val(response.company_name);
+          // address.val(response.address);
+          // website.val(response.website);
+          // company_description.val(response.company_description);
+          // slogan.val(response.slogan);
+          // company_history.val(response.company_history);
+          // company_mission.val(response.company_mission);
         },
         error: function () {
           console.log('error');
@@ -413,7 +404,7 @@ $(function () {
     </div>
     <input type="submit" id="submit_upload" class="btn btn-primary btn-sm" value="Upload">
   </form>`);
-    $('body').on('click', '#close_change_logo', function(){
+    $('body').on('click', '#close_change_logo', function () {
       $change.slideUp('slow');
       $(this).addClass('d-none');
     });

@@ -115,6 +115,9 @@ CREATE TABLE tb_msg_box_company(
     sent_msg VARCHAR(1000)
 );
 
+TRUNCATE TABLE tb_job_seeker_profile;
+
+
 SELECT * FROM tb_msg_box_hr;
 SELECT * FROM tb_msg_box_job_seeker;
 SELECT * FROM tb_hr;

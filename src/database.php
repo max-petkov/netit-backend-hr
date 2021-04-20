@@ -24,14 +24,12 @@ class Database
         }
     }
 
-    public function prepare_query($sql, $post_data)
+    public function prepare_query($sql, $value = null)
     {
         $result = $this->db_connection->prepare($sql);
-        $result->execute($post_data);
+        $result->execute($value);
         return $result;
     }
-
-
 }
 
 $pdo = new Database;

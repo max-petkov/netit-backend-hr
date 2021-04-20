@@ -1,5 +1,5 @@
 <?php 
-include 'database.php';
+// include 'database.php';
 
   if (isset($_POST['inbox_job_seeker_counter'])) {
     $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');

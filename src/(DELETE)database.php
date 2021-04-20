@@ -156,79 +156,79 @@ if (isset($_POST['hr_username'])) {
   }
 }
 
-if (isset($_POST['submit_login'])) {
+// if (isset($_POST['submit_login'])) {
 
-  if (empty($_POST['username']) && empty($_POST['password'])) {
-    $_SESSION['error_message'] = 'All fields must be filled out!';
-    header('location: login.php');
-    exit;
-  } elseif (
-    login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password']) ||
-    login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password']) ||
-    login_attempt('tb_hr', 'username', 'password', $_POST['username'], $_POST['password'])
-  ) {
-    if (login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
-      $_SESSION['employee_id'] = login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
-      redirect_to('employee-dashboard.php');
-    } else if (login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
-      $_SESSION['company_id'] = login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
-      redirect_to('company-dashboard.php');
-    } else {
-      $_SESSION['hr_id'] = login_attempt('tb_hr', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
-      redirect_to('hr-dashboard.php');
-    }
-  } else {
-    $_SESSION['error_message'] = 'Incorrect username or password... Try again!';
-    redirect_to('login.php');
-  }
-}
+//   if (empty($_POST['username']) && empty($_POST['password'])) {
+//     $_SESSION['error_message'] = 'All fields must be filled out!';
+//     header('location: login.php');
+//     exit;
+//   } elseif (
+//     login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password']) ||
+//     login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password']) ||
+//     login_attempt('tb_hr', 'username', 'password', $_POST['username'], $_POST['password'])
+//   ) {
+//     if (login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
+//       $_SESSION['employee_id'] = login_attempt('tb_job_seeker_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+//       redirect_to('employee-dashboard.php');
+//     } else if (login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password']) == true) {
+//       $_SESSION['company_id'] = login_attempt('tb_company_profile', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+//       redirect_to('company-dashboard.php');
+//     } else {
+//       $_SESSION['hr_id'] = login_attempt('tb_hr', 'username', 'password', $_POST['username'], $_POST['password'])['id'];
+//       redirect_to('hr-dashboard.php');
+//     }
+//   } else {
+//     $_SESSION['error_message'] = 'Incorrect username or password... Try again!';
+//     redirect_to('login.php');
+//   }
+// }
 
 
-mysqli_close($db_connection);
+// mysqli_close($db_connection);
 
 // Update job_seeker profile via ajax
-if (isset($_POST['first_name'])) {
+// if (isset($_POST['first_name'])) {
 
-  if (
-    mb_strlen($_POST['first_name']) > 4                                                                                      &&
-    mb_strlen($_POST['first_name']) < 49                                                                                         &&
-    preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['first_name'])                                                               &&
-    !empty($_POST['first_name'])                                                                                                 &&
-    mb_strlen($_POST['last_name']) > 4                                                                                           &&
-    mb_strlen($_POST['last_name']) < 49                                                                                          &&
-    preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['last_name'])                                                                &&
-    !empty($_POST['last_name'])                                                                                                  &&
-    mb_strlen($_POST['address']) < 49                                                                                            &&
-    preg_match('/^[a-zA-Z0-9-,\'. \p{Cyrillic}]+$/u', $_POST['address'])                                                         &&
-    !empty($_POST['address'])                                                                                                    &&
-    mb_strlen($_POST['website']) < 49                                                                                            &&
-    preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) &&
-    !empty($_POST['website'])                                                                                                    &&
-    mb_strlen($_POST['short_introduction']) > 49                                                                                 &&
-    mb_strlen($_POST['short_introduction']) < 999                                                                                &&
-    !empty($_POST['short_introduction'])
-  ) {
+//   if (
+//     mb_strlen($_POST['first_name']) > 4                                                                                      &&
+//     mb_strlen($_POST['first_name']) < 49                                                                                         &&
+//     preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['first_name'])                                                               &&
+//     !empty($_POST['first_name'])                                                                                                 &&
+//     mb_strlen($_POST['last_name']) > 4                                                                                           &&
+//     mb_strlen($_POST['last_name']) < 49                                                                                          &&
+//     preg_match('/^[a-zA-Z\p{Cyrillic}]+$/u', $_POST['last_name'])                                                                &&
+//     !empty($_POST['last_name'])                                                                                                  &&
+//     mb_strlen($_POST['address']) < 49                                                                                            &&
+//     preg_match('/^[a-zA-Z0-9-,\'. \p{Cyrillic}]+$/u', $_POST['address'])                                                         &&
+//     !empty($_POST['address'])                                                                                                    &&
+//     mb_strlen($_POST['website']) < 49                                                                                            &&
+//     preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) &&
+//     !empty($_POST['website'])                                                                                                    &&
+//     mb_strlen($_POST['short_introduction']) > 49                                                                                 &&
+//     mb_strlen($_POST['short_introduction']) < 999                                                                                &&
+//     !empty($_POST['short_introduction'])
+//   ) {
 
-    $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-    $sql = ("UPDATE tb_job_seeker_profile SET first_name=:first_name, last_name=:last_name, address=:address, website=:website, short_introduction=:short_introduction WHERE id='{$_SESSION['employee_id']}'");
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':first_name', $_POST['first_name']);
-    $stmt->bindValue(':last_name', $_POST['last_name']);
-    $stmt->bindValue(':address', $_POST['address']);
-    $stmt->bindValue(':website', $_POST['website']);
-    $stmt->bindValue(':short_introduction', $_POST['short_introduction']);
+//     $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+//     $sql = ("UPDATE tb_job_seeker_profile SET first_name=:first_name, last_name=:last_name, address=:address, website=:website, short_introduction=:short_introduction WHERE id='{$_SESSION['employee_id']}'");
+//     $stmt = $db->prepare($sql);
+//     $stmt->bindValue(':first_name', $_POST['first_name']);
+//     $stmt->bindValue(':last_name', $_POST['last_name']);
+//     $stmt->bindValue(':address', $_POST['address']);
+//     $stmt->bindValue(':website', $_POST['website']);
+//     $stmt->bindValue(':short_introduction', $_POST['short_introduction']);
 
-    $stmt->execute();
+//     $stmt->execute();
 
-    $json_data['first_name']         = $_POST['first_name'];
-    $json_data['last_name']          = $_POST['last_name'];
-    $json_data['address']            = $_POST['address'];
-    $json_data['website']            = $_POST['website'];
-    $json_data['short_introduction'] = $_POST['short_introduction'];
+//     $json_data['first_name']         = $_POST['first_name'];
+//     $json_data['last_name']          = $_POST['last_name'];
+//     $json_data['address']            = $_POST['address'];
+//     $json_data['website']            = $_POST['website'];
+//     $json_data['short_introduction'] = $_POST['short_introduction'];
 
-    echo json_encode($json_data);
-  }
-}
+//     echo json_encode($json_data);
+//   }
+// }
 
 // Delete job application
 if (isset($_POST['cancel_job_id'])) {
