@@ -35,63 +35,63 @@
           <h4 class="text-center">For Companies</h4>
           <p class="text-muted text-center mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, mollitia!</p>
           <div class="form-group mb-3">
-            <input type="text" class="form-control <?php echo $validator->style_input['username'] ?? ''; ?>" name="username" placeholder="Username" value="<?php echo $_POST['username'] ?? ''; ?>">
-            <?php echo $validator->error_msg['username'] ?? ''; ?>
-            <?php echo $validator->succ_msg['username'] ?? ''; ?>
+            <input type="text" class="form-control <?php echo $check->style_input['username'] ?? ''; ?>" name="username" placeholder="Username" value="<?php echo $_POST['username'] ?? ''; ?>">
+            <?php echo $check->error_msg['username'] ?? ''; ?>
+            <?php echo $check->succ_msg['username'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <input type="text" class="form-control <?php echo $validator->style_input['name'] ?? ''; ?>" name="name" placeholder="Company Name" value="<?php echo $_POST['name'] ?? ''; ?>">
-            <?php echo $validator->error_msg['name'] ?? ''; ?>
-            <?php echo $validator->succ_msg['name'] ?? ''; ?>
+            <input type="text" class="form-control <?php echo $check->style_input['name'] ?? ''; ?>" name="name" placeholder="Company Name" value="<?php echo $_POST['name'] ?? ''; ?>">
+            <?php echo $check->error_msg['name'] ?? ''; ?>
+            <?php echo $check->succ_msg['name'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <input type="email" class="form-control <?php echo $validator->style_input['email'] ?? ''; ?>" name="email" placeholder="Email" value="<?php echo $_POST['email'] ?? ''; ?>">
-            <?php echo $validator->error_msg['email'] ?? ''; ?>
-            <?php echo $validator->succ_msg['email'] ?? ''; ?>
+            <input type="email" class="form-control <?php echo $check->style_input['email'] ?? ''; ?>" name="email" placeholder="Email" value="<?php echo $_POST['email'] ?? ''; ?>">
+            <?php echo $check->error_msg['email'] ?? ''; ?>
+            <?php echo $check->succ_msg['email'] ?? ''; ?>
           </div> 
           <div class="form-group mb-3">
             <h4>IT Branches:</h4>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $validator->style_input['frontend'] ?? ''; ?>" name="it_branch[]" value="frontend" <?php echo $validator->check_box['frontend'] ?? ''; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $check->style_input['frontend'] ?? ''; ?>" name="frontend" value="frontend" <?php echo $check->check_box['frontend'] ?? ''; ?>>
               <label class="form-check-label" for="it_branch">Front-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $validator->style_input['backend'] ?? ''; ?>" name="it_branch[]" value="backend" <?php echo $validator->check_box['backend'] ?? ''; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $check->style_input['backend'] ?? ''; ?>" name="backend" value="backend" <?php echo $check->check_box['backend'] ?? ''; ?>>
               <label class="form-check-label" for="it_branch">Back-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $validator->style_input['fullstack'] ?? ''; ?>" name="it_branch[]" value="fullstack" <?php echo $validator->check_box['fullstack'] ?? ''; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $check->style_input['fullstack'] ?? ''; ?>" name="fullstack" value="fullstack" <?php echo $check->check_box['fullstack'] ?? ''; ?>>
               <label class="form-check-label" for="it_branch">Fullstack Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $validator->style_input['qa'] ?? ''; ?>" name="it_branch[]" value="qa" <?php echo $validator->check_box['qa'] ?? ''; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $check->style_input['qa'] ?? ''; ?>" name="qa" value="qa" <?php echo $check->check_box['qa'] ?? ''; ?>>
               <label class="form-check-label" for="it_branch">Quality Assurance</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $validator->style_input['mobdev'] ?? ''; ?>" name="it_branch[]" value="mobdev" <?php echo $validator->check_box['mobdev'] ?? ''; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $check->style_input['mobdev'] ?? ''; ?>" name="mobdev" value="mobdev" <?php echo $check->check_box['mobdev'] ?? ''; ?>>
               <label class="form-check-label" for="it_branch">Mobile Development</label>
             </div>
             <div class="form-check mb-2">
-              <input type="checkbox" class="form-check-input <?php echo $validator->style_input['ux/ui'] ?? ''; ?>" name="it_branch[]" value="ux/ui" <?php echo $validator->check_box['ux/ui'] ?? ''; ?>>
+              <input type="checkbox" class="form-check-input <?php echo $check->style_input['ux/ui'] ?? ''; ?>" name="ux/ui" value="ux/ui" <?php echo $check->check_box['ux/ui'] ?? ''; ?>>
               <label class="form-check-label" for="it_branch">UX/UI</label>
             </div>
             <?php echo $error['branch'] ?? ''; ?>
-            <?php echo $validator->error_msg['branch'] ?? ''; ?>
+            <?php echo $check->error_msg['branch'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <textarea class="form-control <?php echo $validator->style_input['description'] ?? ''; ?>" name="company_description" id="company_description" rows="5" placeholder="Company Description"><?php echo $_POST['company_description'] ?? ''; ?></textarea>
-            <?php echo $validator->error_msg['description'] ?? ''; ?>
-            <?php echo $validator->succ_msg['description'] ?? ''; ?>
+            <textarea class="form-control <?php echo $check->style_input['description'] ?? ''; ?>" name="company_description" id="company_description" rows="5" placeholder="Company Description"><?php echo $_POST['company_description'] ?? ''; ?></textarea>
+            <?php echo $check->error_msg['description'] ?? ''; ?>
+            <?php echo $check->succ_msg['description'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <input type="password" class="form-control <?php echo $validator->style_input['password'] ?? ''; ?>" name="password" placeholder="Password" value="<?php echo $_POST['password'] ?? ''; ?>">
-            <?php echo $validator->error_msg['password'] ?? ''; ?>
-            <?php echo $validator->succ_msg['password'] ?? ''; ?>
+            <input type="password" class="form-control <?php echo $check->style_input['password'] ?? ''; ?>" name="password" placeholder="Password" value="<?php echo $_POST['password'] ?? ''; ?>">
+            <?php echo $check->error_msg['password'] ?? ''; ?>
+            <?php echo $check->succ_msg['password'] ?? ''; ?>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control <?php echo $validator->style_input['confirm_password'] ?? ''; ?>" name="confirm_password" placeholder="Confirm Password" value="<?php echo $_POST['confirm_password'] ?? ''; ?>">
-            <?php echo $validator->error_msg['confirm_password'] ?? ''; ?>
-            <?php echo $validator->succ_msg['confirm_password'] ?? ''; ?>
+            <input type="password" class="form-control <?php echo $check->style_input['confirm_password'] ?? ''; ?>" name="confirm_password" placeholder="Confirm Password" value="<?php echo $_POST['confirm_password'] ?? ''; ?>">
+            <?php echo $check->error_msg['confirm_password'] ?? ''; ?>
+            <?php echo $check->succ_msg['confirm_password'] ?? ''; ?>
           </div>
           <div class="d-grid col-6 mx-auto">
             <input type="submit" name="register_company" class="btn btn-primary mt-4">

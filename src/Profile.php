@@ -32,6 +32,7 @@ class Profile
     // Create profile
     public function create_profile()
     {
+        global $pdo;
         if (isset($this->post_data['register_employee'])) {
             $employee_data = [
                 ':username' => $this->post_data['username'],
@@ -40,7 +41,6 @@ class Profile
                 ':email' => $this->post_data['email'],
                 ':password' => $this->post_data['password'],
             ];
-            global $pdo;
             $sql = ("INSERT INTO tb_job_seeker_profile(username, first_name, last_name, email, password) 
                      VALUES(:username, :first_name, :last_name, :email, :password)");
             $pdo->prepare_query($sql, $employee_data);
@@ -52,23 +52,34 @@ class Profile
             $company_data = [
                 ':username' => $this->post_data['username'],
                 ':company_name' => $this->post_data['name'],
-                ':frontend_branch' => $this->post_data['it_branch[0]'],
-                ':backend_branch' => $this->post_data['it_branch[1]'],
-                ':fullstack_branch' => $this->post_data['it_branch[2]'],
-                ':qa_branch' => $this->post_data['it_branch[3]'],
-                ':mobdev_branch' => $this->post_data['it_branch[4]'],
-                ':ux_ui_branch' => $this->post_data['it_branch[5]'],
+                ':frontend_branch' => $this->post_data['frontend'],
+                ':backend_branch' => $this->post_data['backend'],
+                ':fullstack_branch' => $this->post_data['fullstack'],
+                ':qa_branch' => $this->post_data['qa'],
+                ':mobdev_branch' => $this->post_data['mobdev'],
+                ':ux_ui_branch' => $this->post_data['ux/ui'],
                 ':company_description' => $this->post_data['company_description'],
                 ':email' => $this->post_data['email'],
                 ':password' => $this->post_data['password'],
             ];
-            global $pdo;
             $sql = ("INSERT INTO tb_company_profile(username, company_name, frontend_branch, backend_branch, fullstack_branch, qa_branch, mobdev_branch, ux_ui_branch , company_description, email, password) 
                      VALUES(:username, :company_name, :frontend_branch, :backend_branch, :fullstack_branch, :qa_branch, :mobdev_branch, :ux_ui_branch, :company_description, :email, :password)");
             $pdo->prepare_query($sql, $company_data);
 
             $_SESSION['success_message'] = 'Account created successfully!';
             redirect_to('login.php');
+        }
+
+        if (isset($this->post_data['register_hr'])) {
+            $hr_data = [
+                ':company_id' => $_SESSION['company_id'],
+                ':username' => $this->post_data['username'],
+                ':email' => $this->post_data['email'],
+                ':password' => $this->post_data['password'],
+            ];
+            $sql = ("INSERT INTO tb_hr(company_id, username, email, password) 
+                     VALUES(:company_id, :username, :email, :password)");
+            $pdo->prepare_query($sql, $hr_data);
         }
     }
 
@@ -126,6 +137,7 @@ class Profile
     {
         return $this->profile_query("SELECT * FROM $tb_profile WHERE id=$session_id");
     }
+
 
     // Private methods
     private function login_job_seeker()

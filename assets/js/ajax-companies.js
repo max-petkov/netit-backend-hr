@@ -10,21 +10,12 @@ $(function () {
     let company_description = $('textarea[name="company_description"]');
     let company_history = $('textarea[name="company_history"]');
     let company_mission = $('textarea[name="company_mission"]');
-    let frontend_branch = $('input[name="it_branch[0]"]');
-    let backend_branch = $('input[name="it_branch[1]"]');
-    let fullstack_branch = $('input[name="it_branch[2]"]');
-    let qa_branch = $('input[name="it_branch[3]"]');
-    let mobdev_branch = $('input[name="it_branch[4]"]');
-    let ux_ui_branch = $('input[name="it_branch[5]"]');
     let proceed = true;
     let $form_data = $(this).serializeArray();
     $form_data.push({
-      name: 'update_company', //It will be used as isset() at server side validation
+      name: 'update_company',
       value: null
     });
-
-    console.log($form_data);
-    // Proceed will tell ajax if everything is true proceed with ajax call if proceed is false don't make ajax call
 
     // COMPANY NAME
     if (company_name.val().trim() == '') {
@@ -186,42 +177,6 @@ $(function () {
       setTimeout(function () {
         $('#checkbox_response').hide('fast');
       }, 5000)
-      if ($.inArray('frontend', frontend_branch) && frontend_branch.is(':checked')) {
-        frontend_branch.val('frontend');
-      } else {
-        frontend_branch.val('');
-      }
-
-      if ($.inArray('backend', backend_branch) && backend_branch.is(':checked')) {
-        backend_branch.val('backend');
-      } else {
-        backend_branch.val('');
-      }
-
-      if ($.inArray('fullstack', fullstack_branch) && fullstack_branch.is(':checked')) {
-        fullstack_branch.val('fullstack');
-      } else {
-        fullstack_branch.val('');
-      }
-
-      if ($.inArray('qa', qa_branch) && qa_branch.is(':checked')) {
-        qa_branch.val('qa');
-      } else {
-        qa_branch.val('');
-      }
-
-      if ($.inArray('mobdev', mobdev_branch) && mobdev_branch.is(':checked')) {
-        mobdev_branch.val('mobdev');
-      } else {
-        mobdev_branch.val('');
-      }
-
-      if ($.inArray('ux/ui', ux_ui_branch) && ux_ui_branch.is(':checked')) {
-        ux_ui_branch.val('ux/ui');
-      } else {
-        ux_ui_branch.val('');
-      }
-
     }
 
     // COMPANY DESCRIPTION
@@ -376,6 +331,7 @@ $(function () {
     // TODO VALIDATION
     e.preventDefault();
     let img = new FormData($(this)[0]);
+
     $.ajax({
       url: 'src/upload-file.php',
       method: 'post',
@@ -402,6 +358,7 @@ $(function () {
       <div></div>
       <small class="form-text form-muted">Max 3mb size</small>
     </div>
+    <input type="hidden" name="upload_file">
     <input type="submit" id="submit_upload" class="btn btn-primary btn-sm" value="Upload">
   </form>`);
     $('body').on('click', '#close_change_logo', function () {
@@ -1153,25 +1110,26 @@ $(function () {
 
   $('#hr_acc_form').on('submit', function (e) {
     e.preventDefault();
-    let $username = $('input[name="hr_username"]');
+    let $username = $('#hr_username');
     let $username_response_text = $('#hr_username_response_text');
-    let $email = $('input[name="hr_email"]');
+    let $email = $('#hr_email');
     let $email_response_text = $('#hr_email_response_text');
     let $password = $('input[name="password"]');
     let $password_response_text = $('#hr_password_response_text');
     let $confirm_password = $('input[name="confirm_password"]');
     let $confirm_password_response_text = $('#hr_confirm_password_response_text');
+    let $form_data = $(this).serializeArray();
+
+    $form_data.push({
+      name: 'register_hr',
+      value: null
+    })
     let proceed = true;
 
-
-    // Checking for existing username
     $.ajax({
-      url: 'src/checking-existing-username-email-hr.php',
+      url: 'src/create-profile.php',
       method: 'post',
-      data: {
-        check_existing_username: $username.val(),
-        check_existing_email: $email.val()
-      },
+      data: $form_data,
       success: function (response) {
         // HR username
         if (!$username.val().trim()) {
@@ -1401,14 +1359,9 @@ $(function () {
 
         if (proceed) {
           $.ajax({
-            url: 'src/database.php',
+            url: 'src/create-profile.php',
             method: 'post',
-            data: {
-              hr_username: $username.val(),
-              hr_email: $email.val(),
-              hr_password: $password.val(),
-              hr_confirm_password: $confirm_password.val()
-            },
+            data: $form_data,
             success: function () {
               $('#hr_succ_mess').show('fast');
               $('#hr_succ_mess').addClass('alert alert-success').html('Account created successfully!')
@@ -1416,7 +1369,7 @@ $(function () {
                 $('#hr_succ_mess').hide('fast');
               }, 5000)
             }
-          })
+          });
         }
       }
     });

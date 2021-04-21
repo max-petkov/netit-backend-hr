@@ -29,6 +29,9 @@ class Validator
                 if ($this->existing_acc($this->post_data['username'])) {
                     $this->error_msg['username'] = '<div class="invalid-feedback">Username exists!</div>';
                     $this->style_input['username'] = 'is-invalid';
+                    if (isset($this->post_data['register_hr']) && $this->existing_acc($this->post_data['username'])) {
+                        echo 'username is taken';
+                    }
                     return false;
                 } else {
                     $this->succ_msg['username'] = '<div class="valid-feedback">Great!</div>';
@@ -92,6 +95,9 @@ class Validator
                 if ($this->existing_email($this->post_data['email'])) {
                     $this->error_msg['email'] = '<div class="invalid-feedback">Email exists!</div>';
                     $this->style_input['email'] = 'is-invalid';
+                    if (isset($this->post_data['register_hr']) && $this->existing_email($this->post_data['email'])) {
+                        echo 'email is taken';
+                    }
                     return false;
                 } else {
                     if ($this->email_format($this->post_data['email'])) {
@@ -168,44 +174,44 @@ class Validator
     public function validate_branches()
     {
 
-        if (empty($this->post_data['it_branch'])) {
+        if ($this->validate_branch() === false) {
             $this->error_msg['branch'] = '<div class="text-danger">You need to check atleast one branch!</div>';
             return false;
         } else {
-            $this->valid_branch($this->post_data['it_branch']);
+            $this->valid_branch();
             return true;
         }
     }
-
+    
     // Valid branches 
-    public function valid_branch($array)
+    public function valid_branch()
     {
-        if (in_array('frontend', $array)) {
+        if (!empty($this->post_data['frontend'])) {
             $this->check_box['frontend'] = 'checked';
             $this->style_input['frontend'] = 'is-valid';
         }
 
-        if (in_array('backend', $array)) {
+        if (!empty($this->post_data['backend'])) {
             $this->check_box['backend'] = 'checked';
             $this->style_input['backend'] = 'is-valid';
         }
 
-        if (in_array('fullstack', $array)) {
+        if (!empty($this->post_data['fullstack'])) {
             $this->check_box['fullstack'] = 'checked';
             $this->style_input['fullstack'] = 'is-valid';
         }
 
-        if (in_array('qa', $array)) {
+        if (!empty($this->post_data['qa'])) {
             $this->check_box['qa'] = 'checked';
             $this->style_input['qa'] = 'is-valid';
         }
 
-        if (in_array('mobdev', $array)) {
+        if (!empty($this->post_data['mobdev'])) {
             $this->check_box['mobdev'] = 'checked';
             $this->style_input['mobdev'] = 'is-valid';
         }
 
-        if (in_array('ux/ui', $array)) {
+        if (!empty($this->post_data['ux/ui'])) {
             $this->check_box['ux/ui'] = 'checked';
             $this->style_input['ux/ui'] = 'is-valid';
         }
@@ -265,27 +271,19 @@ class Validator
 
     public function validate_history()
     {
-        if ($this->empty_field($this->post_data['company_history'])) {
+        if ($this->count_symbols_textarea($this->post_data['company_history'])) {
             return false;
         } else {
-            if ($this->count_symbols_textarea($this->post_data['company_history'])) {
-                return false;
-            } else {
-                return true;
-            }
+            return true;
         }
     }
 
     public function validate_mission()
     {
-        if ($this->empty_field($this->post_data['company_mission'])) {
+        if ($this->count_symbols_textarea($this->post_data['company_mission'])) {
             return false;
         } else {
-            if ($this->count_symbols_textarea($this->post_data['company_mission'])) {
-                return false;
-            } else {
-                return true;
-            }
+            return true;
         }
     }
 
@@ -339,7 +337,18 @@ class Validator
                 $this->validate_description() === true &&
                 $this->validate_history() === true &&
                 $this->validate_mission() === true &&
-                $this->update_branch() === true
+                $this->validate_branch() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['register_hr'])) {
+            if (
+                $this->validate_username() === true &&
+                $this->validate_email() === true &&
+                $this->validate_password() === true &&
+                $this->validate_confirm_password() === true
             ) {
                 return true;
             }
@@ -388,7 +397,7 @@ class Validator
     }
 
     // Branch validation on update
-    private function update_branch()
+    private function validate_branch()
     {
         if (
             empty($this->post_data['frontend']) &&

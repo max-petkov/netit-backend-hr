@@ -37,34 +37,34 @@
           <h4 class="text-center">For Employees</h4>
           <p class="text-muted text-center mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, mollitia!</p>
           <div class="form-group mb-3">
-            <input type="text" class="form-control <?php echo $validator->style_input['username'] ?? ''; ?>" name="username" placeholder="Username" value="<?php echo $_POST['username'] ?? ''; ?>">
-            <?php echo $validator->error_msg['username'] ?? ''; ?>
-            <?php echo $validator->succ_msg['username'] ?? ''; ?>
+            <input type="text" class="form-control <?php echo $check->style_input['username'] ?? ''; ?>" name="username" placeholder="Username" value="<?php echo $_POST['username'] ?? ''; ?>">
+            <?php echo $check->error_msg['username'] ?? ''; ?>
+            <?php echo $check->succ_msg['username'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <input type="text" class="form-control <?php echo $validator->style_input['name'] ?? ''; ?>" name="name" placeholder="First Name" value="<?php echo $_POST['name'] ?? ''; ?>">
-            <?php echo $validator->error_msg['name'] ?? ''; ?>
-            <?php echo $validator->succ_msg['name'] ?? ''; ?>
+            <input type="text" class="form-control <?php echo $check->style_input['name'] ?? ''; ?>" name="name" placeholder="First Name" value="<?php echo $_POST['name'] ?? ''; ?>">
+            <?php echo $check->error_msg['name'] ?? ''; ?>
+            <?php echo $check->succ_msg['name'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <input type="text" class="form-control <?php echo $validator->style_input['last_name'] ?? ''; ?>" name="last_name" placeholder="Last Name" value="<?php echo $_POST['last_name'] ?? ''; ?>">
-            <?php echo $validator->error_msg['last_name'] ?? ''; ?>
-            <?php echo $validator->succ_msg['last_name'] ?? ''; ?>
+            <input type="text" class="form-control <?php echo $check->style_input['last_name'] ?? ''; ?>" name="last_name" placeholder="Last Name" value="<?php echo $_POST['last_name'] ?? ''; ?>">
+            <?php echo $check->error_msg['last_name'] ?? ''; ?>
+            <?php echo $check->succ_msg['last_name'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <input type="email" class="form-control <?php echo $validator->style_input['email'] ?? ''; ?>" name="email" placeholder="Email" value="<?php echo $_POST['email'] ?? ''; ?>">
-            <?php echo $validator->error_msg['email'] ?? ''; ?>
-            <?php echo $validator->succ_msg['email'] ?? ''; ?>
+            <input type="email" class="form-control <?php echo $check->style_input['email'] ?? ''; ?>" name="email" placeholder="Email" value="<?php echo $_POST['email'] ?? ''; ?>">
+            <?php echo $check->error_msg['email'] ?? ''; ?>
+            <?php echo $check->succ_msg['email'] ?? ''; ?>
           </div>
           <div class="form-group mb-3">
-            <input type="password" class="form-control <?php echo $validator->style_input['password'] ?? ''; ?>" name="password" placeholder="Password" value="<?php echo $_POST['password'] ?? ''; ?>">
-            <?php echo $validator->error_msg['password'] ?? ''; ?>
-            <?php echo $validator->succ_msg['password'] ?? ''; ?>
+            <input type="password" class="form-control <?php echo $check->style_input['password'] ?? ''; ?>" name="password" placeholder="Password" value="<?php echo $_POST['password'] ?? ''; ?>">
+            <?php echo $check->error_msg['password'] ?? ''; ?>
+            <?php echo $check->succ_msg['password'] ?? ''; ?>
           </div>
           <div class="form-group mb-4">
-            <input type="password" class="form-control <?php echo $validator->style_input['confirm_password'] ?? ''; ?>" name="confirm_password" placeholder="Confirm Password" value="<?php echo $_POST['confirm_password'] ?? ''; ?>">
-            <?php echo $validator->error_msg['confirm_password'] ?? ''; ?>
-            <?php echo $validator->succ_msg['confirm_password'] ?? ''; ?>
+            <input type="password" class="form-control <?php echo $check->style_input['confirm_password'] ?? ''; ?>" name="confirm_password" placeholder="Confirm Password" value="<?php echo $_POST['confirm_password'] ?? ''; ?>">
+            <?php echo $check->error_msg['confirm_password'] ?? ''; ?>
+            <?php echo $check->succ_msg['confirm_password'] ?? ''; ?>
           </div>
           <div class="d-grid col-6 mx-auto">
             <input type="submit" name="register_employee" class="btn btn-primary px-4">

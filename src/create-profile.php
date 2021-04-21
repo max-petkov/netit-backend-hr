@@ -36,3 +36,17 @@ if (isset($_POST['register_company'])) {
     $proceed->create_profile();
   }
 }
+
+// Create HR profile
+if (isset($_POST['register_hr'])) {
+  $check = new Validator($_POST);
+  $check->validate_username();
+  $check->validate_email();
+  $check->validate_password();
+  $check->validate_confirm_password();
+
+  if ($check->is_valid()) {
+    $proceed = new Profile($_POST);
+    $proceed->create_profile();
+  }
+}

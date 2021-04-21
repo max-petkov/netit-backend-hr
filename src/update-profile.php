@@ -20,5 +20,6 @@ if (isset($_POST['update_company'])) {
     if ($changes->is_valid()) {
         $proceed->update_profile();
         echo json_encode($_POST);
-    }
+    } 
 }
+

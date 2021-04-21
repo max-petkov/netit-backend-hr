@@ -382,7 +382,7 @@
       <form id="update_company_profile" method="POST" class="row edit-profile pb-3">
         <div class="ps-3 mb-3">
           <h4 class="card-text">Edit profile:</h4>
-          <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center">
+          <button class="btn btn-primary btn-sm d-flex align-items-center">
             <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
               <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
             </svg>
@@ -431,27 +431,27 @@
             <label for="it_branches">IT branches</label>
             <p id="checkbox_response" class="mb-2"></p>
             <div class="form-check my-2">
-              <input id="frontend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="frontend" value="frontend" <?php echo (!$profile->frontend) ? '' : 'checked'; //if ($profile->frontend != null || $profile->frontend != '') {echo 'checked';} ?>>
+              <input id="frontend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="frontend" value="frontend" <?php echo (!$profile->frontend) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Front-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="backend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="backend" value="backend" <?php echo (!$profile->backend) ? '' : 'checked'; //if ($profile->backend != null || $profile->backend != '') {echo 'checked';} ?>>
+              <input id="backend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="backend" value="backend" <?php echo (!$profile->backend) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Back-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="fullstack_checked_status" type="checkbox" class="checkbox_length form-check-input" name="fullstack" value="fullstack" <?php echo (!$profile->fullstack) ? '' : 'checked';//if ($profile->fullstack != null || $profile->fullstack != '') {echo 'checked';} ?>>
+              <input id="fullstack_checked_status" type="checkbox" class="checkbox_length form-check-input" name="fullstack" value="fullstack" <?php echo (!$profile->fullstack) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Fullstack Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="qa_checked_status" type="checkbox" class="checkbox_length form-check-input" name="qa" value="qa" <?php echo (!$profile->qa) ? '' : 'checked';//if ($profile->qa != null || $profile->qa != '') {echo 'checked';} ?>>
+              <input id="qa_checked_status" type="checkbox" class="checkbox_length form-check-input" name="qa" value="qa" <?php echo (!$profile->qa) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Quality Assurance</label>
             </div>
             <div class="form-check mb-2">
-              <input id="mobdev_checked_status" type="checkbox" class="checkbox_length form-check-input" name="mobdev" value="mobdev" <?php echo (!$profile->mobdev) ? '' : 'checked';//if ($profile->mobdev != null || $profile->mobdev != '') {echo 'checked';} ?>>
+              <input id="mobdev_checked_status" type="checkbox" class="checkbox_length form-check-input" name="mobdev" value="mobdev" <?php echo (!$profile->mobdev) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Mobile Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="ux_ui_checked_status" type="checkbox" class="checkbox_length form-check-input" name="ux/ui" value="ux/ui" <?php echo (!$profile->ux_ui) ? '' : 'checked'; //if ($profile->ux_ui != null || $profile->ux_ui != '') {echo 'checked';} ?>>
+              <input id="ux_ui_checked_status" type="checkbox" class="checkbox_length form-check-input" name="ux/ui" value="ux/ui" <?php echo (!$profile->ux_ui) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">UX/UI</label>
             </div>
           </div>
@@ -476,48 +476,42 @@
   </div>
 
   <!-- Upload logo image -->
-  <?php
-  $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-  $sql = ("SELECT file_name, file_mime, file_data FROM tb_company_profile WHERE id='{$_SESSION['company_id']}'");
-  $stmt = $db->query($sql);
-  $stmt->execute();
-  while ($row = $stmt->fetch()) :
-    if ($row['file_data'] !== null) : ?>
-      <div class="js-upload-logo-box card shadow rounded">
-        <div class="d-flex justify-content-between mt-3 mb-2 px-3">
-          <h4 class="m-0">Upload logo:</h4>
-          <button class="btn-close align-self-end"></button>
-        </div>
-        <div id="change_container" class="card-body">
-          <div id="changed_data">
-            <img id="showcase_company_logo" src="data:<?php $row['file_mime']; ?>;base64,<?php echo base64_encode($row['file_data']); ?>" class="me-2" alt="uploaded-picture" width="80px">
-            <div class="mt-3">
-              <button id="change_logo" class="btn btn-primary btn-sm">Change</button>
-              <button id="close_change_logo" class="btn btn-secondary btn-sm d-none ms-1">Close</button>
-              <div></div>
-            </div>
+  <?php if ($profile->file_mime !== null) : ?>
+    <div class="js-upload-logo-box card shadow rounded">
+      <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+        <h4 class="m-0">Upload logo:</h4>
+        <button class="btn-close align-self-end"></button>
+      </div>
+      <div id="change_container" class="card-body">
+        <div id="changed_data">
+          <img id="showcase_company_logo" src="data:<?php $profile->file_mime; ?>;base64,<?php echo base64_encode($profile->file_data); ?>" class="me-2" alt="uploaded-picture" width="80px">
+          <div class="mt-3">
+            <button id="change_logo" class="btn btn-primary btn-sm">Change</button>
+            <button id="close_change_logo" class="btn btn-secondary btn-sm d-none ms-1">Close</button>
+            <div></div>
           </div>
         </div>
       </div>
-    <?php else : ?>
-      <div class="js-upload-logo-box card  shadow rounded">
-        <div class="d-flex justify-content-between mt-3 mb-2 px-3">
-          <h4 class="m-0">Upload logo:</h4>
-          <button class="btn-close align-self-end"></button>
-        </div>
-        <div class="card-body">
-          <form id="upload_company_img" method="POST" enctype="multipart/form-data">
-            <div class="form-group mb-3 d-flex flex-column">
-              <input type="file" class="form-control-file" name="img_file">
-              <div></div>
-              <small class="form-text form-muted">Max 3mb size</small>
-            </div>
-            <input type="submit" id="submit_upload" class="btn btn-primary btn-sm" value="Upload">
-          </form>
-        </div>
+    </div>
+  <?php else : ?>
+    <div class="js-upload-logo-box card  shadow rounded">
+      <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+        <h4 class="m-0">Upload logo:</h4>
+        <button class="btn-close align-self-end"></button>
       </div>
-    <?php endif; ?>
-  <?php endwhile; ?>
+      <div class="card-body">
+        <form id="upload_company_img" method="POST" enctype="multipart/form-data">
+          <div class="form-group mb-3 d-flex flex-column">
+            <input type="file" class="form-control-file" name="img_file">
+            <div></div>
+            <small class="form-text form-muted">Max 3mb size</small>
+          </div>
+          <input type="hidden" name="upload_file">
+          <input type="submit" id="submit_upload" name="upload_file" class="btn btn-primary btn-sm" value="Upload">
+        </form>
+      </div>
+    </div>
+  <?php endif; ?>
 
   <!-- HR -->
   <div class="js_hr_box container d-none mt-4">
@@ -532,13 +526,12 @@
             <div id="hr_succ_mess"></div>
             <div class="form-group mb-2">
               <label for="hr_account">Username</label>
-              <input type="text" name="hr_username" class="form-control form-control-sm">
-              <input type="hidden">
+              <input id="hr_username" type="text" name="username" class="form-control form-control-sm">
               <div id="hr_username_response_text"></div>
             </div>
             <div class="form-group mb-2">
               <label for="hr_account">Email</label>
-              <input type="text" name="hr_email" class="form-control form-control-sm">
+              <input id="hr_email" type="text" name="email" class="form-control form-control-sm">
               <div id="hr_email_response_text"></div>
             </div>
             <div class="form-group mb-2">
@@ -551,7 +544,7 @@
               <input type="password" name="confirm_password" class="form-control form-control-sm">
               <div id="hr_confirm_password_response_text"></div>
             </div>
-            <input type="submit" name="submit_hr_acc" value="Submit" class="btn btn-primary">
+            <input type="submit" name="register_hr" value="Submit" class="btn btn-primary">
           </form>
         </div>
       </div>
@@ -683,42 +676,48 @@
   <section class="container mt-4 my-md-5">
     <div class="row">
       <div class="col-0 col-md-9 mx-auto">
-          <div class="mb-3 d-flex">
-            <di id="showcase_container">
-              <div id="showcase_data" class="d-flex">
-                <?php if ($profile->file_data !== null) : ?>
-                  <img id="showcase_company_logo" src="data:<?php $profile->file_mime; ?>;base64,<?php echo base64_encode($profile->file_data); ?>" class="me-2" alt="uploaded-picture" width="120px">
-                <?php endif; ?>
-                <div>
-                  <h1 id="showcase_company_name" class="m-0 display-4">
-                    <?php echo $profile->name;; ?>
-                  </h1>
-                  <p id="showcase_company_slogan" class="lead mb-0"><?php echo $profile->slogan; ?></p>
-                  <div id="showcase_it_branches" class="badges mt-1">
-                    <div id="badge_it_container">
-                      <?php echo (!$profile->frontend) ? '' : "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>"; //if ($profile->frontend != null || $profile->frontend != '') {echo "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>";}?>
-                      <?php echo (!$profile->backend) ? '' : "<span class=\"badge bg-dark\"> {$profile->backend} </span>"; //if ($profile->backend != null || $profile->backend != '') {echo "<span class=\"badge bg-dark\"> {$profile->backend} </span>";}?>
-                      <?php echo (!$profile->fullstack) ? '' : "<span class=\"badge bg-success\"> {$profile->fullstack} </span>";// if ($profile->fullstack != null || $profile->fullstack != '') {echo "<span class=\"badge bg-success\"> {$profile->fullstack} </span>";}?>
-                      <?php echo (!$profile->qa) ? '' : "<span class=\"badge bg-danger\"> {$profile->qa} </span>"; //if ($profile->qa != null || $profile->qa != '') {echo "<span class=\"badge bg-danger\"> {$profile->qa} </span>";}?>
-                      <?php echo (!$profile->mobdev) ? '' : "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>"; //if ($profile->mobdev != null || $profile->mobdev != '') {echo "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>";}?>
-                      <?php echo (!$profile->ux_ui) ? '' : "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>"; //if ($profile->ux_ui != null || $profile->ux_ui != '') {                        echo "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>";}?>
-                    </div>
+        <div class="mb-3 d-flex">
+          <di id="showcase_container">
+            <div id="showcase_data" class="d-flex">
+              <?php if ($profile->file_data !== null) : ?>
+                <img id="showcase_company_logo" src="data:<?php $profile->file_mime; ?>;base64,<?php echo base64_encode($profile->file_data); ?>" class="me-2" alt="uploaded-picture" width="120px">
+              <?php endif; ?>
+              <div>
+                <h1 id="showcase_company_name" class="m-0 display-4">
+                  <?php echo $profile->name;; ?>
+                </h1>
+                <p id="showcase_company_slogan" class="lead mb-0"><?php echo $profile->slogan; ?></p>
+                <div id="showcase_it_branches" class="badges mt-1">
+                  <div id="badge_it_container">
+                    <?php echo (!$profile->frontend) ? '' : "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>"; //if ($profile->frontend != null || $profile->frontend != '') {echo "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>";}
+                    ?>
+                    <?php echo (!$profile->backend) ? '' : "<span class=\"badge bg-dark\"> {$profile->backend} </span>"; //if ($profile->backend != null || $profile->backend != '') {echo "<span class=\"badge bg-dark\"> {$profile->backend} </span>";}
+                    ?>
+                    <?php echo (!$profile->fullstack) ? '' : "<span class=\"badge bg-success\"> {$profile->fullstack} </span>"; // if ($profile->fullstack != null || $profile->fullstack != '') {echo "<span class=\"badge bg-success\"> {$profile->fullstack} </span>";}
+                    ?>
+                    <?php echo (!$profile->qa) ? '' : "<span class=\"badge bg-danger\"> {$profile->qa} </span>"; //if ($profile->qa != null || $profile->qa != '') {echo "<span class=\"badge bg-danger\"> {$profile->qa} </span>";}
+                    ?>
+                    <?php echo (!$profile->mobdev) ? '' : "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>"; //if ($profile->mobdev != null || $profile->mobdev != '') {echo "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>";}
+                    ?>
+                    <?php echo (!$profile->ux_ui) ? '' : "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>"; //if ($profile->ux_ui != null || $profile->ux_ui != '') {                        echo "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>";}
+                    ?>
                   </div>
                 </div>
               </div>
-            </di>
-          </div>
-          <p id="showcase_company_description"><?php echo $profile->company_description; ?></p>
-          <ul class="mb-0">
-            <li>
-              <span><b>Company history:</b></span>
-              <p id="showcase_company_history"><?php echo $profile->company_history; ?></p>
-            </li>
-            <li>
-              <span><b>Company mission:</b></span>
-              <p id="showcase_company_mission"><?php echo $profile->company_mission; ?></p>
-            </li>
-          </ul>
+            </div>
+          </di>
+        </div>
+        <p id="showcase_company_description"><?php echo $profile->company_description; ?></p>
+        <ul class="mb-0">
+          <li>
+            <span><b>Company history:</b></span>
+            <p id="showcase_company_history"><?php echo $profile->company_history; ?></p>
+          </li>
+          <li>
+            <span><b>Company mission:</b></span>
+            <p id="showcase_company_mission"><?php echo $profile->company_mission; ?></p>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
