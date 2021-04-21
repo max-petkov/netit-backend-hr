@@ -6,33 +6,33 @@ session_start();
 
 // Create job seeker profile
 if (isset($_POST['register_employee'])) {
-  $validator = new Validator($_POST);
-  $validator->validate_username();
-  $validator->validate_name();
-  $validator->validate_last_name();
-  $validator->validate_email();
-  $validator->validate_password();
-  $validator->validate_confirm_password();
+  $check = new Validator($_POST);
+  $check->validate_username();
+  $check->validate_name();
+  $check->validate_last_name();
+  $check->validate_email();
+  $check->validate_password();
+  $check->validate_confirm_password();
 
-  if ($validator->is_valid()) {
-    $profile = new Profile($_POST);
-    $profile->create_profile();
+  if ($check->is_valid()) {
+    $proceed = new Profile($_POST);
+    $proceed->create_profile();
   }
 }
 
 // Create company profile
 if (isset($_POST['register_company'])) {
-  $validator = new Validator($_POST);
-  $validator->validate_username();
-  $validator->validate_name();
-  $validator->validate_email();
-  $validator->validate_branches();
-  $validator->validate_description();
-  $validator->validate_password();
-  $validator->validate_confirm_password();
+  $check = new Validator($_POST);
+  $check->validate_username();
+  $check->validate_name();
+  $check->validate_email();
+  $check->validate_branches();
+  $check->validate_description();
+  $check->validate_password();
+  $check->validate_confirm_password();
 
-  if ($validator->is_valid()) {
-    $profile = new Profile($_POST);
-    $profile->create_profile();
+  if ($check->is_valid()) {
+    $proceed = new Profile($_POST);
+    $proceed->create_profile();
   }
 }

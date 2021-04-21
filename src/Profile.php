@@ -29,6 +29,7 @@ class Profile
         $this->post_data = $data;
     }
 
+    // Create profile
     public function create_profile()
     {
         if (isset($this->post_data['register_employee'])) {
@@ -71,6 +72,15 @@ class Profile
         }
     }
 
+    // Login profile
+    public function login()
+    {
+        $this->login_job_seeker();
+        $this->login_company();
+        $this->login_hr();
+    }
+
+    // Update profile
     public function update_profile()
     {
         if (isset($this->post_data['update_employee'])) {
@@ -111,9 +121,71 @@ class Profile
         }
     }
 
+    // Get profile data
     public function profile_data($tb_profile, $session_id)
     {
         return $this->profile_query("SELECT * FROM $tb_profile WHERE id=$session_id");
+    }
+
+    // Private methods
+    private function login_job_seeker()
+    {
+        if ($this->match_username_pass('tb_job_seeker_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password'])) {
+            global $pdo;
+            $sql = ("SELECT id, username, password FROM tb_job_seeker_profile 
+                     WHERE username='{$this->post_data['username']}' 
+                     AND password='{$this->post_data['password']}' LIMIT 1");
+            $stmt = $pdo->prepare_query($sql);
+            while ($row = $stmt->fetch()) {
+                $_SESSION['employee_id'] = $row['id'];
+            }
+            redirect_to('employee-dashboard.php');
+        }
+    }
+
+    private function login_company()
+    {
+        if ($this->match_username_pass('tb_company_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password']) === true) {
+            global $pdo;
+            $sql = ("SELECT id, username, password FROM tb_company_profile 
+                     WHERE username='{$this->post_data['username']}' 
+                     AND password='{$this->post_data['password']}' LIMIT 1");
+            $stmt = $pdo->prepare_query($sql);
+            while ($row = $stmt->fetch()) {
+                $_SESSION['company_id'] = $row['id'];
+            }
+            redirect_to('company-dashboard.php');
+        }
+    }
+
+    private function login_hr()
+    {
+        if ($this->match_username_pass('tb_hr', 'username', 'password', $this->post_data['username'], $this->post_data['password']) === true) {
+            global $pdo;
+            $sql = ("SELECT id, username, password FROM tb_hr 
+                     WHERE username='{$this->post_data['username']}' 
+                     AND password='{$this->post_data['password']}' LIMIT 1");
+            $stmt = $pdo->prepare_query($sql);
+            while ($row = $stmt->fetch()) {
+                $_SESSION['hr_id'] = $row['id'];
+            }
+            redirect_to('hr-dashboard.php');
+        }
+    }
+
+    private function match_username_pass($db_tb, $db_username, $db_password, $username_val, $pass_val)
+    {
+        global $pdo;
+        $sql  = ("SELECT id, {$db_username}, {$db_password} FROM {$db_tb} 
+                  WHERE BINARY {$db_username}='{$username_val}' 
+                  AND BINARY {$db_password}='{$pass_val}' LIMIT 1");
+        $stmt = $pdo->prepare_query($sql);
+
+        if ($stmt->rowCount() === 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private function profile_query($sql)

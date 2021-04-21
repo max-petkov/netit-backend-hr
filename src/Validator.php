@@ -177,6 +177,40 @@ class Validator
         }
     }
 
+    // Valid branches 
+    public function valid_branch($array)
+    {
+        if (in_array('frontend', $array)) {
+            $this->check_box['frontend'] = 'checked';
+            $this->style_input['frontend'] = 'is-valid';
+        }
+
+        if (in_array('backend', $array)) {
+            $this->check_box['backend'] = 'checked';
+            $this->style_input['backend'] = 'is-valid';
+        }
+
+        if (in_array('fullstack', $array)) {
+            $this->check_box['fullstack'] = 'checked';
+            $this->style_input['fullstack'] = 'is-valid';
+        }
+
+        if (in_array('qa', $array)) {
+            $this->check_box['qa'] = 'checked';
+            $this->style_input['qa'] = 'is-valid';
+        }
+
+        if (in_array('mobdev', $array)) {
+            $this->check_box['mobdev'] = 'checked';
+            $this->style_input['mobdev'] = 'is-valid';
+        }
+
+        if (in_array('ux/ui', $array)) {
+            $this->check_box['ux/ui'] = 'checked';
+            $this->style_input['ux/ui'] = 'is-valid';
+        }
+    }
+
     public function validate_address()
     {
         if ($this->empty_field($this->post_data['address'])) {
@@ -314,14 +348,14 @@ class Validator
 
 
     // Empty input
-    public function empty_field($value)
+    private function empty_field($value)
     {
         if (empty(trim($value))) {
             return true;
         }
     }
 
-    // Input string lenght
+    // Input string length
     private function count_symbols_input($value, $min = null)
     {
         if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > 49) {
@@ -329,7 +363,7 @@ class Validator
         }
     }
 
-    // Textarea string lenght
+    // Textarea string length
     private function count_symbols_textarea($value, $min = null)
     {
         if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > 999) {
@@ -350,40 +384,6 @@ class Validator
     {
         if (trim($value1) != trim($value2)) {
             return true;
-        }
-    }
-
-    // Valid branches 
-    public function valid_branch($array)
-    {
-        if (in_array('frontend', $array)) {
-            $this->check_box['frontend'] = 'checked';
-            $this->style_input['frontend'] = 'is-valid';
-        }
-
-        if (in_array('backend', $array)) {
-            $this->check_box['backend'] = 'checked';
-            $this->style_input['backend'] = 'is-valid';
-        }
-
-        if (in_array('fullstack', $array)) {
-            $this->check_box['fullstack'] = 'checked';
-            $this->style_input['fullstack'] = 'is-valid';
-        }
-
-        if (in_array('qa', $array)) {
-            $this->check_box['qa'] = 'checked';
-            $this->style_input['qa'] = 'is-valid';
-        }
-
-        if (in_array('mobdev', $array)) {
-            $this->check_box['mobdev'] = 'checked';
-            $this->style_input['mobdev'] = 'is-valid';
-        }
-
-        if (in_array('ux/ui', $array)) {
-            $this->check_box['ux/ui'] = 'checked';
-            $this->style_input['ux/ui'] = 'is-valid';
         }
     }
 
@@ -437,74 +437,6 @@ class Validator
         $result = $stmt->rowCount();
 
         if ($result > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // Validate login
-    public function login()
-    {
-        $this->login_job_seeker();
-        $this->login_company();
-        $this->login_hr();
-    }
-
-    private function login_job_seeker()
-    {
-        if ($this->find_acc_pass('tb_job_seeker_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password'])) {
-            global $pdo;
-            $sql = ("SELECT id, username, password FROM tb_job_seeker_profile 
-                     WHERE username='{$this->post_data['username']}' 
-                     AND password='{$this->post_data['password']}' LIMIT 1");
-            $stmt = $pdo->prepare_query($sql);
-            while ($row = $stmt->fetch()) {
-                $_SESSION['employee_id'] = $row['id'];
-            }
-            redirect_to('employee-dashboard.php');
-        }
-    }
-
-    private function login_company()
-    {
-        if ($this->find_acc_pass('tb_company_profile', 'username', 'password', $this->post_data['username'], $this->post_data['password']) === true) {
-            global $pdo;
-            $sql = ("SELECT id, username, password FROM tb_company_profile 
-                     WHERE username='{$this->post_data['username']}' 
-                     AND password='{$this->post_data['password']}' LIMIT 1");
-            $stmt = $pdo->prepare_query($sql);
-            while ($row = $stmt->fetch()) {
-                $_SESSION['company_id'] = $row['id'];
-            }
-            redirect_to('company-dashboard.php');
-        }
-    }
-
-    private function login_hr()
-    {
-        if ($this->find_acc_pass('tb_hr', 'username', 'password', $this->post_data['username'], $this->post_data['password']) === true) {
-            global $pdo;
-            $sql = ("SELECT id, username, password FROM tb_hr 
-                     WHERE username='{$this->post_data['username']}' 
-                     AND password='{$this->post_data['password']}' LIMIT 1");
-            $stmt = $pdo->prepare_query($sql);
-            while ($row = $stmt->fetch()) {
-                $_SESSION['hr_id'] = $row['id'];
-            }
-            redirect_to('hr-dashboard.php');
-        }
-    }
-
-    private function find_acc_pass($db_tb, $db_username, $db_password, $username_val, $pass_val)
-    {
-        global $pdo;
-        $sql  = ("SELECT id, {$db_username}, {$db_password} FROM {$db_tb} 
-                  WHERE BINARY {$db_username}='{$username_val}' 
-                  AND BINARY {$db_password}='{$pass_val}' LIMIT 1");
-        $stmt = $pdo->prepare_query($sql);
-
-        if ($stmt->rowCount() === 1) {
             return true;
         } else {
             return false;
