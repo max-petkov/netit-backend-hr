@@ -121,40 +121,40 @@
 // }
 
 // Insert HR into DB
-if (isset($_POST['hr_username'])) {
-  if (
-    !empty($_POST['hr_username'])                                                             &&
-    preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['hr_username'])                      &&
-    !empty($_POST['hr_email'])                                                                        &&
-    filter_var($_POST['hr_email'], FILTER_VALIDATE_EMAIL)                                            &&
-    !empty($_POST['hr_password'])                                                                     &&
-    preg_match('/^[a-zA-Z0-9-]+$/u', $_POST['hr_password'])                              &&
-    !empty($_POST['hr_confirm_password'])                                                             &&
-    $_POST['hr_password'] == $_POST['hr_confirm_password']                                               &&
-    mb_strlen($_POST['hr_username'])    >= 4                                                  &&
-    mb_strlen($_POST['hr_username'])    <= 49                                                 &&
-    mb_strlen($_POST['hr_email'])       <= 254                                                &&
-    mb_strlen($_POST['hr_password'])            >= 4                                                  &&
-    mb_strlen($_POST['hr_password'])            <= 49                                                 &&
-    !checking_existing_username_email('tb_company_profile', 'username', $_POST['hr_username'])      &&
-    !checking_existing_username_email('tb_job_seeker_profile', 'username', $_POST['hr_username'])      &&
-    !checking_existing_username_email('tb_hr', 'username', $_POST['hr_username'])      &&
-    !checking_existing_username_email('tb_company_profile', 'email', $_POST['hr_email'])                    &&
-    !checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['hr_email']) &&
-    !checking_existing_username_email('tb_hr', 'email', $_POST['hr_email'])
-  ) {
+// if (isset($_POST['hr_username'])) {
+//   if (
+//     !empty($_POST['hr_username'])                                                             &&
+//     preg_match('/^[a-zA-Z0-9\p{Cyrillic}\-]+$/u', $_POST['hr_username'])                      &&
+//     !empty($_POST['hr_email'])                                                                        &&
+//     filter_var($_POST['hr_email'], FILTER_VALIDATE_EMAIL)                                            &&
+//     !empty($_POST['hr_password'])                                                                     &&
+//     preg_match('/^[a-zA-Z0-9-]+$/u', $_POST['hr_password'])                              &&
+//     !empty($_POST['hr_confirm_password'])                                                             &&
+//     $_POST['hr_password'] == $_POST['hr_confirm_password']                                               &&
+//     mb_strlen($_POST['hr_username'])    >= 4                                                  &&
+//     mb_strlen($_POST['hr_username'])    <= 49                                                 &&
+//     mb_strlen($_POST['hr_email'])       <= 254                                                &&
+//     mb_strlen($_POST['hr_password'])            >= 4                                                  &&
+//     mb_strlen($_POST['hr_password'])            <= 49                                                 &&
+//     !checking_existing_username_email('tb_company_profile', 'username', $_POST['hr_username'])      &&
+//     !checking_existing_username_email('tb_job_seeker_profile', 'username', $_POST['hr_username'])      &&
+//     !checking_existing_username_email('tb_hr', 'username', $_POST['hr_username'])      &&
+//     !checking_existing_username_email('tb_company_profile', 'email', $_POST['hr_email'])                    &&
+//     !checking_existing_username_email('tb_job_seeker_profile', 'email', $_POST['hr_email']) &&
+//     !checking_existing_username_email('tb_hr', 'email', $_POST['hr_email'])
+//   ) {
 
-    $hr_username    = $_POST['hr_username'];
-    $hr_email      = $_POST['hr_email'];
-    $hr_password    = $_POST['hr_password'];
+//     $hr_username    = $_POST['hr_username'];
+//     $hr_email      = $_POST['hr_email'];
+//     $hr_password    = $_POST['hr_password'];
 
-    $sql  = ('INSERT INTO tb_hr(company_id, username, email, password) VALUES(?, ?, ?, ?)');
-    $stmt = $db_connection->prepare($sql);
-    $stmt->bind_param('ssss', $_SESSION['company_id'], $hr_username, $hr_email, $hr_password);
-    $stmt->execute();
-    $stmt->close();
-  }
-}
+//     $sql  = ('INSERT INTO tb_hr(company_id, username, email, password) VALUES(?, ?, ?, ?)');
+//     $stmt = $db_connection->prepare($sql);
+//     $stmt->bind_param('ssss', $_SESSION['company_id'], $hr_username, $hr_email, $hr_password);
+//     $stmt->execute();
+//     $stmt->close();
+//   }
+// }
 
 // if (isset($_POST['submit_login'])) {
 
@@ -239,63 +239,63 @@ if (isset($_POST['cancel_job_id'])) {
   echo 'Successful delete!';
 }
 
-// Update company profile via ajax
-if (isset($_POST['company_name'])) {
-  if (
-    mb_strlen($_POST['company_name']) > 4                                                                                       ||
-    mb_strlen($_POST['company_name']) < 254                                                                                          ||
-    preg_match('/^[a-zA-Z0-9- \p{Cyrillic}]+$/u', $_POST['company_name'])                                                               ||
-    !empty($_POST['company_name'])                                                                                                   ||
-    mb_strlen($_POST['slogan']) < 49                                                                                           ||
-    mb_strlen($_POST['address']) < 49                                                                                             ||
-    preg_match('/^[a-zA-Z0-9-,\'. \p{Cyrillic}]+$/u', $_POST['address'])                                                         ||
-    !empty($_POST['address'])                                                                                                      ||
-    mb_strlen($_POST['website']) < 49                                                                                             ||
-    preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) ||
-    !empty($_POST['website'])                                                                                                      ||
-    mb_strlen($_POST['company_description']) > 49                                                                                  ||
-    mb_strlen($_POST['company_description']) < 999                                                                                 ||
-    empty($_POST['company_description']) ||
-    preg_match('/^[a-zA-Z0-9-\'!.,; \p{Cyrillic}]+$/u', $_POST['company_description']) ||
-    mb_strlen($_POST['company_history']) < 999 ||
-    mb_strlen($_POST['company_mission']) < 999
-  ) {
-    $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-    $sql = ("UPDATE tb_company_profile SET company_name=:company_name, slogan=:slogan, address=:address, website=:website, company_description=:company_description, company_history=:company_history, company_mission=:company_mission, frontend_branch=:frontend_branch, backend_branch=:backend_branch, fullstack_branch=:fullstack_branch, qa_branch=:qa_branch, mobdev_branch=:mobdev_branch, ux_ui_branch=:ux_ui_branch WHERE id='{$_SESSION['company_id']}'");
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':company_name', $_POST['company_name']);
-    $stmt->bindValue(':slogan', $_POST['slogan']);
-    $stmt->bindValue(':address', $_POST['address']);
-    $stmt->bindValue(':website', $_POST['website']);
-    $stmt->bindValue(':company_description', $_POST['company_description']);
-    $stmt->bindValue(':company_history', $_POST['company_history']);
-    $stmt->bindValue(':company_mission', $_POST['company_mission']);
-    $stmt->bindValue(':frontend_branch', $_POST['frontend_branch']);
-    $stmt->bindValue(':backend_branch', $_POST['backend_branch']);
-    $stmt->bindValue(':fullstack_branch', $_POST['fullstack_branch']);
-    $stmt->bindValue(':qa_branch', $_POST['qa_branch']);
-    $stmt->bindValue(':mobdev_branch', $_POST['mobdev_branch']);
-    $stmt->bindValue(':ux_ui_branch', $_POST['ux_ui_branch']);
+// // Update company profile via ajax
+// if (isset($_POST['company_name'])) {
+//   if (
+//     mb_strlen($_POST['company_name']) > 4                                                                                       ||
+//     mb_strlen($_POST['company_name']) < 254                                                                                          ||
+//     preg_match('/^[a-zA-Z0-9- \p{Cyrillic}]+$/u', $_POST['company_name'])                                                               ||
+//     !empty($_POST['company_name'])                                                                                                   ||
+//     mb_strlen($_POST['slogan']) < 49                                                                                           ||
+//     mb_strlen($_POST['address']) < 49                                                                                             ||
+//     preg_match('/^[a-zA-Z0-9-,\'. \p{Cyrillic}]+$/u', $_POST['address'])                                                         ||
+//     !empty($_POST['address'])                                                                                                      ||
+//     mb_strlen($_POST['website']) < 49                                                                                             ||
+//     preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $_POST['website']) ||
+//     !empty($_POST['website'])                                                                                                      ||
+//     mb_strlen($_POST['company_description']) > 49                                                                                  ||
+//     mb_strlen($_POST['company_description']) < 999                                                                                 ||
+//     empty($_POST['company_description']) ||
+//     preg_match('/^[a-zA-Z0-9-\'!.,; \p{Cyrillic}]+$/u', $_POST['company_description']) ||
+//     mb_strlen($_POST['company_history']) < 999 ||
+//     mb_strlen($_POST['company_mission']) < 999
+//   ) {
+//     $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
+//     $sql = ("UPDATE tb_company_profile SET company_name=:company_name, slogan=:slogan, address=:address, website=:website, company_description=:company_description, company_history=:company_history, company_mission=:company_mission, frontend_branch=:frontend_branch, backend_branch=:backend_branch, fullstack_branch=:fullstack_branch, qa_branch=:qa_branch, mobdev_branch=:mobdev_branch, ux_ui_branch=:ux_ui_branch WHERE id='{$_SESSION['company_id']}'");
+//     $stmt = $db->prepare($sql);
+//     $stmt->bindValue(':company_name', $_POST['company_name']);
+//     $stmt->bindValue(':slogan', $_POST['slogan']);
+//     $stmt->bindValue(':address', $_POST['address']);
+//     $stmt->bindValue(':website', $_POST['website']);
+//     $stmt->bindValue(':company_description', $_POST['company_description']);
+//     $stmt->bindValue(':company_history', $_POST['company_history']);
+//     $stmt->bindValue(':company_mission', $_POST['company_mission']);
+//     $stmt->bindValue(':frontend_branch', $_POST['frontend_branch']);
+//     $stmt->bindValue(':backend_branch', $_POST['backend_branch']);
+//     $stmt->bindValue(':fullstack_branch', $_POST['fullstack_branch']);
+//     $stmt->bindValue(':qa_branch', $_POST['qa_branch']);
+//     $stmt->bindValue(':mobdev_branch', $_POST['mobdev_branch']);
+//     $stmt->bindValue(':ux_ui_branch', $_POST['ux_ui_branch']);
 
-    $stmt->execute();
+//     $stmt->execute();
 
-    $json_data['company_name']         = $_POST['company_name'];
-    $json_data['slogan']          = $_POST['slogan'];
-    $json_data['address']            = $_POST['address'];
-    $json_data['website']            = $_POST['website'];
-    $json_data['company_description'] = $_POST['company_description'];
-    $json_data['company_history'] = $_POST['company_history'];
-    $json_data['company_mission'] = $_POST['company_mission'];
-    $json_data['frontend_branch'] = $_POST['frontend_branch'];
-    $json_data['backend_branch'] = $_POST['backend_branch'];
-    $json_data['fullstack_branch'] = $_POST['fullstack_branch'];
-    $json_data['qa_branch'] = $_POST['qa_branch'];
-    $json_data['mobdev_branch'] = $_POST['mobdev_branch'];
-    $json_data['ux_ui_branch'] = $_POST['ux_ui_branch'];
+//     $json_data['company_name']         = $_POST['company_name'];
+//     $json_data['slogan']          = $_POST['slogan'];
+//     $json_data['address']            = $_POST['address'];
+//     $json_data['website']            = $_POST['website'];
+//     $json_data['company_description'] = $_POST['company_description'];
+//     $json_data['company_history'] = $_POST['company_history'];
+//     $json_data['company_mission'] = $_POST['company_mission'];
+//     $json_data['frontend_branch'] = $_POST['frontend_branch'];
+//     $json_data['backend_branch'] = $_POST['backend_branch'];
+//     $json_data['fullstack_branch'] = $_POST['fullstack_branch'];
+//     $json_data['qa_branch'] = $_POST['qa_branch'];
+//     $json_data['mobdev_branch'] = $_POST['mobdev_branch'];
+//     $json_data['ux_ui_branch'] = $_POST['ux_ui_branch'];
 
-    echo json_encode($json_data);
-  }
-}
+//     echo json_encode($json_data);
+//   }
+// }
 
 // Make published job in-active
 if (isset($_POST['published_job_id'])) {
