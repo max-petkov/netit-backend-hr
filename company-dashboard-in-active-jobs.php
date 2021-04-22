@@ -1,62 +1,36 @@
-<?php include 'src/database.php'; ?>
+<?php include 'src/Jobs.php'; ?>
+<?php session_start(); ?>
 
 <!-- View in-active published jobs -->
 <div class="container">
-  <div class="card">
+  <div class="card shadow rounded">
     <div id="published_job_tab_container" class="card-header">
       <ul id="load_published_job_tab_container" class="nav nav-tabs card-header-tabs">
-        <?php
-        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql2 = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
-        $stmt2 = $db->query($sql2);
-        $stmt2->execute();
-        $row2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-        <li class="nav-item"><a id="active_jobs" href="company-dashboard.php" class="nav-link">Active jobs (<?php echo $stmt2->rowCount(); ?>)</a></li>
-        <?php
-        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='N' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
-        $stmt = $db->query($sql);
-        $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-        <li class="nav-item"><a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link active">In-active jobs (<?php echo $stmt->rowCount(); ?>)</a></li>
+        <?php $job_data = new Job; ?>
+        <li class="nav-item">
+          <a id="active_jobs" href="company-dashboard.php" class="nav-link">Active jobs (<?php echo $job_data->count_active_inactive_jobs('Y'); ?>)</a>
+        </li>
+        <li class="nav-item">
+          <a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link active">In-active jobs (<?php echo $job_data->count_active_inactive_jobs('N'); ?>)</a>
+        </li>
       </ul>
     </div>
     <div class="card-body">
       <ul id="view_published_jobs" class="list-group-flush">
-        <?php foreach ($row as $value) : ?>
+        <?php $job_data = new Job; ?>
+        <?php foreach ($job_data->display_jobs_company('N') as $value) : ?>
           <li class="job-li list-group-item py-3">
             <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?></p>
             <div class="d-flex align-items-center">
             </div>
             <p id="update_job_title" class="m-0 fw-bold"> <?php echo $value['job_title']; ?> </p>
             <span class="badges mt-1">
-
-              <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
-              }
-              ?>
+              <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
+              <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+              <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
+              <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
+              <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
+              <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
               <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
               <div class="d-flex justify-content-between">
@@ -67,13 +41,6 @@
                       <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                     </svg>
                     Read more
-                  </button>
-                  <button id="update_published_job" class="js-update-in-active-publish btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
-                    Make changes
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-pencil-square" viewBox="0 0 16 16">
-                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                    </svg>
                   </button>
                   <button id="activate_published_job" class="btn btn-success d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be active!">
                     Turn on
@@ -96,11 +63,7 @@
               <p class="m-0 d-none"> <?php echo $value['job_description']; ?> </p>
           </li>
         <?php endforeach; ?>
-        <?php
-          if ($stmt->rowCount() === 0) {
-            echo "<h6 class=\"job-li\">There are no published jobs...</h6>";
-          }
-          ?>
+        <?php echo ($job_data->count_active_inactive_jobs('N') === 0) ? "<h6>There are no published jobs...</h6>" : ''; ?>
       </ul>
     </div>
   </div>

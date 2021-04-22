@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php include_once 'src/functions.php'; ?>
 <?php include_once 'src/Profile.php'; ?>
+<?php include_once 'src/Jobs.php'; ?>
 <?php login_required($_SESSION['company_id']); ?>
 
 <!DOCTYPE html>
@@ -43,7 +44,6 @@
                   <a class="dropdown-item xsm-text-class" href="#">Edit Profile</a>
                 </li>
                 <li id="upload_img_btn">
-                  <!-- TODO ANIMATION -->
                   <a id="open_upload_img" class="dropdown-item xsm-text-class" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-upload" viewBox="0 0 16 16">
                       <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
@@ -573,10 +573,10 @@
               <div class="form-group mb-3 order-1">
                 <label for="job_time" class="fw-bold">Job time</label>
                 <div class="form-group mt-1">
-                  <input type="checkbox" name="job_time[0]" class="job_time_length form-check-input" value="full time">
+                  <input type="checkbox" name="job_fulltime" class="job_time_length form-check-input" value="full time">
                   <label for="job_title">Full time</label>
                 </div>
-                <input type="checkbox" name="job_time[1]" class="job_time_length form-check-input" value="part time">
+                <input type="checkbox" name="job_part_time" class="job_time_length form-check-input" value="part time">
                 <label for="job_title">Part time</label>
               </div>
 
@@ -591,27 +591,27 @@
                     </span>
                   </label>
                   <div class="form-check mt-1">
-                    <input id="frontend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[0]" value="frontend">
+                    <input id="frontend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="frontend" value="frontend">
                     <label class="form-check-label" for="it_branch">Front-end Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input id="backend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[1]" value="backend">
+                    <input id="backend_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="backend" value="backend">
                     <label class="form-check-label" for="it_branch">Back-end Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input id="fullstack_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[2]" value="fullstack">
+                    <input id="fullstack_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="fullstack" value="fullstack">
                     <label class="form-check-label" for="it_branch">Fullstack Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input id="qa_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[3]" value="qa">
+                    <input id="qa_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="qa" value="qa">
                     <label class="form-check-label" for="it_branch">Quality Assurance</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input id="mobdev_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[4]" value="mobdev">
+                    <input id="mobdev_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="mobdev" value="mobdev">
                     <label class="form-check-label" for="it_branch">Mobile Development</label>
                   </div>
                   <div class="form-check mb-2">
-                    <input id="ux_ui_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="it_tag[5]" value="ux/ui">
+                    <input id="ux_ui_checked_tag" type="checkbox" class="it_tag_length form-check-input" name="ux/ui" value="ux/ui">
                     <label class="form-check-label" for="it_branch">UX/UI</label>
                   </div>
                 </div>
@@ -621,15 +621,12 @@
             <p id="job_time_response_text" class="mb-0"></p>
 
           </div>
-
-
           <div class="form-group mb-3 d-flex">
             <div class="form-group me-3">
               <label for="" class="fw-bold">Salary:</label>
-              <input type="text" class="form-control" name="job_salary">
+              <input type="text" class="form-control" name="salary">
               <p id="salary_response_text" class="m-0"></p>
             </div>
-
             <div class="form-group me-3">
               <label for="job_salary_currency" class="fw-bold">Currency:</label>
               <div class="form-group me-2">
@@ -642,7 +639,6 @@
               </div>
               <p id="currency_response_text" class="m-0"></p>
             </div>
-
             <div class="form-group">
               <label for="job_salary_year_month" class="fw-bold">Month/Year:</label>
               <div class="form-group me-2">
@@ -655,22 +651,27 @@
               </div>
               <p id="job_month_year_response_text" class="m-0"></p>
             </div>
-
           </div>
           <div class="form-group">
             <label for="job_description" class="fw-bold">Job Description</label>
             <!-- NEED TO ADD CKEDITOR -->
-            <textarea name="job_description" rows="8" class="form-control"></textarea>
+            <textarea name="description" rows="8" class="form-control"></textarea>
             <p id="job_description_response_text" class="m-0"></p>
           </div>
-          <input type="submit" value="Publish" name="publish_submit" class="btn btn-primary mt-3">
-          <input type="hidden" name="secret_number" value="<?php echo $_SESSION['company_id'] ?>">
+          <input type="submit" value="Publish" class="btn btn-primary mt-3">
+          <input type="hidden" name="username" value="<?php echo $profile->username; ?>">
+          <input type="hidden" name="name" value="<?php echo $profile->name; ?>">
+          <input type="hidden" name="email" value="<?php echo $profile->email; ?>">
+          <span class="tooltip-icon" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Published job content CAN'T be changed after submit!">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mt-3 bi bi-info-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+            </svg>
+          </span>
         </form>
       </div>
     </div>
   </div>
-
-
 
   <!-- Company showcase -->
   <section class="container mt-4 my-md-5">
@@ -689,18 +690,12 @@
                 <p id="showcase_company_slogan" class="lead mb-0"><?php echo $profile->slogan; ?></p>
                 <div id="showcase_it_branches" class="badges mt-1">
                   <div id="badge_it_container">
-                    <?php echo (!$profile->frontend) ? '' : "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>"; //if ($profile->frontend != null || $profile->frontend != '') {echo "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>";}
-                    ?>
-                    <?php echo (!$profile->backend) ? '' : "<span class=\"badge bg-dark\"> {$profile->backend} </span>"; //if ($profile->backend != null || $profile->backend != '') {echo "<span class=\"badge bg-dark\"> {$profile->backend} </span>";}
-                    ?>
-                    <?php echo (!$profile->fullstack) ? '' : "<span class=\"badge bg-success\"> {$profile->fullstack} </span>"; // if ($profile->fullstack != null || $profile->fullstack != '') {echo "<span class=\"badge bg-success\"> {$profile->fullstack} </span>";}
-                    ?>
-                    <?php echo (!$profile->qa) ? '' : "<span class=\"badge bg-danger\"> {$profile->qa} </span>"; //if ($profile->qa != null || $profile->qa != '') {echo "<span class=\"badge bg-danger\"> {$profile->qa} </span>";}
-                    ?>
-                    <?php echo (!$profile->mobdev) ? '' : "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>"; //if ($profile->mobdev != null || $profile->mobdev != '') {echo "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>";}
-                    ?>
-                    <?php echo (!$profile->ux_ui) ? '' : "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>"; //if ($profile->ux_ui != null || $profile->ux_ui != '') {                        echo "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>";}
-                    ?>
+                    <?php echo (!$profile->frontend) ? '' : "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>"; ?>
+                    <?php echo (!$profile->backend) ? '' : "<span class=\"badge bg-dark\"> {$profile->backend} </span>"; ?>
+                    <?php echo (!$profile->fullstack) ? '' : "<span class=\"badge bg-success\"> {$profile->fullstack} </span>"; ?>
+                    <?php echo (!$profile->qa) ? '' : "<span class=\"badge bg-danger\"> {$profile->qa} </span>"; ?>
+                    <?php echo (!$profile->mobdev) ? '' : "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>"; ?>
+                    <?php echo (!$profile->ux_ui) ? '' : "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>"; ?>
                   </div>
                 </div>
               </div>
@@ -864,66 +859,34 @@
     </div>
   </div>
 
-  <!-- Update published job -->
-  <div class="d-none js-update-publish-job-form"></div>
-
   <!-- View published jobs -->
   <div class="container">
     <div class="card shadow rounded">
       <div id="published_job_tab_container" class="card-header">
         <ul id="load_published_job_tab_container" class="nav nav-tabs card-header-tabs">
-          <?php
-          $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-          $sql = ("SELECT * FROM tb_published_jobs WHERE is_active='Y' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
-          $stmt = $db->query($sql);
-          $stmt->execute();
-          $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-          ?>
-          <li class="nav-item"><a id="active_jobs" href="company-dashboard.php" class="nav-link active">Active jobs (<?php echo $stmt->rowCount(); ?>)</a></li>
-          <?php
-          $sql2 = ("SELECT * FROM tb_published_jobs WHERE is_active='N' AND company_id='{$_SESSION['company_id']}' ORDER BY published_date DESC");
-          $stmt2 = $db->query($sql2);
-          $stmt2->execute();
-          $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-          ?>
-          <li class="nav-item"><a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link">In-active jobs (<?php echo $stmt2->rowCount(); ?>)</a></li>
+          <?php $job_data = new Job; ?>
+          <li class="nav-item">
+            <a id="active_jobs" href="company-dashboard.php" class="nav-link active">Active jobs (<?php echo $job_data->count_active_inactive_jobs('Y'); ?>)</a>
+          </li>
+          <li class="nav-item">
+            <a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link">In-active jobs (<?php echo $job_data->count_active_inactive_jobs('N'); ?>)</a>
+          </li>
         </ul>
       </div>
       <div class="card-body">
         <ul id="view_published_jobs" class="list-group-flush">
-
-          <?php foreach ($row as $value) : ?>
+          <?php foreach ($job_data->display_jobs_company('Y') as $value) : ?>
             <li class="job-li list-group-item py-3">
               <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?></p>
               <div class="d-flex align-items-center">
               </div>
-              <p id="update_job_title" class="m-0 fw-bold">
-                <?php echo $value['job_title']; ?>
-              </p>
-              <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
-              }
-              ?>
-              <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
-              }
-              ?>
+              <p id="update_job_title" class="m-0 fw-bold"><?php echo $value['job_title']; ?></p>
+              <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
+              <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+              <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
+              <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
+              <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
+              <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
               <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
               <p class="d-none"><b>Job description: </b> <?php echo $value['job_description']; ?></p>
@@ -935,24 +898,13 @@
                   </svg>
                   Read more
                 </button>
-                <button id="update_published_job" class="js-update-active-publish btn btn-warning d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>">
-                  Make changes
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-1 bi bi-pencil-square" viewBox="0 0 16 16">
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                  </svg>
-                </button>
-                <button id="remove_published_job" class="btn btn-danger d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be in-active!">
+                <button class="js-remove-published-job btn btn-danger d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be in-active!">
                   Turn off
                 </button>
               </div>
             </li>
           <?php endforeach; ?>
-          <?php
-          if ($stmt->rowCount() === 0) {
-            echo "<h6>There are no published jobs...</h6>";
-          }
-          ?>
+          <?php echo ($job_data->count_active_inactive_jobs('Y') === 0) ? "<h6>There are no published jobs...</h6>" : ''; ?>
         </ul>
       </div>
     </div>

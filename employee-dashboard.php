@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php include_once 'src/functions.php'; ?>
 <?php include_once 'src/Profile.php'; ?>
+<?php include_once 'src/Jobs.php'; ?>
 <?php login_required($_SESSION['employee_id']); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -292,39 +293,18 @@
       <button class="btn-close align-self-end"></button>
     </div>
     <ul id="applied_job_container" class="card-body list-group-flush">
-      <?php $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-      $sql = ("SELECT a.*, b.* FROM tb_published_jobs AS a INNER JOIN tb_applied_jobs AS b WHERE b.job_id=a.id AND b.job_seeker_id={$_SESSION['employee_id']} AND is_applied='Y' ORDER BY b.applied_id DESC");
-      $stmt = $db->prepare($sql);
-      $stmt->execute();
-      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($row as $value) : ?>
+      <?php
+      $job_data = new Job;
+      foreach ($job_data->display_applied_jobs() as $value) : ?>
         <li class="applied_job_data list-group-item">
           <div class="small text-muted d-flex align-items-center">
-            <?php echo "<span class=\"me-1\">{$value['published_date']}</span> <span class=\"text-dark fw-bold fs-5\"> {$value['company_name']}</span>"; ?>
-            <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-              echo "<span class=\"badge bg-secondary mx-1\"> {$value['frontend_tag']} </span>";
-            }
-            ?>
-            <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-              echo "<span class=\"badge bg-dark mx-1\"> {$value['backend_tag']} </span>";
-            }
-            ?>
-            <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-              echo "<span class=\"badge bg-success mx-1\"> {$value['fullstack_tag']} </span>";
-            }
-            ?>
-            <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-              echo "<span class=\"badge bg-danger mx-1\"> {$value['qa_tag']} </span>";
-            }
-            ?>
-            <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-              echo "<span class=\"badge bg-warning mx-1\"> {$value['mobdev_tag']} </span>";
-            }
-            ?>
-            <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-              echo "<span class=\"badge bg-primary mx-1\"> {$value['ux_ui_tag']} </span>";
-            }
-            ?>
+            <?php echo "<span class=\"me-1\">{$value['published_date']}</span> <span class=\"text-dark fw-bold fs-5 me-1\"> {$value['company_name']}</span>"; ?>
+            <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
+            <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+            <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
+            <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
+            <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
+            <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
             <span class="badge bg-info mx-1"> <?php echo $value['job_time']; ?> </span>
           </div>
           <p class="mt-2"><?php echo $value['job_title']; ?></p>
@@ -345,11 +325,8 @@
               </svg>
               Reject
             </button>
-
-            </form>
-            <input type="hidden" value="<?php echo $_SESSION['employee_id']; ?>">
             <input type="hidden" value="<?php echo $value['applied_id']; ?>">
-            <input type="hidden" value="<?php echo $value['random_chars']; ?>">
+            <input type="hidden" name="cancel_application" value="">
           </div>
           <hr class="m-2">
         </li>
@@ -439,7 +416,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div id="refresh_frontend_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_tag', 'frontend'); ?></div>
+                  <div id="refresh_frontend_tag" class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('frontend_tag', 'frontend'); ?></div>
                 </div>
               </div>
             </div>
@@ -451,7 +428,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div id="refresh_backend_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('backend_tag', 'backend'); ?></div>
+                  <div id="refresh_backend_tag" class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('backend_tag', 'backend'); ?></div>
                 </div>
               </div>
             </div>
@@ -463,7 +440,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div id="refresh_fullstack_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_tag', 'fullstack'); ?></div>
+                  <div id="refresh_fullstack_tag" class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('fullstack_tag', 'fullstack'); ?></div>
                 </div>
               </div>
             </div>
@@ -475,7 +452,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div id="refresh_qa_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('qa_tag', 'qa'); ?></div>
+                  <div id="refresh_qa_tag" class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('qa_tag', 'qa'); ?></div>
                 </div>
               </div>
             </div>
@@ -487,7 +464,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div id="refresh_mobdev_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_tag', 'mobdev'); ?></div>
+                  <div id="refresh_mobdev_tag" class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('mobdev_tag', 'mobdev'); ?></div>
                 </div>
               </div>
             </div>
@@ -499,7 +476,7 @@
               <div class="card">
                 <div class="card-body p-2">
                   <div class="card-subttile text-center small">Published jobs:</div>
-                  <div id="refresh_ux_ui_tag" class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_tag', 'ux/ui'); ?></div>
+                  <div id="refresh_ux_ui_tag" class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('ux_ui_tag', 'ux/ui'); ?></div>
                 </div>
               </div>
             </div>
@@ -528,19 +505,7 @@
         </div>
         <ul id="published_job_list" class="list-group-flush ps-0">
           <?php
-
-          $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-
-          $sql = ("SELECT a.*, b.id, b.file_mime, b.file_data 
-          FROM tb_published_jobs AS a
-          INNER JOIN tb_company_profile AS b
-          ON b.id=a.company_id 
-          WHERE a.is_active='Y' 
-          ORDER BY a.published_date DESC");
-          $stmt = $db->query($sql);
-          $stmt->execute();
-          $row = $stmt->fetchAll(PDO::FETCH_BOTH);
-          foreach ($row as $value) : ?>
+          foreach ($job_data->display_active_jobs_employee() as $value) : ?>
             <li class="job_li list-group-item py-3">
               <div class="d-flex align-items-center">
                 <span class="text-muted me-2">Published: <?php echo $value['published_date']; ?> by </span>
@@ -548,33 +513,14 @@
                   <img id="showcase_company_logo" src="data:<?php $value['file_mime']; ?>;base64,<?php echo base64_encode($value['file_data']); ?>" class="me-1" alt="uploaded-picture" width="32px">
                 <?php endif; ?>
                 <?php echo "<span class=\"fw-bold text-dark fs-5 me-2\">{$value['company_name']}</span>"; ?>
-                <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                  echo "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                  echo "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                  echo "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                  echo "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                  echo "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                  echo "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>";
-                }
-                ?>
+                <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
+                <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+                <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
+                <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
+                <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
+                <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
                 <span class="badge bg-info me-1"> <?php echo $value['job_time']; ?> </span>
               </div>
-
               <p class="w-50 mt-2"><b>Job title: </b> <?php echo $value['job_title']; ?> </p>
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
 
@@ -587,11 +533,7 @@
                   </svg>
                   Read more
                 </button>
-                <?php
-                $stmt2 = $db->query("SELECT applied_id, job_id, job_seeker_id, is_applied FROM tb_applied_jobs WHERE job_id='{$value[0]}' AND job_seeker_id='{$_SESSION['employee_id']}' AND is_applied='Y'");
-                $stmt2->execute();
-                $row2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-                if ($stmt2->rowCount() === 0) : ?>
+                <?php if ($job_data->is_applied_btn($value[0]) === 0) : ?>
                   <button class="js-apply-job btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value[0]; ?>">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -618,37 +560,19 @@
                     <div class="d-flex align-items-center mb-1">
                       <p class="text-muted m-0">Published: <?php echo $value['published_date']; ?> by</p>
                       <h5 class="m-0 ms-1"><?php echo $value['company_name']; ?></h5>
-                      <!-- <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" width="56px" alt=""> -->
                     </div>
                     <p class="m-0"> <?php echo $value['job_title']; ?> </p>
-                    <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                      echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
-                    }
-                    ?>
-                    <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                      echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
-                    }
-                    ?>
-                    <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                      echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
-                    }
-                    ?>
-                    <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                      echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
-                    }
-                    ?>
-                    <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                      echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
-                    }
-                    ?>
-                    <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                      echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
-                    }
-                    ?>
+                    <?php echo "<span class=\"fw-bold text-dark fs-5 me-2\">{$value['company_name']}</span>"; ?>
+                    <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
+                    <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+                    <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
+                    <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
+                    <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
+                    <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
                     <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
                     <textarea name="motivational_speech" class="form-control mt-3" rows="10" placeholder="Why do you want to apply for this job?"></textarea>
                     <div id="motivation_speech_response_text"></div>
-                    <button id="send_speech" class="btn btn-primary d-flex align-items-center mt-3">
+                    <button class="js-send-speech btn btn-primary d-flex align-items-center mt-3">
                       Send
                       <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="16.987" height="16.557" viewBox="0 0 16.987 16.557">
                         <g id="send" transform="translate(0 -6.196)">
@@ -658,6 +582,7 @@
                         </g>
                       </svg>
                     </button>
+                    <input type="hidden" name="apply_job" value="">
                   </div>
                 </div>
               </div>

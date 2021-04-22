@@ -182,7 +182,7 @@ class Validator
             return true;
         }
     }
-    
+
     // Valid branches 
     public function valid_branch()
     {
@@ -287,6 +287,94 @@ class Validator
         }
     }
 
+    public function validate_job_title()
+    {
+        if ($this->empty_field($this->post_data['job_title'])) {
+            return false;
+        } else {
+            if ($this->string_length($this->post_data['job_title'], 20, 254)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_job_description()
+    {
+        if ($this->empty_field($this->post_data['description'])) {
+            return false;
+        } else {
+            if ($this->count_symbols_textarea($this->post_data['description'], 49)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_work_time()
+    {
+        if (empty($this->post_data['job_fulltime']) && empty($this->post_data['job_part_time'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function validate_currency()
+    {
+        if (empty($this->post_data['currency'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function validate_month_year_salary()
+    {
+        if (empty($this->post_data['month_year_salary'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function validate_salary()
+    {
+        if ($this->empty_field($this->post_data['salary'])) {
+            return false;
+        } else {
+            if (preg_match('/[a-zA-Z)(*&^%$#@!)]/', $this->post_data['salary'])) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_motivation_speech()
+    {
+        if ($this->empty_field($this->post_data['motivation_speech'])) {
+            return false;
+        } else {
+            if ($this->count_symbols_textarea($this->post_data['motivation_speech'], 49)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_hidden_fields()
+    {
+        if ($this->has_employee_applied() === 0 && $this->existing_published_job_random_chars() === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function is_valid()
     {
         if (isset($this->post_data['register_employee'])) {
@@ -353,13 +441,58 @@ class Validator
                 return true;
             }
         }
-    }
 
+        if (isset($this->post_data['publish_job'])) {
+            if (
+                $this->validate_job_title() === true &&
+                $this->validate_branches() === true &&
+                $this->validate_work_time() === true &&
+                $this->validate_salary() === true &&
+                $this->validate_currency() === true &&
+                $this->validate_month_year_salary() === true &&
+                $this->validate_job_description() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['update_job'])) {
+            if (
+                $this->validate_job_title() === true &&
+                $this->validate_branches() === true &&
+                $this->validate_work_time() === true &&
+                $this->validate_salary() === true &&
+                $this->validate_currency() === true &&
+                $this->validate_month_year_salary() === true &&
+                $this->validate_job_description() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['apply_job'])) {
+            if (
+                $this->validate_hidden_fields() === true &&
+                $this->validate_motivation_speech() === true &&
+                $_SESSION['employee_id'] === $this->post_data['job_seeker_id']
+            ) {
+                return true;
+            }
+        }
+    }
 
     // Empty input
     private function empty_field($value)
     {
         if (empty(trim($value))) {
+            return true;
+        }
+    }
+
+    // NEW length counter
+    private function string_length($value, $min = null, $max = null)
+    {
+        if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > $max) {
             return true;
         }
     }
@@ -450,5 +583,33 @@ class Validator
         } else {
             return false;
         }
+    }
+
+    // Security when appling to job
+    private function existing_published_job_random_chars()
+    {
+        global $pdo;
+        $data = [
+            ':id' => $this->post_data['job_id'],
+            ':random_chars' => $this->post_data['random_chars']
+        ];
+        $sql = ("SELECT id, random_chars FROM tb_published_jobs WHERE id=:id AND random_chars=:random_chars LIMIT 1");
+        $stmt = $pdo->prepare_query($sql, $data);
+        $result = $stmt->rowCount();
+        return $result;
+    }
+
+    private function has_employee_applied()
+    {
+        global $pdo;
+        $data = [
+            ':job_id' => $this->post_data['job_id'],
+            ':job_seeker_id' => $this->post_data['job_seeker_id'],
+            ':is_applied' => $this->post_data['is_applied']
+        ];
+        $sql = ("SELECT * FROM tb_applied_jobs WHERE job_id=:job_id AND job_seeker_id=:job_seeker_id AND is_applied=:is_applied");
+        $stmt = $pdo->prepare_query($sql, $data);
+        $result = $stmt->rowCount();
+        return $result;
     }
 }

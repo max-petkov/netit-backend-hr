@@ -393,25 +393,30 @@ $(function () {
     event.preventDefault();
     let job_title = $('input[name="job_title"]');
     let job_title_response_text = $('#job_title_response_text');
-    let job_fulltime = $('input[name="job_time[0]"');
-    let job_part_time = $('input[name="job_time[1]"');
+    let job_fulltime = $('input[name="job_fulltime"');
+    let job_part_time = $('input[name="job_part_time"');
     let job_time_response_text = $('#job_time_response_text');
-    let frontend_tag = $('input[name="it_tag[0]"]');
-    let backend_tag = $('input[name="it_tag[1]"]');
-    let fullstack_tag = $('input[name="it_tag[2]"]');
-    let qa_tag = $('input[name="it_tag[3]"]');
-    let mobdev_tag = $('input[name="it_tag[4]"]');
-    let ux_ui_tag = $('input[name="it_tag[5]"]');
+    let frontend_tag = $('input[name="frontend"]');
+    let backend_tag = $('input[name="backend"]');
+    let fullstack_tag = $('input[name="fullstack"]');
+    let qa_tag = $('input[name="qa"]');
+    let mobdev_tag = $('input[name="mobdev"]');
+    let ux_ui_tag = $('input[name="ux/ui"]');
     let job_tag_response_text = $('#job_tag_response_text');
-    let job_salary = $('input[name="job_salary"]');
+    let job_salary = $('input[name="salary"]');
     let salary_response_text = $('#salary_response_text');
     let salary_currency = $('input[name="currency"]:checked');
     let currency_response_text = $('#currency_response_text');
     let salary_month_year = $('input[name="month_year_salary"]:checked');
     let job_month_year_response_text = $('#job_month_year_response_text');
-    let job_description = $('textarea[name="job_description"]');
+    let job_description = $('textarea[name="description"]');
     let job_description_response_text = $('#job_description_response_text');
+    let $form_data = $(this).serializeArray();
     let proceed = true;
+    $form_data.push({
+      name: 'publish_job',
+      value: null
+    });
 
     // Job title
     if (job_title.val().trim().length < 20 || job_title.val().trim().length > 254) {
@@ -637,36 +642,15 @@ $(function () {
       $.ajax({
         url: 'src/publish-job.php',
         method: 'POST',
-        cache: 'false',
-        data: {
-          job_company_id: $('input[name="secret_number"]').val(),
-          job_company_username: $('input[name="company_username"]').val(),
-          job_company_name: $('input[name="company_name"]').val(),
-          job_company_email: $('input[name="company_email"]').val(),
-          job_title: job_title.val(),
-          job_fulltime: job_fulltime.val(),
-          job_part_time: job_part_time.val(),
-          frontend_tag: frontend_tag.val(),
-          backend_tag: backend_tag.val(),
-          fullstack_tag: fullstack_tag.val(),
-          qa_tag: qa_tag.val(),
-          mobdev_tag: mobdev_tag.val(),
-          ux_ui_tag: ux_ui_tag.val(),
-          job_salary: job_salary.val(),
-          salary_currency: salary_currency.val(),
-          salary_month_year: salary_month_year.val(),
-          job_description: job_description.val()
-
-        },
+        data: $form_data,
         success: function () {
-
           $('#publish_succ_mess').show('fast');
           $('#publish_succ_mess').addClass('alert alert-success').html('Publish successful!')
           $('#view_published_jobs').load('company-dashboard.php .job-li');
           $('#published_job_tab_container').load('company-dashboard.php #load_published_job_tab_container');
           setTimeout(function () {
             $('#publish_succ_mess').hide('fast');
-          }, 5000)
+          }, 5000);
         },
         error: function (jqXHR, text, errorThrown) {
           console.log(jqXHR + " " + text + " " + errorThrown);
@@ -676,17 +660,19 @@ $(function () {
 
   });
 
+  $
   // Turn off published job
-  $('#view_published_jobs').on('click', '#remove_published_job', function () {
+  $('#view_published_jobs').on('click', '.js-remove-published-job', function () {
     $published_job_id = $(this);
     $published_job_id.html('Loading...').addClass('disabled');
 
     $.ajax({
-      url: 'src/database.php',
+      url: 'src/publish-job.php',
       method: 'post',
       data: {
         published_job_id: $published_job_id.val(),
-        is_active: 'N'
+        is_active: 'N',
+        set_inactive: null
       },
       success: function () {
         $published_job_id.closest('li').fadeOut('slow', function () {
@@ -707,12 +693,13 @@ $(function () {
     let $published_date = `${new Date().getFullYear()}-${adding_zeros_time(new Date().getMonth() + 1)}-${adding_zeros_time(new Date().getDate())}`;
 
     $.ajax({
-      url: 'src/database.php',
+      url: 'src/publish-job.php',
       method: 'post',
       data: {
-        activate_published_job_id: $activate_published_job_id.val(),
+        published_job_id: $activate_published_job_id.val(),
         published_date: $published_date,
-        is_active: 'Y'
+        is_active: 'Y',
+        set_active: null
       },
       success: function () {
         $activate_published_job_id.closest('li').fadeOut('slow', function () {
@@ -726,336 +713,13 @@ $(function () {
     });
   });
 
-  // Getting published job data and proceed for update
-  $('#view_published_jobs').on('click', '#update_published_job', function () {
-    $published_job_id = $(this);
-    $update_job_form_container = $('.js-update-publish-job-form');
-
-    $.ajax({
-      url: 'src/getting-published-job-data.php',
-      method: 'post',
-      data: {
-        update_published_job_id: $published_job_id.val()
-      },
-      success: function (response) {
-        $update_job_form_container.html(`${response}`);
-        if ($update_job_form_container.hasClass('d-none')) {
-          $update_job_form_container.removeClass('d-none').animate({
-            top: '50%',
-            right: '32px',
-            opacity: '1'
-          }, 'fast');
-          // Update job ajax
-          $('#update_published_job_form').on('submit', function (event) {
-            event.preventDefault();
-            let job_title = $('input[name="update_job_title"]');
-            let job_title_response_text = $('#update_job_title_response_text');
-            let job_fulltime = $('input[name="update_job_time[0]"');
-            let job_part_time = $('input[name="update_job_time[1]"');
-            let job_time_response_text = $('#update_job_time_response_text');
-            let frontend_tag = $('input[name="update_it_tag[0]"]');
-            let backend_tag = $('input[name="update_it_tag[1]"]');
-            let fullstack_tag = $('input[name="update_it_tag[2]"]');
-            let qa_tag = $('input[name="update_it_tag[3]"]');
-            let mobdev_tag = $('input[name="update_it_tag[4]"]');
-            let ux_ui_tag = $('input[name="update_it_tag[5]"]');
-            let job_tag_response_text = $('#update_job_tag_response_text');
-            let job_salary = $('input[name="update_job_salary"]');
-            let salary_response_text = $('#update_salary_response_text');
-            let salary_currency = $('input[name="update_currency"]:checked');
-            let currency_response_text = $('#update_currency_response_text');
-            let salary_month_year = $('input[name="update_month_year_salary"]:checked');
-            let job_month_year_response_text = $('#update_job_month_year_response_text');
-            let job_description = $('textarea[name="update_job_description"]');
-            let job_description_response_text = $('#update_job_description_response_text');
-            let update_publish_job_submit = $('button[name="update_publish_job_submit"]');
-            let $published_date = `${new Date().getFullYear()}-${adding_zeros_time(new Date().getMonth() + 1)}-${adding_zeros_time(new Date().getDate())}`;
-            let proceed = true;
-
-            // Job title
-            if (job_title.val().trim().length < 20 || job_title.val().trim().length > 254) {
-              job_title_response_text.show('fast');
-              job_title.addClass('is-invalid');
-              job_title_response_text.addClass('text-danger')
-                .html('You need to put more than 20 symbols or less than 255!');
-
-              if (job_title_response_text.hasClass('text-success') && job_title.hasClass('is-valid')) {
-                job_title.removeClass('is-valid').addClass('is-invalid');
-                job_title_response_text.removeClass('text-success')
-                  .addClass('text-danger')
-                  .html('You need to put more than 20 symbols or less than 255!');
-              }
-
-              proceed = false;
-            } else {
-              job_title_response_text.show('fast');
-              job_title.addClass('is-valid');
-              job_title_response_text.addClass('text-success')
-                .html('OK!');
-              if (job_title_response_text.hasClass('text-danger') && job_title.hasClass('is-invalid')) {
-                job_title.removeClass('is-invalid').addClass('is-valid');
-                job_title_response_text.removeClass('text-danger')
-                  .addClass('text-success')
-                  .html('OK!');
-              }
-
-              setTimeout(function () {
-                job_title_response_text.hide('fast');
-              }, 5000)
-            }
-
-            // IT tag
-            if ($('.it_tag_length:checked').length === 0) {
-              job_tag_response_text.show('fast');
-              job_tag_response_text.addClass('text-danger').text('You need to select atleast one tag... This will help applicants to find more easy your publish!');
-
-              proceed = false;
-            } else {
-              job_tag_response_text.show('fast');
-              if (job_tag_response_text.hasClass('text-danger')) {
-                job_tag_response_text.removeClass('text-danger')
-                  .addClass('text-success');
-              }
-              job_tag_response_text.text(`Great! You have selected ${$('.it_tag_length:checked').length} tag/tags!`);
-              setTimeout(function () {
-                job_tag_response_text.hide('fast');
-              }, 5000);
-
-              if ($.inArray('frontend', frontend_tag) && frontend_tag.is(':checked')) {
-                frontend_tag.val('frontend');
-              } else {
-                frontend_tag.val('');
-              }
-
-              if ($.inArray('backend', backend_tag) && backend_tag.is(':checked')) {
-                backend_tag.val('backend');
-              } else {
-                backend_tag.val('');
-              }
-
-              if ($.inArray('fullstack', fullstack_tag) && fullstack_tag.is(':checked')) {
-                fullstack_tag.val('fullstack');
-              } else {
-                fullstack_tag.val('');
-              }
-
-              if ($.inArray('qa', qa_tag) && qa_tag.is(':checked')) {
-                qa_tag.val('qa');
-              } else {
-                qa_tag.val('');
-              }
-
-              if ($.inArray('mobdev', mobdev_tag) && mobdev_tag.is(':checked')) {
-                mobdev_tag.val('mobdev');
-              } else {
-                mobdev_tag.val('');
-              }
-
-              if ($.inArray('ux/ui', ux_ui_tag) && ux_ui_tag.is(':checked')) {
-                ux_ui_tag.val('ux/ui');
-              } else {
-                ux_ui_tag.val('');
-              }
-
-            }
-
-            // Job time
-            if ($('.job_time_length:checked').length === 0) {
-              job_time_response_text.show('fast');
-              job_time_response_text.addClass('text-danger').text('You need to choose between Fulltime or Part time or you can choose both!');
-
-              proceed = false;
-            } else {
-              job_time_response_text.show('fast');
-              if (job_time_response_text.hasClass('text-danger')) {
-                job_time_response_text.removeClass('text-danger')
-                  .addClass('text-success');
-              }
-              job_time_response_text.text(`Great! Now People will know how many hourse will work per day!`);
-              setTimeout(function () {
-                job_time_response_text.hide('fast');
-              }, 5000);
-
-              if ($.inArray('full time', job_fulltime) && job_fulltime.is(':checked')) {
-                job_fulltime.val('full time');
-              } else {
-                job_fulltime.val('');
-              }
-
-              if ($.inArray('part time', job_part_time) && job_part_time.is(':checked')) {
-                job_part_time.val('part time');
-              } else {
-                job_part_time.val('');
-              }
-            }
-
-            // Job Salary
-            if (job_salary.val().match(/[a-zA-Z)(*&^%$#@!)]/) || job_salary.val() == '') {
-
-              salary_response_text.show('fast');
-              job_salary.addClass('is-invalid');
-              salary_response_text.addClass('text-danger')
-                .html('You can put only [0-9,-.]!');
-
-              if (salary_response_text.hasClass('text-success') && job_salary.hasClass('is-valid')) {
-                job_salary.removeClass('is-valid').addClass('is-invalid');
-                salary_response_text.removeClass('text-success')
-                  .addClass('text-danger')
-                  .html('You can put only [0-9,-.]!');
-              }
-
-              proceed = false;
-            } else {
-              salary_response_text.show('fast');
-              job_salary.addClass('is-valid');
-              salary_response_text.addClass('text-success')
-                .html('OK!');
-              if (salary_response_text.hasClass('text-danger') && job_salary.hasClass('is-invalid')) {
-                job_salary.removeClass('is-invalid').addClass('is-valid');
-                salary_response_text.removeClass('text-danger')
-                  .addClass('text-success')
-                  .html('OK!');
-              }
-
-              setTimeout(function () {
-                salary_response_text.hide('fast');
-              }, 5000)
-            }
-
-            // Salary currency
-            if (salary_currency.length === 0) {
-              currency_response_text.show('fast');
-              currency_response_text.addClass('text-danger').text('Field is required!');
-
-              proceed = false;
-            } else {
-              currency_response_text.show('fast');
-              if (currency_response_text.hasClass('text-danger')) {
-                currency_response_text.removeClass('text-danger')
-                  .addClass('text-success');
-              }
-
-              currency_response_text.text('OK!');
-              setTimeout(function () {
-                currency_response_text.hide('fast');
-              }, 5000);
-            }
-
-            // Salary month year 
-            if (salary_month_year.length === 0) {
-              job_month_year_response_text.show('fast');
-              job_month_year_response_text.addClass('text-danger').text('Field is required!');
-
-              proceed = false;
-            } else {
-              job_month_year_response_text.show('fast');
-              if (job_month_year_response_text.hasClass('text-danger')) {
-                job_month_year_response_text.removeClass('text-danger')
-                  .addClass('text-success');
-              }
-
-              job_month_year_response_text.text('OK!');
-              setTimeout(function () {
-                job_month_year_response_text.hide('fast');
-              }, 5000);
-            }
-
-            // Job description
-            if (job_description.val().trim().length < 49 || job_description.val().trim().length > 999) {
-              job_description_response_text.show('fast');
-              job_description.addClass('is-invalid');
-              job_description_response_text.addClass('text-danger')
-                .html('You need to put more than 50 symbols or less than 999!');
-
-              if (job_description_response_text.hasClass('text-success') && job_description.hasClass('is-valid')) {
-                job_description.removeClass('is-valid').addClass('is-invalid');
-                job_description_response_text.removeClass('text-success')
-                  .addClass('text-danger')
-                  .html('You need to put more than 20 symbols or less than 255!');
-              }
-
-              proceed = false;
-            } else {
-              job_description_response_text.show('fast');
-              job_description.addClass('is-valid');
-              job_description_response_text.addClass('text-success')
-                .html('OK!');
-              if (job_description_response_text.hasClass('text-danger') && job_description.hasClass('is-invalid')) {
-                job_description.removeClass('is-invalid').addClass('is-valid');
-                job_description_response_text.removeClass('text-danger')
-                  .addClass('text-success')
-                  .html('OK!');
-              }
-
-              setTimeout(function () {
-                job_description_response_text.hide('fast');
-              }, 5000)
-            }
-
-            if (proceed) {
-              $.ajax({
-                url: 'src/database.php',
-                method: 'POST',
-                cache: 'false',
-                data: {
-                  update_publish_job_submit: update_publish_job_submit.val(),
-                  published_date: $published_date,
-                  job_title: job_title.val(),
-                  job_fulltime: job_fulltime.val(),
-                  job_part_time: job_part_time.val(),
-                  frontend_tag: frontend_tag.val(),
-                  backend_tag: backend_tag.val(),
-                  fullstack_tag: fullstack_tag.val(),
-                  qa_tag: qa_tag.val(),
-                  mobdev_tag: mobdev_tag.val(),
-                  ux_ui_tag: ux_ui_tag.val(),
-                  job_salary: job_salary.val(),
-                  salary_currency: salary_currency.val(),
-                  salary_month_year: salary_month_year.val(),
-                  job_description: job_description.val()
-
-                },
-                success: function () {
-
-                  $('#update_publish_succ_mess').show('fast');
-                  $('#update_publish_succ_mess').addClass('alert alert-success').html('Update successful!')
-                  setTimeout(function () {
-                    $('#update_publish_succ_mess').hide('fast');
-                  }, 5000)
-
-                  if ($published_job_id.hasClass('js-update-active-publish')) {
-                    $('#view_published_jobs').load('company-dashboard.php .job-li');
-                  } else if ($published_job_id.hasClass('js-update-in-active-publish')) {
-                    $('#view_published_jobs').load('company-dashboard-in-active-jobs.php .job-li');
-                  }
-
-                },
-                error: function (jqXHR, text, errorThrown) {
-                  console.log(jqXHR + " " + text + " " + errorThrown);
-                },
-              });
-            }
-          });
-        }
-      }
-    });
-    $update_job_form_container.on('click', '.btn-close', function () {
-      $update_job_form_container.animate({
-        right: '-544px',
-        opacity: '0'
-      }, 'slow', function () {
-        $(this).addClass('d-none');
-      })
-    });
-  });
-
   // Remove published job from database
   $('#view_published_jobs').on('click', '#remove_completely_from_db', function () {
     $published_job_id = $(this);
     $confirm_container = $(this).closest('div').next();
     $confirm_container.slideDown('slow').addClass('card border-primary mt-3')
       .html(`<div class="card-body">
-      <h5 class="mb-3">Are you sure you want to delete this post?</h5>
+      <h5 class="mb-3">Are you sure you want to delete this announcement?</h5>
       <button id="delete_confirmed" class="btn btn-primary btn-sm">Yes, proceed!</button>
       <button id="close_confirm_container" class="btn btn-secondary btn-sm">Close</button>
     </div>`);
@@ -1066,10 +730,11 @@ $(function () {
     });
     $confirm_container.on('click', '#delete_confirmed', function () {
       $.ajax({
-        url: 'src/database.php',
+        url: 'src/publish-job.php',
         method: 'post',
         data: {
-          delete_published_job_id: $published_job_id.children('input').val()
+          published_job_id: $published_job_id.children('input').val(),
+          delete_job: null
         },
         success: function () {
           $published_job_id.closest('li').fadeOut('slow', function () {

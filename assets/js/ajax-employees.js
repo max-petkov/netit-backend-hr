@@ -1,10 +1,9 @@
 $(function () {
 
   // Apply job
-  $(document).on('click', '.js-apply-job', function () {
+  $('body').on('click', '.js-apply-job', function () {
     $apply_button = $(this);
     $apply_button.closest('div')
-      .next()
       .next()
       .removeClass('d-none').animate({
         top: '0px',
@@ -34,7 +33,7 @@ $(function () {
     });
 
 
-    $('body').on('click', '#send_speech', function (event) {
+    $('body').on('click', '.js-send-speech', function (event) {
       event.preventDefault();
       event.stopImmediatePropagation();
       $send_speech = $(this);
@@ -70,14 +69,15 @@ $(function () {
 
       if ($proceed) {
         $.ajax({
-          url: 'src/applied-jobs.php',
+          url: 'src/publish-job.php',
           method: 'post',
           data: {
             job_id: $apply_button.val(),
             job_seeker_id: $apply_button.next().val(),
             random_chars: $apply_button.next().next().val(),
             is_applied: 'Y',
-            motivation_speech: $send_speech.prev().prev().val()
+            motivation_speech: $send_speech.prev().prev().val(),
+            apply_job: $(this).next().val()
           },
           success: function () {
             $apply_button.text('Applied!').addClass('disabled');
@@ -107,14 +107,11 @@ $(function () {
     $cancel_application_button.text('Loading...').addClass('disabled');
 
     $.ajax({
-      url: 'src/database.php',
+      url: 'src/publish-job.php',
       method: 'post',
       data: {
-        cancel_job_id: $cancel_application_button.val(),
-        job_seeker_id: $cancel_application_button.next().val(),
-        applied_id: $cancel_application_button.next().next().val()
-
-        // random_chars: $cancel_application_button.next().next().next().val() THIS IS FOR SECURITY REASON
+        applied_id: $cancel_application_button.next().val(),
+        cancel_application: $(this).next().next().val()
       },
       success: function () {
         $cancel_application_button.closest('li').fadeOut('slow', function () {
@@ -224,12 +221,12 @@ $(function () {
     let short_introduction = $('textarea[name="short_introduction"]');
     let proceed = true; // Proceed will tell ajax if everything is true proceed with ajax call if proceed is false don't make ajax call
     let $form_data = $(this).serializeArray();
-    
+
     $form_data.push({
       name: 'update_employee', //It will be used as isset() at server side validation
       value: null
     });
-    
+
 
     // FIRST NAME
     if (first_name.val().trim() == '') {
