@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php include_once 'src/functions.php'; ?>
+<?php include_once 'src/Message.php'; ?>
 <?php login_required($_SESSION['hr_id']); ?>
 
 <!DOCTYPE html>
@@ -130,13 +131,7 @@
               <svg id="envelope_open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="me-1 d-none bi bi-envelope-open" viewBox="0 0 16 16">
                 <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z" />
               </svg>
-              <?php
-              $sql2 = ("SELECT inbox_msg, hr_id, is_viewed FROM tb_msg_box_hr WHERE inbox_msg IS NOT NULL AND is_viewed IS NULL AND hr_id='{$_SESSION['hr_id']}'");
-              $stmt2 = $db->query($sql2);
-              $stmt2->execute();
-              $result2 = $stmt2->rowCount();
-              ?>
-              <span class="badge bg-danger rounded-pill"><?php echo $result2; ?></span>
+              <span class="badge bg-danger rounded-pill"><?php Message::count_inbox_msg('tb_msg_box_hr', 'hr_id', $_SESSION['hr_id']); ?></span>
             </a>
           </li>
         </ul>
@@ -153,30 +148,20 @@
     <div class="card-body">
       <form method="POST">
         <?php
-              $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-              $sql = ("SELECT a.id, a.company_id, a.username, b.id, b.company_name
-        FROM tb_hr AS a
-        INNER JOIN tb_company_profile AS b
-        ON b.id=a.company_id
-        WHERE a.id='{$_SESSION['hr_id']}'");
-              $stmt = $db->query($sql);
-              $stmt->execute();
-              $result = $stmt->fetch(PDO::FETCH_BOTH);
-              while ($value = $result) :
+              $msg_data = new Message;
+              $msg_data->get_msg_data();
         ?>
-          <div class="js-scs-msg-send"></div>
-          <div class="form-group mb-2">
-            <label for="to"><b>From:</b></label>
-            <input type="text" class="form-control form-control-sm" name="hr_username" value="<?php echo $value['username']; ?>" disabled>
-            <input type="hidden" value="<?php echo $_SESSION['hr_id']; ?>">
-          </div>
-          <div class="form-group mb-2">
-            <label for="to"> <b>To:</b></label>
-            <input type="email" class="form-control form-control-sm" name="company_name'" value="<?php echo $value['company_name']; ?>" disabled>
-            <input type="hidden" value="<?php echo $value['company_id']; ?>">
-          </div>
-          <?php break; ?>
-        <?php endwhile; ?>
+        <div class="js-scs-msg-send"></div>
+        <div class="form-group mb-2">
+          <label for="to"><b>From:</b></label>
+          <input type="text" class="form-control form-control-sm" name="hr_username" value="<?php echo $msg_data->hr_username; ?>" disabled>
+          <input type="hidden" value="<?php echo $msg_data->hr_id; ?>">
+        </div>
+        <div class="form-group mb-2">
+          <label for="to"> <b>To:</b></label>
+          <input type="email" class="form-control form-control-sm" name="company_name'" value="<?php echo $msg_data->company_username; ?>" disabled>
+          <input type="hidden" value="<?php echo $msg_data->company_id; ?>">
+        </div>
         <div class="form-group mb-2">
           <label for="subject"><b>Subject:</b></label>
           <input type="text" class="form-control form-control-sm" name="message_subject" value="">

@@ -157,10 +157,11 @@ $(function () {
   $('body').on('click', '.message_icon', function () {
     if ($(this).children('span').text() !== '0') {
       $.ajax({
-        url: 'src/inbox-counter.php',
+        url: 'src/message-controller.php',
         method: 'post',
         data: {
-          inbox_hr_counter: 'Y'
+          inbox_hr_counter: null,
+          reset_counter: null
         },
         success: function () {
           $('#inbox_hr_counter_container').load('hr-dashboard.php #inbox_hr_counter');

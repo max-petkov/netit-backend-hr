@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'Message.php';
 include_once 'Validator.php';
 
@@ -56,4 +57,9 @@ if (isset($_POST['company_to_hr'])) {
         $proceed->send_msg_to_hr_from_company();
         echo 'Message sent to hr from company';
     }
+}
+
+if (isset($_POST['reset_counter'])) {
+    $proceed = new Message($_POST);
+    $proceed->reset_inbox_counter();
 }
