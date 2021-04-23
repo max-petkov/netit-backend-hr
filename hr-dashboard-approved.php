@@ -1,4 +1,5 @@
-<?php include 'src/database.php'; ?>
+<?php session_start(); ?>
+<?php include_once 'src/Candidate.php'; ?>
 
 <!-- Approved applicants -->
 <div id="applicants_container" class="container-sm mt-4">
@@ -6,65 +7,14 @@
     <div class="card-header">
       <h4 class="my-3">Applicants</h4>
       <ul class="nav nav-tabs card-header-tabs">
-        <?php
-        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql2 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
-          FROM tb_hr AS a 
-          INNER JOIN tb_company_profile AS b 
-          ON b.id=a.company_id
-          INNER JOIN tb_published_jobs AS c 
-          ON c.company_id=b.id
-          INNER JOIN tb_applied_jobs AS d
-          ON d.job_id = c.id
-          INNER JOIN tb_job_seeker_profile AS e
-          ON d.job_seeker_id = e.id
-          WHERE  a.id='{$_SESSION['hr_id']}'
-          AND d.is_approved IS null");
-        $stmt2 = $db->query($sql2);
-        $stmt2->execute();
-        ?>
         <li class="nav-item">
-          <a id="new_applicants_tab" href="hr-dashboard.php" class="nav-link">New applicants (<?php echo $stmt2->rowCount(); ?>)</a>
+          <a id="new_applicants_tab" href="hr-dashboard.php" class="nav-link">New applicants (<?php Candidate::count_candidates(' IS NULL'); ?>)</a>
         </li>
-        <?php
-        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
-          FROM tb_hr AS a 
-          INNER JOIN tb_company_profile AS b 
-          ON b.id=a.company_id
-          INNER JOIN tb_published_jobs AS c 
-          ON c.company_id=b.id
-          INNER JOIN tb_applied_jobs AS d
-          ON d.job_id = c.id
-          INNER JOIN tb_job_seeker_profile AS e
-          ON d.job_seeker_id = e.id
-          WHERE  a.id='{$_SESSION['hr_id']}'
-          AND d.is_approved='Y'");
-        $stmt = $db->query($sql);
-        $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_BOTH);
-        ?>
         <li class="nav-item">
-          <a id="approved_applicants_tab" href="hr-dashboard-approved.php" class="nav-link active">Approved (<?php echo $stmt->rowCount(); ?>)</a>
+          <a id="approved_applicants_tab" href="hr-dashboard-approved.php" class="nav-link active">Approved (<?php Candidate::count_candidates("='Y'"); ?>)</a>
         </li>
-        <?php
-        $sql3 = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
-          FROM tb_hr AS a 
-          INNER JOIN tb_company_profile AS b 
-          ON b.id=a.company_id
-          INNER JOIN tb_published_jobs AS c 
-          ON c.company_id=b.id
-          INNER JOIN tb_applied_jobs AS d
-          ON d.job_id = c.id
-          INNER JOIN tb_job_seeker_profile AS e
-          ON d.job_seeker_id = e.id
-          WHERE  a.id='{$_SESSION['hr_id']}'
-          AND d.is_approved='N'");
-        $stmt3 = $db->query($sql3);
-        $stmt3->execute();
-        ?>
         <li class="nav-item">
-          <a id="reject_applicants_tab" href="hr-dashboard-reject.php" class="nav-link">Reject (<?php echo $stmt3->rowCount(); ?>)</a>
+          <a id="reject_applicants_tab" href="hr-dashboard-reject.php" class="nav-link">Reject (<?php Candidate::count_candidates("='N'"); ?>)</a>
         </li>
       </ul>
     </div>
@@ -78,37 +28,23 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($row as $key => $value) : ?>
+          <?php
+          $candidate = new Candidate;
+          $approved_candidate = $candidate->display_candidate("='Y'");
+          $candidate_data = $approved_candidate->fetchAll(PDO::FETCH_BOTH);
+          foreach ($candidate_data as $key => $value) : ?>
             <tr class="js-applicants-data">
               <th scope="row">
                 <?php echo $key + 1; ?>
               </th>
               <td class="w-50">
                 <p class="m-0 small"><span class="fw-bold">Date:</span> <?php echo $value['published_date']; ?></p>
-                <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                  echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                  echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                  echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                  echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                  echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
-                }
-                ?>
-                <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                  echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
-                }
-                ?>
+                <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
+                <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+                <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
+                <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
+                <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
+                <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
                 <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
                 <p class="m-0"><b>Title:</b> <?php echo $value['job_title']; ?></p>
                 <p class="mt-3 d-none">
@@ -218,11 +154,7 @@
           <?php endforeach; ?>
         </tbody>
       </table>
-      <?php if ($stmt->rowCount() === 0) : ?>
-        <td>
-          <h5>There are no applicants...</h5>
-        </td>
-      <?php endif; ?>
+      <?php echo ($approved_candidate->rowCount() === 0) ? '<h5>There are no candidates...</h5>' : ''; ?>
     </div>
   </div>
 </div>

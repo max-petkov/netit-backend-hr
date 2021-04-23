@@ -1,4 +1,21 @@
 <?php
+include_once 'Candidate.php';
+
+// if (isset($_POST['approved_status'])) {
+//   $proceed = new Candidate($_POST);
+//   $proceed->update_status();
+// }
+
+// if (isset($_POST['interviewed_status'])) {
+//   $proceed = new Candidate($_POST);
+//   $proceed->update_status();
+// }
+
+
+
+
+
+
 if(isset($_POST['approve_candidate'])){
   $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
   $sql = ("UPDATE tb_applied_jobs SET is_approved=:is_approved WHERE job_seeker_id='{$_POST['job_seeker_id']}' AND job_id='{$_POST['job_id']}'");

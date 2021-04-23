@@ -3,6 +3,7 @@
 <?php include_once 'src/Profile.php'; ?>
 <?php include_once 'src/Jobs.php'; ?>
 <?php include_once 'src/Message.php'; ?>
+<?php include_once 'src/Candidate.php'; ?>
 <?php login_required($_SESSION['company_id']); ?>
 
 <!DOCTYPE html>
@@ -469,7 +470,7 @@
     </div>
   <?php endif; ?>
 
-  <!-- HR -->
+  <!-- Create HR acc-->
   <div class="js_hr_box container d-none mt-4">
     <div class="row">
       <div class="card col-8 mx-auto shadow rounded">
@@ -506,8 +507,6 @@
       </div>
     </div>
   </div>
-
-
 
   <!-- Publish job -->
   <div class="d-none publish_job_box">
@@ -685,24 +684,6 @@
         </span>
       </div>
       <div class="card-body">
-        <?php
-        $db = new PDO("mysql:host=localhost;dbname=monster_hr_db", "root", '');
-        $sql = ("SELECT a.*, b.id, b.username, c.*, d.*, e.* 
-          FROM tb_hr AS a 
-          INNER JOIN tb_company_profile AS b 
-          ON b.id=a.company_id
-          INNER JOIN tb_published_jobs AS c 
-          ON c.company_id=b.id
-          INNER JOIN tb_applied_jobs AS d
-          ON d.job_id = c.id
-          INNER JOIN tb_job_seeker_profile AS e
-          ON d.job_seeker_id = e.id
-          WHERE  b.id='{$_SESSION['company_id']}'
-          AND d.is_approved='Y'");
-        $stmt = $db->query($sql);
-        $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_BOTH);
-        ?>
         <table class="table table-hover">
           <thead class="table table-success">
             <tr class="">
@@ -712,37 +693,23 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($row as $key => $value) : ?>
+            <?php
+            $candidate = new Candidate;
+            $approved_candidate = $candidate->display_approved_candidates_on_company_dshb();
+            $candidate_data = $approved_candidate->fetchAll(PDO::FETCH_BOTH);
+            foreach ($candidate_data as $key => $value) : ?>
               <tr class="js-applicants-data">
                 <th scope="row">
                   <?php echo $key + 1; ?>
                 </th>
                 <td class="w-50">
                   <p class="m-0 small"><span class="fw-bold">Date:</span> <?php echo $value['published_date']; ?></p>
-                  <?php if ($value['frontend_tag'] != null || $value['frontend_tag'] != '') {
-                    echo "<span class=\"badge bg-secondary\"> {$value['frontend_tag']} </span>";
-                  }
-                  ?>
-                  <?php if ($value['backend_tag'] != null || $value['backend_tag'] != '') {
-                    echo "<span class=\"badge bg-dark\"> {$value['backend_tag']} </span>";
-                  }
-                  ?>
-                  <?php if ($value['fullstack_tag'] != null || $value['fullstack_tag'] != '') {
-                    echo "<span class=\"badge bg-success\"> {$value['fullstack_tag']} </span>";
-                  }
-                  ?>
-                  <?php if ($value['qa_tag'] != null || $value['qa_tag'] != '') {
-                    echo "<span class=\"badge bg-danger\"> {$value['qa_tag']} </span>";
-                  }
-                  ?>
-                  <?php if ($value['mobdev_tag'] != null || $value['mobdev_tag'] != '') {
-                    echo "<span class=\"badge bg-warning\"> {$value['mobdev_tag']} </span>";
-                  }
-                  ?>
-                  <?php if ($value['ux_ui_tag'] != null || $value['ux_ui_tag'] != '') {
-                    echo "<span class=\"badge bg-primary\"> {$value['ux_ui_tag']} </span>";
-                  }
-                  ?>
+                  <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
+                  <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+                  <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
+                  <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
+                  <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
+                  <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
                   <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
                   <p class="m-0"><b>Title:</b> <?php echo $value['job_title']; ?></p>
                   <p class="mt-3 d-none">
@@ -806,11 +773,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
-        <?php if ($stmt->rowCount() === 0) : ?>
-          <td>
-            <h5>There are no applicants...</h5>
-          </td>
-        <?php endif; ?>
+        <?php echo ($approved_candidate->rowCount() === 0) ? '<h5>There are no candidates...</h5>' : ''; ?>
       </div>
     </div>
   </div>
@@ -879,7 +842,6 @@
   <script src="assets/js/script.js"></script>
   <script src="assets/js/ajax-companies.js"></script>
   <script src="assets/js/message.js"></script>
-
 </body>
 
 </html>

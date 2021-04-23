@@ -138,6 +138,16 @@ class Profile
         return $this->profile_query("SELECT * FROM $tb_profile WHERE id=$session_id");
     }
 
+    public function hr_profile_data()
+    {
+        $sql = ("SELECT a.*, b.id, b.company_name, b.address, b.website, b.slogan, b.frontend_branch, b.backend_branch, b.fullstack_branch, b.qa_branch, b.mobdev_branch, b.ux_ui_branch, b.company_description, b.file_mime, b.file_data 
+        FROM tb_hr AS a 
+        INNER JOIN tb_company_profile AS b 
+        ON a.company_id=b.id 
+        WHERE a.id='{$_SESSION['hr_id']}'");
+        return $this->profile_query($sql);
+    }
+
 
     // Private methods
     private function login_job_seeker()
@@ -223,6 +233,23 @@ class Profile
                 $this->company_description = $row['company_description'];
                 $this->company_mission = $row['company_mission'];
                 $this->company_history = $row['company_history'];
+                $this->slogan = $row['slogan'];
+                $this->frontend = $row['frontend_branch'];
+                $this->backend = $row['backend_branch'];
+                $this->fullstack = $row['fullstack_branch'];
+                $this->mobdev = $row['mobdev_branch'];
+                $this->qa = $row['qa_branch'];
+                $this->ux_ui = $row['ux_ui_branch'];
+                $this->file_mime = $row['file_mime'];
+                $this->file_data = $row['file_data'];
+            }
+            if (isset($_SESSION['hr_id'])) {
+                $this->username = $row['username'];
+                $this->name = $row['company_name'];
+                $this->email = $row['email'];
+                $this->address = $row['address'];
+                $this->website = $row['website'];
+                $this->company_description = $row['company_description'];
                 $this->slogan = $row['slogan'];
                 $this->frontend = $row['frontend_branch'];
                 $this->backend = $row['backend_branch'];

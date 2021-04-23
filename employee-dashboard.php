@@ -296,13 +296,9 @@
           </div>
           <hr class="m-2">
         </li>
-      <?php
-      endforeach;
-      $db = null;
-      ?>
+      <?php endforeach; ?>
     </ul>
   </div>
-
   <!-- Edit profile -->
   <div class="card d-none profile_box shadow-lg p-3 mb-5 bg-body rounded">
     <div class="d-flex justify-content-end pt-2">

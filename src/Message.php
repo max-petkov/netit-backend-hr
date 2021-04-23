@@ -123,6 +123,42 @@ class Message
         return $result;
     }
 
+    public function inbox_hr()
+    {
+        global $pdo;
+        $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name, d.id, d.username
+        FROM tb_msg_box_hr AS a 
+        LEFT JOIN tb_company_profile AS b 
+        ON a.company_id=b.id 
+        LEFT JOIN tb_job_seeker_profile AS c 
+        ON c.id=a.job_seeker_id
+        LEFT JOIN tb_hr AS d
+        ON d.id='{$_SESSION['hr_id']}'
+        WHERE a.hr_id='{$_SESSION['hr_id']}'
+        AND inbox_msg IS NOT NULL
+        AND sent_msg IS NULL
+        ORDER BY a.id DESC");
+        $result = $pdo->prepare_query($sql);
+        return $result;
+    }
+
+    public function sent_by_hr()
+    {
+        global $pdo;
+        $sql = ("SELECT a.*, b.id, b.company_name, c.id, c.first_name, c.last_name 
+        FROM tb_msg_box_hr AS a 
+        LEFT JOIN tb_company_profile AS b 
+        ON a.company_id=b.id 
+        LEFT JOIN tb_job_seeker_profile AS c 
+        ON c.id=a.job_seeker_id 
+        WHERE a.hr_id='{$_SESSION['hr_id']}'
+        AND inbox_msg IS NULL
+        AND sent_msg IS NOT NULL 
+        ORDER BY a.id DESC");
+        $result = $pdo->prepare_query($sql);
+        return $result;
+    }
+
     public function get_msg_data()
     {
         global $pdo;
