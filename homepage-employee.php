@@ -54,10 +54,10 @@
       <hr>
     </div>
   </header>
+
   <!-- Cards published jobs -->
   <div id="cards-job-container">
     <div class="d-flex justify-content-center flex-wrap">
-
       <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Frontend</div>
@@ -69,7 +69,6 @@
           </div>
         </div>
       </div>
-
       <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Backend</div>
@@ -81,7 +80,6 @@
           </div>
         </div>
       </div>
-
       <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Fullstack</div>
@@ -93,7 +91,6 @@
           </div>
         </div>
       </div>
-
       <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">QA</div>
@@ -105,7 +102,6 @@
           </div>
         </div>
       </div>
-
       <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">MobDev</div>
@@ -117,7 +113,6 @@
           </div>
         </div>
       </div>
-
       <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">UX/UI</div>
@@ -132,6 +127,7 @@
     </div>
     <hr class="my-4">
   </div>
+
   <!-- Used languages -->
   <section class="bg-dark py-5">
     <div class="container">
@@ -162,6 +158,7 @@
       </div>
     </div>
   </section>
+
   <!-- Team -->
   <section class="py-5">
     <div class="container">
@@ -183,7 +180,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-lg-3 col-md-6 ">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-0">
             <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
@@ -199,7 +195,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
             <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
@@ -215,7 +210,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
             <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
@@ -231,11 +225,9 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
   <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>

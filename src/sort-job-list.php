@@ -26,7 +26,6 @@ if (isset($_POST['tag_list'])) {
       </div>
       <p class="w-50 mt-2"><b>Job title: </b> <?php echo $value['job_title']; ?> </p>
       <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
-
       <p class="js-job-description d-none mt-3"> <?php echo $value['job_description']; ?> </p>
       <div class="d-flex">
         <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">
@@ -120,7 +119,6 @@ if (isset($_POST['tag_list'])) {
       </div>
       <p class="w-50 mt-2"><b>Job title: </b> <?php echo $value['job_title']; ?> </p>
       <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
-
       <p class="js-job-description d-none mt-3"> <?php echo $value['job_description']; ?> </p>
       <div class="d-flex">
         <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">
@@ -213,7 +211,6 @@ if (isset($_POST['tag_list'])) {
       </div>
       <p class="w-50 mt-2"><b>Job title: </b> <?php echo $value['job_title']; ?> </p>
       <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
-
       <p class="js-job-description d-none mt-3"> <?php echo $value['job_description']; ?> </p>
       <div class="d-flex">
         <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">

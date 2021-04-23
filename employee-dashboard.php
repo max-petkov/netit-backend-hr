@@ -50,7 +50,6 @@
                   <a class="dropdown-item xsm-text-class" href="#">Applications</a>
                 </li>
                 <div class="dropdown-divider"></div>
-
                 <li class="dropdown-item xsm-text-class d-flex align-items-center">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
@@ -106,6 +105,7 @@
             </li>
           </ul>
         </div>
+
         <!-- message icon -->
         <ul class="navbar-nav">
           <li id="inbox_job_seeker_counter_container" class="nav-item">
@@ -158,7 +158,6 @@
                 </svg>
               </span>
             </div>
-
             <p class="chevron-expand-text">
               <span class="fw-bold">Message: </span>
               <?php echo $value['inbox_msg']; ?>
@@ -251,7 +250,6 @@
     </div>
   </div>
 
-
   <!-- Applications -->
   <div class="card shadow-lg p-3 mb-5 bg-body rounded application_box d-none">
     <div class="d-flex justify-content-between mt-3 mb-2 px-3">
@@ -299,10 +297,10 @@
       <?php endforeach; ?>
     </ul>
   </div>
+
   <!-- Edit profile -->
   <div class="card d-none profile_box shadow-lg p-3 mb-5 bg-body rounded">
     <div class="d-flex justify-content-end pt-2">
-
       <button class="btn-close"></button>
     </div>
     <div class="card-body pt-0">
@@ -330,7 +328,6 @@
               <div></div>
             </div>
           </div>
-
           <div class="form-group row mb-3 pe-0">
             <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
               <label for="address_employee">Address</label>
@@ -343,7 +340,6 @@
               <div></div>
             </div>
           </div>
-
           <div class="form-group row mb-3 pe-0">
             <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
               <label for="username">Username</label>
@@ -371,7 +367,6 @@
       <!-- Cards job container -->
       <div id="cards-job-container">
         <div class="d-flex justify-content-center flex-wrap">
-
           <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
             <div class="card-body p-2">
               <div class="card-title text-center">Frontend</div>
@@ -383,7 +378,6 @@
               </div>
             </div>
           </div>
-
           <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
             <div class="card-body p-2">
               <div class="card-title text-center">Backend</div>
@@ -395,7 +389,6 @@
               </div>
             </div>
           </div>
-
           <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
             <div class="card-body p-2">
               <div class="card-title text-center">Fullstack</div>
@@ -407,7 +400,6 @@
               </div>
             </div>
           </div>
-
           <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
             <div class="card-body p-2">
               <div class="card-title text-center">QA</div>
@@ -419,7 +411,6 @@
               </div>
             </div>
           </div>
-
           <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
             <div class="card-body p-2">
               <div class="card-title text-center">MobDev</div>
@@ -431,7 +422,6 @@
               </div>
             </div>
           </div>
-
           <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
             <div class="card-body p-2">
               <div class="card-title text-center">UX/UI</div>
@@ -485,7 +475,6 @@
               </div>
               <p class="w-50 mt-2"><b>Job title: </b> <?php echo $value['job_title']; ?> </p>
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
-
               <p class="js-job-description d-none mt-3"> <?php echo $value['job_description']; ?> </p>
               <div class="d-flex">
                 <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">
@@ -554,7 +543,6 @@
       </div>
     </div>
   </section>
-
   <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>

@@ -83,7 +83,6 @@
                     <?php echo $profile_data->website; ?>
                   </a>
                 </li>
-
                 <div class="dropdown-divider"></div>
                 <li id="profile_button">
                   <a id="logout_employee" class="dropdown-item xsm-text-class d-flex align-items-center" href="src/logout.php">
@@ -102,6 +101,7 @@
             </li>
           </ul>
         </div>
+
         <!-- message icon -->
         <ul class="navbar-nav">
           <li id="inbox_hr_counter_container" class="nav-item">
@@ -166,7 +166,6 @@
       </form>
     </div>
   </div>
-
 
   <!-- Company showcase -->
   <div class="container mt-4">
@@ -546,7 +545,6 @@
       </ul>
     </div>
   </div>
-
   <footer class="bg-dark text-white py-3 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>

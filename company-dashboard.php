@@ -189,7 +189,6 @@
                 </svg>
               </span>
             </div>
-
             <p class="chevron-expand-text">
               <span class="fw-bold">Message: </span>
               <?php echo $value['inbox_msg']; ?>
@@ -332,7 +331,6 @@
   <!-- Edit profile -->
   <div class="card d-none profile_box shadow-lg p-3 mb-5 bg-body rounded">
     <div class="d-flex justify-content-end pt-2">
-
       <button class="btn-close"></button>
     </div>
     <div class="card-body pt-0">
@@ -828,7 +826,6 @@
       </div>
     </div>
   </div>
-
   <footer class="bg-dark text-white py-3 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
@@ -836,7 +833,6 @@
       <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg" class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
     </div>
   </footer>
-
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>

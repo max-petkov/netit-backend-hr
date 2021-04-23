@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="assets/css/custom.css">
   <title>Register | Company</title>
 </head>
+
 <body>
   <nav class="navbar shadow-custom-navbar navbar-expand-sm py-3 mb-5">
     <div class="container">
@@ -48,7 +50,7 @@
             <input type="email" class="form-control <?php echo $check->style_input['email'] ?? ''; ?>" name="email" placeholder="Email" value="<?php echo $_POST['email'] ?? ''; ?>">
             <?php echo $check->error_msg['email'] ?? ''; ?>
             <?php echo $check->succ_msg['email'] ?? ''; ?>
-          </div> 
+          </div>
           <div class="form-group mb-3">
             <h4>IT Branches:</h4>
             <div class="form-check mb-2">
@@ -105,9 +107,9 @@
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
       <hr class="mx-auto my-1" width="256px">
-      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg"
-          class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
+      <p class="text-center mb-0"><a href="mailto:maxy.dp@abv.bg" class="text-decoration-none text-white">maxy.dp@abv.bg</a></p>
     </div>
   </footer>
 </body>
+
 </html>
