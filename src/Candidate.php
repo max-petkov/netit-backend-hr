@@ -67,4 +67,36 @@ class Candidate
 
         return $pdo->prepare_query($sql);
     }
+
+    public function update_status()
+    {
+        global $pdo;
+        if (isset($this->post_data['approve_candidate'])) {
+            $data = [':is_approved' => $this->post_data['approve_candidate']];
+            $sql = ("UPDATE tb_applied_jobs SET is_approved=:is_approved WHERE job_seeker_id='{$this->post_data['job_seeker_id']}' AND job_id='{$this->post_data['job_id']}' LIMIT 1");
+            $pdo->prepare_query($sql, $data);
+            echo 'is approved';
+        }
+
+        if (isset($this->post_data['reject_candidate'])) {
+            $data = [':is_approved' => $this->post_data['reject_candidate']];
+            $sql = ("UPDATE tb_applied_jobs SET is_approved=:is_approved WHERE job_seeker_id='{$this->post_data['job_seeker_id']}' AND job_id='{$this->post_data['job_id']}' LIMIT 1");
+            $pdo->prepare_query($sql, $data);
+            echo 'is not approved';
+        }
+
+        if (isset($this->post_data['interviewed_yes'])) {
+            $data = [':is_interviewed' => $this->post_data['interviewed_yes']];
+            $sql = ("UPDATE tb_applied_jobs SET is_interviewed=:is_interviewed WHERE job_seeker_id='{$this->post_data['job_seeker_id']}' AND job_id='{$this->post_data['job_id']}' LIMIT 1");
+            $pdo->prepare_query($sql, $data);
+            echo 'is interviewed';
+        }
+
+        if (isset($this->post_data['interviewed_no'])) {
+            $data = [':is_interviewed' => $this->post_data['interviewed_no']];
+            $sql = ("UPDATE tb_applied_jobs SET is_interviewed=:is_interviewed WHERE job_seeker_id='{$this->post_data['job_seeker_id']}' AND job_id='{$this->post_data['job_id']}' LIMIT 1");
+            $pdo->prepare_query($sql, $data);
+            echo 'is not interviewed';
+        }
+    }
 }

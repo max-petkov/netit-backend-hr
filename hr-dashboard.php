@@ -368,8 +368,8 @@
                           <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                         </svg>
                       </span>
-                      <input type="hidden" value="<?php echo $value['job_id']; ?>">
-                      <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                      <input type="hidden" class="js-job-id" value="<?php echo $value['job_id']; ?>">
+                      <input type="hidden" class="js-job-seeker-id" value="<?php echo $value['job_seeker_id']; ?>">
                     </div>
                   <?php endif; ?>
                 </td>
@@ -377,8 +377,8 @@
                   <div class="d-flex justify-content-center">
                     <button class="js-approve-answer btn btn-success btn-sm me-2" value="Y">Yes</button>
                     <button class="js-approve-answer btn btn-danger btn-sm" value="N">No</button>
-                    <input type="hidden" value="<?php echo $value['job_id']; ?>">
-                    <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                    <input type="hidden" class="js-job-id" value="<?php echo $value['job_id']; ?>">
+                    <input type="hidden" class="js-job-seeker-id" value="<?php echo $value['job_seeker_id']; ?>">
                     <input type="hidden" name="candidate_name" value="<?php echo $value['first_name']; ?>">
                   </div>
                   <div class="js-confirm-approve"></div>

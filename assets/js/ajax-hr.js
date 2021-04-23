@@ -2,15 +2,16 @@ $(function () {
   // Getting response after interview
   $('.js-applicants-data').on('click', '.js-interview-answer', function () {
     $btn_answer = $(this);
-
     if ($btn_answer.val() === 'Y') {
       $.ajax({
         url: 'src/candidate-status.php',
         method: 'post',
+        cache: false,
         data: {
+          candidate_status: null,
           interviewed_yes: $btn_answer.val(),
-          job_id: $btn_answer.next().next().val(),
-          job_seeker_id: $btn_answer.next().next().next().val()
+          job_id: $btn_answer.siblings('.js-job-id').val(),
+          job_seeker_id: $btn_answer.siblings('.js-job-seeker-id').val()
         },
         success: function () {
           $btn_answer.closest('.d-flex').fadeOut('slow', function () {
@@ -28,10 +29,12 @@ $(function () {
       $.ajax({
         url: 'src/candidate-status.php',
         method: 'post',
+        cache: false,
         data: {
-          interviewed_yes: $btn_answer.val(),
-          job_id: $btn_answer.next().val(),
-          job_seeker_id: $btn_answer.next().next().val()
+          candidate_status: null,
+          interviewed_no: $btn_answer.val(),
+          job_id: $btn_answer.siblings('.js-job-id').val(),
+          job_seeker_id: $btn_answer.siblings('.js-job-seeker-id').val()
         },
         success: function () {
           $btn_answer.closest('.d-flex').fadeOut('slow', function () {
@@ -47,8 +50,10 @@ $(function () {
   });
 
   // Getting response after approve
-  $('body').on('click', '.js-approve-answer', function () {
+  $('body').on('click', '.js-approve-answer', function (e) {
+    e.stopImmediatePropagation();
     $btn_answer = $(this);
+
     $('.js-approve-answer').addClass('disabled');
     $btn_confirm_answer = $btn_answer.closest('.d-flex').next();
 
@@ -71,10 +76,12 @@ $(function () {
         $.ajax({
           url: 'src/candidate-status.php',
           method: 'post',
+          cache: false,
           data: {
+            candidate_status: null,
             approve_candidate: $btn_answer.val(),
-            job_id: $btn_answer.next().next().val(),
-            job_seeker_id: $btn_answer.next().next().next().val()
+            job_id: $btn_answer.siblings('.js-job-id').val(),
+            job_seeker_id: $btn_answer.siblings('.js-job-seeker-id').val()
           },
           success: function () {
             $yes_btn.closest('.js-applicants-data').fadeOut('slow', function () {
@@ -113,10 +120,12 @@ $(function () {
         $.ajax({
           url: 'src/candidate-status.php',
           method: 'post',
+          cache: false,
           data: {
+            candidate_status: null,
             reject_candidate: $btn_answer.val(),
-            job_id: $btn_answer.next().val(),
-            job_seeker_id: $btn_answer.next().next().val()
+            job_id: $btn_answer.siblings('.js-job-id').val(),
+            job_seeker_id: $btn_answer.siblings('.js-job-seeker-id').val()
           },
           success: function () {
             $no_btn.closest('.js-applicants-data').fadeOut('slow', function () {
