@@ -93,13 +93,14 @@ $(function () {
 
       if ($proceed) {
         $.ajax({
-          url: 'src/messages.php',
+          url: 'src/message-controller.php',
           method: 'post',
           data: {
             from: $from.val(),
             to: $to.val(),
             subject: $subject.val(),
-            sent_msg_hr: $message.val()
+            msg: $message.val(),
+            hr_to_employee: null
           },
           success: function () {
             $scs_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');
@@ -219,13 +220,14 @@ $(function () {
 
       if ($proceed) {
         $.ajax({
-          url: 'src/messages.php',
+          url: 'src/message-controller.php',
           method: 'post',
           data: {
             from: $from.val(),
             to: $to.val(),
             subject: $subject.val(),
-            sent_msg_job_seeker: $message.val()
+            msg: $message.val(),
+            employee_to_hr: null
           },
           success: function () {
             $scs_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');
@@ -350,13 +352,14 @@ $(function () {
 
       if ($proceed) {
         $.ajax({
-          url: 'src/messages.php',
+          url: 'src/message-controller.php',
           method: 'post',
           data: {
             from: $from.val(),
             to: $to.val(),
             subject: $subject.val(),
-            sent_msg_hr: $message.val()
+            msg: $message.val(),
+            hr_to_employee: null
           },
           success: function () {
             $scs_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');
@@ -482,13 +485,14 @@ $(function () {
 
       if ($proceed) {
         $.ajax({
-          url: 'src/messages.php',
+          url: 'src/message-controller.php',
           method: 'post',
           data: {
             from: $from.val(),
             to: $to.val(),
             subject: $subject.val(),
-            sent_msg_hr_to_company: $message.val()
+            msg: $message.val(),
+            hr_to_company: null
           },
           success: function () {
             $scs_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');
@@ -589,13 +593,14 @@ $(function () {
 
     if ($proceed) {
       $.ajax({
-        url: 'src/messages.php',
+        url: 'src/message-controller.php',
         method: 'post',
         data: {
           from: $from.val(),
           to: $to.val(),
           subject: $subject.val(),
-          sent_msg_hr_to_company: $message.val()
+          msg: $message.val(),
+          hr_to_company: null
         },
         success: function () {
           $scs_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');
@@ -682,13 +687,14 @@ $(function () {
 
     if ($proceed) {
       $.ajax({
-        url: 'src/messages.php',
+        url: 'src/message-controller.php',
         method: 'post',
         data: {
           from: $from.val(),
           to: $to.val(),
           subject: $subject.val(),
-          sent_msg_company: $message.val()
+          msg: $message.val(),
+          company_to_hr: null
         },
         success: function () {
           $scs_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');
@@ -702,7 +708,7 @@ $(function () {
     }
   });
 
-  // 
+  // Reply message from company to hr
   $('body').on('click', '.js-reply-from-company-to-hr', function () {
     $open_btn = $(this);
     $open_msg_box = $(this).siblings('.js-message-job-seeker-box');
@@ -798,13 +804,14 @@ $(function () {
 
       if ($proceed) {
         $.ajax({
-          url: 'src/messages.php',
+          url: 'src/message-controller.php',
           method: 'post',
           data: {
             from: $from.val(),
             to: $to.val(),
             subject: $subject.val(),
-            sent_msg_company: $message.val()
+            msg: $message.val(),
+            company_to_hr: null
           },
           success: function () {
             $scs_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');

@@ -375,6 +375,49 @@ class Validator
         }
     }
 
+    public function validate_from()
+    {
+        if (empty($this->post_data['from'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public function validate_to()
+    {
+        if (empty($this->post_data['to'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function validate_subject_msg()
+    {
+        if ($this->empty_field($this->post_data['subject'])) {
+            return false;
+        } else {
+            if ($this->string_length($this->post_data['subject'], 20, 254)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function validate_msg()
+    {
+        if ($this->empty_field($this->post_data['msg'])) {
+            return false;
+        } else {
+            if ($this->string_length($this->post_data['msg'], 49, 999)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
     public function is_valid()
     {
         if (isset($this->post_data['register_employee'])) {
@@ -475,6 +518,50 @@ class Validator
                 $this->validate_hidden_fields() === true &&
                 $this->validate_motivation_speech() === true &&
                 $_SESSION['employee_id'] === $this->post_data['job_seeker_id']
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['hr_to_employee'])) {
+            if (
+                $this->validate_from() === true &&
+                $this->validate_to() === true &&
+                $this->validate_subject_msg() === true &&
+                $this->validate_msg() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['hr_to_company'])) {
+            if (
+                $this->validate_from() === true &&
+                $this->validate_to() === true &&
+                $this->validate_subject_msg() === true &&
+                $this->validate_msg() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['employee_to_hr'])) {
+            if (
+                $this->validate_from() === true &&
+                $this->validate_to() === true &&
+                $this->validate_subject_msg() === true &&
+                $this->validate_msg() === true
+            ) {
+                return true;
+            }
+        }
+
+        if (isset($this->post_data['company_to_hr'])) {
+            if (
+                $this->validate_from() === true &&
+                $this->validate_to() === true &&
+                $this->validate_subject_msg() === true &&
+                $this->validate_msg() === true
             ) {
                 return true;
             }
