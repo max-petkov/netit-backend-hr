@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/custom.css">
-  <title>Monster HR | Dashboard</title>
+  <title>👾Monster HR | Dashboard</title>
 </head>
 
 <body>
@@ -290,7 +290,6 @@
               Reject
             </button>
             <input type="hidden" value="<?php echo $value['applied_id']; ?>">
-            <input type="hidden" name="cancel_application" value="">
           </div>
           <hr class="m-2">
         </li>
@@ -315,7 +314,7 @@
           </button>
         </div>
         <div>
-          <div id="success_mess_validation"></div>
+          <div class="js-success-msg"></div>
           <div class="form-group row mb-3 pe-0">
             <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
               <label for="first_name">First name</label>
@@ -513,7 +512,6 @@
                       <h5 class="m-0 ms-1"><?php echo $value['company_name']; ?></h5>
                     </div>
                     <p class="m-0"> <?php echo $value['job_title']; ?> </p>
-                    <?php echo "<span class=\"fw-bold text-dark fs-5 me-2\">{$value['company_name']}</span>"; ?>
                     <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
                     <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
                     <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
@@ -522,7 +520,7 @@
                     <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
                     <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
                     <textarea name="motivational_speech" class="form-control mt-3" rows="10" placeholder="Why do you want to apply for this job?"></textarea>
-                    <div id="motivation_speech_response_text"></div>
+                    <div></div>
                     <button class="js-send-speech btn btn-primary d-flex align-items-center mt-3">
                       Send
                       <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="16.987" height="16.557" viewBox="0 0 16.987 16.557">
@@ -533,7 +531,6 @@
                         </g>
                       </svg>
                     </button>
-                    <input type="hidden" name="apply_job" value="">
                   </div>
                 </div>
               </div>
@@ -554,6 +551,7 @@
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/functions.js"></script>
   <script src="assets/js/ajax-employees.js"></script>
   <script src="assets/js/message.js"></script>
 </body>

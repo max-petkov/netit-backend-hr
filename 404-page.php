@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/custom.css">
-  <title>Monster HR | 404 error</title>
+  <title>👾Monster HR | 404 error</title>
 </head>
 <body>
   <section class="container d-flex align-items-center justify-content-center vh-100">
