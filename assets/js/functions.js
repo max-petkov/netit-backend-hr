@@ -58,3 +58,45 @@ function success_mot_speech($success_msg, $mot_speech) {
         });
     }, 2000);
 }
+
+function adding_zeros_time(data) {
+    if (data <= 9) {
+        data = '0' + data;
+    }
+    return data;
+}
+
+function digital_clock() {
+    let d = new Date();
+    let h = d.getHours();
+    let min = d.getMinutes();
+    let s = d.getSeconds();
+    let m = d.getMonth();
+    let date = d.getDate();
+    let y = d.getFullYear();
+    let date_time = document.getElementById('date_time');
+    let month_array = ['Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Noem', 'Dec'];
+
+    date_time.innerHTML =
+        `<p class="mb-0"><b>Today is: </b>${date} ${month_array[m]} ${y}</p> <p class="text-center mb-0">${adding_zeros_time(h)} : ${adding_zeros_time(min)} : ${adding_zeros_time(s)}</p>`;
+    setTimeout(digital_clock, 1000);
+}
+
+digital_clock();
+
+function greetings() {
+    let d = new Date();
+    let h = d.getHours();
+    let greetings = document.getElementById('greetings');
+
+    if (h >= 0 && h <= 11) {
+        greetings.innerHTML = 'Good morning, ';
+
+    } else if (h >= 12 && h <= 17) {
+        greetings.innerHTML = `Good afternoon, `;
+
+    } else if (h >= 18 && h <= 23) {
+        greetings.innerHTML = `Good evening, `;
+    }
+}
+greetings();

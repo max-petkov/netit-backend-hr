@@ -151,7 +151,7 @@ $(function () {
   });
 
   // Reset inbox counter
-  $('body').on('click', '.message_icon', function () {
+  $('body').on('click', '.js-message-icon', function () {
     let $envelope_icon_number = $(this).children('span').text();
 
     if ($envelope_icon_number !== '0') {

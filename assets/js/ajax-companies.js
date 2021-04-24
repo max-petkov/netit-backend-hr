@@ -1041,7 +1041,7 @@ $(function () {
   });
 
   // Update inbox counter
-  $('body').on('click', '.message_icon', function () {
+  $('body').on('click', '.js-message-icon', function () {
     if ($(this).children('span').text() !== '0') {
       $.ajax({
         url: 'src/message-controller.php',

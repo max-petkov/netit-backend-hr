@@ -45,7 +45,7 @@ body {
 }
 
 /* Box */
-.message_box {
+.js-message-box {
   max-width: 500px;
   position: absolute;
   z-index: 1;

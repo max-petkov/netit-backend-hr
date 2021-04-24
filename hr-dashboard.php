@@ -42,7 +42,7 @@
                 </li>
                 <div class="dropdown-divider"></div>
                 <li>
-                  <a class="message_icon dropdown-item xsm-text-class" href="#">Messages</a>
+                  <a class="js-message-icon dropdown-item xsm-text-class" href="#">Messages</a>
                 </li>
                 <li>
                   <a id="open_sending_msg_container" class="dropdown-item xsm-text-class" href="#">
@@ -105,7 +105,7 @@
         <!-- message icon -->
         <ul class="navbar-nav">
           <li id="inbox_hr_counter_container" class="nav-item">
-            <a id="inbox_hr_counter" href="#" class="message_icon nav-link d-flex align-items-center">
+            <a id="inbox_hr_counter" href="#" class="js-message-icon nav-link d-flex align-items-center">
               <svg id="envelope_close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="me-1 envelope_closed bi bi-envelope" viewBox="0 0 16 16">
                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z" />
               </svg>
@@ -392,7 +392,7 @@
   </div>
 
   <!-- Message container -->
-  <div class="card shadow-lg p-3 mb-5 bg-body rounded message_box d-none">
+  <div class="card shadow-lg rounded js-message-box d-none">
     <div class="d-flex justify-content-between mt-3 mb-2 px-3">
       <h4 class="m-0">Messages:</h4>
       <button class="btn-close align-self-end"></button>
@@ -417,15 +417,16 @@
               <p class="text-muted small">sent by <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
               <p class="small"><?php echo $value['send_date']; ?></p>
             </div>
-            <div class="chevron_btn d-flex justify-content-between align-items-start">
+            <div class="d-flex justify-content-between align-items-start">
               <p><b>Subject:</b><?php echo $value['subject']; ?></p>
-              <span class="ms-1">
+              <span class="js-chevron ms-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                 </svg>
               </span>
             </div>
-            <p class="chevron-expand-text">
+            <p class="js-expand-text">
+              <span class="fw-bold">Message: </span>
               <?php echo $value['inbox_msg']; ?>
             </p>
             <?php if ($value['company_id'] !== null) : ?>
@@ -528,15 +529,16 @@
               <p class="text-muted small">sent to <b class="text-dark"> <?php echo "{$value['company_name']} {$value['first_name']} {$value['last_name']}"; ?> </b></p>
               <p class="small"><?php echo $value['send_date']; ?></p>
             </div>
-            <div class="chevron_btn d-flex justify-content-between align-items-start">
-              <p><b>Subject: </b><?php echo $value['subject']; ?></p>
-              <span class="ms-1">
+            <div class="d-flex justify-content-between align-items-start">
+              <p><b>Subject:</b><?php echo $value['subject']; ?></p>
+              <span class="js-chevron ms-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                 </svg>
               </span>
             </div>
-            <p class="chevron-expand-text">
+            <p class="js-expand-text">
+              <span class="fw-bold">Message: </span>
               <?php echo $value['sent_msg']; ?>
             </p>
           </li>
