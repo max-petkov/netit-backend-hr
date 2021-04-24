@@ -311,28 +311,28 @@
                     </div>
                     <div class="card-body">
                       <form method="POST">
-                        <div class="js-scs-msg-send"></div>
+                        <div class="js-scs-msg"></div>
                         <div class="form-group mb-2">
                           <label for="to"><b>From:</b></label>
-                          <input type="text" class="form-control form-control-sm" name="hr_id" value="<?php echo $value[2]; ?>" disabled>
-                          <input type="hidden" value="<?php echo $_SESSION['hr_id']; ?>">
+                          <input type="text" class="form-control form-control-sm" value="<?php echo $value[2]; ?>" disabled>
+                          <input type="hidden" name="from" value="<?php echo $_SESSION['hr_id']; ?>">
                         </div>
                         <div class="form-group mb-2">
                           <label for="to"> <b>To:</b></label>
-                          <input type="email" class="form-control form-control-sm" name="job_seeker_id" value="<?php echo $value['first_name']; ?>" disabled>
-                          <input type="hidden" value="<?php echo $value['job_seeker_id']; ?>">
+                          <input type="email" class="form-control form-control-sm" value="<?php echo $value['first_name']; ?>" disabled>
+                          <input type="hidden" name="to" value="<?php echo $value['job_seeker_id']; ?>">
                         </div>
                         <div class="form-group mb-2">
                           <label for="subject"><b>Subject:</b></label>
-                          <input type="text" class="form-control form-control-sm" name="message_subject" value="">
-                          <div class="js-subject-response-text"></div>
+                          <input type="text" class="form-control form-control-sm" name="subject" value="">
+                          <div></div>
                         </div>
                         <div class="form-group">
                           <label for="message"><b>Message:</b></label>
-                          <textarea name="message" class="form-control" rows="6"></textarea>
-                          <div class="js-message-response-text"></div>
+                          <textarea name="msg" class="form-control" rows="6"></textarea>
+                          <div></div>
                         </div>
-                        <button class="js-submit-sending-msg-job-seeker btn btn-primary d-flex align-items-center mt-3">
+                        <button type="submit" class="js-submit-sending-msg-job-seeker btn btn-primary d-flex align-items-center mt-3">
                           <span>Send</span>
                           <svg class="ms-3" xmlns="http://www.w3.org/2000/svg" width="16.987" height="16.557" viewBox="0 0 16.987 16.557">
                             <g id="send" transform="translate(0 -6.196)">
