@@ -70,9 +70,46 @@ function success_send_msg($success_msg, $msg_box, $btn, $send_btns, $ajax_load) 
               </svg>
               Send Message`);
                 $msg_box.addClass('d-none');
-                $('.chevron-expand-text').slideUp();
+                $('.js-expand-text').slideUp();
             });
         });
+    }, 2000);
+    $ajax_load;
+}
+
+function success_reply_msg($success_msg, $msg_box, $btn, $send_btns, $ajax_load) {
+    $success_msg.slideDown('slow').addClass('alert alert-success').text('Message send successful!');
+    setTimeout(function () {
+        $success_msg.slideUp('slow', function () {
+            $msg_box.slideUp('slow', function () {
+                $send_btns.removeClass('disabled');
+                $btn.removeClass('disabled').html(`Reply<svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
+                <g id="send" transform="translate(0 -6.196)">
+                  <g id="Group_216" data-name="Group 216" transform="translate(0 6.197)">
+                    <path id="Path_22" data-name="Path 22" d="M16.809,13.7a1.78,1.78,0,0,0-.826-.826L2.556,6.375A1.78,1.78,0,0,0,.128,8.638l2.335,5.836L.128,20.311a1.78,1.78,0,0,0,2.428,2.264l13.427-6.5A1.78,1.78,0,0,0,16.809,13.7ZM2.039,21.505a.593.593,0,0,1-.809-.755L3.5,15.067H15.344ZM3.5,13.881,1.23,8.2a.593.593,0,0,1,.809-.753l13.305,6.436H3.5Z" transform="translate(0 -6.197)" fill="#fff" />
+                  </g>
+                </g>
+              </svg>`);
+                $msg_box.addClass('d-none');
+                $('.js-expand-text').slideUp();
+            });
+        });
+    }, 2000);
+    $ajax_load;
+}
+
+function nav_msg_scs($msg_box, $success_msg, $ajax_load) {
+    $success_msg.slideDown('slow').addClass('alert alert-success').text('Apply successful!');
+    setTimeout(function () {
+        $success_msg.slideUp('slow', function () {
+            $msg_box.animate({
+                right: '-544px',
+                opacity: '0'
+            }, 'slow', function () {
+                $msg_box.addClass('d-none');
+            });
+        });
+        $('.js-expand-text').slideUp();
     }, 2000);
     $ajax_load;
 }

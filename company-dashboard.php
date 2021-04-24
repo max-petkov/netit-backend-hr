@@ -215,28 +215,28 @@
               </div>
               <div class="card-body">
                 <form method="POST">
-                  <div class="js-scs-msg-send"></div>
+                  <div class="js-scs-msg"></div>
                   <div class="form-group mb-2">
                     <label for="to"><b>From:</b></label>
-                    <input type="text" class="form-control form-control-sm" name="job_seeker_id" value="<?php echo $value['company_name']; ?>" disabled>
-                    <input type="hidden" value="<?php echo $_SESSION['company_id']; ?>">
+                    <input type="text" class="form-control form-control-sm" value="<?php echo $value['company_name']; ?>" disabled>
+                    <input type="hidden" name="from" value="<?php echo $_SESSION['company_id']; ?>">
                   </div>
                   <div class="form-group mb-2">
                     <label for="to"> <b>To:</b></label>
-                    <input type="email" class="form-control form-control-sm" name="hr_id" value="<?php echo $value['username']; ?>" disabled>
-                    <input type="hidden" value="<?php echo $value['hr_id']; ?>">
+                    <input type="email" class="form-control form-control-sm" value="<?php echo $value['username']; ?>" disabled>
+                    <input type="hidden" name="to" value="<?php echo $value['hr_id']; ?>">
                   </div>
                   <div class="form-group mb-2">
                     <label for="subject"><b>Subject:</b></label>
-                    <input type="text" class="form-control form-control-sm" name="message_subject" value="">
-                    <div class="js-subject-response-text"></div>
+                    <input type="text" class="form-control form-control-sm" name="subject">
+                    <div></div>
                   </div>
                   <div class="form-group">
                     <label for="message"><b>Message:</b></label>
-                    <textarea name="message" class="form-control" rows="6"></textarea>
-                    <div class="js-message-response-text"></div>
+                    <textarea name="msg" class="form-control" rows="6"></textarea>
+                    <div></div>
                   </div>
-                  <button class="js-submit-sending-from-company-to-hr btn btn-primary btn-sm d-flex align-items-center mt-3">
+                  <button type="submit" class="js-submit-sending-from-company-to-hr btn btn-primary btn-sm d-flex align-items-center mt-3">
                     <span>Send</span>
                     <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
                       <g id="send" transform="translate(0 -6.196)">
@@ -289,33 +289,33 @@
       <button class="btn-close align-self-end"></button>
     </div>
     <div class="card-body">
-      <form method="POST">
+      <form id="msg_from_company_to_hr" method="POST">
         <?php
         $msg_data = new Message;
         $msg_data->get_msg_data();
         ?>
-        <div class="js-scs-msg-send"></div>
+        <div class="js-scs-msg"></div>
         <div class="form-group mb-2">
           <label for="to"><b>From:</b></label>
-          <input type="text" class="form-control form-control-sm" name="company_username" value="<?php echo $msg_data->company_username; ?>" disabled>
-          <input type="hidden" value="<?php echo $msg_data->company_id; ?>">
+          <input type="text" class="form-control form-control-sm" value="<?php echo $msg_data->company_username; ?>" disabled>
+          <input type="hidden" name="from" value="<?php echo $msg_data->company_id; ?>">
         </div>
         <div class="form-group mb-2">
           <label for="to"> <b>To:</b></label>
-          <input type="text" class="form-control form-control-sm" name="hr_username'" value="<?php echo $msg_data->hr_username; ?>" disabled>
-          <input type="hidden" value="<?php echo $msg_data->hr_id; ?>">
+          <input type="text" class="form-control form-control-sm" value="<?php echo $msg_data->hr_username; ?>" disabled>
+          <input type="hidden" name="to" value="<?php echo $msg_data->hr_id; ?>">
         </div>
         <div class="form-group mb-2">
           <label for="subject"><b>Subject:</b></label>
-          <input type="text" class="form-control form-control-sm" name="message_subject" value="">
-          <div class="js-subject-response-text"></div>
+          <input type="text" class="form-control form-control-sm" name="subject">
+          <div></div>
         </div>
         <div class="form-group">
           <label for="message"><b>Message:</b></label>
-          <textarea name="message" class="form-control" rows="6"></textarea>
-          <div class="js-message-response-text"></div>
+          <textarea name="msg" class="form-control" rows="6"></textarea>
+          <div></div>
         </div>
-        <button class="js-send-msg-company-to-hr btn btn-primary btn-sm d-flex align-items-center mt-3">
+        <button type="submit" class="js-send-msg-company-to-hr btn btn-primary btn-sm d-flex align-items-center mt-3">
           <span>Send</span>
           <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16.987 16.557">
             <g id="send" transform="translate(0 -6.196)">
@@ -837,6 +837,7 @@
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/functions.js"></script>
   <script src="assets/js/ajax-companies.js"></script>
   <script src="assets/js/message.js"></script>
 </body>
