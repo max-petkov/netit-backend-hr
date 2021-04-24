@@ -457,7 +457,7 @@
         <ul id="published_job_list" class="list-group-flush ps-0">
           <?php
           foreach ($job_data->display_active_jobs_employee() as $value) : ?>
-            <li class="job_li list-group-item py-3">
+            <li class="js-job-li list-group-item py-3">
               <div class="d-flex align-items-center">
                 <span class="text-muted me-2">Published: <?php echo $value['published_date']; ?> by </span>
                 <?php if ($value['file_data'] !== null) : ?>
@@ -550,10 +550,10 @@
 
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/functions.js"></script>
   <script src="assets/js/ajax-employees.js"></script>
   <script src="assets/js/message.js"></script>
+  <script src="assets/js/functions.js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>

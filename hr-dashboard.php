@@ -346,7 +346,7 @@
                     </div>
                   </div>
                 </td>
-                <td id="is_interviewed" class="text-center">
+                <td class="js-is-interviewed text-center">
                   <?php if ($value['is_interviewed'] === 'Y') : ?>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-check2-circle text-success" viewBox="0 0 16 16">
                       <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
@@ -378,7 +378,7 @@
                     <button class="js-approve-answer btn btn-danger btn-sm" value="N">No</button>
                     <input type="hidden" class="js-job-id" value="<?php echo $value['job_id']; ?>">
                     <input type="hidden" class="js-job-seeker-id" value="<?php echo $value['job_seeker_id']; ?>">
-                    <input type="hidden" name="candidate_name" value="<?php echo $value['first_name']; ?>">
+                    <input type="hidden" class="js-candidate-name" name="candidate_name" value="<?php echo $value['first_name']; ?>">
                   </div>
                   <div class="js-confirm-approve"></div>
                 </td>
@@ -556,6 +556,7 @@
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/functions.js"></script>
   <script src="assets/js/ajax-hr.js"></script>
   <script src="assets/js/message.js"></script>
 </body>

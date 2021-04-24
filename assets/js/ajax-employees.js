@@ -14,7 +14,7 @@ $(function () {
       $apply_btn.text('Waiting...').addClass('disabled')
     });
 
-    $('.job_li').on('click', '.btn-close', function () {
+    $mot_speech.on('click', '.btn-close', function () {
       let $close_mot_speech = $(this).closest('.container');
 
       $close_mot_speech.animate({
@@ -23,24 +23,20 @@ $(function () {
       }, 'slow', function () {
         $close_mot_speech.addClass('d-none');
         $apply_btn.html(`
-            <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-            <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-          </svg>
-          Apply`).removeClass('disabled');
+              <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+              <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+            Apply`).removeClass('disabled');
       });
     });
 
-    // First request is sent but after second, thirnd, etc it sends the same ?!?!?!?!?
-    $('body').on('click', '.js-send-speech', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
+    $mot_speech.on('click', '.js-send-speech', function () {
       let $send_btn = $(this);
       let $success_msg = $(this).closest('.card-body').children('#apply_succ_mess');
       let $speech = $(this).closest('.js-motivation-speech');
       let $textarea = $(this).siblings('.form-control');
       let $proceed = true;
-
 
       if (string_length($textarea, 49, 999)) {
         invalid_response($textarea, 'Field must be more than 49 or less than 999 symbols!');
@@ -52,6 +48,7 @@ $(function () {
       if ($proceed) {
         $.ajax({
           url: 'src/publish-job.php',
+          cache: false,
           method: 'post',
           data: {
             job_id: $apply_btn.val(),
@@ -87,7 +84,7 @@ $(function () {
         cancel_application: null
       },
       success: function () {
-        remove_element($btn.closest('li'), $job_li.load('employee-dashboard.php .job_li'));
+        remove_element($btn.closest('li'), $job_li.load('employee-dashboard.php .js-job-li'));
       }
     });
   });
@@ -182,8 +179,7 @@ $(function () {
             $job_list.html($.trim(response));
           }
         }
-      })
-
+      });
     }
   });
 
@@ -321,7 +317,7 @@ $(function () {
     }
   });
 
-  // Lazy load
+  // Lazy load job list
   $("#published_job_list li").slice(10).hide();
   let $mincount = 10;
   let $maxcount = 20;
