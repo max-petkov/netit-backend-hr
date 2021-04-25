@@ -387,27 +387,27 @@
             <label for="it_branches">IT branches</label>
             <p id="checkbox_response" class="mb-2"></p>
             <div class="form-check my-2">
-              <input id="frontend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="frontend" value="frontend" <?php echo (!$profile->frontend) ? '' : 'checked'; ?>>
+              <input id="frontend_checked_status" type="checkbox" class="js-checkbox-length form-check-input" name="frontend" value="frontend" <?php echo (!$profile->frontend) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Front-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="backend_checked_status" type="checkbox" class="checkbox_length form-check-input" name="backend" value="backend" <?php echo (!$profile->backend) ? '' : 'checked'; ?>>
+              <input id="backend_checked_status" type="checkbox" class="js-checkbox-length form-check-input" name="backend" value="backend" <?php echo (!$profile->backend) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Back-end Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="fullstack_checked_status" type="checkbox" class="checkbox_length form-check-input" name="fullstack" value="fullstack" <?php echo (!$profile->fullstack) ? '' : 'checked'; ?>>
+              <input id="fullstack_checked_status" type="checkbox" class="js-checkbox-length form-check-input" name="fullstack" value="fullstack" <?php echo (!$profile->fullstack) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Fullstack Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="qa_checked_status" type="checkbox" class="checkbox_length form-check-input" name="qa" value="qa" <?php echo (!$profile->qa) ? '' : 'checked'; ?>>
+              <input id="qa_checked_status" type="checkbox" class="js-checkbox-length form-check-input" name="qa" value="qa" <?php echo (!$profile->qa) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Quality Assurance</label>
             </div>
             <div class="form-check mb-2">
-              <input id="mobdev_checked_status" type="checkbox" class="checkbox_length form-check-input" name="mobdev" value="mobdev" <?php echo (!$profile->mobdev) ? '' : 'checked'; ?>>
+              <input id="mobdev_checked_status" type="checkbox" class="js-checkbox-length form-check-input" name="mobdev" value="mobdev" <?php echo (!$profile->mobdev) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">Mobile Development</label>
             </div>
             <div class="form-check mb-2">
-              <input id="ux_ui_checked_status" type="checkbox" class="checkbox_length form-check-input" name="ux/ui" value="ux/ui" <?php echo (!$profile->ux_ui) ? '' : 'checked'; ?>>
+              <input id="ux_ui_checked_status" type="checkbox" class="js-checkbox-length form-check-input" name="ux/ui" value="ux/ui" <?php echo (!$profile->ux_ui) ? '' : 'checked'; ?>>
               <label class="form-check-label" for="it_branch">UX/UI</label>
             </div>
           </div>
@@ -483,24 +483,24 @@
             <div class="form-group mb-2">
               <label for="hr_account">Username</label>
               <input id="hr_username" type="text" name="username" class="form-control form-control-sm">
-              <div id="hr_username_response_text"></div>
+              <div></div>
             </div>
             <div class="form-group mb-2">
               <label for="hr_account">Email</label>
               <input id="hr_email" type="text" name="email" class="form-control form-control-sm">
-              <div id="hr_email_response_text"></div>
+              <div></div>
             </div>
             <div class="form-group mb-2">
               <label for="hr_account">Password</label>
               <input type="password" name="password" class="form-control form-control-sm">
-              <div id="hr_password_response_text"></div>
+              <div></div>
             </div>
             <div class="form-group mb-3">
               <label for="hr_account">Confirm password</label>
               <input type="password" name="confirm_password" class="form-control form-control-sm">
-              <div id="hr_confirm_password_response_text"></div>
+              <div></div>
             </div>
-            <input type="submit" name="register_hr" value="Submit" class="btn btn-primary">
+            <input type="submit" value="Submit" class="btn btn-primary">
           </form>
         </div>
       </div>
@@ -520,7 +520,7 @@
           <div class="form-group mb-3">
             <label for="job_title" class="fw-bold">Job title</label>
             <input type="text" name="job_title" class="form-control form-control-sm">
-            <p id="job_title_response_text"></p>
+            <div></div>
           </div>
           <div class="mb-3">
             <div class="form-group d-flex">
@@ -579,7 +579,7 @@
             <div class="form-group me-3">
               <label for="" class="fw-bold">Salary:</label>
               <input type="text" class="form-control" name="salary">
-              <p id="salary_response_text" class="m-0"></p>
+              <div></div>
             </div>
             <div class="form-group me-3">
               <label for="job_salary_currency" class="fw-bold">Currency:</label>
@@ -608,20 +608,13 @@
           </div>
           <div class="form-group">
             <label for="job_description" class="fw-bold">Job Description</label>
-            <!-- NEED TO ADD CKEDITOR -->
             <textarea name="description" rows="8" class="form-control"></textarea>
-            <p id="job_description_response_text" class="m-0"></p>
+            <div></div>
           </div>
           <input type="submit" value="Publish" class="btn btn-primary mt-3">
           <input type="hidden" name="username" value="<?php echo $profile->username; ?>">
           <input type="hidden" name="name" value="<?php echo $profile->name; ?>">
           <input type="hidden" name="email" value="<?php echo $profile->email; ?>">
-          <span class="tooltip-icon" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Published job content CAN'T be changed after submit!">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mt-3 bi bi-info-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-              <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-            </svg>
-          </span>
         </form>
       </div>
     </div>

@@ -51,7 +51,7 @@
                   </button>
                 </div>
                 <!-- BS5 alpha3 have tooltip problem a multiple hover and dissappears so data-bs-animation="false" will make a workaround -->
-                <span id="remove_completely_from_db" class="tooltip-icon" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be DELETED!">
+                <span class="js-remove-job-from-db tooltip-icon" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be DELETED!">
                   <input type="hidden" value="<?php echo $value['id']; ?>">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="text-danger ms-1 bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />

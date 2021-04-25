@@ -199,11 +199,6 @@ $(function () {
     });
   });
 
-  // If there are no results on employee-dashboard published jobs
-  if ($('#published_job_list li').length === 0) {
-    $('#published_job_list').html(`<h6>There are no published jobs...</h6>`);
-  }
-
   // Bootstrap 5 tooltip FIY-> data-bs-animation="false" will prevent from dissapering the tooltip after multiple hovers
   $('body').tooltip({
     boundary: 'window',

@@ -16,6 +16,22 @@ function no_match($val, $regex) {
     }
 }
 
+function checkbox_radio_length($element_length) {
+    if ($element_length.length === 0) {
+        return true;
+    }
+}
+
+function match_password($pass, $conf_pass) {
+    if ($pass.val().trim() !== $conf_pass.val().trim()) {
+        return true;
+    }
+}
+
+function checkbox_radio_invalid_response($element, $text) {
+    $element.addClass('text-danger').text($text);
+}
+
 function invalid_response($element, $response) {
     $element.addClass('is-invalid')
         .next()
@@ -32,7 +48,7 @@ function valid_response($element) {
 }
 
 function success_call($element) {
-    $element.slideDown('slow').addClass('alert alert-success').text('Update successful!');
+    $element.slideDown('slow').addClass('alert alert-success').text('Success!');
     setTimeout(function () {
         $element.slideUp('slow');
     }, 2000);
@@ -46,7 +62,7 @@ function remove_element($element, $load_ajax) {
 }
 
 function success_mot_speech($success_msg, $mot_speech) {
-    $success_msg.slideDown('slow').addClass('alert alert-success').text('Apply successful!');
+    $success_msg.slideDown('slow').addClass('alert alert-success').text('Success!');
     setTimeout(function () {
         $success_msg.slideUp('slow', function () {
             $mot_speech.animate({
