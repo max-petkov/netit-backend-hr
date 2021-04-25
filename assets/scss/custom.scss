@@ -1,7 +1,43 @@
 // Adding custom font
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
 
-// Custom Style CSS
+// Colors
+$light_purple: #c29ffa;
+$light_green: #a3cfbb;
+$light_blue: #6ea8fe;
+$light_yellow: #ffe69c;
+$light_red: #f1aeb5;
+$light_gray: #dee2e6;
+$light_cyan: #9eeaf9;
+
+.bg-color-light-purple {
+  background-color: $light_purple;
+}
+
+.bg-color-light-green {
+  background-color: $light_green;
+}
+
+.bg-color-light-blue {
+  background-color: $light_blue;
+}
+
+.bg-color-light-yellow {
+  background-color: $light_yellow;
+}
+
+.bg-color-light-red {
+  background-color: $light_red;
+}
+
+.bg-color-light-gray {
+  background-color: $light_gray;
+}
+
+.bg-color-light-cyan {
+  background-color: $light_cyan;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -20,8 +56,7 @@ body {
   font-size: 0.9rem;
 }
 
-
-/* Color doesn't work, use fill: */
+/* Color doesn't work, use fill: on svg */
 .back-icon:hover {
   cursor: pointer;
   fill: #000;
@@ -171,4 +206,12 @@ body {
 
 .transform-scale:active {
   transform: scale(0.90);
+}
+
+.js-overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.js-h-600px {
+  height: 600px;
 }

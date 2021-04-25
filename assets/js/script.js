@@ -2,7 +2,7 @@
 $(function () {
 
   let message_box = $('.js-message-box');
-  let application_open = $('#addplication_button');
+  let application_open = $('#application_btn');
   let application_box = $('.application_box');
   let profile_open = $('#profile_button');
   let profile_box = $('.profile_box');
@@ -10,7 +10,7 @@ $(function () {
   let $publish_job_box = $('.publish_job_box');
   let $hr_open = $('#hr_button');
   let $hr_box = $('.js_hr_box');
-  let $open_sending_msg_hr = $('#open_sending_msg_container');
+  let $open_sending_form = $('#open_sending_msg_container');
   let $sending_msg_hr_box = $('#send_msg_hr_box');
   let $sending_msg_company_box = $('#send_msg_company_box');
   let $open_upload_img = $('#open_upload_img');
@@ -18,15 +18,54 @@ $(function () {
   let $sent_tab = $('#sent_tab');
   let all_boxes = $('.js-message-box, .application_box, .profile_box, .publish_job_box, .js-update-publish-job-form, .js_hr_box, .js-send-msg-hr-box, .js-send-msg-company-box, .js-upload-logo-box ');
 
-  // Message icon click event
-  $('body').on('click', '.js-message-icon', function () {
-    if (message_box.hasClass('d-none')) {
-      message_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-    }
-  });
+
+  if (window.innerWidth > 768) {
+    show_box_lg_screen(profile_open, profile_box); // Profile box
+    show_box_lg_screen(application_open, application_box); // Application box
+    show_box_lg_screen($publish_job_open, $publish_job_box); // Publish box
+    show_box_lg_screen($hr_open, $hr_box); // HR box
+    show_box_lg_screen($open_sending_form, $sending_msg_hr_box); // Sending msg box from HR
+    show_box_lg_screen($open_sending_form, $sending_msg_company_box); // Sending msg box from company
+    show_box_lg_screen($open_upload_img, $upload_img_box); // Upload img
+
+    // Message box
+    $('body').on('click', '.js-message-icon', function () {
+      if (message_box.hasClass('d-none')) {
+        message_box.removeClass('d-none').animate({
+          right: '32px',
+          opacity: '1'
+        }, 'fast', function () {
+          if (message_box.height() > 768) {
+            message_box.addClass('js-h-600px js-overflow-y-scroll');
+          }
+        });
+      }
+    });
+  }
+
+  if (window.innerWidth <= 768) {
+    show_box_sm_screen(profile_open, profile_box); // Profile box
+    show_box_sm_screen(application_open, application_box); // Application box
+    show_box_sm_screen($publish_job_open, $publish_job_box); // Publish box
+    show_box_sm_screen($hr_open, $hr_box); // HR box
+    show_box_sm_screen($open_sending_form, $sending_msg_hr_box); // Sending msg box from HR
+    show_box_sm_screen($open_sending_form, $sending_msg_company_box); // Sending msg box from HR
+    show_box_sm_screen($open_upload_img, $upload_img_box); // Upload img
+
+    // Message box
+    $('body').on('click', '.js-message-icon', function () {
+      if (message_box.hasClass('d-none')) {
+        message_box.removeClass('d-none').animate({
+          right: '1px',
+          opacity: '1'
+        }, 'fast', function () {
+          if (message_box.height() > 768) {
+            message_box.addClass('js-h-600px js-overflow-y-scroll');
+          }
+        });
+      }
+    });
+  }
 
   //  Change message icon on hover
   $('body').on('mouseenter', '.js-message-icon', function () {
@@ -53,76 +92,6 @@ $(function () {
 
     $chevron.toggleClass('chevron-animation-open');
     $msg.slideToggle();
-  });
-
-  // Application box
-  application_open.on('click', function () {
-    if (application_box.hasClass('d-none')) {
-      application_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-      $('#applied_job_container').load('employee-dashboard.php .applied_job_data');
-    }
-  });
-
-  // Profile box
-  profile_open.on('click', function () {
-    if (profile_box.hasClass('d-none')) {
-      profile_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-    }
-  });
-
-  // Publish job box
-  $publish_job_open.on('click', function () {
-    if ($publish_job_box.hasClass('d-none')) {
-      $publish_job_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-    }
-  });
-
-  // HR box
-  $hr_open.on('click', function () {
-    if ($hr_box.hasClass('d-none')) {
-      $hr_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-    }
-  });
-
-  // Sending msg HR box
-  $open_sending_msg_hr.on('click', function () {
-    if ($sending_msg_hr_box.hasClass('d-none')) {
-      $sending_msg_hr_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-    }
-  });
-
-  // Sending msg Company box
-  $open_sending_msg_hr.on('click', function () {
-    if ($sending_msg_company_box.hasClass('d-none')) {
-      $sending_msg_company_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-    }
-  });
-
-  $open_upload_img.on('click', function () {
-    if ($upload_img_box.hasClass('d-none')) {
-      $upload_img_box.removeClass('d-none').animate({
-        right: '32px',
-        opacity: '1'
-      }, 'fast');
-    }
   });
 
   // Close app, mess, profile on clicking the X
@@ -199,7 +168,7 @@ $(function () {
     });
   });
 
-  // Bootstrap 5 tooltip FIY-> data-bs-animation="false" will prevent from dissapering the tooltip after multiple hovers
+  // Bootstrap 5 tooltip FYI-> data-bs-animation="false" will prevent from dissapering the tooltip after multiple hovers
   $('body').tooltip({
     boundary: 'window',
     selector: '[data-bs-toggle="tooltip"]'
@@ -214,7 +183,5 @@ $(function () {
 
   $('.js-close-approved-candidates').on('click', function () {
     $('#candidates_container').fadeOut('slow');
-  })
-
-
+  });
 })

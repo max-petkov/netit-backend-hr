@@ -6,13 +6,23 @@ $(function () {
     let $random_chars = $(this).next().next();
     let $mot_speech = $apply_btn.closest('div').next();
 
-    $mot_speech.removeClass('d-none').animate({
-      top: '0px',
-      right: '32px',
-      opacity: '1'
-    }, 'fast', function () {
-      $apply_btn.text('Waiting...').addClass('disabled')
-    });
+    if (window.innerWidth <= 768) {
+      $mot_speech.removeClass('d-none').animate({
+        top: '0px',
+        right: '0px',
+        opacity: '1'
+      }, 'fast', function () {
+        $apply_btn.text('Waiting...').addClass('disabled')
+      });
+    } else {
+      $mot_speech.removeClass('d-none').animate({
+        top: '0px',
+        right: '32px',
+        opacity: '1'
+      }, 'fast', function () {
+        $apply_btn.text('Waiting...').addClass('disabled')
+      });
+    }
 
     $mot_speech.on('click', '.btn-close', function () {
       let $close_mot_speech = $(this).closest('.container');
@@ -318,14 +328,19 @@ $(function () {
   });
 
   // Lazy load job list
-  $("#published_job_list li").slice(10).hide();
   let $mincount = 10;
   let $maxcount = 20;
+  $('#published_job_list li').slice(10).hide();
   $(window).on('scroll', function () {
     if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
-      $("#published_job_list li").slice($mincount, $maxcount).show();
+      $('#published_job_list li').slice($mincount, $maxcount).show();
       $mincount = $mincount + 10;
       $maxcount = $maxcount + 10;
     }
+  });
+
+  // Refresh Application box
+  $('body').on('click', '#application_btn', function () {
+    $('#applied_job_container').load('employee-dashboard.php .applied_job_data');
   });
 })

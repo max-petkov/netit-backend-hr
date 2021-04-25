@@ -57,7 +57,7 @@
   <!-- Card published jobs -->
   <div id="cards-job-container">
     <div class="d-flex justify-content-center flex-wrap">
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Frontend</div>
           <div class="card">
@@ -68,7 +68,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Backend</div>
           <div class="card">
@@ -79,7 +79,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Fullstack</div>
           <div class="card">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">QA</div>
           <div class="card">
@@ -101,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">MobDev</div>
           <div class="card">
@@ -112,7 +112,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">UX/UI</div>
           <div class="card">
@@ -132,25 +132,25 @@
     <div class="container">
       <h3 class="fs-3 text-white text-underline text-center"><i>Platform made with:</i></h3>
       <div class="d-flex flex-wrap justify-content-center align-items-center">
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/html5-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/css3-alt-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/sass-brands.svg" alt="" width="64px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/js-square-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/jquery-brand.svg" alt="" width="64px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/php-brands.svg" alt="" width="80px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3 display-6 text-center text-white">
+        <div class="mx-2 mt-2 mt-md-0 display-6 text-center text-white">
           <img src="assets/icons/database-solid.svg" alt="" width="48px" height="48px" class="svg-bg-color">
           <p class="fs-6 m-0">MySQL</p>
         </div>
@@ -172,9 +172,9 @@
               <h5 class="text-muted text-center">Frontend Developer</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>
@@ -187,9 +187,9 @@
               <h5 class="text-muted text-center">Backend Developer</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>
@@ -202,9 +202,9 @@
               <h5 class="text-muted text-center">Quality Assurance</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>
@@ -217,9 +217,9 @@
               <h5 class="text-muted text-center">UX/UI</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>

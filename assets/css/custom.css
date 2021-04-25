@@ -1,4 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Calistoga&display=swap");
+.bg-color-light-purple {
+  background-color: #c29ffa;
+}
+
+.bg-color-light-green {
+  background-color: #a3cfbb;
+}
+
+.bg-color-light-blue {
+  background-color: #6ea8fe;
+}
+
+.bg-color-light-yellow {
+  background-color: #ffe69c;
+}
+
+.bg-color-light-red {
+  background-color: #f1aeb5;
+}
+
+.bg-color-light-gray {
+  background-color: #dee2e6;
+}
+
+.bg-color-light-cyan {
+  background-color: #9eeaf9;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -15,7 +43,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Color doesn't work, use fill: */
+/* Color doesn't work, use fill: on svg */
 .back-icon:hover {
   cursor: pointer;
   fill: #000;
@@ -162,4 +190,12 @@ body {
 
 .transform-scale:active {
   transform: scale(0.9);
+}
+
+.js-overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.js-h-600px {
+  height: 600px;
 }

@@ -21,8 +21,8 @@ class Validator
             $this->style_input['username'] = 'is-invalid';
             return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['username'], 4)) {
-                $this->error_msg['username'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
+            if ($this->string_length($this->post_data['username'], 4, 49)) {
+                $this->error_msg['username'] = '<div class="invalid-feedback">More than 3 and less than 50!</div>';
                 $this->style_input['username'] = 'is-invalid';
                 return false;
             } else {
@@ -49,8 +49,8 @@ class Validator
             $this->style_input['name'] = 'is-invalid';
             return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['name'], 4)) {
-                $this->error_msg['name'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
+            if ($this->string_length($this->post_data['name'], 2, 49)) {
+                $this->error_msg['name'] = '<div class="invalid-feedback">More than 1 and less than 50!</div>';
                 $this->style_input['name'] = 'is-invalid';
                 return false;
             } else {
@@ -68,8 +68,8 @@ class Validator
             $this->style_input['last_name'] = 'is-invalid';
             return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['last_name'], 4)) {
-                $this->error_msg['last_name'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
+            if ($this->string_length($this->post_data['last_name'], 2, 49)) {
+                $this->error_msg['last_name'] = '<div class="invalid-feedback">More than 1 and less than 50!</div>';
                 $this->style_input['last_name'] = 'is-invalid';
                 return false;
             } else {
@@ -87,8 +87,8 @@ class Validator
             $this->style_input['email'] = 'is-invalid';
             return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['email'])) {
-                $this->error_msg['email'] = '<div class="invalid-feedback">Email must be less than 49 symbols!</div>';
+            if ($this->string_length($this->post_data['email'], 0, 49)) {
+                $this->error_msg['email'] = '<div class="invalid-feedback">Email must be less than 50 symbols!</div>';
                 $this->style_input['email'] = 'is-invalid';
                 return false;
             } else {
@@ -121,8 +121,8 @@ class Validator
             $this->style_input['password'] = 'is-invalid';
             return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['password'], 4)) {
-                $this->error_msg['password'] = '<div class="invalid-feedback">More than 4 and less than 49!</div>';
+            if ($this->string_length($this->post_data['password'], 4, 49)) {
+                $this->error_msg['password'] = '<div class="invalid-feedback">More than 3 and less than 50!</div>';
                 $this->style_input['password'] = 'is-invalid';
                 return false;
             } else {
@@ -159,7 +159,7 @@ class Validator
             $this->style_input['description'] = 'is-invalid';
             return false;
         } else {
-            if ($this->count_symbols_textarea($this->post_data['company_description'], 49)) {
+            if ($this->string_length($this->post_data['company_description'], 49, 999)) {
                 $this->error_msg['description'] = '<div class="invalid-feedback">Field must be more than 50 and less than 1000 symbols!</div>';
                 $this->style_input['description'] = 'is-invalid';
                 return false;
@@ -222,7 +222,7 @@ class Validator
         if ($this->empty_field($this->post_data['address'])) {
             return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['address'])) {
+            if ($this->string_length($this->post_data['address'], 0, 49)) {
                 return false;
             } else {
                 return true;
@@ -235,7 +235,7 @@ class Validator
         if ($this->empty_field($this->post_data['website'])) {
             return false;
         } else {
-            if ($this->count_symbols_input($this->post_data['website'])) {
+            if ($this->string_length($this->post_data['website'], 0, 49)) {
                 return false;
             } else {
                 if (!preg_match('/(-)|(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/', $this->post_data['website'])) {
@@ -252,7 +252,7 @@ class Validator
         if ($this->empty_field($this->post_data['short_introduction'])) {
             return false;
         } else {
-            if ($this->count_symbols_textarea($this->post_data['short_introduction'])) {
+            if ($this->string_length($this->post_data['short_introduction'], 49, 999)) {
                 return false;
             } else {
                 return true;
@@ -262,7 +262,7 @@ class Validator
 
     public function validate_slogan()
     {
-        if ($this->count_symbols_input($this->post_data['slogan'])) {
+        if ($this->string_length($this->post_data['slogan'], 0, 49)) {
             return false;
         } else {
             return true;
@@ -271,7 +271,7 @@ class Validator
 
     public function validate_history()
     {
-        if ($this->count_symbols_textarea($this->post_data['company_history'])) {
+        if ($this->string_length($this->post_data['company_history'], 0, 999)) {
             return false;
         } else {
             return true;
@@ -280,7 +280,7 @@ class Validator
 
     public function validate_mission()
     {
-        if ($this->count_symbols_textarea($this->post_data['company_mission'])) {
+        if ($this->string_length($this->post_data['company_mission'], 0, 999)) {
             return false;
         } else {
             return true;
@@ -305,7 +305,7 @@ class Validator
         if ($this->empty_field($this->post_data['description'])) {
             return false;
         } else {
-            if ($this->count_symbols_textarea($this->post_data['description'], 49)) {
+            if ($this->string_length($this->post_data['description'], 49, 999)) {
                 return false;
             } else {
                 return true;
@@ -358,7 +358,7 @@ class Validator
         if ($this->empty_field($this->post_data['motivation_speech'])) {
             return false;
         } else {
-            if ($this->count_symbols_textarea($this->post_data['motivation_speech'], 49)) {
+            if ($this->string_length($this->post_data['motivation_speech'], 49, 999)) {
                 return false;
             } else {
                 return true;
@@ -576,26 +576,10 @@ class Validator
         }
     }
 
-    // NEW length counter
+    // Symbol counter
     private function string_length($value, $min = null, $max = null)
     {
         if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > $max) {
-            return true;
-        }
-    }
-
-    // Input string length
-    private function count_symbols_input($value, $min = null)
-    {
-        if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > 49) {
-            return true;
-        }
-    }
-
-    // Textarea string length
-    private function count_symbols_textarea($value, $min = null)
-    {
-        if (mb_strlen(trim($value)) < $min || mb_strlen(trim($value)) > 999) {
             return true;
         }
     }

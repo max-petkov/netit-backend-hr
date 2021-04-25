@@ -171,3 +171,33 @@ function greetings() {
     }
 }
 greetings();
+
+function show_box_lg_screen($trigger_btn, $box) {
+    $trigger_btn.on('click', function () {
+        if ($box.hasClass('d-none')) {
+            $box.removeClass('d-none').animate({
+                right: '32px',
+                opacity: '1'
+            }, 'fast', function () {
+                if ($box.height() > 768) {
+                    $box.addClass('js-h-600px js-overflow-y-scroll');
+                }
+            });
+        }
+    });
+}
+
+function show_box_sm_screen($trigger_btn, $box) {
+    $trigger_btn.on('click', function () {
+        if ($box.hasClass('d-none')) {
+            $box.removeClass('d-none').animate({
+                right: '1px',
+                opacity: '1'
+            }, 'fast', function () {
+                if ($box.height() > 768) {
+                    $box.addClass('js-h-600px js-overflow-y-scroll');
+                }
+            });
+        }
+    });
+}
