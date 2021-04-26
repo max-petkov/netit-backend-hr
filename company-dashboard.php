@@ -283,7 +283,7 @@
   </div>
 
   <!-- Send HR message -->
-  <div id="send_msg_hr_box" class="js-send-msg-hr-box card shadow rounded mb-4 d-none">
+  <div id="send_msg_hr_box" class="js-send-msg-hr-box js-send-msg-box-md card shadow rounded mb-4 d-none">
     <div class="d-flex justify-content-between mt-3 mb-2 px-3">
       <h4 class="m-0">Send message:</h4>
       <button class="btn-close align-self-end"></button>

@@ -146,8 +146,8 @@ $(function () {
     $job_description = $(this).closest('div').prev();
 
     $job_description.removeClass('d-none').slideDown('slow', function () {
-      $read_description.removeClass('btn-primary js-show-job-description')
-        .addClass('btn-secondary js-close-job-description')
+      $read_description.removeClass('btn-outline-primary js-show-job-description')
+        .addClass('btn-outline-secondary js-close-job-description')
         .text('Close');
     });
 
@@ -158,8 +158,64 @@ $(function () {
     $job_description = $(this).closest('div').prev();
 
     $job_description.slideUp('slow', function () {
-      $read_description.removeClass('btn-secondary js-close-job-description')
-        .addClass('btn-primary js-show-job-description')
+      $read_description.removeClass('btn-outline-secondary js-close-job-description')
+        .addClass('btn-outline-primary js-show-job-description')
+        .html(`<svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+         <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+         <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+       </svg>
+       Read more`);
+    });
+  });
+
+  //  Read motivation speech
+  $('body').on('click', '.js-read-mot-speech', function () {
+    $read_description = $(this);
+    $job_description = $(this).closest('div').next();
+
+    $job_description.removeClass('d-none').slideDown('slow', function () {
+      $read_description.removeClass('btn-outline-primary js-read-mot-speech')
+        .addClass('btn-outline-secondary js-close-mot-speech')
+        .text('Close');
+    });
+
+  });
+
+  $('body').on('click', '.js-close-mot-speech', function () {
+    $read_description = $(this);
+    $job_description = $(this).closest('div').next();
+
+    $job_description.slideUp('slow', function () {
+      $read_description.removeClass('btn-outline-secondary js-close-mot-speech')
+        .addClass('btn-outline-primary js-read-mot-speech')
+        .html(`<svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+         <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+         <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+       </svg>
+       Read more`);
+    });
+  });
+
+  //  View candidate profile
+  $('body').on('click', '.js-view-candidate-profile', function () {
+    $read_description = $(this);
+    $job_description = $(this).closest('div').siblings('.js-candidate-profile');
+
+    $job_description.removeClass('d-none').slideDown('slow', function () {
+      $read_description.removeClass('btn-outline-primary js-view-candidate-profile')
+        .addClass('btn-outline-secondary js-close-candidate-profile ')
+        .text('Close');
+    });
+
+  });
+
+  $('body').on('click', '.js-close-candidate-profile ', function () {
+    $read_description = $(this);
+    $job_description = $(this).closest('div').siblings('.js-candidate-profile');
+
+    $job_description.slideUp('slow', function () {
+      $read_description.removeClass('btn-outline-secondary js-close-candidate-profile ')
+        .addClass('btn-outline-primary js-view-candidate-profile')
         .html(`<svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
          <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
          <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />

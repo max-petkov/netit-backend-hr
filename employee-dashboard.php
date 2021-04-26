@@ -251,7 +251,7 @@
   <div class="card shadow-lg rounded application_box d-none px-1 px-md-2">
     <div class="d-flex justify-content-between mt-3 mb-2 px-3">
       <h4 class="m-0">Applications:</h4>
-      <button class="btn-close align-self-end"></button>
+      <button class="btn-close"></button>
     </div>
     <ul id="applied_job_container" class="card-body list-group-flush">
       <?php
@@ -275,14 +275,14 @@
           <p><b>Salary: </b><?php echo $value['job_salary']; ?> </p>
           <p class="d-none"><b>Job description: </b> <?php echo $value['job_description']; ?> </p>
           <div class="d-flex">
-            <button class="js-show-job-description btn btn-primary btn-sm d-flex align-items-center me-2">
+            <button class="js-show-job-description btn btn-outline-primary btn-sm d-flex align-items-center me-2">
               <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                 <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
               </svg>
               Read more
             </button>
-            <button class="js-cancel-application btn btn-danger btn-sm d-flex align-items-center" value="<?php echo $value['job_id'] ?>">
+            <button class="js-cancel-application btn btn-outline-danger btn-sm d-flex align-items-center" value="<?php echo $value['job_id'] ?>">
               <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                 <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -479,7 +479,7 @@
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
               <p class="js-job-description d-none mt-3"><span class="fw-bold">Description: </span> <?php echo $value['job_description']; ?> </p>
               <div class="d-flex">
-                <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">
+                <button class="js-show-job-description btn btn-outline-primary d-flex align-items-center btn-sm me-2">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                     <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -487,7 +487,7 @@
                   Read more
                 </button>
                 <?php if ($job_data->is_applied_btn($value[0]) === 0) : ?>
-                  <button class="js-apply-job btn btn-success d-flex align-items-center btn-sm" value="<?php echo $value[0]; ?>">
+                  <button class="js-apply-job btn btn-outline-success d-flex align-items-center btn-sm" value="<?php echo $value[0]; ?>">
                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                       <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />

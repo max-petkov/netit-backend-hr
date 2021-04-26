@@ -3,8 +3,8 @@
 
 <!--Rejected applicants -->
 <div id="applicants_container" class="container-sm mt-4">
-  <div id="applicants_data" class="card shadow-lg rounded">
-    <div class="card-header">
+  <div id="applicants_data" class="card table-responsive shadow rounded">
+    <div class="card-header w-1400px">
       <h4 class="my-3">Applicants</h4>
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
@@ -18,10 +18,10 @@
         </li>
       </ul>
     </div>
-    <div class="card-body">
+    <div class="card-body w-1400px">
       <table class="table table-hover">
         <thead class="table table-danger">
-          <tr class="">
+          <tr>
             <th>#</th>
             <th>Published job</th>
             <th>Candidate profile</th>
@@ -38,38 +38,40 @@
                 <?php echo $key + 1; ?>
               </th>
               <td class="w-50">
-                <p class="m-0 small"><span class="fw-bold">Date:</span> <?php echo $value['published_date']; ?></p>
-                <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
-                <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
-                <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
-                <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
-                <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
-                <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
-                <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
+                <p class="m-0 small"><span class="fw-bold">Published date :</span> <?php echo $value['published_date']; ?></p>
+                <div class="mb-3">
+                  <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-color-light-blue me-1\"> {$value['frontend_tag']} </span>"; ?>
+                  <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-color-light-gray text-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+                  <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-color-light-green me-1\"> {$value['fullstack_tag']} </span>"; ?>
+                  <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-color-light-red me-1\"> {$value['qa_tag']} </span>"; ?>
+                  <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-color-light-yellow text-dark me-1\"> {$value['mobdev_tag']} </span>"; ?>
+                  <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-color-light-purple me-1\"> {$value['ux_ui_tag']} </span>"; ?>
+                  <span class="badge bg-color-light-cyan  me-1"> <?php echo $value['job_time']; ?> </span>
+                </div>
                 <p class="m-0"><b>Title:</b> <?php echo $value['job_title']; ?></p>
-                <p class="mt-3 d-none">
-                  <?php echo $value['job_description']; ?>
-                </p>
-                <button class="mt-3 me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                  </svg>
-                  Read more
-                </button>
+                <p class="mt-3 d-none"><b>Description: </b> <?php echo $value['job_description']; ?></p>
+                <div>
+                  <button class="js-show-job-description btn btn-outline-primary btn-sm d-flex align-items-center mt-3 me-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                    Read more
+                  </button>
+                </div>
               </td>
               <td class="w-50">
-                <p class="small mb-0"><b>Date: </b><?php echo $value['applied_date']; ?></p>
+                <p class="small mb-0"><b>Applied date: </b><?php echo $value['applied_date']; ?></p>
                 <p class="mb-2"><b>Name: </b><?php echo "{$value['first_name']} {$value['last_name']}";  ?></p>
                 <div class="js-job-seeker-toogle-btns d-flex mb-2">
-                  <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
+                  <button class="js-read-mot-speech me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                       <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                     </svg>
                     Motivation Speech
                   </button>
-                  <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
+                  <button class="js-view-candidate-profile me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                       <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -83,24 +85,11 @@
                     Send Message
                   </button>
                 </div>
-                <p class="d-none">
-                  <?php echo $value['motivation_speech']; ?>
-                </p>
+                <p class="d-none"><b>Motivation speech: </b><?php echo $value['motivation_speech']; ?></p>
                 <!-- User profile -->
-                <div id="candidate_profile" class="d-none card shadow rounded">
-                  <div class="d-flex justify-content-between mt-4">
-                    <div class="ms-3">
-                      <h4 class="card-text"><?php echo "{$value['first_name']}'s profile:"; ?></h4>
-                      <button class="btn btn-primary btn-sm d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-download" viewBox="0 0 16 16">
-                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                        </svg>
-                        Resume
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
+                <div class="js-candidate-profile d-none card shadow rounded">
+                  <h4 class="card-text ms-3 my-3"><?php echo "{$value['first_name']}'s profile:"; ?></h4>
+                  <div class="card-body pt-0">
                     <p class="m-0"><b>Email: </b><?php echo $value['email']; ?></p>
                     <p class="m-0"><b>Website: </b>
                       <a href="<?php echo $value['website']; ?>" target="_blank"><?php echo $value['website']; ?></a>

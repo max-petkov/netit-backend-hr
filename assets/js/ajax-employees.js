@@ -12,7 +12,7 @@ $(function () {
         right: '0px',
         opacity: '1'
       }, 'fast', function () {
-        $apply_btn.text('Waiting...').addClass('disabled')
+        $apply_btn.text('Waiting...').removeClass('btn-outline-success').addClass('btn-success disabled');
       });
     } else {
       $mot_speech.removeClass('d-none').animate({
@@ -20,7 +20,7 @@ $(function () {
         right: '32px',
         opacity: '1'
       }, 'fast', function () {
-        $apply_btn.text('Waiting...').addClass('disabled')
+        $apply_btn.text('Waiting...').removeClass('btn-outline-success').addClass('btn-success disabled');
       });
     }
 
@@ -69,7 +69,7 @@ $(function () {
             apply_job: null
           },
           success: function () {
-            $apply_btn.text('Applied!').addClass('disabled');
+            $apply_btn.text('Applied!').removeClass('btn-outline-success').addClass('btn-success disabled');
             $send_btn.text('Success!').addClass('disabled');
             success_mot_speech($success_msg, $speech);
           }
