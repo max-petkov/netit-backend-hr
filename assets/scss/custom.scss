@@ -135,7 +135,7 @@ body {
 }
 
 .js_hr_box {
-  max-width: 768px;
+  max-width: 500px;
   position: absolute;
   z-index: 1;
   opacity: 0;
@@ -219,6 +219,10 @@ body {
 // Media queries
 @media (max-width: 768px) {
   .js-send-msg-box-md {
+    width: 300px;
+  }
+
+  .js-create-hr-xsm-box {
     width: 300px;
   }
 

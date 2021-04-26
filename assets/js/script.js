@@ -232,7 +232,7 @@ $(function () {
 
   //  Approved candidates company dashboard
   $('#approved_candidates').on('click', function () {
-    $('#candidates_container').fadeIn('slow', function () {
+    $('#candidates_container').fadeIn('fast', function () {
       $('#candidates_container').removeClass('d-none');
     });
   });

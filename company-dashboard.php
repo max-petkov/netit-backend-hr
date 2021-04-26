@@ -264,7 +264,7 @@
               <p class="small"><?php echo $value['send_date']; ?></p>
             </div>
             <div class="d-flex justify-content-between align-items-start">
-              <p><b>Subject:</b><?php echo $value['subject']; ?></p>
+              <p class="text-break"><b>Subject:</b><?php echo $value['subject']; ?></p>
               <span class="js-chevron ms-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
@@ -334,7 +334,7 @@
     <div class="d-flex justify-content-end pt-2">
       <button class="btn-close"></button>
     </div>
-    <div class="card-body pt-0">
+    <div class="card-body pt-0 px-0 px-md-2">
       <form id="update_company_profile" method="POST" class="row edit-profile pb-3">
         <div class="ps-3 mb-3">
           <h4 class="card-text">Edit profile:</h4>
@@ -346,44 +346,44 @@
           </button>
         </div>
         <div id="success_mess_validation"></div>
-        <div class="form-group row mb-3 pe-0">
-          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
+        <div class="form-group row mb-0 mb-sm-2 pe-0">
+          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2 mb-2 mb-sm-0">
             <label for="first_name">Company name</label>
             <input type="text" class="form-control form-control-sm" name="name" value="<?php echo $profile->name;; ?>">
             <div></div>
           </div>
-          <div class="form-group col-0 pe-0 col-sm-6">
+          <div class="form-group col-0 pe-0 col-sm-6 mb-2 mb-sm-0">
             <label for="last_name">Slogan</label>
             <input type="text" class="form-control form-control-sm" name="slogan" placeholder="Write company slogan..." value="<?php echo $profile->slogan; ?>">
             <div></div>
           </div>
         </div>
 
-        <div class="form-group row mb-3 pe-0">
-          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
+        <div class="form-group row mb-0 mb-sm-2 pe-0">
+          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2 mb-2 mb-sm-0">
             <label for="address_employee">Address</label>
             <input type="text" class="form-control form-control-sm" name="address" value="<?php echo $profile->address; ?>">
             <div></div>
           </div>
-          <div class="form-group col-0 col-sm-6 pe-0">
+          <div class="form-group col-0 col-sm-6 pe-0 mb-2 mb-sm-0">
             <label for="website_employee">Website</label>
             <input type="text" class="form-control form-control-sm" name="website" value="<?php echo $profile->website; ?>">
             <div></div>
           </div>
         </div>
 
-        <div class="form-group row mb-3 pe-0">
-          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2">
+        <div class="form-group row mb-0 mb-sm-2 pe-0">
+          <div class="form-group col-0 col-sm-6 pe-0 pe-sm-2 mb-2 mb-sm-0">
             <label for="username">Username</label>
             <input type="text" class="form-control form-control-sm" name="username" value="<?php echo $profile->username; ?>" disabled>
           </div>
-          <div class="form-group col-0 col-sm-6 pe-0">
+          <div class="form-group col-0 col-sm-6 pe-0 mb-2 mb-sm-0">
             <label for="email">Email</label>
             <input type="email" class="form-control form-control-sm" name="email" value="<?php echo $profile->email; ?>" disabled>
           </div>
         </div>
         <div class="company_branches">
-          <div class="form-group mb-3">
+          <div class="form-group">
             <label for="it_branches">IT branches</label>
             <p id="checkbox_response" class="mb-2"></p>
             <div class="form-check my-2">
@@ -412,17 +412,17 @@
             </div>
           </div>
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
           <label for="company_description">Company description</label>
           <textarea name="company_description" class="form-control form-control-sm" rows="4"><?php echo $profile->company_description; ?></textarea>
           <div></div>
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
           <label for="company_history">Company history</label>
           <textarea name="company_history" class="form-control form-control-sm" rows="4" placeholder="Write company history..."><?php echo $profile->company_history; ?></textarea>
           <div></div>
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
           <label for="company_mission">Company mission</label>
           <textarea name="company_mission" class="form-control form-control-sm" rows="4" placeholder="Write company mission..."><?php echo $profile->company_mission; ?></textarea>
           <div></div>
@@ -470,40 +470,36 @@
   <?php endif; ?>
 
   <!-- Create HR acc-->
-  <div class="js_hr_box container d-none mt-4">
-    <div class="row">
-      <div class="card col-8 mx-auto shadow rounded">
-        <div class="d-flex justify-content-between mt-3 mb-2 px-3">
-          <h4 class="m-0">Create HR account:</h4>
-          <button class="btn-close align-self-end"></button>
+  <div class="js_hr_box js-create-hr-xsm-box card col-8 mx-auto shadow rounded">
+    <div class="d-flex justify-content-between mt-3 mb-2 px-3">
+      <h4 class="m-0">Create HR account:</h4>
+      <button class="btn-close align-self-end"></button>
+    </div>
+    <div class="card-body">
+      <form id="hr_acc_form" method="POST" action="company-dashboard.php">
+        <div id="hr_succ_mess"></div>
+        <div class="form-group mb-2">
+          <label for="hr_account">Username</label>
+          <input id="hr_username" type="text" name="username" class="form-control form-control-sm">
+          <div></div>
         </div>
-        <div class="card-body">
-          <form id="hr_acc_form" method="POST" action="company-dashboard.php">
-            <div id="hr_succ_mess"></div>
-            <div class="form-group mb-2">
-              <label for="hr_account">Username</label>
-              <input id="hr_username" type="text" name="username" class="form-control form-control-sm">
-              <div></div>
-            </div>
-            <div class="form-group mb-2">
-              <label for="hr_account">Email</label>
-              <input id="hr_email" type="text" name="email" class="form-control form-control-sm">
-              <div></div>
-            </div>
-            <div class="form-group mb-2">
-              <label for="hr_account">Password</label>
-              <input type="password" name="password" class="form-control form-control-sm">
-              <div></div>
-            </div>
-            <div class="form-group mb-3">
-              <label for="hr_account">Confirm password</label>
-              <input type="password" name="confirm_password" class="form-control form-control-sm">
-              <div></div>
-            </div>
-            <input type="submit" value="Submit" class="btn btn-primary">
-          </form>
+        <div class="form-group mb-2">
+          <label for="hr_account">Email</label>
+          <input id="hr_email" type="text" name="email" class="form-control form-control-sm">
+          <div></div>
         </div>
-      </div>
+        <div class="form-group mb-2">
+          <label for="hr_account">Password</label>
+          <input type="password" name="password" class="form-control form-control-sm">
+          <div></div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="hr_account">Confirm password</label>
+          <input type="password" name="confirm_password" class="form-control form-control-sm">
+          <div></div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </form>
     </div>
   </div>
 
@@ -514,7 +510,7 @@
         <h4 class="m-0">Publish job:</h4>
         <button class="btn-close align-self-end"></button>
       </div>
-      <div class="card-body">
+      <div class="card-body px-0 px-sm-3">
         <form id="publish_form" method="POST" action="company-dashboard.php">
           <div id="publish_succ_mess"></div>
           <div class="form-group mb-3">
@@ -523,8 +519,8 @@
             <div></div>
           </div>
           <div class="mb-3">
-            <div class="form-group d-flex">
-              <div class="form-group mb-3 order-1">
+            <div class="form-group d-flex flex-column flex-sm-row">
+              <div class="form-group mb-0 mb-sm-2 order-1">
                 <label for="job_time" class="fw-bold">Job time</label>
                 <div class="form-group mt-1">
                   <input type="checkbox" name="job_fulltime" class="job_time_length form-check-input" value="full time">
@@ -573,15 +569,14 @@
             </div>
             <p id="job_tag_response_text" class="mb-0"></p>
             <p id="job_time_response_text" class="mb-0"></p>
-
           </div>
-          <div class="form-group mb-3 d-flex">
-            <div class="form-group me-3">
+          <div class="form-group mb-3 d-flex flex-column flex-sm-row">
+            <div class="form-group me-0 me-sm-3 mb-2 mb-sm-0">
               <label for="" class="fw-bold">Salary:</label>
               <input type="text" class="form-control" name="salary">
               <div></div>
             </div>
-            <div class="form-group me-3">
+            <div class="form-group me-0 me-sm-3 mb-2 mb-sm-0">
               <label for="job_salary_currency" class="fw-bold">Currency:</label>
               <div class="form-group me-2">
                 <input type="radio" class="form-check-input" name="currency" value="€">
@@ -626,24 +621,24 @@
       <div class="col-0 col-md-9 mx-auto">
         <div class="mb-3 d-flex">
           <di id="showcase_container">
-            <div id="showcase_data" class="d-flex">
-              <?php if ($profile->file_data !== null) : ?>
-                <img id="showcase_company_logo" src="data:<?php $profile->file_mime; ?>;base64,<?php echo base64_encode($profile->file_data); ?>" class="me-2" alt="uploaded-picture" width="120px">
-              <?php endif; ?>
-              <div>
-                <h1 id="showcase_company_name" class="m-0 display-4">
-                  <?php echo $profile->name;; ?>
+            <div id="showcase_data">
+              <div class="d-flex">
+                <?php if ($profile->file_data !== null) : ?>
+                  <img id="showcase_company_logo" src="data:<?php $profile->file_mime; ?>;base64,<?php echo base64_encode($profile->file_data); ?>" class="me-2" alt="uploaded-picture" width="64px">
+                <?php endif; ?>
+                <h1 id="showcase_company_name" class="m-0 display-5">
+                  <?php echo $profile->name; ?>
+                  <p id="showcase_company_slogan" class="lead mb-0"><?php echo $profile->slogan; ?></p>
                 </h1>
-                <p id="showcase_company_slogan" class="lead mb-0"><?php echo $profile->slogan; ?></p>
-                <div id="showcase_it_branches" class="badges mt-1">
-                  <div id="badge_it_container">
-                    <?php echo (!$profile->frontend) ? '' : "<span class=\"badge bg-secondary\"> {$profile->frontend} </span>"; ?>
-                    <?php echo (!$profile->backend) ? '' : "<span class=\"badge bg-dark\"> {$profile->backend} </span>"; ?>
-                    <?php echo (!$profile->fullstack) ? '' : "<span class=\"badge bg-success\"> {$profile->fullstack} </span>"; ?>
-                    <?php echo (!$profile->qa) ? '' : "<span class=\"badge bg-danger\"> {$profile->qa} </span>"; ?>
-                    <?php echo (!$profile->mobdev) ? '' : "<span class=\"badge bg-warning\"> {$profile->mobdev} </span>"; ?>
-                    <?php echo (!$profile->ux_ui) ? '' : "<span class=\"badge bg-primary\"> {$profile->ux_ui} </span>"; ?>
-                  </div>
+              </div>
+              <div id="showcase_it_branches" class="badges mt-1">
+                <div id="badge_it_container" classt="small">
+                  <?php echo (!$profile->frontend) ? '' : "<span class=\"badge bg-color-light-blue me-1\"> {$profile->frontend} </span>"; ?>
+                  <?php echo (!$profile->backend) ? '' : "<span class=\"badge bg-color-light-gray text-dark me-1\"> {$profile->backend} </span>"; ?>
+                  <?php echo (!$profile->fullstack) ? '' : "<span class=\"badge bg-color-light-green me-1\"> {$profile->fullstack} </span>"; ?>
+                  <?php echo (!$profile->qa) ? '' : "<span class=\"badge bg-color-light-red me-1\"> {$profile->qa} </span>"; ?>
+                  <?php echo (!$profile->mobdev) ? '' : "<span class=\"badge bg-color-light-yellow text-dark me-1\"> {$profile->mobdev} </span>"; ?>
+                  <?php echo (!$profile->ux_ui) ? '' : "<span class=\"badge bg-color-light-purple me-1\"> {$profile->ux_ui} </span>"; ?>
                 </div>
               </div>
             </div>
@@ -665,9 +660,9 @@
   </section>
 
   <!-- Approved candidates -->
-  <div id="candidates_container" class="container-sm my-4 d-none">
-    <div id="candidates_data" class="card shadow rounded">
-      <div class="card-header d-flex align-items-center justify-content-between">
+  <div id="candidates_container" class="container-fluid my-4 d-none">
+    <div id="candidates_data" class="card table-responsive shadow rounded">
+      <div class="card-header d-flex align-items-center justify-content-between w-1400px">
         <h4 class="my-3">Approved candidates</h4>
         <span class="js-close-approved-candidates cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -676,7 +671,7 @@
         </span>
       </div>
       <div class="card-body">
-        <table class="table table-hover">
+        <table class="table table-hover w-1400px">
           <thead class="table table-success">
             <tr class="">
               <th>#</th>
@@ -695,38 +690,40 @@
                   <?php echo $key + 1; ?>
                 </th>
                 <td class="w-50">
-                  <p class="m-0 small"><span class="fw-bold">Date:</span> <?php echo $value['published_date']; ?></p>
-                  <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
-                  <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
-                  <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
-                  <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
-                  <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
-                  <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
-                  <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
+                  <p class="m-0 small"><span class="fw-bold">Published date: </span> <?php echo $value['published_date']; ?></p>
+                  <div class="mb-3">
+                    <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-color-light-blue me-1\"> {$value['frontend_tag']} </span>"; ?>
+                    <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-color-light-gray text-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+                    <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-color-light-green me-1\"> {$value['fullstack_tag']} </span>"; ?>
+                    <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-color-light-red me-1\"> {$value['qa_tag']} </span>"; ?>
+                    <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-color-light-yellow text-dark me-1\"> {$value['mobdev_tag']} </span>"; ?>
+                    <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-color-light-purple me-1\"> {$value['ux_ui_tag']} </span>"; ?>
+                    <span class="badge bg-color-light-cyan  me-1"> <?php echo $value['job_time']; ?> </span>
+                  </div>
                   <p class="m-0"><b>Title:</b> <?php echo $value['job_title']; ?></p>
-                  <p class="mt-3 d-none">
-                    <?php echo $value['job_description']; ?>
-                  </p>
-                  <button class="mt-3 me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
-                      <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                    Read more
-                  </button>
+                  <p class="mt-3 d-none"><b>Description: </b><?php echo $value['job_description']; ?></p>
+                  <div>
+                    <button class="js-show-job-description btn btn-outline-primary btn-sm d-flex align-items-center mt-3 me-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      Read more
+                    </button>
+                  </div>
                 </td>
                 <td class="w-50">
-                  <p class="small mb-0"><b>Date: </b><?php echo $value['applied_date']; ?></p>
+                  <p class="small mb-0"><b>Applied date: </b><?php echo $value['applied_date']; ?></p>
                   <p class="mb-2"><b>Name: </b><?php echo "{$value['first_name']} {$value['last_name']}";  ?></p>
                   <div class="js-job-seeker-toogle-btns d-flex mb-2">
-                    <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <button class="js-read-mot-speech me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                         <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                       </svg>
                       Motivation Speech
                     </button>
-                    <button class="me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
+                    <button class="js-view-candidate-profile me-3 btn btn-outline-primary btn-sm d-flex align-items-center">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-chevron-double-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                         <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -734,24 +731,11 @@
                       View Profile
                     </button>
                   </div>
-                  <p class="d-none">
-                    <?php echo $value['motivation_speech']; ?>
-                  </p>
+                  <p class="d-none"><b>Motivation speech: </b><?php echo $value['motivation_speech']; ?></p>
                   <!-- User profile -->
-                  <div id="candidate_profile" class="d-none card shadow rounded">
-                    <div class="d-flex justify-content-between mt-4">
-                      <div class="ms-3">
-                        <h4 class="card-text"><?php echo "{$value['first_name']}'s profile:"; ?></h4>
-                        <button class="btn btn-primary btn-sm d-flex align-items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-1 bi bi-download" viewBox="0 0 16 16">
-                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                          </svg>
-                          Resume
-                        </button>
-                      </div>
-                    </div>
-                    <div class="card-body">
+                  <div class="js-candidate-profile d-none card shadow rounded">
+                    <h4 class="card-text ms-3 my-3"><?php echo "{$value['first_name']}'s profile:"; ?></h4>
+                    <div class="card-body pt-0">
                       <p class="m-0"><b>Email: </b><?php echo $value['email']; ?></p>
                       <p class="m-0"><b>Website: </b>
                         <a href="<?php echo $value['website']; ?>" target="_blank"><?php echo $value['website']; ?></a>
@@ -771,45 +755,45 @@
   </div>
 
   <!-- View published jobs -->
-  <div class="container">
+  <section class="container">
     <div class="card shadow rounded">
       <div id="published_job_tab_container" class="card-header">
         <ul id="load_published_job_tab_container" class="nav nav-tabs card-header-tabs">
           <?php $job_data = new Job; ?>
           <li class="nav-item">
-            <a id="active_jobs" href="company-dashboard.php" class="nav-link active">Active jobs (<?php echo $job_data->count_active_inactive_jobs('Y'); ?>)</a>
+            <a id="active_jobs" href="company-dashboard.php" class="nav-link active px-2 px-sm-3">Active jobs (<?php echo $job_data->count_active_inactive_jobs('Y'); ?>)</a>
           </li>
           <li class="nav-item">
-            <a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link">In-active jobs (<?php echo $job_data->count_active_inactive_jobs('N'); ?>)</a>
+            <a id="in_active_jobs" href="company-dashboard-in-active-jobs.php" class="nav-link px-2 px-sm-3">In-active jobs (<?php echo $job_data->count_active_inactive_jobs('N'); ?>)</a>
           </li>
         </ul>
       </div>
-      <div class="card-body">
-        <ul id="view_published_jobs" class="list-group-flush">
+      <div class="card-body px-0 px-sm-3">
+        <ul id="view_published_jobs" class="list-group-flush ps-0 ps-sm-3">
           <?php foreach ($job_data->display_jobs_company('Y') as $value) : ?>
             <li class="job-li list-group-item py-3">
-              <p class="text-muted mb-2">Published: <?php echo $value['published_date']; ?></p>
-              <div class="d-flex align-items-center">
+              <div class="text-muted">Published date: <?php echo $value['published_date']; ?></div>
+              <div class="mb-3">
+                <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-color-light-blue me-1\"> {$value['frontend_tag']} </span>"; ?>
+                <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-color-light-gray text-dark me-1\"> {$value['backend_tag']} </span>"; ?>
+                <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-color-light-green me-1\"> {$value['fullstack_tag']} </span>"; ?>
+                <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-color-light-red me-1\"> {$value['qa_tag']} </span>"; ?>
+                <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-color-light-yellow text-dark me-1\"> {$value['mobdev_tag']} </span>"; ?>
+                <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-color-light-purple me-1\"> {$value['ux_ui_tag']} </span>"; ?>
+                <span class="badge bg-color-light-cyan  me-1"> <?php echo $value['job_time']; ?> </span>
               </div>
-              <p id="update_job_title" class="m-0 fw-bold"><?php echo $value['job_title']; ?></p>
-              <?php echo (!$value['frontend_tag']) ? '' : "<span class=\"badge bg-secondary me-1\"> {$value['frontend_tag']} </span>"; ?>
-              <?php echo (!$value['backend_tag']) ? '' : "<span class=\"badge bg-dark me-1\"> {$value['backend_tag']} </span>"; ?>
-              <?php echo (!$value['fullstack_tag']) ? '' : "<span class=\"badge bg-success me-1\"> {$value['fullstack_tag']} </span>"; ?>
-              <?php echo (!$value['qa_tag']) ? '' : "<span class=\"badge bg-danger me-1\"> {$value['qa_tag']} </span>"; ?>
-              <?php echo (!$value['mobdev_tag']) ? '' : "<span class=\"badge bg-warning me-1\"> {$value['mobdev_tag']} </span>"; ?>
-              <?php echo (!$value['ux_ui_tag']) ? '' : "<span class=\"badge bg-primary me-1\"> {$value['ux_ui_tag']} </span>"; ?>
-              <span class="badge bg-info"> <?php echo $value['job_time']; ?> </span>
+              <p id="update_job_title" class="m-0"><b>Title: </b><?php echo $value['job_title']; ?></p>
               <p class="mt-2"><span class="fw-bold">Salary:</span> <?php echo $value['job_salary']; ?> </p>
               <p class="d-none"><b>Job description: </b> <?php echo $value['job_description']; ?></p>
               <div class="d-flex">
-                <button class="js-show-job-description btn btn-primary d-flex align-items-center btn-sm me-2">
+                <button class="js-show-job-description btn btn-outline-primary d-flex align-items-center btn-sm me-2">
                   <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
                     <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
                   </svg>
                   Read more
                 </button>
-                <button class="js-remove-published-job btn btn-danger d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be in-active!">
+                <button class="js-remove-published-job btn btn-outline-danger d-flex align-items-center btn-sm me-2" value="<?php echo $value['id']; ?>" data-bs-animation="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Your publish will be in-active!">
                   Turn off
                 </button>
               </div>
@@ -819,7 +803,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </section>
   <footer class="bg-dark text-white py-3 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
