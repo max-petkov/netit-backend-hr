@@ -683,4 +683,15 @@ class Validator
         $result = $stmt->rowCount();
         return $result;
     }
+
+    public static function one_user_only()
+    {
+        if (
+            isset($_SESSION['employee_id']) ||
+            isset($_SESSION['company_id']) ||
+            isset($_SESSION['hr_id'])
+        ) {
+            return true;
+        }
+    }
 }
