@@ -20,24 +20,27 @@
 <body>
   <!-- Navigation bar -->
   <nav class="navbar navbar-dark bg-dark navbar-expand py-2">
-    <div class="container flex-column flex-sm-row">
+    <div class="container d-flex">
       <p class="calistoga-font navbar-brand text-white mb-0">Monster HR</p>
       <div class="d-flex">
         <!-- Collapse dropdown -->
-        <div class="collapse navbar-collapse justify-content-end">
+        <div class="collapse navbar-collapse justify-content-end order-1 order-sm-0">
           <ul class="navbar-nav">
             <?php
             $profile_data = new Profile;
             $profile_data->hr_profile_data();
             ?>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span id="greetings"></span>
-                <span id="greetings_first_name">
-                  <?php echo $profile_data->name; ?> HR
-                </span>
+              <a class="cursor-pointer nav-link p-0 pe-1 ms-2 ms-sm-0" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="greetings" class="d-none d-sm-inline"></span>
+                <span id="greetings_first_name" class="d-none d-sm-inline"><?php echo $profile_data->name; ?> HR</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="d-none d-sm-inline bi bi-chevron-down" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                </svg>
+                <!-- Burger -->
+                <img src="assets/icons/bars-solid.png" alt="burger-menu" class="d-inline d-sm-none transform-scale" width="20px">
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li class="dropdown-item xsm-text-class text-center">Your are logged in as<br><b class="xsm-text-class"><?php echo $profile_data->username; ?></b>
                 </li>
                 <div class="dropdown-divider"></div>

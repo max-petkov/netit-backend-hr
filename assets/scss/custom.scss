@@ -216,6 +216,10 @@ body {
   height: 600px;
 }
 
+.dropdown-menu {
+  top: 28px !important;
+}
+
 // Media queries
 @media (max-width: 768px) {
   .js-send-msg-box-md {
