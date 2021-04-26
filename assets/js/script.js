@@ -32,6 +32,7 @@ $(function () {
     $('body').on('click', '.js-message-icon', function () {
       if (message_box.hasClass('d-none')) {
         message_box.removeClass('d-none').animate({
+          top: '49px',
           right: '32px',
           opacity: '1'
         }, 'fast', function () {
@@ -56,6 +57,7 @@ $(function () {
     $('body').on('click', '.js-message-icon', function () {
       if (message_box.hasClass('d-none')) {
         message_box.removeClass('d-none').animate({
+          top: '49px',
           right: '1px',
           opacity: '1'
         }, 'fast', function () {
