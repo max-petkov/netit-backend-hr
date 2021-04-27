@@ -1,5 +1,5 @@
 <?php
-    include_once 'Database.php';
+include_once 'Database.php';
 class Upload
 {
     public static function upload_file()

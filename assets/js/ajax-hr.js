@@ -1,6 +1,6 @@
 $(function () {
   // Interview candidate
-  $('.js-applicants-data').on('click', '.js-interview-answer', function () {
+  $('body').on('click', '.js-interview-answer', function () {
     let $btn = $(this);
     let $interviewed_btns = $(this).closest('.d-flex');
     let $job_id = $(this).siblings('.js-job-id');

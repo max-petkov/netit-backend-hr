@@ -22,7 +22,7 @@ class Validator
             return false;
         } else {
             if ($this->string_length($this->post_data['username'], 4, 49)) {
-                $this->error_msg['username'] = '<div class="invalid-feedback">More than 3 and less than 50!</div>';
+                $this->error_msg['username'] = '<div class="invalid-feedback">Field must be more than 3 and less than 50 symbols!</div>';
                 $this->style_input['username'] = 'is-invalid';
                 return false;
             } else {
@@ -50,7 +50,7 @@ class Validator
             return false;
         } else {
             if ($this->string_length($this->post_data['name'], 2, 49)) {
-                $this->error_msg['name'] = '<div class="invalid-feedback">More than 1 and less than 50!</div>';
+                $this->error_msg['name'] = '<div class="invalid-feedback">Field must be more than 1 and less than 50 symbols!</div>';
                 $this->style_input['name'] = 'is-invalid';
                 return false;
             } else {
@@ -69,7 +69,7 @@ class Validator
             return false;
         } else {
             if ($this->string_length($this->post_data['last_name'], 2, 49)) {
-                $this->error_msg['last_name'] = '<div class="invalid-feedback">More than 1 and less than 50!</div>';
+                $this->error_msg['last_name'] = '<div class="invalid-feedback">Field must be more than 1 and less than 50 symbols!</div>';
                 $this->style_input['last_name'] = 'is-invalid';
                 return false;
             } else {
@@ -122,7 +122,7 @@ class Validator
             return false;
         } else {
             if ($this->string_length($this->post_data['password'], 4, 49)) {
-                $this->error_msg['password'] = '<div class="invalid-feedback">More than 3 and less than 50!</div>';
+                $this->error_msg['password'] = '<div class="invalid-feedback">Field must be more than 3 and less than 50 symbols!</div>';
                 $this->style_input['password'] = 'is-invalid';
                 return false;
             } else {

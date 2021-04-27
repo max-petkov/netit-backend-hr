@@ -138,7 +138,6 @@ $(function () {
 
   // Upload image
   $('#upload_company_img').on('submit', function (e) {
-    // TODO VALIDATION
     e.preventDefault();
     let $img = new FormData($(this)[0]);
 
@@ -154,7 +153,7 @@ $(function () {
       error: function () {
         console.log('error');
       }
-    })
+    });
   });
 
   // Change image
@@ -179,9 +178,9 @@ $(function () {
     });
 
     $('#upload_company_img').on('submit', function (e) {
-      // TODO VALIDATION
       e.preventDefault();
       let img = new FormData($(this)[0]);
+
       $.ajax({
         url: 'src/upload-file.php',
         method: 'post',
@@ -197,7 +196,6 @@ $(function () {
         }
       })
     });
-
   });
 
   // Publish job ajax

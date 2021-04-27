@@ -115,16 +115,6 @@ CREATE TABLE tb_msg_box_company(
     sent_msg VARCHAR(1000)
 );
 
-TRUNCATE TABLE tb_job_seeker_profile;
-TRUNCATE TABLE tb_applied_jobs;
-TRUNCATE TABLE tb_company_profile;
-TRUNCATE TABLE tb_hr;
-TRUNCATE TABLE tb_msg_box_company;
-TRUNCATE TABLE tb_published_jobs;
-TRUNCATE TABLE tb_msg_box_company;
-TRUNCATE TABLE tb_msg_box_hr;
-TRUNCATE TABLE tb_msg_box_job_seeker;
-
 SELECT * FROM tb_msg_box_hr;
 SELECT * FROM tb_msg_box_job_seeker;
 SELECT * FROM tb_hr;

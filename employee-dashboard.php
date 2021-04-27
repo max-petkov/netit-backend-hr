@@ -152,7 +152,7 @@
             <div class="small"><?php echo $value['send_date']; ?></div>
             <div class="text-muted small mb-3">sent by <b class="text-dark"> <?php echo $value['username']; ?> </b></div>
             <div class="d-flex justify-content-between align-items-start">
-              <p><b>Subject:</b><?php echo $value['subject']; ?></p>
+              <p><b>Subject: </b><?php echo $value['subject']; ?></p>
               <span class="js-chevron ms-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
@@ -232,7 +232,7 @@
             <div class="small"><?php echo $value['send_date']; ?></div>
             <div class="text-muted small mb-3">sent to <b class="text-dark"> <?php echo $value['username']; ?> </b></div>
             <div class="d-flex justify-content-between align-items-start">
-              <p><b>Subject:</b><?php echo $value['subject']; ?></p>
+              <p><b>Subject: </b><?php echo $value['subject']; ?></p>
               <span class="js-chevron ms-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
