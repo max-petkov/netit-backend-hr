@@ -1,4 +1,4 @@
-<?php include_once 'src/functions.php'; ?>
+<?php include_once 'src/Jobs.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,77 +53,72 @@
       <hr class="my-5">
     </div>
   </header>
+
   <!-- Card published jobs -->
   <div id="cards-job-container">
     <div class="d-flex justify-content-center flex-wrap">
-
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Frontend</div>
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('frontend_tag', 'frontend'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('frontend_tag', 'frontend'); ?></div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Backend</div>
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('backend_tag', 'backend'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('backend_tag', 'backend'); ?></div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">Fullstack</div>
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('fullstack_tag', 'fullstack'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('fullstack_tag', 'fullstack'); ?></div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">QA</div>
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('qa_tag', 'qa'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('qa_tag', 'qa'); ?></div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">MobDev</div>
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('mobdev_tag', 'mobdev'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('mobdev_tag', 'mobdev'); ?></div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="card mx-0 mx-sm-2 mt-4 mt-md-3">
+      <div class="card mx-0 me-2 mx-sm-2 mt-4 mt-md-3">
         <div class="card-body p-2">
           <div class="card-title text-center">UX/UI</div>
           <div class="card">
             <div class="card-body p-2">
               <div class="card-subttile text-center small">Published jobs:</div>
-              <div class="card-subtitle text-center fw-bold"><?php echo published_job('ux_ui_tag', 'ux/ui'); ?></div>
+              <div class="card-subtitle text-center fw-bold"><?php Job::count_published_job_tags('ux_ui_tag', 'ux/ui'); ?></div>
             </div>
           </div>
         </div>
@@ -131,45 +126,44 @@
     </div>
     <hr class="my-4">
   </div>
+
   <!-- Used languages -->
   <section class="bg-dark py-5">
     <div class="container">
       <h3 class="fs-3 text-white text-underline text-center"><i>Platform made with:</i></h3>
       <div class="d-flex flex-wrap justify-content-center align-items-center">
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/html5-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/css3-alt-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/sass-brands.svg" alt="" width="64px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/js-square-brands.svg" alt="" width="48px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/jquery-brand.svg" alt="" width="64px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3">
+        <div class="mx-2 mt-2 mt-md-0">
           <img src="assets/icons/php-brands.svg" alt="" width="80px" height="64px" class="svg-bg-color">
         </div>
-        <div class="m-3 display-6 text-center text-white">
+        <div class="mx-2 mt-2 mt-md-0 display-6 text-center text-white">
           <img src="assets/icons/database-solid.svg" alt="" width="48px" height="48px" class="svg-bg-color">
           <p class="fs-6 m-0">MySQL</p>
         </div>
       </div>
     </div>
   </section>
+
   <!-- Team -->
   <section class="py-5">
     <div class="container">
-
       <h1 class="text-center mt-5">Meet the Creators</h1>
       <p class="text-center lead mx-auto mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iusto dignissimos eius iste maxime ullam placeat vitae porro unde </p>
-
       <div class="row mb-5 justify-content-center">
-
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2">
             <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
@@ -178,14 +172,13 @@
               <h5 class="text-muted text-center">Frontend Developer</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>
         </div>
-
         <div class="col-lg-3 col-md-6 ">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-0">
             <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
@@ -194,14 +187,13 @@
               <h5 class="text-muted text-center">Backend Developer</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>
         </div>
-
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
             <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
@@ -210,14 +202,13 @@
               <h5 class="text-muted text-center">Quality Assurance</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>
         </div>
-
         <div class="col-lg-3 col-md-6">
           <div class="card pt-4 pb-2 mt-4 mt-sm-4 mt-md-4 mt-lg-0">
             <img class="img-fluid rounded-circle mx-auto shadow-sm rounded" src="assets/img/profifle-pic.jpg" alt="profile-pic">
@@ -226,18 +217,16 @@
               <h5 class="text-muted text-center">UX/UI</h5>
               <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem ullam, suscipit quod ea non beatae. Lorem ipsum dolor sit amet.</p>
               <div class="social-links-card">
-                <span><a href=""><i class="fs-4 bi bi-facebook"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
-                <span><a href=""><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
+                <span><a href="https://www.facebook.com" target="_blank"><i class="fs-4 bi bi-facebook"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fs-4 ms-3 bi bi-instagram"></i></a></span>
+                <span><a href="mailto:maxy.dp@abv.bg"><i class="fs-4 ms-3 bi bi-envelope"></i></a></span>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
   <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
