@@ -297,7 +297,6 @@
           <hr class="m-2">
         </li>
       <?php endforeach; ?>
-
     </ul>
   </div>
 
