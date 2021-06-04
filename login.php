@@ -50,7 +50,7 @@
       </div>
     </div>
   </div>
-  <footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4">
     <div class="container">
       <p class="text-center text-white m-0">Made with ❤ by Maximilian Petkov</p>
       <hr class="mx-auto my-1" width="256px">

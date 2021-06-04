@@ -27,8 +27,20 @@
   background-color: #9eeaf9;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: 0;
+  margin-top: auto;
 }
 
 .shadow-custom-navbar {
@@ -36,7 +48,7 @@ body {
 }
 
 .calistoga-font {
-  font-family: 'Calistoga', cursive;
+  font-family: "Calistoga", cursive;
 }
 
 .xsm-text-class {

@@ -1,5 +1,5 @@
 // Adding custom font
-@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Calistoga&display=swap");
 
 // Colors
 $light_purple: #c29ffa;
@@ -38,19 +38,29 @@ $light_cyan: #9eeaf9;
   background-color: $light_cyan;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: 0;
+  margin-top: auto;
 }
 
 .shadow-custom-navbar {
   box-shadow: 2px 0px 5px #707070;
 }
 
-
 .calistoga-font {
-  font-family: 'Calistoga', cursive;
+  font-family: "Calistoga", cursive;
 }
-
 
 .xsm-text-class {
   font-size: 0.9rem;
@@ -61,7 +71,6 @@ body {
   cursor: pointer;
   fill: #000;
 }
-
 
 .edit-profile {
   font-size: 0.9rem;
@@ -74,7 +83,6 @@ body {
 /* CHEVRON */
 .bi-chevron-down {
   cursor: pointer;
-
 }
 
 .chevron-animation-open {
@@ -86,7 +94,6 @@ body {
   transform: rotate(180deg);
   transition: 0.4s;
 }
-
 
 /* Box */
 .js-message-box {
@@ -205,7 +212,7 @@ body {
 }
 
 .transform-scale:active {
-  transform: scale(0.90);
+  transform: scale(0.9);
 }
 
 .js-overflow-y-scroll {
